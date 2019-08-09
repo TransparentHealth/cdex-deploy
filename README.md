@@ -69,7 +69,7 @@ containerization service.
 
 The components involved include:
 
-- PostgreSQL database server
+- PostgreSQL database server using AWS RDS
 - Nginx web server
 - Python Django Application and framework
 - HAPI FHIR JPA Server
@@ -84,7 +84,8 @@ SMH is configured to run on port 8001
 VMI is configured to run on port 8000
 
 SMY, VMI and FHIR all use PostgreSQL as a database service via
-port 5432.
+port 5432. In STAGING and PRODUCTION these database services are
+provided by AWS RDS.
 
 The deployment instructions for each service can be found in the
 respective README.md file.
@@ -92,3 +93,30 @@ respective README.md file.
 - HAPI FHIR: https://github.com/TransparentHealth/THAPI/blob/master/README.md
 - VMI: https://github.com/TransparentHealth/vmi/blob/master/README.md
 - SMH: https://github.com/TransparentHealth/sharemyhealth/blob/master/README.md
+
+Deployment is performed using Ansible Scripts. Scripts are provided for:
+
+- Creating a 4 area VPC across 3 availability Zones
+- Creating Security Groups for Inter-area communication
+- Deploying Launch configurations with auto scaling groups that can be attached to a Load Balancer via Target Groups.
+
+The following systems will be configured manually. Their configuration will be documented via a README.md file in this repository:
+
+- Application Load Balancers
+- AWS RDS PostgreSQL database
+- Security Groups
+- Peering configurations
+
+The deployment scripts will be installed on a Management Server in the
+main AWS account. The requirements to run Ansible and the deployment 
+scripts will be installed and this machine will be used for all 
+deployments. This will eliminate inconsistencies in the deployment 
+environment.
+
+The environment manager will connect to the Management Server via SSH
+and will run necessary scripts from the server.
+
+
+
+
+ 
