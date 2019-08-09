@@ -1,0 +1,34 @@
+# deploy-server.yml
+---
+# playbook that runs in our VPC to deploy a server, providing AWS credentials in the environment
+
+- hosts: localhost
+  vars:
+    replacement_time: "{{ ansible_date_time.iso8601_basic_short }}"
+    snapshot_ami_name: "PROD-WEB-LAUNCH-AMI-{{ replacement_time }}"
+    vpc_app_subnets_prod_app_a_id: "subnet-03bc73d4d28eef9bc"
+    vpc_app_subnets_prod_app_b_id: "subnet-0375bebc1346506f7"
+    vpc_app_subnets_prod_app_c_id: "subnet-018e033a8cdae0ff8"
+# TODO Change .pem file
+    vpc_ec2_key_name: "MY-prod-app.pem"
+    vpc_target_group: "PROD-WEB"
+    # target_group_mode: replace | add
+    target_group_mode: "replace"
+    # old_instance_action: terminate | stop | run
+    old_instance_action: "terminate"
+
+  vars_files:
+    - group_vars/all.yml
+    - group_vars/project_ansibled.yml
+
+  environment:
+    AWS_ACCESS_KEY_ID: "{{ aws_access_key }}"
+    AWS_SECRET_ACCESS_KEY: "{{ aws_secret_key }}"
+    AWS_REGION: "{{ aws_region }}"
+  tasks:
+    - debug:
+        msg: "subnet a: {{ vpc_app_subnets_prod_app_a_id }}"
+    - include_tasks: tasks/app/make_ami.yml
+    - include_tasks: tasks/app/update_target_group.yml
+#     - include_tasks: tasks/app/replace_app_server.yml
+

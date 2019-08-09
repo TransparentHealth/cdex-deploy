@@ -1,0 +1,144 @@
+# tasks/env/make_ami.yml
+---
+# uses Instance Id to create AMI
+# AMI name is taken from use_this_ami variable
+
+- name: "get VPC Facts for {{ vpc_env }}"
+  ec2_vpc_net_facts:
+    filters:
+      "tag:Name": "MY-{{ vpc_env|lower }}-A"
+  register: this_vpc_result
+
+- name: Check the vpc info
+  debug:
+    msg: "{{ this_vpc_result }}"
+
+- name: Get the subnet info
+  ec2_vpc_subnet_facts:
+    filters:
+      vpc-id: "{{ this_vpc_result.vpcs.0.vpc_id}}}"
+  register: this_vpc_subnet_result
+
+- name: Check the subnet info
+  debug:
+    msg: "{{ this_vpc_subnet_result }}"
+
+- name: What is the AMI Name?
+  debug:
+    msg: "Setting AMI Name to {{ snapshot_ami_name }}"
+
+# Get EC2 Instance
+# Get volume id
+- name: Get source instance
+  ec2_instance_facts:
+    filters:
+      "tag:Name": "MY-prod-web-AMI-SOURCE"
+  register: source_instance
+
+- name: create ami from source instance
+  ec2_ami:
+    instance_id: "{{ source_instance.instances.0.instance_id }}"
+    name: "{{ vpc_env|upper }}-WEB-LAUNCH-{{ replacement_time }}"
+    no_reboot: yes
+    delete_snapshot: yes
+    description: "{{ vpc_env|upper }} image {{ replacement_time }}"
+    wait: yes
+    tags:
+      Name: "{{ vpc_env|upper }}-WEB-LAUNCH-{{ replacement_time }}"
+      ENV: "{{ vpc_env|lower }}"
+      SOURCE: "{{ source_instance.instances.0.instance_id }}"
+  register: ami_result
+
+- name: check ami result
+  debug:
+    msg: "{{ ami_result }}"
+
+#    vpc_app_subnets_prod_app_a_id: "subnet-03bc73d4d28eef9bc"
+#    vpc_app_subnets_prod_app_b_id: "subnet-0375bebc1346506f7"
+#    vpc_app_subnets_prod_app_c_id: "subnet-018e033a8cdae0ff8"
+
+- name: "show subnet_id {{ vpc_app_subnets_prod_app_a_id }}"
+  debug:
+    msg: "{{ vpc_app_subnets_prod_app_a_id }}"
+
+
+- name: "Create instance from AMI for PROD-app-a: {{ ami_result.name }}({{ ami_result.image_id}}) "
+  ec2:
+    key_name: "{{ vpc_ec2_key_name }}"
+    image: "{{ ami_result.image_id}}"
+    wait: yes
+    instance_type: "t3a.medium"
+    instance_tags:
+      Name: "MY-PROD-WEB-1a-{{ replacement_time }}"
+      ENV: "prod"
+      ZONE: "PROD-app-a"
+      ROLE: "web-farm"
+      IMAGE: "{{ vpc_env|upper }}-WEB-LAUNCH-{{ replacement_time }}"
+    monitoring: no
+    volumes:
+      - device_name: "/dev/sda1"
+        encrypted: True
+        delete_on_termination: True
+        volume_size: 30
+    vpc_subnet_id: "{{  vpc_app_subnets_prod_app_a_id }}"
+    assign_public_ip: no
+  register: ec2_zone_a_instance_created
+
+- name: What happened to a
+  debug:
+    msg: "{{ec2_zone_a_instance_created }}"
+
+# - name: add to ELB
+
+
+- name: "Create instance from AMI for PROD-app-b: {{ ami_result.name }}({{ ami_result.image_id}}) "
+  ec2:
+    key_name: "{{ vpc_ec2_key_name }}"
+    image: "{{ ami_result.image_id}}"
+    wait: yes
+    instance_type: "t3a.medium"
+    instance_tags:
+      Name: "MY-PROD-WEB-1b-{{ replacement_time }}"
+      ENV: "prod"
+      ZONE: "PROD-app-b"
+      ROLE: "web-farm"
+      IMAGE: "{{ vpc_env|upper }}-WEB-LAUNCH-{{ replacement_time }}"
+    monitoring: no
+    volumes:
+      - device_name: "/dev/sda1"
+        encrypted: True
+        delete_on_termination: True
+        volume_size: 30
+    vpc_subnet_id: "{{  vpc_app_subnets_prod_app_b_id }}"
+    assign_public_ip: no
+  register: ec2_zone_b_instance_created
+
+- name: What happened to b
+  debug:
+    msg: "{{ec2_zone_b_instance_created }}"
+
+- name: "Create instance from AMI for PROD-app-c: {{ ami_result.name }}({{ ami_result.image_id}}) "
+  ec2:
+    key_name: "{{ vpc_ec2_key_name }}"
+    image: "{{ ami_result.image_id}}"
+    wait: yes
+    instance_type: "t3a.medium"
+    instance_tags:
+      Name: "MY-PROD-WEB-1c-{{ replacement_time }}"
+      ENV: "prod"
+      ZONE: "PROD-app-c"
+      ROLE: "web-farm"
+      IMAGE: "{{ vpc_env|upper }}-WEB-LAUNCH-{{ replacement_time }}"
+    monitoring: no
+    volumes:
+      - device_name: "/dev/sda1"
+        encrypted: True
+        delete_on_termination: True
+        volume_size: 30
+    vpc_subnet_id: "{{  vpc_app_subnets_prod_app_c_id }}"
+    assign_public_ip: no
+  register: ec2_zone_c_instance_created
+
+- name: What happened to c
+  debug:
+    msg: "{{ec2_zone_c_instance_created }}"

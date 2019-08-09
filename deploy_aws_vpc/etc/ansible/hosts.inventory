@@ -1,0 +1,11 @@
+#---
+# hosts.inventory
+# Copy to ./etc/ansible/hosts on first install
+
+localhost ansible_connection=local
+
+[vpc]
+vpc_ansibled
+
+[project_ansibled:children]
+vpc

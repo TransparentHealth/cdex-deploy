@@ -1,0 +1,100 @@
+# tasks/vpc/setup.gateways.yml
+---
+# creates the gateways for the VPC, and sets up routing for the subnets
+
+# create the internet gateway, saving the output to extract the ID later
+- name: create internet gateway
+  ec2_vpc_igw:
+    vpc_id: "{{ vpc_id }}"
+    tags:
+      Name: "{{ vpc_env|upper }}-IGW"
+      Env: "{{vpc_env|upper }}"
+  register: create_gateway
+
+- debug:
+    msg: "vpc_subnets = {{ vpc_subnets }}"
+
+
+# Setting fact for NAT GW Subnet reference and getting it persisted in the fact cache
+- set_fact:
+    vpc_subnet_nat_gw_ref: "{{ vpc_env|upper }}-dmz-c"
+    cacheable: yes
+
+- debug:
+    msg: "vpc_subnet_ids = {{ vpc_subnet_ids }}  \n and we want {{ vpc_subnet_ids[vpc_subnet_nat_gw_ref] }}"
+
+# create the NAT gateway, looking up the subnet ID by the human readable name: "DEV-dmz-c"
+# create nat gateway in a public subnet (dmz-a, dmz-b or dmz-c)
+- name: create NAT gateway (A)
+  ec2_vpc_nat_gateway:
+    subnet_id: "{{ vpc_subnet_ids[vpc_subnet_nat_gw_ref] }}"
+    region: "{{ aws_region }}"
+    wait: yes
+    if_exist_do_not_create: true
+  register: create_nat_gateway
+
+- debug:
+    msg:
+      - "The {{ vpc_env|upper }} NAT Gateway (A) public ip is {{ create_nat_gateway.nat_gateway_addresses }}\n"
+
+# parse the outputs of the Ansible modules for some important details referred to when setting up routing
+- name: "set facts Gateway IDs and IP"
+  set_fact:
+    vpc_gateway_id: "{{ create_gateway.gateway_id }}"
+    vpc_nat_gateway_id: "{{ create_nat_gateway.nat_gateway_id }}"
+    vpc_nat_gateway_ip: "{{ create_nat_gateway.nat_gateway_addresses.0.public_ip }}"
+
+- name: "set tags on NAT Gateway"
+  command: "aws ec2 create-tags --region {{ aws_region }} --resources {{ vpc_nat_gateway_id }} --tags Key=Name,Value={{ vpc_env|upper }}-NATGW Key=Env,Value={{ vpc_env|upper }}"
+
+# update the VPCs DNS with the public IP of the new NAT gateway
+# State is required: present | absent | get | create | delete
+- name: "update DNS [{{ vpc_dns_zone }}] with NAT gateway IP [{{ vpc_nat_gateway_ip }}] "
+  route53:
+    zone: "{{ vpc_dns_zone }}"
+    private_zone: yes
+    record: nat.{{ vpc_dns_zone }}
+    type: A
+    state: present
+    overwrite: yes
+    value: "{{ vpc_nat_gateway_ip }}"
+
+# private route table that routes through the NAT -- attach it to our private subnets
+- name: create route table for private subnets
+  ec2_vpc_route_table:
+    vpc_id: "{{ vpc_id }}"
+    tags:
+      Name: "{{ vpc_name }}-private"
+    subnets:
+      - "{{ vpc_subnet_ids[item] }}"
+    routes:
+      - dest: 0.0.0.0/0
+        gateway_id: "{{ vpc_nat_gateway_id }}"
+  with_items:
+    - "{{ vpc_env|upper }}-app-a"
+    - "{{ vpc_env|upper }}-app-b"
+    - "{{ vpc_env|upper }}-app-c"
+    - "{{ vpc_env|upper }}-dbs-a"
+    - "{{ vpc_env|upper }}-dbs-b"
+    - "{{ vpc_env|upper }}-dbs-c"
+    - "{{ vpc_env|upper }}-ctl-a"
+    - "{{ vpc_env|upper }}-ctl-b"
+    - "{{ vpc_env|upper }}-ctl-c"
+
+# public route table that routes through the internet gateway -- attach it to our public subnets
+- name: create route table for public subnets
+  ec2_vpc_route_table:
+    vpc_id: "{{ vpc_id }}"
+    tags:
+      Name: "{{ vpc_name }}-public"
+      Env: "{{ vpc_env|upper }}"
+    subnets:
+      - "{{ vpc_subnet_ids[item] }}"
+    routes:
+      - dest: 0.0.0.0/0
+        gateway_id: "{{ vpc_gateway_id }}"
+  with_items:
+    - "{{ vpc_env|upper }}-dmz-a"
+    - "{{ vpc_env|upper }}-dmz-b"
+    - "{{ vpc_env|upper }}-dmz-c"
+

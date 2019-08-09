@@ -1,0 +1,55 @@
+# tasks/env/replace_app_server.yml
+---
+# replaces an app server and adds into Load Balancer
+# replace_this_ami = old ami to replace
+# use_this_ami = new ami to use
+-
+# Get list of AMIs
+
+
+# get list of prod instances
+# Check for PROD EC2 Instances
+- name: get OLD Instances
+  ec2_instance_facts:
+    filters:
+      "tag:ENV": "{{ vpc_env }}"
+      "tag:ROLE": "web-farm"
+  register: env_web_farm_instances
+
+- name: "See what web_farm instances are running in {{ vpc_env }}"
+  debug:
+    msg: "{{ env_web_farm_instances}}"
+  when: env_web_farm_instances is defined
+
+- name: "See instances by availability zone"
+  debug:
+    msg:
+      - "{{ item.instance_id }}: {{ item.placement.availability_zone }}"
+  with_items: "{{ env_web_farm_instances.instances | default([]) }}"
+  when: env_web_farm_instances is defined
+
+# Modify the target group with a custom health check
+- name: Get elb info
+  elb_target_group_facts:
+    collect_targets_health: yes
+    names:
+      - "{{ vpc_target_group }}"
+  register: vpc_elb_info
+
+- name: "See what we know about the ELB"
+  debug:
+    msg: "{{ vpc_elb_info|json_query('target_groups') }}"
+
+
+# Add new instances to target group
+
+# check target_group_mode
+
+# If replace:
+
+#   remove old instances from target_group based on old_instance_action
+
+#   Terminate old instances based on tag:IMAGE == replace_this_image
+
+
+

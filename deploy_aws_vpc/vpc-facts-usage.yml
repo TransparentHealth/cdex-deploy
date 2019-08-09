@@ -1,0 +1,11 @@
+- name: define some facts about the VPC!
+  include_tasks: tasks/vpc/facts.yml
+
+- name: now we can reference the subnet IDs of our subnets by friendly names
+  command: echo "The subnet ID of 'app-a' is: {{ vpc_subnet_ids['app-a'] }}"
+
+
+#- name: define some facts about a different VPC by providing the VPC name as a var!
+#  include_tasks: tasks/vpc/facts.yml
+#  vars:
+#    vpc_name: "another_vpc"

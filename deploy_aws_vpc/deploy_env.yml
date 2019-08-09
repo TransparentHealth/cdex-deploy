@@ -1,0 +1,14 @@
+# deploy_env.yml
+---
+# playbook that runs to create ELB, RDS and hosts in the `vpc` group, providing AWS credentials
+# in the environment
+
+- hosts: vpc
+  environment:
+    AWS_ACCESS_KEY_ID: "{{ aws_access_key }}"
+    AWS_SECRET_ACCESS_KEY: "{{ aws_secret_key }}"
+    AWS_REGION: "{{ aws_region }}"
+  tasks:
+
+    - include_tasks: tasks/env/setup_rds.yml
+

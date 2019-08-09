@@ -1,0 +1,8 @@
+# group_vars/all.yml
+---
+# global definitions, not too much to go here...
+
+# specify to run Ansible for hosts locally by default, not over SSH
+ansible_connection: local
+
+# ansible_python_interpreter: /Users/mark/.virtualenvs/deploy_aws_vpc/bin/python3
