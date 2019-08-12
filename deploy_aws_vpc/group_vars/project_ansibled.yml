@@ -6,13 +6,13 @@
 # AFBH assigned number for each discrete vpc environment within an environment category
 # use for DNS updates
 vpc_base_region: us-east
-vpc_number: 2
+vpc_number: 1
 
 # general details about our VPC
 
 vpc_env: scratch
-vpc_name: "MY-{{ vpc_env }}-A"
-vpc_dns_zone: "{{ vpc_env }}-medyear.{{ vpc_number }}"
+vpc_name: "ABH-{{ vpc_env }}-A"
+vpc_dns_zone: "{{ vpc_env }}-abhealth.{{ vpc_number }}"
 
 vpc_key: "{{ vpc_dns_zone }}-key"
 vpc_env_block_prefix: "{{ vpc_base_region }}-{{ vpc_number }}-{{ vpc_env|lower }}"

@@ -1,0 +1,56 @@
+# tasks/mgmt/provision_mgmt_server.yml
+---
+# Builds a management control server in the default VPC using an ubuntu instance
+# configured with Ansible, boto and other tools
+-
+
+
+- name: Get AMI
+  ec2_ami_facts:
+    owners: self
+    filters:
+      "tag:Name": "{{ use_this_ami }}"
+  register: amis
+
+- debug:
+    msg: "{{ amis }}"
+
+- debug:
+    msg:
+      - "AMI ID: {{ amis.images.0.image_id }}"
+      - "Device mappings: {{ amis.images.0.block_device_mappings }}"
+
+# get list of prod instances
+# Check for PROD EC2 Instances
+- name: get OLD Instances
+  ec2_instance_facts:
+    filters:
+      "tag:ENV": "{{ vpc_env }}"
+      "tag:ROLE": "web-farm"
+      "tag:IMAGE": "{{ replace_this_ami }}"
+  when: replace_this_ami is defined
+  register: env_old_instances
+
+- debug:
+    msg: "{{ env_old_instances}}"
+  when: env_old_instances is defined
+
+- debug:
+    msg:
+      - "{{ item.instance_id }}: {{ item.placement.availability_zone }}"
+  with_items: "{{ env_old_instances.instances | default([]) }}"
+  when: env_old_instances is defined
+
+# Pick AMI
+
+# Launch new machine
+
+# Add to target group
+
+
+# Remove current machine in zone
+
+# terminate current machine
+
+
+

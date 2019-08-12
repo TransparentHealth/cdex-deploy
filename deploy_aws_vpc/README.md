@@ -32,13 +32,17 @@ This install is on Mac OS/Linux.
 
 ## setup
 
+Clone this repository into an empty folder
+
+    git clone https://github.com/transparenthealth/cdex-deploy.git
+
 Create a Virtual Environment
     
-    python3.7 -m venv ~/.virtualenvs/deploy_aws_vpc 
+    python3.7 -m venv env 
 
 Activate the Virtual Environment
     
-    source ~/.virtualenvs/deploy_aws_vpc/bin/activate
+    source ./env/bin/activate
     
 Upgrade Pip
     
@@ -49,36 +53,48 @@ Install Ansible
     pip install ansible
     pip install botocore
     pip install boto3
+    pip install boto
     
 Install AWS CLI tools
 
-    curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+    curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "env/awscli-bundle.zip"
+    cd env
     unzip awscli-bundle.zip
     sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws  
+    cd ..
 
 Test for successful AWS CLI install
 
     aws --version
     
-The result should be something like:
+The result should be something like:ansible_vault
 
     aws-cli/1.16.135 Python/3.7.0 Darwin/18.5.0 botocore/1.12.125
     
 Create an Ansible.Vault password file:
 
-    echo "my_vault_pass" > ~/ansibled.vault
-    ansible-vault encrypt_string "my_secret_string" --vault-password-file ~/ansibled.vault
+    echo "my_vault_pass" > ./env/ansibled.vault
+    ansible-vault encrypt_string "my_secret_string" --vault-password-file ./env/ansibled.vault
+    
+Ensure that this unecrypted file is deleted as soon as the vault 
+has been populated.    
+
+Create an AWS Key pair for the Management Server
+
+    aws ec2 create-key-pair --key-name MyKeyPair --query 'KeyMaterial' --output text > env/MyKeyPair.pem
+    
     
 Edit group_vars/all.yml
 
-    ansible_python_interpreter: /Users/mark/.virtualenvs/deploy_aws_vpc/bin/python3
+    ansible_python_interpreter: {volume/folder}/env/bin/python3
 
 Change the above line to match the location of the virtualenv 
 python version.
 
 Run the playbook:
 
-    ansible-playbook -i ./etc/ansible/hosts vpc.yml --vault-id ~/ansibled.vault 
+    cd ./deploy_aws_vpc
+    ansible-playbook -i ./etc/ansible/hosts vpc.yml --vault-id ~/env/ansibled.vault 
 
 
 ### VPC Configuration
@@ -86,27 +102,27 @@ Run the playbook:
 - The VPC is configured in AWS US-East-1.
 - The VPC has a 10.0.0.0/16 address space.
 - The VPC has subnets across three availability zones (a, b & c).
-- The VPC has four areas: dmz, app, dbs ad ctl
+- The VPC has four areas: dmz, app, dbs and ctl
 
 ### DMZ
 
 - The DMZ zone will be used to host the Application Load Balancers.
-- 10.0.2.0/24: AZ a
-- 10.0.5.0/24: AZ b
-- 10.0.8.0/24: AZ c
+- 10.0.1.0/24: AZ a
+- 10.0.2.0/24: AZ b
+- 10.0.3.0/24: AZ c
 
 ### APP
 
 - The APP zone will be used to host the web and app server farm.
-- 10.0.1.0/24: AZ a
-- 10.0.4.0/24: AZ b
-- 10.0.7.0/24: AZ c
+- 10.0.4.0/24: AZ a
+- 10.0.5.0/24: AZ b
+- 10.0.6.0/24: AZ c
 
 ### DBS
 
 - The DBS zone will be used to host the database servers, or connections to RDS.
-- 10.0.3.0/24: AZ a
-- 10.0.6.0/24: AZ b
+- 10.0.7.0/24: AZ a
+- 10.0.8.0/24: AZ b
 - 10.0.9.0/24: AZ c
 
 ### CTL
@@ -122,7 +138,7 @@ Run the playbook:
 
 ## Web Access
 
-- A Security Group allows http and https (Port 80, 8080 & 443) access to the DMZ subnets.
+- A Security Group allows http and https (Port 80 & 443) access to the DMZ subnets.
 
 ## Other useful scripts
  
@@ -148,8 +164,8 @@ This means they must be defined in the DMZ zone.
 The Ansible script will launch an entire VPC. The project.ansibled.yml file 
 should be updated with vpc_number, vpc_name vpc_env and vpc_key
 
-If the vpc_key already exists it will not be overwritten. This is the key needed 
-to login via SSH to a server.
+If the vpc_key already exists it will not be overwritten. 
+This is the key needed to login via SSH to a server.
 
 If you are rebuilding a VPC you may need to delete the existing VPC and
 the associated route53 internal DNS settings.

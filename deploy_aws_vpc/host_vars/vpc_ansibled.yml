@@ -9,11 +9,11 @@
 vpc_env_block:
   us-east-1-scratch: "10.11."
   us-east-1-dev: "10.12."
-  us-east-1-stage: "10.13."
+  us-east-1-staging: "10.13."
   us-east-1-prod: "10.14."
   us-east-2-scratch: "10.1."
   us-east-2-dev: "10.2."
-  us-east-2-stage: "10.0."
+  us-east-2-staging: "10.0."
   us-east-2-prod: "10.3."
 
 # IP CIDR block for the VPC
@@ -57,8 +57,6 @@ vpc_subnets:
   ctl-c:
     cidr: "{{ vpc_env_block[vpc_env_block_prefix] }}12.0/24"
     az: "{{ aws_region }}c"
-
-
 
 
 
@@ -123,40 +121,25 @@ vpc_security_groups:
         cidr_ip: "{{ vpc_subnets['dmz-c']['cidr'] }}"
         rule_desc: "ssh Traffic from dmz-c"
 
-# TODO: Change ports and Descriptions
+
   - name: "{{ vpc_env }}-DBS"
     description: "Access to DBS zone"
     rules:
       - proto: tcp
         ports:
-          - 1433
+          - 5432
         cidr_ip: "{{ vpc_subnets['app-a']['cidr'] }}"
-        rule_desc: "MSSQL Traffic from app-a"
+        rule_desc: "Postgres Traffic from app-a"
       - proto: tcp
         ports:
-          - 1433
+          - 5432
         cidr_ip: "{{ vpc_subnets['app-b']['cidr'] }}"
-        rule_desc: "MSSQL Traffic from app-b"
+        rule_desc: "Postgres Traffic from app-b"
       - proto: tcp
         ports:
-          - 1433
+          - 5432
         cidr_ip: "{{ vpc_subnets['app-c']['cidr'] }}"
         rule_desc: "Web Traffic from app-c"
-      - proto: tcp
-        ports:
-          - 1433
-        cidr_ip: "{{ vpc_subnets['dmz-a']['cidr'] }}"
-        rule_desc: "MSSQL Traffic from dmz-a"
-      - proto: tcp
-        ports:
-          - 1433
-        cidr_ip: "{{ vpc_subnets['dmz-b']['cidr'] }}"
-        rule_desc: "MSSQL Traffic from dmz-b"
-      - proto: tcp
-        ports:
-          - 1433
-        cidr_ip: "{{ vpc_subnets['dmz-c']['cidr'] }}"
-        rule_desc: "Web Traffic from dmz-c"
       - proto: tcp
         ports:
           - 22
