@@ -9,7 +9,7 @@
 
 # Create an ELB with application stickiness enabled
 - name: "Create {{ vpc_env }}-vmi-ALB"
-  module: elb_application_lb
+    module: elb_application_lb
     name: "{{ vpc_env }}-vmi-ALB"
     state: "{{ role_state }}"
     scheme: "internet-facing"
@@ -37,7 +37,7 @@
 
 # Create an ELB with application stickiness enabled
 - name: "Create {{ vpc_env }}-smh-ALB"
-  module: elb_application_lb
+    module: elb_application_lb
     name: "{{ vpc_env }}-smh-ALB"
     state: "{{ role_state }}"
     scheme: "internet-facing"
@@ -65,7 +65,7 @@
 
 # Create an ELB with application stickiness enabled
 - name: "Create {{ vpc_env }}-smhapp-ALB"
-  module: elb_application_lb
+    module: elb_application_lb
     name: "{{ vpc_env }}-smh-ALB"
     state: "{{ role_state }}"
     scheme: "internet-facing"
