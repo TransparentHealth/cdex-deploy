@@ -5,6 +5,12 @@
 - hosts: vpc
   vars_files:
     - "group_vars/abhealth-env-{{ vpc_env|lower }}.yml"
+  vars:
+    role_state: present
+    alb_list:
+      - { platform_app: "vmi", alb_scheme: "internet-facing", ports: [80, 443], protocols: ["http", "https"] }
+      - { platform_app: "smh", alb_scheme: "internet-facing", ports: [80, 443], protocols: ["http", "https"] }
+      - { platform_app: "smhapp", alb_scheme: "internet-facing", ports: [80, 443], protocols: ["http", "https"] }
   environment:
     AWS_ACCESS_KEY_ID: "{{ aws_access_key }}"
     AWS_SECRET_ACCESS_KEY: "{{ aws_secret_key }}"
@@ -14,4 +20,6 @@
     - include_tasks: tasks/vpc/setup.vpc.yml
     - include_tasks: tasks/vpc/setup.gateways.yml
     - include_tasks: tasks/vpc/setup.alb.yml
+      with_items:
+        - "{{ alb_list }}"
     - include_tasks: tasks/vpc/facts.yml

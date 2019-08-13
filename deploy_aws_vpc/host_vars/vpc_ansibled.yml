@@ -61,6 +61,11 @@ vpc_subnets:
 
 
 # a list defining the security groups for our VPC
+#
+# vpc_env: prod | staging
+#
+#
+#
 vpc_security_groups:
   - name: "{{ vpc_env }}-DMZ"
     description: "Public Access to DMZ"

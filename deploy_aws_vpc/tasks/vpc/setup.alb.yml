@@ -1,13 +1,18 @@
 # tasks/vpc/setup.alb.yml
 ---
 
+# The following should come in as item
+#  alb_list:
+#    - { platform_app: "vmi", ports: [80, 443], protocols: ["http", "https"] }
+#    - { platform_app: "smh", ports: [80, 443], protocols: ["http", "https"] }
+#   - { platform_app: "smhapp", ports: [80, 443], protocols: ["http", "https"] }
 
 # Create an ELB with application stickiness enabled
 - name: "Create {{ vpc_env|lower }}-ALB"
-  module: ec2_elb_lb
-    name: "{{ vpc_env|lower }}-ALB"
-    state: present
-    scheme: internet-facing
+  module: elb_application_lb
+    name: "{{ vpc_env|lower }}-{{ item.platform_app }}-ALB"
+    state: "{{ role_state }}"
+    scheme: "{{ item.alb_scheme }}"
     region: "{{ aws_region }}"
     zones:
       - "{{ aws_region }}a"
@@ -23,10 +28,10 @@
         instance_protocol: http
         instance_port: 80
     security_group_names:
-      - "{{ vpc_env }}-DMZ"
+      - "{{ vpc_env }}-{{ item.platform_app }}-DMZ"
     stickiness:
       type: application
       enabled: yes
       cookie: SESSIONID
   register: alb_instance
-  
+
