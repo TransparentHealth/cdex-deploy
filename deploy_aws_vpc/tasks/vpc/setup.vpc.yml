@@ -5,9 +5,6 @@
 - debug:
     msg: "Entering {{ vpc_env }} vpc task with {{ vpc_name }}"
 
-- debug:
-    msg: "{{ aws_secret_key }} / {{ aws_access_key }}"
-
 # use the Ansible module to create our VPC, saving the output into `create_vpc`
 - name: create VPC
   ec2_vpc_net:

@@ -9,7 +9,6 @@
     vpc_app_subnets_prod_app_a_id: "subnet-03bc73d4d28eef9bc"
     vpc_app_subnets_prod_app_b_id: "subnet-0375bebc1346506f7"
     vpc_app_subnets_prod_app_c_id: "subnet-018e033a8cdae0ff8"
-# TODO Change .pem file
     vpc_ec2_key_name: "abhealth-{{ env|lower }}-servers.pem"
     vpc_target_group: "{{ env|upper }}-WEB"
     # target_group_mode: replace | add

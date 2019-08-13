@@ -1,0 +1,29 @@
+# tasks/vpc/setup.alb.yml
+---
+
+
+# Create an ELB with application stickiness enabled
+- local_action:
+    module: ec2_elb_lb
+    name: "{{ vpc_env|lower }}-ALB"
+    state: present
+    scheme: internet-facing
+    region: "{{ aws_region }}"
+    zones:
+      - "{{ vpc_region }}a"
+      - "{{ vpc_region }}b"
+      - "{{ vpc_region }}c"
+    listeners:
+      - protocol: http
+        load_balancer_port: 80
+        instance_port: 80
+      - protoccol: https
+        load_balancer_port: 443
+        instance_port: 443
+    security_group_names:
+      - "{{ vpc_env }}-DMZ"
+
+    stickiness:
+      type: application
+      enabled: yes
+      cookie: SESSIONID
