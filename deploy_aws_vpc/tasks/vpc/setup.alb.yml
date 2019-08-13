@@ -8,9 +8,9 @@
 #    - { platform_app: "smhapp", ports: [80, 443], protocols: ["http", "https"] }
 
 # Create an ELB with application stickiness enabled
-- name: "Create {{ vpc_env|lower }}-vmi-ALB"
+- name: "Create {{ vpc_env }}-vmi-ALB"
   module: elb_application_lb
-    name: "{{ vpc_env|lower }}-vmi-ALB"
+    name: "{{ vpc_env }}-vmi-ALB"
     state: "{{ role_state }}"
     scheme: "internet-facing"
     region: "{{ aws_region }}"
@@ -36,9 +36,9 @@
   register: "alb_instance_vmi"
 
 # Create an ELB with application stickiness enabled
-- name: "Create {{ vpc_env|lower }}-smh-ALB"
+- name: "Create {{ vpc_env }}-smh-ALB"
   module: elb_application_lb
-    name: "{{ vpc_env|lower }}-smh-ALB"
+    name: "{{ vpc_env }}-smh-ALB"
     state: "{{ role_state }}"
     scheme: "internet-facing"
     region: "{{ aws_region }}"
@@ -64,9 +64,9 @@
   register: "alb_instance_smh"
 
 # Create an ELB with application stickiness enabled
-- name: "Create {{ vpc_env|lower }}-smhapp-ALB"
+- name: "Create {{ vpc_env }}-smhapp-ALB"
   module: elb_application_lb
-    name: "{{ vpc_env|lower }}-smh-ALB"
+    name: "{{ vpc_env }}-smh-ALB"
     state: "{{ role_state }}"
     scheme: "internet-facing"
     region: "{{ aws_region }}"
