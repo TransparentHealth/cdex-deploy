@@ -8,9 +8,9 @@
 #    - { platform_app: "smhapp", ports: [80, 443], protocols: ["http", "https"] }
 
 # Create an ELB with application stickiness enabled
-- name: "Create {{ vpc_env|lower }}-{{ item.platform_app }}-ALB"
+- name: "Create {{ vpc_env|lower }}-vmi-ALB"
   module: elb_application_lb
-    name: "{{ vpc_env|lower }}-{{ item }}-ALB"
+    name: "{{ vpc_env|lower }}-vmi-ALB"
     state: "{{ role_state }}"
     scheme: "internet-facing"
     region: "{{ aws_region }}"
@@ -33,5 +33,60 @@
       type: application
       enabled: yes
       cookie: SESSIONID
-  register: "alb_instance.{{ item }}"
+  register: "alb_instance_vmi"
 
+# Create an ELB with application stickiness enabled
+- name: "Create {{ vpc_env|lower }}-smh-ALB"
+  module: elb_application_lb
+    name: "{{ vpc_env|lower }}-smh-ALB"
+    state: "{{ role_state }}"
+    scheme: "internet-facing"
+    region: "{{ aws_region }}"
+    zones:
+      - "{{ aws_region }}a"
+      - "{{ aws_region }}b"
+      - "{{ aws_region }}c"
+    listeners:
+      - protocol: http
+        load_balancer_port: 80
+        instance_port: 80
+        proxy_protocol: True
+      - protoccol: https
+        load_balancer_port: 443
+        instance_protocol: http
+        instance_port: 80
+    security_group_names:
+      - "{{ vpc_env }}-DMZ"
+    stickiness:
+      type: application
+      enabled: yes
+      cookie: SESSIONID
+  register: "alb_instance_smh"
+
+# Create an ELB with application stickiness enabled
+- name: "Create {{ vpc_env|lower }}-smhapp-ALB"
+  module: elb_application_lb
+    name: "{{ vpc_env|lower }}-smh-ALB"
+    state: "{{ role_state }}"
+    scheme: "internet-facing"
+    region: "{{ aws_region }}"
+    zones:
+      - "{{ aws_region }}a"
+      - "{{ aws_region }}b"
+      - "{{ aws_region }}c"
+    listeners:
+      - protocol: http
+        load_balancer_port: 80
+        instance_port: 80
+        proxy_protocol: True
+      - protoccol: https
+        load_balancer_port: 443
+        instance_protocol: http
+        instance_port: 80
+    security_group_names:
+      - "{{ vpc_env }}-DMZ"
+    stickiness:
+      type: application
+      enabled: yes
+      cookie: SESSIONID
+  register: "alb_instance_smhapp"
