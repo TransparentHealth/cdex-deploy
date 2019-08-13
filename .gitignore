@@ -105,3 +105,6 @@ venv.bak/
 
 # aws cli bundle
 awscli-bundle/
+.idea/
+abhealth-env-staging.yml
+cdex-deploy.iml
