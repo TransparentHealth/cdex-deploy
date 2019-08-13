@@ -7,6 +7,10 @@
     - "group_vars/abhealth-env-{{ vpc_env|lower }}.yml"
   vars:
     role_state: present
+    platform_app:
+      - "vmi"
+      - "smh"
+      - "smhapp"
     alb_list:
       - { platform_app: "vmi", alb_scheme: "internet-facing", ports: [80, 443], protocols: ["http", "https"] }
       - { platform_app: "smh", alb_scheme: "internet-facing", ports: [80, 443], protocols: ["http", "https"] }
