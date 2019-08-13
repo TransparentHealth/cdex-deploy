@@ -23,7 +23,11 @@
     - include_tasks: tasks/vpc/setup.gateways.yml
     - include_tasks: tasks/vpc/setup.alb.yml
       with_items:
-        - { platform_app: "vmi", alb_scheme: "internet-facing", ports: [80, 443], protocols: ["http", "https"] }
-        - { platform_app: "smh", alb_scheme: "internet-facing", ports: [80, 443], protocols: ["http", "https"] }
-        - { platform_app: "smhapp", alb_scheme: "internet-facing", ports: [80, 443], protocols: ["http", "https"] }
+        - "vmi"
+        - "smh"
+        - "smhapp"
+
+#        - { platform_app: "vmi", alb_scheme: "internet-facing", ports: [80, 443], protocols: ["http", "https"] }
+#        - { platform_app: "smh", alb_scheme: "internet-facing", ports: [80, 443], protocols: ["http", "https"] }
+#        - { platform_app: "smhapp", alb_scheme: "internet-facing", ports: [80, 443], protocols: ["http", "https"] }
     - include_tasks: tasks/vpc/facts.yml

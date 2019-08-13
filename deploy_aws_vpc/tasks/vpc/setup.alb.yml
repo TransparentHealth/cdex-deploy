@@ -10,9 +10,9 @@
 # Create an ELB with application stickiness enabled
 - name: "Create {{ vpc_env|lower }}-{{ item.platform_app }}-ALB"
   module: elb_application_lb
-    name: "{{ vpc_env|lower }}-{{ item.platform_app }}-ALB"
+    name: "{{ vpc_env|lower }}-{{ item }}-ALB"
     state: "{{ role_state }}"
-    scheme: "{{ item.alb_scheme }}"
+    scheme: "internet-facing"
     region: "{{ aws_region }}"
     zones:
       - "{{ aws_region }}a"
@@ -33,5 +33,5 @@
       type: application
       enabled: yes
       cookie: SESSIONID
-  register: "alb_instance_{{ item.platform_app }}"
+  register: "alb_instance.{{ item }}"
 
