@@ -10,9 +10,9 @@
     scheme: internet-facing
     region: "{{ aws_region }}"
     zones:
-      - "{{ vpc_region }}a"
-      - "{{ vpc_region }}b"
-      - "{{ vpc_region }}c"
+      - "{{ aws_region }}a"
+      - "{{ aws_region }}b"
+      - "{{ aws_region }}c"
     listeners:
       - protocol: http
         load_balancer_port: 80
