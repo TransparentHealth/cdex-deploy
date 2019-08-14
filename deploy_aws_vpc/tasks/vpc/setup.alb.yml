@@ -26,7 +26,7 @@
     subnet_ids: []
 
 - debug:
-    msg: "{{ item.subnets[0].subnet_id }}"
+    msg: "we got this: {{ item.subnets[0].subnet_id }}"
   loop: "{{ subnet-facts.results }}"
 
 
