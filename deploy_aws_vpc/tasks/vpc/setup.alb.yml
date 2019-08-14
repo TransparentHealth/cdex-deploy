@@ -38,7 +38,7 @@
         Port: 443
         DefaultActions:
           - Type: forward
-            target_group_arn: "{{ alb_targetgroupfacts_vmi.target_group_arn }}"
+            TargetGroupName: "staging-vmi-APP"
         SslPolicy: ELBSecurityPolicy-2015-05
   register: "alb_instance_vmi"
 
