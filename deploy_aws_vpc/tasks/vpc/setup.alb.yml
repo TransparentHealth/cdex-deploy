@@ -28,10 +28,6 @@
         instance_port: 80
     security_groups:
       - "{{ vpc_env }}-DMZ"
-    stickiness:
-      type: application
-      enabled: yes
-      cookie: SESSIONID
   register: "alb_instance_vmi"
 
 # Create an ELB with application stickiness enabled
@@ -55,10 +51,6 @@
         instance_port: 80
     security_groups:
       - "{{ vpc_env }}-DMZ"
-    stickiness:
-      type: application
-      enabled: yes
-      cookie: SESSIONID
   register: "alb_instance_smh"
 
 # Create an ELB with application stickiness enabled
@@ -82,8 +74,4 @@
         instance_port: 80
     security_groups:
       - "{{ vpc_env }}-DMZ"
-    stickiness:
-      type: application
-      enabled: yes
-      cookie: SESSIONID
   register: "alb_instance_smhapp"
