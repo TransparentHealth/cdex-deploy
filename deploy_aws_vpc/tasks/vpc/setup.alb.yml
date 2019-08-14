@@ -8,7 +8,7 @@
 #    - { platform_app: "smhapp", ports: [80, 443], protocols: ["http", "https"] }
 
 - debug:
-    msg: "Target Groups:\n {{ vpc_security_groups }}"
+    msg: "VPC Security Groups: {{ vpc_security_groups }}"
 
 # Create an ELB with application stickiness enabled
 - elb_application_lb:
@@ -30,6 +30,8 @@
           - Type: forward
             TargetGroupName: "{{ vpc_env }}-vmi-APP"
         SslPolicy: ELBSecurityPolicy-2015-05
+    security_groups:
+      - "{{ vpc_env }}-DMZ"
   register: "alb_instance_vmi"
 
 # Create an ELB with application stickiness enabled
