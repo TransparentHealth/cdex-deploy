@@ -10,6 +10,9 @@
 - debug:
     msg: "VPC Security Groups: {{ vpc_security_groups }}"
 
+- debug:
+    msg: "vpc subnets: {{ vpc_subnets }}"
+    
 - elb_target_group_facts:
     names:
       - "{{ vpc_env }}-vmi-APP"
