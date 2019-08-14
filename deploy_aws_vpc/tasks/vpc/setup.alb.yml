@@ -13,37 +13,35 @@
 - elb_target_group_facts:
     names:
       - "{{ vpc_env }}-vmi-APP"
-      - "{{ vpc_env }}-smh-APP"
-      - "{{ vpc_env }}-smhapp-APP"
-  register: alb_targetgroupfacts
+  register: alb_targetgroupfacts_vmi
 
 - debug:
-    msg: "Target Group Facts:\n{{ alb_targetgroupfacts }}"
+    msg: "Target Group Facts:\n{{ alb_targetgroupfacts_vmi.target_group_arn }}"
 
-## Create an ELB with application stickiness enabled
-#- elb_application_lb:
-#    name: "{{ vpc_env }}-vmi-ALB"
-#    state: "{{ role_state }}"
-#    scheme: "internet-facing"
-#    region: "{{ aws_region }}"
-#    security_groups:
-#      - "{{ vpc_env }}-DMZ"
-#    subnets:
-#      - "{{ vpc_subnets['dmz-a'] }}"
-#      - "{{ vpc_subnets['dmz-b'] }}"
-#      - "{{ vpc_subnets['dmz-c'] }}"
-#    listeners:
-#      # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
-#      - Protocol: http
-#        Port: 80
-#      - Protoccol: https
-#        Port: 443
-#        DefaultActions:
-#          - Type: forward
-#            TargetGroupName: "{{ vpc_env }}-vmi-APP"
-#        SslPolicy: ELBSecurityPolicy-2015-05
-#  register: "alb_instance_vmi"
-#
+# Create an ELB with application stickiness enabled
+- elb_application_lb:
+    name: "{{ vpc_env }}-vmi-ALB"
+    state: "{{ role_state }}"
+    scheme: "internet-facing"
+    region: "{{ aws_region }}"
+    security_groups:
+      - "{{ vpc_env }}-DMZ"
+    subnets:
+      - "{{ vpc_subnets['dmz-a'] }}"
+      - "{{ vpc_subnets['dmz-b'] }}"
+      - "{{ vpc_subnets['dmz-c'] }}"
+    listeners:
+      # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
+      - Protocol: http
+        Port: 80
+      - Protoccol: https
+        Port: 443
+        DefaultActions:
+          - Type: forward
+            target_group_arn: "{{ alb_targetgroupfacts_vmi.target_group_arn }}"
+        SslPolicy: ELBSecurityPolicy-2015-05
+  register: "alb_instance_vmi"
+
 ## Create an ELB with application stickiness enabled
 #- elb_application_lb:
 #    name: "{{ vpc_env }}-smh-ALB"
