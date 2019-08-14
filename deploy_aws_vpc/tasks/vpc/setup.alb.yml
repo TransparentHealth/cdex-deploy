@@ -23,7 +23,7 @@
     msg: "subnet_facts: \n {{ subnet_facts.results }}"
 
 - set_fact:
-    subnet_ids: "{{ subnet_facts.results.subnets|map(attribute='id')|list }}"
+    subnet_ids: "{{ subnet_facts.subnets|map(attribute='subnet_id')|list }}"
 
 - debug:
     msg: "vpc subnets: {{ subnet_ids }}"
