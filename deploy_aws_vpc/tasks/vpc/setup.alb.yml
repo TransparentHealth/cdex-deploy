@@ -25,8 +25,8 @@
 - set_fact:
     subnet_ids: []
 
-- debug: "increment through results"
-    msg: "{{ item }}.subnets[0].subnet_id"
+- debug:
+    msg: "{{ item.subnets[0].subnet_id }}"
   loop: "{{ subnet-facts.results }}"
 
 
