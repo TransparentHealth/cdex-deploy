@@ -26,10 +26,10 @@
         Port: 80
       - Protoccol: https
         Port: 443
-        DefaultActions:
-          - Type: forward
-            TargetGroupName: "{{ vpc_env }}-vmi-APP"
-        SslPolicy: ELBSecurityPolicy-2015-05
+      DefaultActions:
+        - Type: forward
+          TargetGroupName: "{{ vpc_env }}-vmi-APP"
+      SslPolicy: ELBSecurityPolicy-2015-05
     security_groups:
       - "{{ vpc_env }}-DMZ"
   register: "alb_instance_vmi"
@@ -50,10 +50,10 @@
         Port: 80
       - Protoccol: https
         Port: 443
-        DefaultActions:
-          - Type: forward
-            TargetGroupName: "{{ vpc_env }}-smh-APP"
-        SslPolicy: ELBSecurityPolicy-2015-05
+      DefaultActions:
+        - Type: forward
+          TargetGroupName: "{{ vpc_env }}-smh-APP"
+      SslPolicy: ELBSecurityPolicy-2015-05
 
     security_groups:
       - "{{ vpc_env }}-DMZ"
@@ -75,10 +75,10 @@
         Port: 80
       - Protoccol: HTTPS
         Port: 443
-        DefaultActions:
-          - Type: forward
-            TargetGroupName: "{{ vpc_env }}-smhapp-APP"
-        SslPolicy: ELBSecurityPolicy-2015-05
+      DefaultActions:
+        - Type: forward
+          TargetGroupName: "{{ vpc_env }}-smhapp-APP"
+      SslPolicy: ELBSecurityPolicy-2015-05
 
     security_groups:
       - "{{ vpc_env }}-DMZ"
