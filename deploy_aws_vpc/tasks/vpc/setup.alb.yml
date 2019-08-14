@@ -25,7 +25,7 @@
 - set_fact:
     subnet_ids: []
 - set_fact:
-    subnet_ids: {{ subnet_ids + subnet_facts.results[ansible_loop_var].subnets[0].subnet_id }}"
+    subnet_ids: "{{ subnet_ids + subnet_facts.results[ansible_loop_var].subnets[0].subnet_id }}"
   loop: "{{ subnet_facts.results)|length }}"
 
 - debug:
