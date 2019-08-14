@@ -18,14 +18,11 @@
       - "{{ vpc_subnets['dmz-b'] }}"
       - "{{ vpc_subnets['dmz-c'] }}"
     listeners:
-      - protocol: http
-        load_balancer_port: 80
-        instance_port: 80
-        proxy_protocol: True
-      - protoccol: https
-        load_balancer_port: 443
-        instance_protocol: http
-        instance_port: 80
+      # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
+      - Protocol: http
+        Port: 80
+      - Protoccol: https
+        Port: 443
     security_groups:
       - "{{ vpc_env }}-DMZ"
   register: "alb_instance_vmi"
@@ -41,14 +38,11 @@
       - "{{ aws_region }}b"
       - "{{ aws_region }}c"
     listeners:
-      - protocol: http
-        load_balancer_port: 80
-        instance_port: 80
-        proxy_protocol: True
-      - protoccol: https
-        load_balancer_port: 443
-        instance_protocol: http
-        instance_port: 80
+      # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
+      - Protocol: http
+        Port: 80
+      - Protoccol: https
+        Port: 443
     security_groups:
       - "{{ vpc_env }}-DMZ"
   register: "alb_instance_smh"
@@ -64,14 +58,11 @@
       - "{{ aws_region }}b"
       - "{{ aws_region }}c"
     listeners:
-      - protocol: http
-        load_balancer_port: 80
-        instance_port: 80
-        proxy_protocol: True
-      - protoccol: https
-        load_balancer_port: 443
-        instance_protocol: http
-        instance_port: 80
+      # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
+      - Protocol: http
+        Port: 80
+      - Protoccol: https
+        Port: 443
     security_groups:
       - "{{ vpc_env }}-DMZ"
   register: "alb_instance_smhapp"
