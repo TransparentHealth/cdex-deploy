@@ -27,7 +27,8 @@
 
 - debug:
     msg: "we got this: {{ item.subnets[0].subnet_id }}"
-  loop: "{{ subnet_facts.results }}"
+  loop:
+    - "{{ subnet_facts.results }}"
 
 
 - set_fact:
