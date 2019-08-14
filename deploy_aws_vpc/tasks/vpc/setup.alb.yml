@@ -13,10 +13,10 @@
     state: "{{ role_state }}"
     scheme: "internet-facing"
     region: "{{ aws_region }}"
-    zones:
-      - "{{ aws_region }}a"
-      - "{{ aws_region }}b"
-      - "{{ aws_region }}c"
+    subnets:
+      - "{{ vpc_subnets['dmz-a'] }}"
+      - "{{ vpc_subnets['dmz-b'] }}"
+      - "{{ vpc_subnets['dmz-c'] }}"
     listeners:
       - protocol: http
         load_balancer_port: 80
@@ -26,7 +26,7 @@
         load_balancer_port: 443
         instance_protocol: http
         instance_port: 80
-    security_group_names:
+    security_groups:
       - "{{ vpc_env }}-DMZ"
     stickiness:
       type: application
@@ -53,7 +53,7 @@
         load_balancer_port: 443
         instance_protocol: http
         instance_port: 80
-    security_group_names:
+    security_groups:
       - "{{ vpc_env }}-DMZ"
     stickiness:
       type: application
@@ -80,7 +80,7 @@
         load_balancer_port: 443
         instance_protocol: http
         instance_port: 80
-    security_group_names:
+    security_groups:
       - "{{ vpc_env }}-DMZ"
     stickiness:
       type: application
