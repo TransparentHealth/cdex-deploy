@@ -16,7 +16,7 @@
   register: alb_targetgroupfacts_vmi
 
 - debug:
-    msg: "Target Group Facts:\n{{ alb_targetgroupfacts_vmi.target_group_arn }}"
+    msg: "Target Group Facts:\n{{ alb_targetgroupfacts_vmi.target_groups.target_group_arn }}"
 
 # Create an ELB with application stickiness enabled
 - elb_application_lb:
