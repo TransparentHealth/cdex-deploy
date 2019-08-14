@@ -16,7 +16,7 @@
   register: alb_targetgroupfacts_vmi
 
 - debug:
-    msg: "Target Group Facts:\n{{ alb_targetgroupfacts_vmi.target_groups }}"
+    msg: "Target Group Facts:\n{{ alb_targetgroupfacts_vmi.target_groups[0].target_group_arn }}"
 
 # Create an ELB with application stickiness enabled
 - elb_application_lb:
@@ -34,6 +34,9 @@
       # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
       - Protocol: http
         Port: 80
+        DefaultActions:
+          - Type: forward
+            TargetGroupName: "{{ alb_targetgroupfacts_vmi.target_groups[0].target_group_arn }}"
       - Protoccol: https
         Port: 443
         DefaultActions:
