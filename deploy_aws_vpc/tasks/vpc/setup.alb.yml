@@ -7,6 +7,9 @@
 #    - { platform_app: "smh", ports: [80, 443], protocols: ["http", "https"] }
 #    - { platform_app: "smhapp", ports: [80, 443], protocols: ["http", "https"] }
 
+- debug:
+    - msg: "Target Groups:\n {{ vpc_security_groups }}"
+
 # Create an ELB with application stickiness enabled
 - elb_application_lb:
     name: "{{ vpc_env }}-vmi-ALB"
