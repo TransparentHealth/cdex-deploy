@@ -20,10 +20,10 @@
   register: subnet_facts
 
 - debug:
-    msg: "subnet_facts: \n {{ subnet_facts.results[0] }}"
+    msg: "subnet_facts: \n {{ subnet_facts.results[0].subnets }}"
 
 - set_fact:
-    subnet_ids: "{{ subnet_facts.results|map(attribute='subnet_id')|list }}"
+    subnet_ids: "{{ subnet_facts.results[0].subnets|map(attribute='subnet_id')|list }}"
 
 - debug:
     msg: "vpc subnets: {{ subnet_ids }}"
