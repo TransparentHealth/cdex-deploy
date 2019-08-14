@@ -1,0 +1,10 @@
+# tasks/vpc/setup.targetgroup.yml
+# create VPC target Groups.
+
+# Create a target group with a default health check
+- elb_target_group:
+    name: "{{  vpc_env}}-{{ item }}-APP"
+    protocol: http
+    port: 80
+    vpc_id: "{{ vpc_id }}"
+    state: present

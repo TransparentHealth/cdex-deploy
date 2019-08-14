@@ -59,10 +59,15 @@
       - "{{ aws_region }}c"
     listeners:
       # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
-      - Protocol: http
+      - Protocol: HTTP
         Port: 80
-      - Protoccol: https
+      - Protoccol: HTTPS
         Port: 443
+        DefaultActions:
+          - Type: forward
+            TargetGroupName: test-target-group
+        SslPolicy: ELBSecurityPolicy-2015-05
+
     security_groups:
       - "{{ vpc_env }}-DMZ"
   register: "alb_instance_smhapp"
