@@ -12,7 +12,6 @@
 
 - ec2_vpc_subnet_facts:
     filters:
-      vpc-id: vpc-abcdef00
       "tag:Name": "{{ item }}"
   loop:
     - "{{ vpc_env|upper}}-dmz-a"
