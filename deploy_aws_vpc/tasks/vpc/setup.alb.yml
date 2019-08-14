@@ -27,7 +27,7 @@
 
 - debug:
     msg: "we got this: {{ item }}"
-  loop:
+  with_items:
     - "{{ subnet_facts.results }}"
 
 
