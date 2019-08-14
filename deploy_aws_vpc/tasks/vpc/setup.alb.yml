@@ -23,9 +23,7 @@
     msg: "subnet_facts: \n {{ subnet_facts.results }}"
 
 - set_fact:
-    subnet_ids: "[{% for i in range(0,(subnet_facts.results)|length ) %}
-      {{subnet_facts.results[i].subnets[0].subnet_id }},
-    {% endfor %}]"
+    subnet_ids: "[{% for i in range(0,(subnet_facts.results)|length ) %}{{subnet_facts.results[i].subnets[0].subnet_id }},{% endfor %}]"
 
 - debug:
     msg: "vpc subnets: {{ subnet_ids }}"
@@ -46,8 +44,7 @@
     region: "{{ aws_region }}"
     security_groups:
       - "{{ vpc_env }}-DMZ"
-    subnets:
-      "{{ subnet_ids }}"
+    subnets: "{{ subnet_ids }}"
     listeners:
       # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
       - Protocol: http
