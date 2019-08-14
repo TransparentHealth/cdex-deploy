@@ -11,10 +11,20 @@
     msg: "VPC Security Groups: {{ vpc_security_groups }}"
 
 - ec2_vpc_subnet_facts:
-  register: vpc_subnet_facts
+    filters:
+      vpc-id: vpc-abcdef00
+      "tag:Name": "{{ item }}"
+  loop:
+    - "{{ vpc_env|upper}}-dmz-a"
+    - "{{ vpc_env|upper}}-dmz-b"
+    - "{{ vpc_env|upper}}-dmz-c"
+  register: subnet_facts
+
+- set_fact:
+    subnet_ids: "{{ subnet_facts.subnets|map(attribute='id')|list }}"
 
 - debug:
-    msg: "vpc subnets: {{ vpc_subnet_facts }}"
+    msg: "vpc subnets: {{ subnet_ids }}"
 
 - elb_target_group_facts:
     names:
@@ -33,9 +43,7 @@
     security_groups:
       - "{{ vpc_env }}-DMZ"
     subnets:
-      - "{{ vpc_subnets['dmz-a'].cidr }}"
-      - "{{ vpc_subnets['dmz-b'].cidr }}"
-      - "{{ vpc_subnets['dmz-c'].cidr }}"
+      "{{ subnet_ids }}"
     listeners:
       # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
       - Protocol: http
