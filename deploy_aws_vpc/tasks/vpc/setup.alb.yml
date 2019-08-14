@@ -10,6 +10,16 @@
 - debug:
     msg: "VPC Security Groups: {{ vpc_security_groups }}"
 
+- elb_target_group_facts:
+    names:
+      - "{{ vpc_env }}-vmi-APP"
+      - "{{ vpc_env }}-smh-APP"
+      - "{{ vpc_env }}-smhapp-APP"
+  register: alb_targetgroupfacts
+
+- debug:
+    msg: "Target Group Facts:\n{{ alb_targetgroupfacts }}"
+
 # Create an ELB with application stickiness enabled
 - elb_application_lb:
     name: "{{ vpc_env }}-vmi-ALB"
