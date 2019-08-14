@@ -23,7 +23,7 @@
     msg: "subnet_facts: \n {{ subnet_facts.results }}"
 
 - set_fact:
-    subnet_ids: "{% for i in range(0, subnet_facts.results)| length) %}
+    subnet_ids: "{% for i in range(0, subnet_facts.results|length) %}
       - subnet_id: {{subnet_facts.results[i].subnets.subnet-id }}
     {% endfor %}"
 
