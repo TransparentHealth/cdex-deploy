@@ -20,7 +20,7 @@
   register: subnet_facts
 
 - debug:
-    msg: "subnet_facts: \n {{ subnet_facts.subnets | map(attribute="subnet_id")| list }}"
+    msg: "subnet_facts: \n {{ subnet_facts.results.subnets | map(attribute="subnet_id")| list }}"
 
 - set_fact:
     subnet_ids: "{{ subnet_facts.results[0].subnets|map(attribute='subnet_id')|list }}"
