@@ -20,74 +20,74 @@
 - debug:
     msg: "Target Group Facts:\n{{ alb_targetgroupfacts }}"
 
-# Create an ELB with application stickiness enabled
-- elb_application_lb:
-    name: "{{ vpc_env }}-vmi-ALB"
-    state: "{{ role_state }}"
-    scheme: "internet-facing"
-    region: "{{ aws_region }}"
-    security_groups:
-      - "{{ vpc_env }}-DMZ"
-    subnets:
-      - "{{ vpc_subnets['dmz-a'] }}"
-      - "{{ vpc_subnets['dmz-b'] }}"
-      - "{{ vpc_subnets['dmz-c'] }}"
-    listeners:
-      # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
-      - Protocol: http
-        Port: 80
-      - Protoccol: https
-        Port: 443
-        DefaultActions:
-          - Type: forward
-            TargetGroupName: "{{ vpc_env }}-vmi-APP"
-        SslPolicy: ELBSecurityPolicy-2015-05
-  register: "alb_instance_vmi"
-
-# Create an ELB with application stickiness enabled
-- elb_application_lb:
-    name: "{{ vpc_env }}-smh-ALB"
-    state: "{{ role_state }}"
-    scheme: "internet-facing"
-    region: "{{ aws_region }}"
-    security_groups:
-      - "{{ vpc_env }}-DMZ"
-    subnets:
-      - "{{ vpc_subnets['dmz-a'] }}"
-      - "{{ vpc_subnets['dmz-b'] }}"
-      - "{{ vpc_subnets['dmz-c'] }}"
-    listeners:
-      # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
-      - Protocol: http
-        Port: 80
-      - Protoccol: https
-        Port: 443
-          DefaultActions:
-          - Type: forward
-            TargetGroupName: "{{ vpc_env }}-smh-APP"
-        SslPolicy: ELBSecurityPolicy-2015-05
-  register: "alb_instance_smh"
-
-# Create an ELB with application stickiness enabled
-- elb_application_lb:
-    name: "{{ vpc_env }}-smhapp-ALB"
-    state: "{{ role_state }}"
-    scheme: "internet-facing"
-    region: "{{ aws_region }}"
-    security_groups:
-      - "{{ vpc_env }}-DMZ"
-    subnets:
-      - "{{ vpc_subnets['dmz-a'] }}"
-      - "{{ vpc_subnets['dmz-b'] }}"
-      - "{{ vpc_subnets['dmz-c'] }}"
-    listeners:
-      # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
-      - Protocol: HTTP
-        Port: 80
-      - Protoccol: HTTPS
-        Port: 443
-        DefaultActions:
-          - Type: forward
-            TargetGroupName: "{{ vpc_env }}-smhapp-APP"
-        SslPolicy: ELBSecurityPolicy-2015-05
-  register: "alb_instance_smhapp"
+## Create an ELB with application stickiness enabled
+#- elb_application_lb:
+#    name: "{{ vpc_env }}-vmi-ALB"
+#    state: "{{ role_state }}"
+#    scheme: "internet-facing"
+#    region: "{{ aws_region }}"
+#    security_groups:
+#      - "{{ vpc_env }}-DMZ"
+#    subnets:
+#      - "{{ vpc_subnets['dmz-a'] }}"
+#      - "{{ vpc_subnets['dmz-b'] }}"
+#      - "{{ vpc_subnets['dmz-c'] }}"
+#    listeners:
+#      # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
+#      - Protocol: http
+#        Port: 80
+#      - Protoccol: https
+#        Port: 443
+#        DefaultActions:
+#          - Type: forward
+#            TargetGroupName: "{{ vpc_env }}-vmi-APP"
+#        SslPolicy: ELBSecurityPolicy-2015-05
+#  register: "alb_instance_vmi"
+#
+## Create an ELB with application stickiness enabled
+#- elb_application_lb:
+#    name: "{{ vpc_env }}-smh-ALB"
+#    state: "{{ role_state }}"
+#    scheme: "internet-facing"
+#    region: "{{ aws_region }}"
+#    security_groups:
+#      - "{{ vpc_env }}-DMZ"
+#    subnets:
+#      - "{{ vpc_subnets['dmz-a'] }}"
+#      - "{{ vpc_subnets['dmz-b'] }}"
+#      - "{{ vpc_subnets['dmz-c'] }}"
+#    listeners:
+#      # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
+#      - Protocol: http
+#        Port: 80
+#      - Protoccol: https
+#        Port: 443
+#          DefaultActions:
+#          - Type: forward
+#            TargetGroupName: "{{ vpc_env }}-smh-APP"
+#        SslPolicy: ELBSecurityPolicy-2015-05
+#  register: "alb_instance_smh"
+#
+## Create an ELB with application stickiness enabled
+#- elb_application_lb:
+#    name: "{{ vpc_env }}-smhapp-ALB"
+#    state: "{{ role_state }}"
+#    scheme: "internet-facing"
+#    region: "{{ aws_region }}"
+#    security_groups:
+#      - "{{ vpc_env }}-DMZ"
+#    subnets:
+#      - "{{ vpc_subnets['dmz-a'] }}"
+#      - "{{ vpc_subnets['dmz-b'] }}"
+#      - "{{ vpc_subnets['dmz-c'] }}"
+#    listeners:
+#      # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
+#      - Protocol: HTTP
+#        Port: 80
+#      - Protoccol: HTTPS
+#        Port: 443
+#        DefaultActions:
+#          - Type: forward
+#            TargetGroupName: "{{ vpc_env }}-smhapp-APP"
+#        SslPolicy: ELBSecurityPolicy-2015-05
+#  register: "alb_instance_smhapp"
