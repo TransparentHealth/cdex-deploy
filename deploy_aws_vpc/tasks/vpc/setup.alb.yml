@@ -27,9 +27,9 @@
     security_groups:
       - "{{ vpc_env }}-DMZ"
     subnets:
-      - "{{ vpc_subnets['dmz-a'] }}"
-      - "{{ vpc_subnets['dmz-b'] }}"
-      - "{{ vpc_subnets['dmz-c'] }}"
+      - "{{ vpc_subnets['dmz-a'].cidr }}"
+      - "{{ vpc_subnets['dmz-b'].cidr }}"
+      - "{{ vpc_subnets['dmz-c'].cidr }}"
     listeners:
       # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
       - Protocol: http
