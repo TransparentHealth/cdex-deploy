@@ -3,6 +3,8 @@
 # get information about application load balancers.
 
 - elb_application_lb_facts:
+    load_balancer_arns:
+      - "arn:aws:elasticloadbalancing:us-east-1:567024208163:loadbalancer/app/staging-vmi-ALB/f093056a70d7a0d7"
   register: alb_facts
 
 - debug:
