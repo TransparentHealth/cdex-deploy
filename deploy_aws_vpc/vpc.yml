@@ -25,5 +25,5 @@
 #      with_items: "{{ platform_app }}"
 
     - include_tasks: tasks/vpc/get.alb.yml
-    - include_tasks: tasks/vpc/setup.alb.yml
+#    - include_tasks: tasks/vpc/setup.alb.yml
 #    - include_tasks: tasks/vpc/facts.yml

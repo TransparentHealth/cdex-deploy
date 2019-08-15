@@ -6,5 +6,5 @@
   register: alb_facts
 
 - debug:
-    msg: "ALB info: {{ alb_facts }}"
+    msg: "ALB info: {{ alb_facts.load_balancers }}"
 
