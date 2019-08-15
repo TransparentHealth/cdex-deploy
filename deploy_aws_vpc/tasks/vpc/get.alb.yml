@@ -1,0 +1,10 @@
+# tasks/vpc/get.alb.yml
+---
+# get information about application load balancers.
+
+- elb_application_lb_facts:
+  register: alb_facts
+
+- debug:
+    msg: "ALB info: {{ alb_facts }}"
+
