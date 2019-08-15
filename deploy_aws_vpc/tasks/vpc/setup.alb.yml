@@ -56,8 +56,7 @@
     region: "{{ aws_region }}"
     security_groups:
       - "{{ vpc_env }}-DMZ"
-    subnets:
-      - "{{ subnet_ids }}"
+    subnets: "{{ subnet_ids }}"
     listeners:
       # Certificates, DefaultActions, Port, Protocol, Rules, SslPolicy
       - Protocol: http
