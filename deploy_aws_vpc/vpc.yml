@@ -25,5 +25,8 @@
 #      with_items: "{{ platform_app }}"
 
     - include_tasks: tasks/vpc/get.alb.yml
-#    - include_tasks: tasks/vpc/setup.alb.yml
+      with_items:
+        - "{{ vpc_env }}-vmi-ALB"
+        - "{{ vpc_env }}-smh-ALB"
+        - "{{ vpc_env }}-smhapp-ALB"
 #    - include_tasks: tasks/vpc/facts.yml

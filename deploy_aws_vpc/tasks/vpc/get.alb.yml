@@ -3,10 +3,131 @@
 # get information about application load balancers.
 
 - elb_application_lb_facts:
-    load_balancer_arns:
-      - "arn:aws:elasticloadbalancing:us-east-1:567024208163:loadbalancer/app/staging-vmi-ALB/f093056a70d7a0d7"
+    names:
+      - "{{ item }}"
+
+#    load_balancer_arns:
+#      - "arn:aws:elasticloadbalancing:us-east-1:567024208163:loadbalancer/app/staging-vmi-ALB/f093056a70d7a0d7"
   register: alb_facts
 
 - debug:
     msg: "ALB info: {{ alb_facts.load_balancers[0] }}"
 
+# Returned values
+#  {
+#    "load_balancer_arn": "arn:aws:elasticloadbalancing:us-east-1:567024208163:loadbalancer/app/staging-vmi-ALB/f093056a70d7a0d7",
+#    "dns_name": "staging-vmi-ALB-372472988.us-east-1.elb.amazonaws.com",
+#    "canonical_hosted_zone_id": "Z35SXDOTRQ7X7K",
+#    "created_time": "2019-08-14T21:56:22.430000+00:00",
+#    "load_balancer_name": "staging-vmi-ALB",
+#    "scheme": "internet-facing",
+#    "vpc_id": "vpc-05253e87f7c98a659",
+#    "state": {
+#      "code": "active"
+#    },
+#    "type": "application",
+#    "availability_zones": [
+#    {
+#      "zone_name": "us-east-1b",
+#      "subnet_id": "subnet-08fce402b92e7cb3b"
+#    },
+#    {
+#      "zone_name": "us-east-1c",
+#      "subnet_id": "subnet-0c727c2f44c9815bb"
+#    },
+#    {
+#      "zone_name": "us-east-1a",
+#      "subnet_id": "subnet-0ef1b2cf03df24e8d"
+#    }
+#    ],
+#    "security_groups": [
+#      "sg-06d87c8690366dc4c"
+#    ],
+#    "ip_address_type": "ipv4",
+#    "access_logs_s3_enabled": "false",
+#    "access_logs_s3_bucket": "",
+#    "access_logs_s3_prefix": "",
+#    "idle_timeout_timeout_seconds": "60",
+#    "deletion_protection_enabled": "false",
+#    "routing_http2_enabled": "true",
+#    "listeners": [
+#    {
+#      "listener_arn": "arn:aws:elasticloadbalancing:us-east-1:567024208163:listener/app/staging-vmi-ALB/f093056a70d7a0d7/259922e6548a2cee",
+#      "load_balancer_arn": "arn:aws:elasticloadbalancing:us-east-1:567024208163:loadbalancer/app/staging-vmi-ALB/f093056a70d7a0d7",
+#      "port": 443,
+#      "protocol": "HTTPS",
+#      "certificates": [
+#      {
+#        "certificate_arn": "arn:aws:acm:us-east-1:567024208163:certificate/74596017-1b4c-4261-9a35-7840a532d683"
+#      }
+#      ],
+#      "ssl_policy": "ELBSecurityPolicy-2016-08",
+#      "default_actions": [
+#      {
+#        "type": "forward",
+#        "target_group_arn": "arn:aws:elasticloadbalancing:us-east-1:567024208163:targetgroup/staging-vmi-APP/40f8632efbbb08b5",
+#        "order": 1
+#      }
+#      ],
+#      "rules": [
+#      {
+#        "rule_arn": "arn:aws:elasticloadbalancing:us-east-1:567024208163:listener-rule/app/staging-vmi-ALB/f093056a70d7a0d7/259922e6548a2cee/75c56b0fe2236869",
+#        "priority": "default",
+#        "conditions": [],
+#        "actions": [
+#        {
+#          "type": "forward",
+#          "target_group_arn": "arn:aws:elasticloadbalancing:us-east-1:567024208163:targetgroup/staging-vmi-APP/40f8632efbbb08b5",
+#          "order": 1
+#        }
+#        ],
+#        "is_default": true
+#      }
+#      ]
+#    },
+#    {
+#      "listener_arn": "arn:aws:elasticloadbalancing:us-east-1:567024208163:listener/app/staging-vmi-ALB/f093056a70d7a0d7/32d25221442a7562",
+#      "load_balancer_arn": "arn:aws:elasticloadbalancing:us-east-1:567024208163:loadbalancer/app/staging-vmi-ALB/f093056a70d7a0d7",
+#      "port": 80,
+#      "protocol": "HTTP",
+#      "default_actions": [
+#      {
+#        "type": "redirect",
+#        "order": 1,
+#        "redirect_config": {
+#          "protocol": "HTTPS",
+#          "port": "443",
+#          "host": "#{host}",
+#          "path": "/#{path}",
+#          "query": "#{query}",
+#          "status_code": "HTTP_301"
+#        }
+#      }
+#      ],
+#      "rules": [
+#      {
+#        "rule_arn": "arn:aws:elasticloadbalancing:us-east-1:567024208163:listener-rule/app/staging-vmi-ALB/f093056a70d7a0d7/32d25221442a7562/69593be34de9a3de",
+#        "priority": "default",
+#        "conditions": [],
+#        "actions": [
+#        {
+#          "type": "redirect",
+#          "order": 1,
+#          "redirect_config": {
+#            "protocol": "HTTPS",
+#            "port": "443",
+#            "host": "#{host}",
+#            "path": "/#{path}",
+#            "query": "#{query}",
+#            "status_code": "HTTP_301"
+#          }
+#        }
+#        ],
+#        "is_default": true
+#      }
+#      ]
+#    }
+#    ],
+#    "tags": {}
+#  }
+#
