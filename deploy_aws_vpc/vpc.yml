@@ -19,14 +19,15 @@
     AWS_REGION: "{{ aws_region }}"
   tasks:
 
-#    - include_tasks: tasks/vpc/setup.vpc.yml
-#    - include_tasks: tasks/vpc/setup.gateways.yml
-#    - include_tasks: tasks/vpc/setup.targetgroup.yml
-#      with_items: "{{ platform_app }}"
+    - include_tasks: tasks/vpc/setup.vpc.yml
+    - include_tasks: tasks/vpc/setup.gateways.yml
+    - include_tasks: tasks/vpc/setup.targetgroup.yml
+        with_items: "{{ platform_app }}"
 
     - include_tasks: tasks/vpc/get.alb.yml
       with_items:
         - "{{ vpc_env }}-vmi-ALB"
         - "{{ vpc_env }}-smh-ALB"
         - "{{ vpc_env }}-smhapp-ALB"
-#    - include_tasks: tasks/vpc/facts.yml
+
+    - include_tasks: tasks/vpc/facts.yml
