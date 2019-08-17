@@ -1,0 +1,14 @@
+# tasks/app/vmi/get_instance_info.yml
+---
+
+# instance information
+
+- name: "get ec2 info"
+  ec2_instance_facts:
+    instance_ids:
+      - "i-089b85acd8496891b"
+  register: ec2_base
+
+- debug: var={{ item }}
+    with_dict: ec2_base
+

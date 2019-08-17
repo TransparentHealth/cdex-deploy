@@ -1,0 +1,9 @@
+# tasks/env/app/vmi/prepare_ami.yml
+---
+
+# Create the app environment before constructing an AMI.
+# Add the AMI to an autoscaling Group
+
+- name: "create ec2 instance"
+  ec2:
+
