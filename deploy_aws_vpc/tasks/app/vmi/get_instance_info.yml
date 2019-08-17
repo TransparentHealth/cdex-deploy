@@ -9,6 +9,5 @@
       - "i-089b85acd8496891b"
   register: ec2_base
 
-- debug:
-    msg: "{{ ec2_base| to_nice_json }}"
+- shell:  " echo {{ ec2_base| to_nice_json }}"
 
