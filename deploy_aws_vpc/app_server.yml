@@ -21,4 +21,4 @@
 
     - include_tasks: tasks/app/vmi/get_instance_info.yml
 
-      
+
