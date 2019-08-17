@@ -10,5 +10,5 @@
   register: ec2_base
 
 - debug:
-    msg: "{{ ec2_base.stdout.split('\n') }}"
+    msg: "{{ ec2_base| to_nice_json }}"
 
