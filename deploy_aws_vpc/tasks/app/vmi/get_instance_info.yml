@@ -10,5 +10,5 @@
   register: ec2_base
 
 - debug: "var={{ item }}"
-    with_dict: ec2_base
+    with_dict: "{{ ec2_base }}"
 
