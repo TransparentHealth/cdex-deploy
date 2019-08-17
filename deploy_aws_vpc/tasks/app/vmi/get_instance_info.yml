@@ -9,5 +9,6 @@
       - "i-089b85acd8496891b"
   register: ec2_base
 
-- debug: ec2_base.split("\n")
+- debug:
+    msg: ec2_base.split("\n")
 
