@@ -9,6 +9,6 @@
       - "i-089b85acd8496891b"
   register: ec2_base
 
-- debug: var={{ item }}
+- debug: "var={{ item }}"
     with_dict: ec2_base
 
