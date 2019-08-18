@@ -10,5 +10,5 @@
   register: ec2_base
 
 - debug:
-    msg:  "EC2 Instance:\n{{ ec2_base | from_json | to_nice_yaml }}"
+    msg:  "EC2 Instance:\n{{ ec2_base | to_nice_yaml }}"
 
