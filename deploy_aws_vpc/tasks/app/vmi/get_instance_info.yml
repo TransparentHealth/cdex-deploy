@@ -10,5 +10,5 @@
   register: ec2_base
 
 - debug:
-    msg:  " echo {{ ec2_base.split( '\n') }}"
+    msg:  "EC2 Instance:\n{{ ec2_base }}"
 
