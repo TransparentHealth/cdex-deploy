@@ -55,7 +55,7 @@
 - debug: "show the hostnames"
     msg: "{{ item }}"
   with_inventory_hostnames:
-    - all:!ansibled
+    - all
 
 - name: "Wait for ssh to come up"
   wait_for:
