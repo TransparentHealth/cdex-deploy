@@ -36,6 +36,8 @@
   tasks:
 
     # - include_tasks: tasks/app/vmi/get_instance_info.yml
-    - include_tasks: tasks/app/create_instance.yml
+    - include_tasks:
+      - tasks/app/create_instance.yml
+      - tasks/app/nginx_install.yml
 
 

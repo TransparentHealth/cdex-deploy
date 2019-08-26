@@ -1,0 +1,22 @@
+# tasks/app/nginx_install.yml
+# install nginx with latest version
+# pre-installed software:
+#   - python 3.6.8
+#   - git
+
+---
+- hosts: "base_instance"
+  remote_user: ubuntu
+  become: yes
+  gather_facts: no
+  pre_tasks:
+    # - name: 'install python'
+    #   raw: 'sudo apt-get -y install python'
+  tasks:
+    - name: ensure nginx is at the latest version
+        apt: name=nginx state=latest
+        - name: start nginx
+          service:
+            name: nginx
+            state: started
+
