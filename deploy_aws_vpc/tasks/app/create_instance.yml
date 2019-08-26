@@ -47,7 +47,10 @@
     # msg:  "EC2 Instance:\n{{ ec2_base_instance_info | to_nice_json }}"
 
 - name: "Add instance to hosts inventory"
-  add_host: "hostname={{ ec2_base_instance_info.instances[0].private_dns_name }} groupname=base_instance_{{ role_type }}"
+  add_host:
+    hostname: "{{ ec2_base_instance_info.instances[0].private_dns_name }}"
+    groups:
+    - "base_instance_{{ role_type }}"
 
 - name: "Wait for ssh to come up"
   wait_for:
