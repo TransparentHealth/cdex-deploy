@@ -55,9 +55,9 @@
     port: 22
     state: started
 
-- name: "Configure instance"
+- name: "Configure base_instance_{{ role_type }} "
   hosts: "base_instance_{{ role_type }}"
   tasks:
     - name: "install nginx"
-      apt: name=nginx state=present
+      apt: name=nginx  state=present
 
