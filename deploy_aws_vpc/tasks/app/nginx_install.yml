@@ -5,20 +5,15 @@
 #   - git
 
 ---
-
 - hosts: "base_instance"
-  remote_user: ubuntu
-  become: yes
-  gather_facts: no
-#  pre_tasks:
-#    # - name: 'install python'
-#    #   raw: 'sudo apt-get -y install python'
+  become: true
+  root_user: ubuntu
 
   tasks:
-    - name: ensure nginx is at the latest version
-      apt: name=nginx state=latest
+    - name: "Installing latest nginx version"
+      apt: name="nginx" update_cache=yes  state=present  force=yes
     - name: start nginx
       service:
-          name: nginx
-          state: started
+        name: nginx
+        state: started
 
