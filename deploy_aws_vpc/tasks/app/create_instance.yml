@@ -1,0 +1,38 @@
+# tasks/app/vmi/get_instance_info.yml
+---
+
+# instance information
+
+- name: "create ec2 base instance"
+  ec2:
+    key_name: "abhealth-{{ vpc_env }}-servers"
+    group: "{{ vpc_env }}-{{ platform_app }}-APP"
+    instance_type: "{{ ec2_instance_type[platform_app] }}"
+    image: "{{ base_ami }}"
+    state: "present"
+    instance_initiated_shutdown_behavior: "terminate"
+    wait: yes
+    wait_timeout: 500
+    count: 5
+    instance_tags:
+      role: "{{ role_type }}"
+      env: "vpc_env"
+      function: "base_instance"
+      name: "BaseInstance-{{ role_type }}"
+    monitoring: no
+    vpc_subnet_id: "{{ default_subnet_id }}"
+    assign_public_ip: no
+    volumes:
+      - device_name: "/dev/sda1"
+        volume_type: "gp2"
+        volume_size: 10
+        encrypted: True
+        delete_on_termination: True
+  register: base_instance_info
+
+- debug:
+    msg:  "EC2 Instance:\n{{ ec2_base | to_nice_yaml }}"
+    # msg:  "EC2 Instance:\n{{ ec2_base | to_nice_json }}"
+
+- debug:
+    msg: "base instance:\n{{ base_instance_info | to_nice_yaml}}"

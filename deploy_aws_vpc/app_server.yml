@@ -11,6 +11,17 @@
       - "vmi"
       - "smh"
       - "smhapp"
+    base_ami: "ami-07d0cf3af28718ef8"
+    role_type: "vmi"
+    # ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-20190722.1 (ami-07d0cf3af28718ef8)
+
+    # default vpc to create base instance:
+    default_vpc_id: "vpc-86e735fc"
+    # default subnet-id for base instance
+    default_subnet_id: "subnet-1464e93a"
+
+    # Key pair name:
+    key_pair: "abhealth-{{ vpc_env }}-servers"
 
 
   environment:
@@ -19,6 +30,7 @@
     AWS_REGION: "{{ aws_region }}"
   tasks:
 
-    - include_tasks: tasks/app/vmi/get_instance_info.yml
+    # - include_tasks: tasks/app/vmi/get_instance_info.yml
+    - include_tasks: tasks/app/create_instance.yml
 
 

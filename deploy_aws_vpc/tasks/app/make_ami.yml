@@ -27,7 +27,8 @@
   debug:
     msg: "Setting AMI Name to {{ snapshot_ami_name }}"
 
-# Get EC2 Instance
+# Create EC2 Instance
+
 # Get volume id
 - name: Get source instance
   ec2_instance_facts:
