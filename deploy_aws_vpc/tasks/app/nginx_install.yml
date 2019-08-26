@@ -6,8 +6,6 @@
 
 ---
 - hosts: "base_instance_{{ role_type }}"
-  gather_facts: true
-  become: true
   tasks:
     - name: "Installing latest nginx version"
       apt:
