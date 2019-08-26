@@ -58,13 +58,13 @@
     state: started
 
 - hosts: "base_instance_{{ role_type }}"
-- name: "Installing latest nginx version"
-  apt:
-    name: "nginx"
-    update_cache: yes
-    state: present
+  - name: "Installing latest nginx version"
+    apt:
+      name: "nginx"
+      update_cache: yes
+      state: present
 
-- name: start nginx
-  service:
-    name: nginx
-    state: started
+  - name: start nginx
+    service:
+      name: nginx
+      state: started
