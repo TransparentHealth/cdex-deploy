@@ -19,12 +19,12 @@
     instance_initiated_shutdown_behavior: "terminate"
     wait: yes
     wait_timeout: 500
-    count: 5
+    count: 1
     instance_tags:
       role: "{{ role_type }}"
-      env: "vpc_env"
+      env: "{{ vpc_env }}"
       function: "base_instance"
-      name: "BaseInstance-{{ role_type }}"
+      Name: "BaseInstance-{{ role_type }}"
     monitoring: no
     vpc_subnet_id: "{{ default_subnet_id }}"
     assign_public_ip: no
