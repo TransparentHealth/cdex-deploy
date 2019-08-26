@@ -46,10 +46,6 @@ ansible_ssh_private_key_file: "/users/ubuntu/.ssh/abhealth-{{ vpc_env }}-servers
 # EC2 Instance type:
 # vmi | smh | smhapp
 
-ec2_instance_type: [ "vmi": "t2.micro", "smh": "t2.medium", "smhapp": "t2.large" ]
-ec2_instance_volsize: [ "vmi": 20, "smh": 30, "smhapp": 31 ]
-
-
 # RDS DB Type
 # postgres-10
 rds_db_type: "postgres-10"
