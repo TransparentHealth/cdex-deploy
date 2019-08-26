@@ -8,8 +8,6 @@
 - hosts: "base_instance_{{ role_type }}"
   gather_facts: true
   become: true
-  become_user: ubuntu
-  root_user: ubuntu
   tasks:
     - name: "Installing latest nginx version"
       apt:
