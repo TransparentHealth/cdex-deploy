@@ -5,11 +5,7 @@
 #   - git
 
 ---
-- hosts: "base_instance"
-  become: true
-  root_user: ubuntu
-
-  tasks:
+- tasks:
     - name: "Installing latest nginx version"
       apt:
         name: "nginx"
