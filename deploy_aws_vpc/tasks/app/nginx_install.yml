@@ -5,9 +5,10 @@
 #   - git
 
 ---
-- hosts: "base_instance-{{ role_type }}"
-  gather_facts: True
-  become: yes
+- hosts: "base_instance_{{ role_type }}"
+  gather_facts: true
+  become: true
+  become_user: ubuntu
   root_user: ubuntu
   tasks:
     - name: "Installing latest nginx version"
