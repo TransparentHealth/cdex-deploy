@@ -6,11 +6,14 @@
 - debug:
     msg: "instance size:{{ lookup('vars', 'ec2_app_instance_type') }}"
 
+- set_fact:
+    instance_type_choices: "{{ lookup('vars', 'ec2_app_instance_type') }}"
+
 - name: "create ec2 base instance"
   ec2:
     key_name: "abhealth-{{ vpc_env }}-servers"
     group: "{{ vpc_env }}-{{ role_type }}-APP"
-    instance_type: "{{ lookup('vars.ec2_app_instance_type', role_type) }}"
+    instance_type: "{{ instance_type_choices[role_type] }}"
     image: "{{ base_ami }}"
     state: "present"
     instance_initiated_shutdown_behavior: "terminate"
