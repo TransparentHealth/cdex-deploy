@@ -7,7 +7,7 @@
   ec2:
     key_name: "abhealth-{{ vpc_env }}-servers"
     group: "{{ vpc_env }}-{{ role_type }}-APP"
-    instance_type: "{{ ec2_instance_type[platform_app] }}"
+    instance_type: "{{ ec2_instance_type[role_type] }}"
     image: "{{ base_ami }}"
     state: "present"
     instance_initiated_shutdown_behavior: "terminate"
