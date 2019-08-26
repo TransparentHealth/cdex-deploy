@@ -11,7 +11,11 @@
 
   tasks:
     - name: "Installing latest nginx version"
-      apt: name="nginx" update_cache=yes  state=present  force=yes
+      apt:
+        name: "nginx"
+        update_cache: yes
+        state: present
+        force: yes
     - name: start nginx
       service:
         name: nginx
