@@ -4,7 +4,7 @@
 # instance information
 
 - debug:
-    msg: "instance size:{{ lookup('vars', 'ec2_app_instance_type[role_type]') }}"
+    msg: "instance size:{{ lookup('vars', 'ec2_app_instance_type') }}"
 
 - name: "create ec2 base instance"
   ec2:
