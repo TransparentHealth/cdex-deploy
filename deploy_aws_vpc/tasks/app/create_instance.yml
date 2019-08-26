@@ -6,7 +6,7 @@
 - name: "create ec2 base instance"
   ec2:
     key_name: "abhealth-{{ vpc_env }}-servers"
-    group: "{{ vpc_env }}-{{ platform_app }}-APP"
+    group: "{{ vpc_env }}-{{ role_type }}-APP"
     instance_type: "{{ ec2_instance_type[platform_app] }}"
     image: "{{ base_ami }}"
     state: "present"
