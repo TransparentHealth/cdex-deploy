@@ -1,0 +1,8 @@
+# inventory/abhealth-aws_ec2.yml
+# Dynamic Inventory module
+---
+plugin: aws_ec2
+boto_profile: default
+regions:
+  - us-east-1
+
