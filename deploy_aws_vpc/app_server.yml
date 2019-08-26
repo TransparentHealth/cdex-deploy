@@ -12,7 +12,7 @@
       - "smh"
       - "smhapp"
     base_ami: "ami-07d0cf3af28718ef8"
-    ec2_instance_type:
+    ec2_app_instance_type:
       - vmi: "t2.micro"
       - smh: "t2.medium"
       - smhapp: "t2.large"
