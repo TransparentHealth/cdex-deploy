@@ -38,15 +38,15 @@
         instance_type_choices: "{{ lookup('vars', 'ec2_app_instance_type') }}"
         instance_vol_size_choices: "{{ lookup('vars', 'ec2_instance_volsize') }}"
 
-    - name: "Get VPC Facts for vpc where mgmt-controller is located"
-        ec2_vpc_net_facts:
-        region: "{{ aws_region }}"
-        filters:
-          "tag:Name": "{{deployment_server_name }}"
-      register: vpc_info
+#    - name: "Get VPC Facts for vpc where mgmt-controller is located"
+#        ec2_vpc_net_facts:
+#        region: "{{ aws_region }}"
+#        filters:
+#          "tag:Name": "{{deployment_server_name }}"
+#      register: vpc_info
 
-    - debug:
-        msg: "vpc_info"
+#    - debug:
+#        msg: "vpc_info"
 
     - name: "get subnet for {{ deployment_server_name}}"
         ec2_instance_facts:
@@ -59,8 +59,9 @@
         msg: "{{ deployment_server_info }}"
 
     - set_fact:
-        vpc_env_id: "vpc_info[0].id"
-        vpc_env_subnet_id: "{{ deployment_server_info.instances[0].network_intefaces.subnet_id }}"
+        # vpc_env_id: "vpc_info[0].id"
+        vpc_env_id: "{{ deployment_server_info.instances[0].network_interfaces.vpc_id }}"
+        vpc_env_subnet_id: "{{ deployment_server_info.instances[0].network_interfaces.subnet_id }}"
     }}"
 #    - ec2_vpc_subnet_facts:
 #        region: "{{ aws_region }}"
