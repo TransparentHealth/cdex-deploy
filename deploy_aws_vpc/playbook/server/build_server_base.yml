@@ -62,7 +62,7 @@
         msg: "{{ vpc_subnet_info}}"
 
     - set_fact:
-        vpc_env_subnet_id: "{{ vpc_subnet_info.subnets.0.subnet_id' }}"
+        vpc_env_subnet_id: "{{ vpc_subnet_info.subnets.0.subnet_id }}"
 
     - name: "create ec2 base instance"
       ec2:
