@@ -54,7 +54,7 @@
   register: new_instance
 
 - debug:
-    msg: "{{ new_instance }}"
+    msg: "{{ new_instance.add_host.host_name }}"
 
 - name: "Wait for ssh to come up"
   wait_for:
