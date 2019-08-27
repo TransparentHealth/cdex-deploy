@@ -41,6 +41,8 @@
 
     # - include_tasks: tasks/app/vmi/get_instance_info.yml
     - include_tasks: "tasks/app/create_instance.yml"
+      vars:
+          variable_host: "localhost"
 
     - include_tasks: "tasks/app/nginx_install.yml"
       vars:
