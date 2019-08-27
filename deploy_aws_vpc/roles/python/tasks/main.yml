@@ -6,7 +6,6 @@
 # Check for python version
 
 - name: "Install Python 3.6"
-  hosts: "{{ variable_host| default('tag_function_BaseInstance') }}"
   become_user: "{{ remote_admin_account }}"
   become: yes
   apt:
