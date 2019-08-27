@@ -7,6 +7,9 @@
 ---
 - hosts: "tag_Name_BaseInstance_{{ role_type }}[hosts]"
   tasks:
+    - debug:
+        msg: "{{ new_instance }}"
+        
     - name: "Installing latest nginx version"
       apt:
         name: "nginx"
