@@ -2,7 +2,8 @@
 ---
 
 # instance information
-- hosts:  "{{ variable_host | default('localhost') }}"
+- hosts: "localhost"
+  # "{{ variable_host | default('localhost') }}"
   connection: local
   gather_facts: no
   tasks:
