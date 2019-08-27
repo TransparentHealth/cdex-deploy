@@ -120,8 +120,9 @@
 
     - name: "configure BaseInstance_{{ role_type }}"
       remote_user: "{{ env_remote_user_account }}"
+      vars:
+        variable_host: "tag_function_BaseInstance:tag_workflow_JustCreated"
 
       roles:
         - "../../roles/python"
-          variable_host: "tag_function_BaseInstance:tag_workflow_JustCreated"
         - "../../roles/nginx"
