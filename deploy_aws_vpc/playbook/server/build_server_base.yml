@@ -61,7 +61,7 @@
     - set_fact:
         # vpc_env_id: "vpc_info[0].id"
         vpc_env_id: "{{ deployment_server_info.instances[0].vpc_id }}"
-        vpc_env_subnet_id: "{{ deployment_server_info.instances[0].network_interfaces.subnet_id }}"
+        vpc_env_subnet_id: "{{ deployment_server_info.instances[0].subnet_id }}"
 
 #    - ec2_vpc_subnet_facts:
 #        region: "{{ aws_region }}"
