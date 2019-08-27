@@ -82,7 +82,7 @@
           Name: "BaseInstance_{{ role_type }}"
           workflow: "JustCreated"
         monitoring: no
-        vpc_subnet_id: "{{ default_subnet_id }}"
+        vpc_subnet_id: "{{ vpc_env_subnet_id }}"
         assign_public_ip: no
         volumes:
           - device_name: "/dev/sda1"
