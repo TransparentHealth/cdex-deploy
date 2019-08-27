@@ -1,0 +1,93 @@
+---
+# playbook/server/build_server_base.yml
+
+# Install process:
+# Create a server instance
+# install base software
+# configure
+# Create ami from server
+# terminate server
+
+
+- name: provision base server
+  hosts: localhost
+  connection: local
+  vars:
+    ansible_ssh_pipelining: no
+    env: "{{ vpc_env }}"
+    # Options - lower case: staging | prod
+    azone: "az1"
+    # Options: az1 | az2 | az3
+    sub_zone: "app"
+    role_type: "vmi"
+    # Options: vmi | smh | smhapp
+
+    sg_zone: "{{ vpc_env }}-{{ role_type }}-APP"
+    env_az: "{{ vpc_env }}-{{ azone }}"
+#    env_cf_data_version: "20"
+#    env_cf_app_version: "01"
+    build_subnet_id: null
+  vars_files:
+    - "./../../vars/common.yml"
+    - "./../../vault/env/{{ vpc_env }}/vault.yml"
+    - "./../../vars/env/{{ vpc_env }}/env.yml"
+
+
+  pre_tasks:
+    - name: "create BaseInstance_{{ role_Type }}"
+
+    - set_fact:
+        instance_type_choices: "{{ lookup('vars', 'ec2_app_instance_type') }}"
+        instance_vol_size_choices: "{{ lookup('vars', 'ec2_instance_volsize') }}"
+
+    - name: "Get VPC Facts for {{ vpc_env }}"
+      # in future we may need to seed -A in tag below
+      ec2_vpc_net_facts:
+        filters:
+          "tag:Name": "ABH-{{ vpc_env }}-A"
+      register: vpc_info
+
+    - debug:
+        msg: "vpc_info"
+
+    - set_fact:
+        vpc_env_id: "vpc_info[0].id"
+
+    - ec2_vpc_subnet_facts:
+        filters:
+          "tag:Name": "{{ vpc_env|upper }}-app-a"
+      register: vpc_subnet_info
+
+    - debug:
+        msg: "{{ vpc_subnet_info}}"
+
+    - set_fact:
+        vpc_env_subnet_id: "{{ vpc_subnet_info.results|map(attribute='subnets.0.id')|list }}"
+
+    - name: "create ec2 base instance"
+      ec2:
+        key_name: "{{ private_key_name }}"
+        group: "{{ vpc_env }}_{{ role_type }}_APP"
+        instance_type: "{{ instance_type_choices[role_type] }}"
+        image: "{{ base_ami }}"
+        state: "present"
+        instance_initiated_shutdown_behavior: "terminate"
+        wait: yes
+        wait_timeout: 500
+        count: 1
+        instance_tags:
+          role: "{{ role_type }}"
+          env: "{{ vpc_env }}"
+          function: "BaseInstance"
+          Name: "BaseInstance_{{ role_type }}"
+          workflow: "JustCreated"
+        monitoring: no
+        vpc_subnet_id: "{{ default_subnet_id }}"
+        assign_public_ip: no
+        volumes:
+          - device_name: "/dev/sda1"
+            volume_type: "gp2"
+            volume_size: "{{ instance_vol_size_choices[role_type] }}"
+            encrypted: True
+            delete_on_termination: True
+      register: ec2_base_instance_info
