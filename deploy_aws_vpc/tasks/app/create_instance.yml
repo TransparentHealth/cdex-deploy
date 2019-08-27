@@ -25,7 +25,7 @@
       role: "{{ role_type }}"
       env: "{{ vpc_env }}"
       function: "BaseInstance"
-      Name: "BaseInstance-{{ role_type }}"
+      Name: "BaseInstance_{{ role_type }}"
       workflow: "JustCreated"
     monitoring: no
     vpc_subnet_id: "{{ default_subnet_id }}"
@@ -51,7 +51,7 @@
   add_host:
     hostname: "{{ ec2_base_instance_info.instances[0].private_dns_name }}"
     groups:
-    - "base_instance_{{ role_type }}"
+    - "BaseInstance_{{ role_type }}"
   register: new_instance
 
 - debug:
@@ -64,7 +64,7 @@
     state: started
 
 #- name: "Configure base_instance_{{ role_type }} "
-#  hosts: "base_instance_{{ role_type }}"
+#  hosts: "BaseInstance_{{ role_type }}"
 #  tasks:
 #    - name: "install nginx"
 #      apt:

@@ -44,6 +44,6 @@
 
     - include_tasks: "tasks/app/nginx_install.yml"
       vars:
-          variable_host: "tag_BaseInstance:tag_JustCreated"
+          variable_host: "tag_function_BaseInstance:tag_workflow_JustCreated"
 
 
