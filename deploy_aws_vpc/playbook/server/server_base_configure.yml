@@ -7,6 +7,7 @@
 
 - name: provision base server
   hosts: "{{ variable_host| default('tag_function_BaseInstance:tag_workflow_JustCreated') }}"
+  remote_user: "{{ remote_user_account }}"
   vars:
     ansible_ssh_pipelining: no
     env: "{{ vpc_env }}"

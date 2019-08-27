@@ -3,3 +3,6 @@
 # Store variables that are common across all environments
 
 deployment_server_name: "abhealth_deploy_server"
+
+remote_user_account: "{{ env_remote_user_account }}"
+remote_admin_account: "{{ env_remote_admin_account }}"
