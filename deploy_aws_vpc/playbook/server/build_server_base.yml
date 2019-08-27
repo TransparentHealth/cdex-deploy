@@ -28,9 +28,9 @@
 #    env_cf_app_version: "01"
     build_subnet_id: null
   vars_files:
-    - "./../../vars/common.yml"
-#    - "./../../vault/env/{{ vpc_env }}/vault.yml"
-    - "./../../vars/env/{{ vpc_env }}/env.yml"
+    - "./../../../vars/common.yml"
+#    - "./../../../vault/env/{{ vpc_env }}/vault.yml"
+    - "./../../../vars/env/{{ vpc_env }}/env.yml"
 
 
   pre_tasks:
