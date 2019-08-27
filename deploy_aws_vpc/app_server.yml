@@ -41,7 +41,7 @@
 
     # - include_tasks: tasks/app/vmi/get_instance_info.yml
     - include_tasks: "tasks/app/create_instance.yml"
-      -
+
     - include_tasks: "tasks/app/nginx_install.yml"
       vars:
           variable_host: "tag_BaseInstance:tag_JustCreated"
