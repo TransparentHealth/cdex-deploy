@@ -24,8 +24,9 @@
     instance_tags:
       role: "{{ role_type }}"
       env: "{{ vpc_env }}"
-      function: "base_instance"
+      function: "BaseInstance"
       Name: "BaseInstance-{{ role_type }}"
+      workflow: "JustCreated"
     monitoring: no
     vpc_subnet_id: "{{ default_subnet_id }}"
     assign_public_ip: no

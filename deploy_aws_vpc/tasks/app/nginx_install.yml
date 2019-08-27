@@ -5,7 +5,7 @@
 #   - git
 
 ---
-- hosts: "{{ new_instance.add_host.host_name }}"
+- hosts: “{{ variable_host | default(‘web’) }}"
   tasks:
     - debug:
         msg: "{{ new_instance.add_host.host_name }}"

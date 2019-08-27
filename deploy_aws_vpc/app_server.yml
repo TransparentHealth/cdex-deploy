@@ -2,7 +2,7 @@
 ---
 # playbook that runs our app server tasks for any hosts in the `vpc` group, providing AWS credentials in the environment
 
-- hosts: "tag_role_app"
+- hosts: all
   vars_files:
     - "group_vars/abhealth-env-{{ vpc_env|lower }}.yml"
   vars:
@@ -41,6 +41,9 @@
 
     # - include_tasks: tasks/app/vmi/get_instance_info.yml
     - include_tasks: "tasks/app/create_instance.yml"
+      -
     - include_tasks: "tasks/app/nginx_install.yml"
+      vars:
+          variable_host: "tag_BaseInstance:tag_JustCreated"
 
 
