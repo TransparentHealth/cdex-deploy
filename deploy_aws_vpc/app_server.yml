@@ -2,7 +2,7 @@
 ---
 # playbook that runs our app server tasks for any hosts in the `vpc` group, providing AWS credentials in the environment
 
-- hosts: vpc
+- hosts: "tag_role_app"
   vars_files:
     - "group_vars/abhealth-env-{{ vpc_env|lower }}.yml"
   vars:
