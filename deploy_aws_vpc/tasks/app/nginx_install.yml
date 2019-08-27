@@ -9,7 +9,7 @@
   tasks:
     - debug:
         msg: "{{ new_instance }}"
-        
+
     - name: "Installing latest nginx version"
       apt:
         name: "nginx"
