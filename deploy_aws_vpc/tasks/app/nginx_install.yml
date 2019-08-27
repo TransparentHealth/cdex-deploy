@@ -5,7 +5,7 @@
 #   - git
 
 ---
-- hosts: "tag_Name_BaseInstance_{{ role_type }}"
+- hosts: "tag_Name_BaseInstance_{{ role_type }}[hosts]"
   tasks:
     - name: "Installing latest nginx version"
       apt:
