@@ -92,3 +92,25 @@
             encrypted: True
             delete_on_termination: True
       register: ec2_base_instance_info
+
+    - name: Wait 180 seconds, but only start checking after 60 seconds
+      wait_for_connection:
+        delay: 60
+        timeout: 180
+
+    - name: "Wait for SSH to become available"
+      wait_for:
+        port: 22
+        host: "{{ ec2_base_instance_info.instances[0]['private_ip'] }}"
+        delay: 5
+
+- name: "configure BaseInstance_{{ role_type }}"
+  hosts: "tag_Name_BaseInstance_{{ role_type }}:tag_workflow_JustCreated"
+  remote_user: "{{ env_remote_user_account }}"
+  gather_facts: no
+  vars:
+    ansible_ssh_pipelining: no
+
+  roles:
+    - ../../roles/python
+    - ../../roles/nginx
