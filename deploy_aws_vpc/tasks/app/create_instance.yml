@@ -5,71 +5,72 @@
 - hosts:  "{{ variable_host | default(‘localhost’) }}"
   connection: local
   gather_facts: no
-- debug:
-    msg: "instance size:{{ lookup('vars', 'ec2_app_instance_type') }}"
+  tasks:
+    - debug:
+        msg: "instance size:{{ lookup('vars', 'ec2_app_instance_type') }}"
 
-- set_fact:
-    instance_type_choices: "{{ lookup('vars', 'ec2_app_instance_type') }}"
-    instance_vol_size_choices: "{{ lookup('vars', 'ec2_instance_volsize') }}"
+    - set_fact:
+        instance_type_choices: "{{ lookup('vars', 'ec2_app_instance_type') }}"
+        instance_vol_size_choices: "{{ lookup('vars', 'ec2_instance_volsize') }}"
 
-- name: "create ec2 base instance"
-  ec2:
-    key_name: "abhealth-{{ vpc_env }}-servers"
-    # group: "{{ vpc_env }}-{{ role_type }}-APP"
-    instance_type: "{{ instance_type_choices[role_type] }}"
-    image: "{{ base_ami }}"
-    state: "present"
-    instance_initiated_shutdown_behavior: "terminate"
-    wait: yes
-    wait_timeout: 500
-    count: 1
-    instance_tags:
-      role: "{{ role_type }}"
-      env: "{{ vpc_env }}"
-      function: "BaseInstance"
-      Name: "BaseInstance_{{ role_type }}"
-      workflow: "JustCreated"
-    monitoring: no
-    vpc_subnet_id: "{{ default_subnet_id }}"
-    assign_public_ip: no
-    volumes:
-      - device_name: "/dev/sda1"
-        volume_type: "gp2"
-        volume_size: "{{ instance_vol_size_choices[role_type] }}"
-        encrypted: True
-        delete_on_termination: True
-  register: ec2_base_instance_info
+    - name: "create ec2 base instance"
+      ec2:
+        key_name: "abhealth-{{ vpc_env }}-servers"
+        # group: "{{ vpc_env }}-{{ role_type }}-APP"
+        instance_type: "{{ instance_type_choices[role_type] }}"
+        image: "{{ base_ami }}"
+        state: "present"
+        instance_initiated_shutdown_behavior: "terminate"
+        wait: yes
+        wait_timeout: 500
+        count: 1
+        instance_tags:
+          role: "{{ role_type }}"
+          env: "{{ vpc_env }}"
+          function: "BaseInstance"
+          Name: "BaseInstance_{{ role_type }}"
+          workflow: "JustCreated"
+        monitoring: no
+        vpc_subnet_id: "{{ default_subnet_id }}"
+        assign_public_ip: no
+        volumes:
+          - device_name: "/dev/sda1"
+            volume_type: "gp2"
+            volume_size: "{{ instance_vol_size_choices[role_type] }}"
+            encrypted: True
+            delete_on_termination: True
+      register: ec2_base_instance_info
 
-- debug:
-    msg:  "EC2 Instance:\n{{ ec2_base_instance_info | to_nice_yaml }}"
-    # msg:  "EC2 Instance:\n{{ ec2_base_instance_info | to_nice_json }}"
+    - debug:
+        msg:  "EC2 Instance:\n{{ ec2_base_instance_info | to_nice_yaml }}"
+        # msg:  "EC2 Instance:\n{{ ec2_base_instance_info | to_nice_json }}"
 
 
-- debug:
-    msg:  "EC2 Instance Id:\n{{ ec2_base_instance_info.instance_ids | to_nice_yaml }}"
-    # msg:  "EC2 Instance:\n{{ ec2_base_instance_info | to_nice_json }}"
+    - debug:
+        msg:  "EC2 Instance Id:\n{{ ec2_base_instance_info.instance_ids | to_nice_yaml }}"
+        # msg:  "EC2 Instance:\n{{ ec2_base_instance_info | to_nice_json }}"
 
-#- name: "Add instance to hosts inventory"
-#  add_host:
-#    hostname: "{{ ec2_base_instance_info.instances[0].private_dns_name }}"
-#    groups:
-#    - "BaseInstance_{{ role_type }}"
-#  register: new_instance
-#
-#- debug:
-#    msg: "{{ new_instance.add_host.host_name }}"
+    #- name: "Add instance to hosts inventory"
+    #  add_host:
+    #    hostname: "{{ ec2_base_instance_info.instances[0].private_dns_name }}"
+    #    groups:
+    #    - "BaseInstance_{{ role_type }}"
+    #  register: new_instance
+    #
+    #- debug:
+    #    msg: "{{ new_instance.add_host.host_name }}"
 
-- name: "Wait for ssh to come up"
-  wait_for:
-    host: "{{ ec2_base_instance_info.instances[0].private_dns_name }}"
-    port: 22
-    state: started
+    - name: "Wait for ssh to come up"
+      wait_for:
+        host: "{{ ec2_base_instance_info.instances[0].private_dns_name }}"
+        port: 22
+        state: started
 
-#- name: "Configure base_instance_{{ role_type }} "
-#  hosts: "BaseInstance_{{ role_type }}"
-#  tasks:
-#    - name: "install nginx"
-#      apt:
-#        name: nginx
-#        state: present
+    #- name: "Configure base_instance_{{ role_type }} "
+    #  hosts: "BaseInstance_{{ role_type }}"
+    #  tasks:
+    #    - name: "install nginx"
+    #      apt:
+    #        name: nginx
+    #        state: present
 
