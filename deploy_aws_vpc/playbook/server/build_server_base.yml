@@ -41,6 +41,7 @@
     - name: "Get VPC Facts for {{ vpc_env }}"
       # in future we may need to seed -A in tag below
       ec2_vpc_net_facts:
+        region: "{{ aws_region }}"
         filters:
           "tag:Name": "ABH-{{ vpc_env }}-A"
       register: vpc_info
@@ -52,6 +53,7 @@
         vpc_env_id: "vpc_info[0].id"
 
     - ec2_vpc_subnet_facts:
+        region: "{{ aws_region }}"
         filters:
           "tag:Name": "{{ vpc_env|upper }}-app-a"
       register: vpc_subnet_info
