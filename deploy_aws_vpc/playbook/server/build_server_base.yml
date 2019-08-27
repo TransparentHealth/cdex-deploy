@@ -38,37 +38,47 @@
         instance_type_choices: "{{ lookup('vars', 'ec2_app_instance_type') }}"
         instance_vol_size_choices: "{{ lookup('vars', 'ec2_instance_volsize') }}"
 
-    - name: "Get VPC Facts for {{ vpc_env }}"
-      # in future we may need to seed -A in tag below
-      ec2_vpc_net_facts:
+    - name: "Get VPC Facts for vpc where mgmt-controller is located"
+        ec2_vpc_net_facts:
         region: "{{ aws_region }}"
         filters:
-          "tag:Name": "ABH-{{ vpc_env }}-A"
+          "tag:Name": "{{deployment_server_name }}"
       register: vpc_info
 
     - debug:
         msg: "vpc_info"
 
-    - set_fact:
-        vpc_env_id: "vpc_info[0].id"
-
-    - ec2_vpc_subnet_facts:
+    - name: "get subnet for {{ deployment_server_name}}"
+        ec2_instance_facts:
         region: "{{ aws_region }}"
         filters:
-          "tag:Name": "{{ vpc_env|upper }}-app-a"
-      register: vpc_subnet_info
+          "tag:Name": "{{ deployment_server_name }}"
+      register: deployment_server_info
 
     - debug:
-        msg: "{{ vpc_subnet_info}}"
+        msg: "{{ deployment_server_info }}"
 
     - set_fact:
-        vpc_env_subnet_id: "{{ vpc_subnet_info.subnets.0.subnet_id }}"
+        vpc_env_id: "vpc_info[0].id"
+        vpc_env_subnet_id: "{{ deployment_server_info.instances[0].network_intefaces.subnet_id }}"
+    }}"
+#    - ec2_vpc_subnet_facts:
+#        region: "{{ aws_region }}"
+#        filters:
+#          "tag:Name": "{{ vpc_env|upper }}-app-a"
+#      register: vpc_subnet_info
 
-    - name: "create ec2 base instance"
+#    - debug:
+#        msg: "{{ vpc_subnet_info}}"
+#
+#    - set_fact:
+#        vpc_env_subnet_id: "{{ vpc_subnet_info.subnets.0.subnet_id }}"
+
+    - name: "create ec2 base instance in same vpc as mgmt-controller"
       ec2:
         key_name: "{{ private_key_name }}"
         region: "{{ aws_region }}"
-        group: "{{ vpc_env }}-{{ role_type }}-APP"
+        # group: "{{ vpc_env }}-{{ role_type }}-APP"
         instance_type: "{{ instance_type_choices[role_type] }}"
         image: "{{ base_ami }}"
         state: "present"
@@ -93,10 +103,13 @@
             delete_on_termination: True
       register: ec2_base_instance_info
 
-    - name: Wait 180 seconds, but only start checking after 60 seconds
+    - name: Wait 180 seconds, but only start checking after 30 seconds
       wait_for_connection:
-        delay: 60
+        delay: 30
         timeout: 180
+
+    - debug:
+        msg: "About to connect to {{ ec2_base_instance_info.instances[0]['private_ip'] }}"
 
     - name: "Wait for SSH to become available"
       wait_for:

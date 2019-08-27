@@ -2,3 +2,4 @@
 # var/common.yml
 # Store variables that are common across all environments
 
+deployment_server_name: "abhealth_deploy_server"
