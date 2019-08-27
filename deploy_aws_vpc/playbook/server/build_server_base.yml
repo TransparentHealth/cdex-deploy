@@ -119,7 +119,7 @@
         delay: 5
 
     - name: "configure BaseInstance_{{ role_type }}"
-      hosts: "tag_Name_BaseInstance_{{ role_type }}:tag_workflow_JustCreated"
+      hosts: "tag_function_BaseInstance:tag_workflow_JustCreated"
       remote_user: "{{ env_remote_user_account }}"
       gather_facts: no
       vars:
