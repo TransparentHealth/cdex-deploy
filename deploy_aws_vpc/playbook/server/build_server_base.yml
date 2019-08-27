@@ -122,6 +122,6 @@
       remote_user: "{{ env_remote_user_account }}"
 
       roles:
-        - ../../roles/python
+        - "../../roles/python"
           variable_host: "tag_function_BaseInstance:tag_workflow_JustCreated"
-        - ../../roles/nginx
+        - "../../roles/nginx"
