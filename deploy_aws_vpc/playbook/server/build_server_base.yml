@@ -34,8 +34,6 @@
 
 
   pre_tasks:
-    - name: "create BaseInstance_{{ role_Type }}"
-
     - set_fact:
         instance_type_choices: "{{ lookup('vars', 'ec2_app_instance_type') }}"
         instance_vol_size_choices: "{{ lookup('vars', 'ec2_instance_volsize') }}"
