@@ -6,7 +6,7 @@
 # Configure the server with base components
 
 - name: provision base server
-- hosts: "tag_function_BaseInstance:tag_workflow_JustCreated"
+  hosts: "{{ variable_host| default('tag_function_BaseInstance:tag_workflow_JustCreated'}}"
   vars:
     ansible_ssh_pipelining: no
     env: "{{ vpc_env }}"
