@@ -5,7 +5,7 @@
 - hosts: localhost
   # "{{ variable_host | default('localhost') }}"
   connection: local
-  gather_facts: no
+  # gather_facts: no
   tasks:
     - debug:
         msg: "instance size:{{ lookup('vars', 'ec2_app_instance_type') }}"
