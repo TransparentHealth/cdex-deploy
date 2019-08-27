@@ -67,6 +67,7 @@
     - name: "create ec2 base instance"
       ec2:
         key_name: "{{ private_key_name }}"
+        region: "{{ aws_region }}"
         group: "{{ vpc_env }}_{{ role_type }}_APP"
         instance_type: "{{ instance_type_choices[role_type] }}"
         image: "{{ base_ami }}"
