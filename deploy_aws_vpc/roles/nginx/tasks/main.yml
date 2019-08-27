@@ -3,78 +3,80 @@
   become_user: "{{ remote_admin_account }}"
   become: yes
   apt:
-    pkg: "nginx"
-    state: installed
-
-- name: "copy nginx.conf to the target"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  template:
-    src: files/nginx.conf
-    dest: /etc/nginx/nginx.conf
-    mode: 0644
-
-- name: "set permission on nginx log dir"
-  become: yes
-  become_user: "{{ remote_admin_account }}"
-  file:
-    path: /var/log/nginx
-    state: directory
-    mode: 0755
-    group: "logreader"
-
-- name: "install uwsgi"
-  become: yes
-  become_user: "{{ remote_admin_account }}"
-  apt:
-    name: "{{ item }}"
+    name: "nginx"
     state: present
-  with_items:
-    - uwsgi
-    - uwsgi-plugin-python36
+    update_cache: yes
+    force_apt_get: yes
 
-#- name: "create sock file"
+#- name: "copy nginx.conf to the target"
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  template:
+#    src: files/nginx.conf
+#    dest: /etc/nginx/nginx.conf
+#    mode: 0644
+#
+#- name: "set permission on nginx log dir"
+#  become: yes
+#  become_user: "{{ remote_admin_account }}"
+#  file:
+#    path: /var/log/nginx
+#    state: directory
+#    mode: 0755
+#    group: "logreader"
+#
+#- name: "install uwsgi"
+#  become: yes
+#  become_user: "{{ remote_admin_account }}"
+#  apt:
+#    name: "{{ item }}"
+#    state: present
+#  with_items:
+#    - uwsgi
+#    - uwsgi-plugin-python36
+#
+##- name: "create sock file"
+##  become_user: "{{ remote_admin_account }}"
+##  become: yes
+##  file:
+##    path: /var/pyapps/hhs_o_server/hhs_oauth_server/pyapps.sock
+##    state: touch
+##    mode: "0664"
+#
+#- name: "create vassals dir"
 #  become_user: "{{ remote_admin_account }}"
 #  become: yes
 #  file:
-#    path: /var/pyapps/hhs_o_server/hhs_oauth_server/pyapps.sock
-#    state: touch
+#    path: /etc/uwsgi/vassals
+#    state: directory
 #    mode: "0664"
-
-- name: "create vassals dir"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  file:
-    path: /etc/uwsgi/vassals
-    state: directory
-    mode: "0664"
-
-- name: "install uwsgi ini file"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  template:
-    src: files/uwsgi.ini
-    dest: /etc/uwsgi/vassals/pyapps.ini
-    mode: "0644"
-
-- name: "add uwsgi to system startup"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  copy:
-    src: files/uwsgi.service
-    dest: /etc/systemd/system/uwsgi.service
-    mode: "0644"
-
-- name: "enable nginx"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  service:
-    name: nginx
-    enabled: yes
-
-- name: "enable uwsgi"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  service:
-    name: uwsgi
-    enabled: yes
+#
+#- name: "install uwsgi ini file"
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  template:
+#    src: files/uwsgi.ini
+#    dest: /etc/uwsgi/vassals/pyapps.ini
+#    mode: "0644"
+#
+#- name: "add uwsgi to system startup"
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  copy:
+#    src: files/uwsgi.service
+#    dest: /etc/systemd/system/uwsgi.service
+#    mode: "0644"
+#
+#- name: "enable nginx"
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  service:
+#    name: nginx
+#    enabled: yes
+#
+#- name: "enable uwsgi"
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  service:
+#    name: uwsgi
+#    enabled: yes
