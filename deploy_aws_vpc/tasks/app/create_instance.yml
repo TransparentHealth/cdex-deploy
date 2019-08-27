@@ -2,8 +2,7 @@
 ---
 
 # instance information
-- hosts:
-    - "{{ variable_host | default(‘localhost’) }}"
+- hosts:  "{{ variable_host | default(‘localhost’) }}"
   connection: local
   gather_facts: no
 - debug:
