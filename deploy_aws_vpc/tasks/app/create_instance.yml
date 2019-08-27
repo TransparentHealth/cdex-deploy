@@ -3,6 +3,7 @@
 
 # instance information
 - hosts: local
+  gather_facts: yes
 - debug:
     msg: "instance size:{{ lookup('vars', 'ec2_app_instance_type') }}"
 
