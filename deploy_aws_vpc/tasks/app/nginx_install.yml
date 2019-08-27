@@ -5,10 +5,10 @@
 #   - git
 
 ---
-- hosts: "tag_Name_BaseInstance_{{ role_type }}[hosts]"
+- hosts: "{{ new_instance.add_host.host_name }}"
   tasks:
     - debug:
-        msg: "{{ new_instance }}"
+        msg: "{{ new_instance.add_host.host_name }}"
 
     - name: "Installing latest nginx version"
       apt:
