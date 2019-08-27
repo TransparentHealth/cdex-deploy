@@ -4,7 +4,7 @@
 # instance information
 - hosts: localhost
   connection: local
-  gather_facts: yes
+  gather_facts: no
 - debug:
     msg: "instance size:{{ lookup('vars', 'ec2_app_instance_type') }}"
 
