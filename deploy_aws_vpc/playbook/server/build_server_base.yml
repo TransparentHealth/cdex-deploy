@@ -118,13 +118,13 @@
         host: "{{ ec2_base_instance_info.instances[0]['private_ip'] }}"
         delay: 5
 
-- name: "configure BaseInstance_{{ role_type }}"
-  hosts: "tag_Name_BaseInstance_{{ role_type }}:tag_workflow_JustCreated"
-  remote_user: "{{ env_remote_user_account }}"
-  gather_facts: no
-  vars:
-    ansible_ssh_pipelining: no
+    - name: "configure BaseInstance_{{ role_type }}"
+      hosts: "tag_Name_BaseInstance_{{ role_type }}:tag_workflow_JustCreated"
+      remote_user: "{{ env_remote_user_account }}"
+      gather_facts: no
+      vars:
+        ansible_ssh_pipelining: no
 
-  roles:
-    - ../../roles/python
-    - ../../roles/nginx
+      roles:
+        - ../../roles/python
+        - ../../roles/nginx
