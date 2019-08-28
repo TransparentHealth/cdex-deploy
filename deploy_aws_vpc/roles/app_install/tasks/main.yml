@@ -3,15 +3,15 @@
 - name: "create base app directory: {{ base_app_directory }}"
   become_user: "{{ remote_admin_account }}"
   become: yes
-  shell:  " rm -Rf {{ base_app_directory }}/{{ role_type}}"
+  file:
+    path: "{{ base_app_directory }}"
+    state: directory
 
 - name: "remove directory"
   become_user: "{{ remote_admin_account }}"
   beccome: yes
-  files:
-    path: "{{ base_app_directory }}/{{ role_type }}"
-    state: absent
-
+  shell: "rm -Rf {{ base_app_directory }}/{{ role_type }"
+ 
 - name: "Get the {{role_Type }} app from github"
   git:
     repo: "https://github.com/TransparentHealth/{{ role_type }}.git"
