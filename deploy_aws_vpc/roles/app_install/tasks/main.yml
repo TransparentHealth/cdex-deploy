@@ -10,7 +10,7 @@
 - name: "remove directory"
   become_user: "{{ remote_admin_account }}"
   beccome: yes
-  shell: "rm -Rf {{ base_app_directory }}/{{ role_type }}"
+  shell: "rm -Rf {{ base_app_directory }}/{{ role_type }}/"
 
 - name: "Get the {{role_Type }} app from github"
   git:
