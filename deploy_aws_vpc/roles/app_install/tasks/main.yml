@@ -3,9 +3,7 @@
 - name: "create base app directory: {{ base_app_directory }}"
   become_user: "{{ remote_admin_account }}"
   become: yes
-  file:
-    path: "{{ base_app_directory }}"
-    state: directory
+  shell:  " rm -Rf {{ base_app_directory }}/{{ role_type}}"
 
 - name: "remove directory"
   become_user: "{{ remote_admin_account }}"
