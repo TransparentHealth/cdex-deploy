@@ -95,7 +95,8 @@
           workflow: "JustCreated"
         monitoring: no
         vpc_subnet_id: "{{ vpc_env_subnet_id }}"
-        assign_public_ip: no
+        # assign public ip to enable software downloads
+        assign_public_ip: yes
         volumes:
           - device_name: "/dev/sda1"
             volume_type: "gp2"

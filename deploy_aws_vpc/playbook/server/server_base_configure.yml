@@ -29,7 +29,8 @@
     - "./../../vars/environment/{{ vpc_env }}/env.yml"
 
   roles:
-    # - "../../roles/python"
+    - "../../roles/python"
+    - "../../roles/app_install"
     - "../../roles/nginx"
 
 

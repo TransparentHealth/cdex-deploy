@@ -6,3 +6,23 @@ deployment_server_name: "abhealth_deploy_server"
 
 remote_user_account: "{{ env_remote_user_account }}"
 remote_admin_account: "{{ env_remote_admin_account }}"
+
+# This is the directory that the apps are cloned into
+# each app will be in a different sub0directory under this base directory
+base_app_directory: "/pyapps"
+
+# create a virtual environment directory in the env directory of the app.
+# eg. if vmi is installed to /pyapps/vmi the env dir for the virtual env is in /pyapps/vmi/env
+virtual_env_dir: "env"
+
+
+app_pyapps_user: "pyapps"
+app_owner: "{{ app_pyapps_user }}"
+# application group: nginx
+app_group: "www-data"
+
+# Python information
+# Version - ubuntu installs Python3.6 by default
+python_ver: "3.6"
+python_bin_dir: "/usr/bin"
+

@@ -1,0 +1,127 @@
+---
+
+- name: "create base app directory: {{ base_app_directory }}"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  file:
+    path: "{{ base_app_directory }}"
+    state: directory
+
+- name: "Get the {{role_Type }} app from github"
+  git:
+    repo: "https://github.com/TransparentHealth/{{ role_type }}.git"
+    dest: "{{ base_app_directory }}"
+    force: yes
+    clone: yes
+
+- name: "Create Virtualenv"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  shell: "cd {{ base_app_directory }}/{{ role_type }}; {{ python_bin_dir }}/python{{ python_ver }} -m venv {{ virtual_env_dir }}"
+
+- name: Ensure group "www-data" exists
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  group:
+    name: "{{ app_group }}"
+    state: present
+
+- name: "Set permissions to application code"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  file:
+    dest: "{{ base_app_directory }}/{{ role_type }}"
+    state: directory
+    recurse: yes
+    owner: "{{ app_pyapps_user }}"
+    group: "{{ app_group }}"
+    mode: 0755
+
+- name: "set ownership to pyapps:www-data ({{ app_pyapps_user }}:{{ app_group }})"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  file:
+    owner: "{{ app_pyapps_user }}"
+    group: "{{ app_group }}"
+    dest: "{{ base_app_directory}}/{{ role_type }}/{{ virtual_env_dir y}}"
+    state: directory
+    recurse: yes
+
+#- name: "update from git: {{ project_repo }} branch:{{ git_branch }}"
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  git:
+#    repo: "{{ project_repo }}"
+#    dest: "{{ install_root }}/{{ project_name }}"
+#    version: "{{ git_branch }}"
+#  register: git_history
+
+#- name: "clone bluebutton-css to hhs_oauth_server app base directory"
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  git:
+#    repo: "{{ css_repo }}"
+#    dest: "{{ install_root }}/{{ project_name }}/{{ css_dir }}"
+#    force: yes
+#    clone: yes
+
+- name: "set permissions to application code ( {{ app_pyapps_user }}:{{ app_group }} )"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  file:
+    dest: "{{ base_app_directory}}/{{ role_type }}"
+    state: directory
+    recurse: yes
+    owner: "{{ app_pyapps_user }}"
+    group: "{{ app_group }}"
+    mode: 0755
+
+- name: "install requirements"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  shell: |
+    source {{ base_app_directory }}/{{ role_type}}/{{ virtual_env_dir }}/bin/activate && make reqs-install
+#  args:
+#    chdir: "{{ app_pyapp_home }}/{{ common_project_name }}"
+
+- name: "install boto3 for collectstatic"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  pip:
+    name: boto3
+    # version: 1.9.42
+    state: present
+    extra_args: " --upgrade {{ pip_extra_args }} "
+    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+
+- # import_tasks: ./../appherd/roles/create_certstore/tasks/main.yml
+
+# change ownership of files
+- name: "Update file ownership"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  file:
+    path: "{{ base_app_directory }}/{{ role_type }}/"
+    recurse: yes
+    owner: "{{ app_owner }}"
+    group: "{{ app_group }}"
+    mode:  "u+rw,g+rw,o-rwx"
+
+# Change ownership for libraries
+- name: "Change ownership for libraries"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  file:
+    path: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+    recurse: yes
+    owner: "{{ app_owner }}"
+    group: "{{ app_group }}"
+    mode:  "u+rw,g+rw,o-rwx"
+
+- name: make manage.py executable
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  file:
+    path: "{{ base_app_directory }}/{{ role_type }}/manage.py"
+    state: touch
+    mode: "u+rwx,g+rwx,o-rwx"
