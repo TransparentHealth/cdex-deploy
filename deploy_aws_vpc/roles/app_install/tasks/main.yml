@@ -11,7 +11,7 @@
   become_user: "{{ remote_admin_account }}"
   beccome: yes
   files:
-    path: "{{ base_app_directory }}/{{ role_type }}/"
+    path: "{{ base_app_directory }}/{{ role_type }}"
     state: absent
 
 - name: "Get the {{role_Type }} app from github"
