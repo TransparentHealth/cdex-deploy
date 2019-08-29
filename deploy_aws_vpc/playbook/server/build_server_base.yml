@@ -48,10 +48,10 @@
 #    - debug:
 #        msg: "vpc_info"
 
-    - name: "install boto3"
-      apt:
-        name: boto3
-        state: present
+#    - name: "install boto3"
+#      apt:
+#        name: boto3
+#        state: present
 
 
     - name: "get subnet for {{ deployment_server_name}}"
