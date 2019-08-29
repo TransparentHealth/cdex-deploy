@@ -17,7 +17,7 @@
 - name: "Get the {{role_Type }} app from github"
   git:
     repo: "https://github.com/TransparentHealth/{{ role_type }}.git"
-    dest: "{{ base_app_directory }}"
+    dest: "{{ base_app_directory }}/{{ role_type }}"
     force: yes
     clone: yes
 
