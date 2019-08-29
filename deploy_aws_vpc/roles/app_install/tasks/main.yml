@@ -54,24 +54,6 @@
     state: directory
     recurse: yes
 
-#- name: "update from git: {{ project_repo }} branch:{{ git_branch }}"
-#  become_user: "{{ remote_admin_account }}"
-#  become: yes
-#  git:
-#    repo: "{{ project_repo }}"
-#    dest: "{{ install_root }}/{{ project_name }}"
-#    version: "{{ git_branch }}"
-#  register: git_history
-
-#- name: "clone bluebutton-css to hhs_oauth_server app base directory"
-#  become_user: "{{ remote_admin_account }}"
-#  become: yes
-#  git:
-#    repo: "{{ css_repo }}"
-#    dest: "{{ install_root }}/{{ project_name }}/{{ css_dir }}"
-#    force: yes
-#    clone: yes
-
 - name: "set permissions to application code ( {{ app_pyapps_user }}:{{ app_group }} )"
   become_user: "{{ remote_admin_account }}"
   become: yes
@@ -86,8 +68,13 @@
 - name: "install requirements"
   become_user: "{{ remote_admin_account }}"
   become: yes
-  shell: |
-    source {{ base_app_directory }}/{{ role_type}}/{{ virtual_env_dir }}/bin/activate && make reqs-install
+  pip:
+    chdir: "{{ base_app_directory }}/{{ role_type}}"
+    requirements: "requirements.txt"
+    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+
+#  shell: |
+#    source {{ base_app_directory }}/{{ role_type}}/{{ virtual_env_dir }}/bin/activate && make reqs-install
 #  args:
 #    chdir: "{{ app_pyapp_home }}/{{ common_project_name }}"
 
