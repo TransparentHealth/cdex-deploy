@@ -17,6 +17,15 @@ base_app_directory: "/pyapps"
 # eg. if vmi is installed to /pyapps/vmi the env dir for the virtual env is in /pyapps/vmi/env
 virtual_env_dir: "env"
 
+# pip install extra arguments needed:
+# when FIPS-140.2 is enabled MD5 checksums are not supported.
+# This causes pip to fail.
+# check file: /proc/sys/crypto/fips_enabled
+# 1 = Enabled | 0 = disabled
+# If enabled we need to pass -i https://pypi.org/simple/ to extra_args
+# in ansible pip command
+# pip_extra_args: " -i https://pypi.org/simple/ "
+pip_extra_args: ""
 
 app_pyapps_user: "{{ env_app_pyapps_user }}"
 app_pyapps_pwd: "{{ env_app_pyapps_pwd }}"
