@@ -4,6 +4,8 @@
 
 deployment_server_name: "abhealth_deploy_server"
 
+aws_access_key: "{{ env_aws_access_key }}"
+
 remote_user_account: "{{ env_remote_user_account }}"
 remote_admin_account: "{{ env_remote_admin_account }}"
 
@@ -16,7 +18,8 @@ base_app_directory: "/pyapps"
 virtual_env_dir: "env"
 
 
-app_pyapps_user: "pyapps"
+app_pyapps_user: "{{ env_app_pyapps_user }}"
+app_pyapps_pwd: "{{ env_app_pyapps_pwd }}"
 app_owner: "{{ app_pyapps_user }}"
 # application group: nginx
 app_group: "www-data"
@@ -26,3 +29,4 @@ app_group: "www-data"
 python_ver: "3.6"
 python_bin_dir: "/usr/bin"
 
+db_master_pw: "{{ env_db_master_pw }}"
