@@ -2,6 +2,11 @@
 # var/common.yml
 # Store variables that are common across all environments
 
+system_descriptive_name:
+  - vmi: "Verify My Identirty"
+  - smh: "Share My Health"
+  - smhapp: "Share My Health Apps"
+
 deployment_server_name: "abhealth_deploy_server"
 
 aws_access_key: "{{ env_aws_access_key }}"
@@ -39,3 +44,12 @@ python_ver: "3.6"
 python_bin_dir: "/usr/bin"
 
 db_master_pw: "{{ env_db_master_pw }}"
+
+# nginx settings
+allowed_ips: "{{ env_allowed_ips }}"
+
+# django settings
+# set a variable entrypoint for the admin console.
+# confuses scanners looking for known endpoints
+
+django_admin_redirector: "private/"

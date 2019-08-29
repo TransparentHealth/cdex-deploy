@@ -117,6 +117,12 @@ The environment manager will connect to the Management Server via SSH
 and will run necessary scripts from the server.
 
 
+## Resources:
 
+Setup Ansible control node:
+https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04
+
+Install Docker: 
+https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-18-04
 
  

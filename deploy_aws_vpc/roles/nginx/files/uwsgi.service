@@ -1,5 +1,5 @@
 [Unit]
-Description=uWSGI - Blue Button 2.0
+Description=uWSGI - {{ system_descriptive_name[]role_type }}
 
 [Service]
 ExecStart=/sbin/uwsgi --emperor /etc/uwsgi/vassals

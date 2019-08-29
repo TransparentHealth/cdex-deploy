@@ -8,14 +8,29 @@
     # update_cache: yes
     force_apt_get: yes
 
-- name: "copy nginx.conf to the target"
+#
+
+# Get vmi/.nginx/{{ role_type }}/nginx.conf out of repo
+# pull to tmp and use as template source to push to /etc/nginx/nginx.conf
+- name: "get  vmi/.nginx/{{ role_type }}/nginx.conf out of repo"
+  run_once: true
+  fetch:
+    src: "{{ base_app_directory }}/{{ role_type }}/.nginx/template/{{ item }}"
+    dest: "/tmp/{{ item }}"
+    flat: yes
+    fail_on_missing: yes
+  with_items:
+    - nginx.conf
+    - uwsgi.ini
+
+- name: "copy nginx.conf from vmi/.nginx to the target"
   become_user: "{{ remote_admin_account }}"
   become: yes
   template:
-    src: files/nginx.conf
+    src: /tmp/nginx.conf
     dest: /etc/nginx/nginx.conf
     mode: 0644
-#
+
 - name: "set permission on nginx log dir"
   become: yes
   become_user: "{{ remote_admin_account }}"
@@ -39,7 +54,7 @@
   become_user: "{{ remote_admin_account }}"
   become: yes
   file:
-    path: /var/pyapps/hhs_o_server/hhs_oauth_server/pyapps.sock
+    path: "/var/pyapps/{{ role_type }}/pyapps.sock"
     state: touch
     mode: "0664"
 
@@ -51,18 +66,18 @@
     state: directory
     mode: "0664"
 
-- name: "install uwsgi ini file"
+- name: "install uwsgi ini file from copied template file"
   become_user: "{{ remote_admin_account }}"
   become: yes
   template:
-    src: files/uwsgi.ini
-    dest: /etc/uwsgi/vassals/pyapps.ini
+    src: /tmp/uwsgi.ini
+    dest: /etc/uwsgi/vassals/uwsgi.ini
     mode: "0644"
 
 - name: "add uwsgi to system startup"
   become_user: "{{ remote_admin_account }}"
   become: yes
-  copy:
+  template:
     src: files/uwsgi.service
     dest: /etc/systemd/system/uwsgi.service
     mode: "0644"
