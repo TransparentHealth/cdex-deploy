@@ -50,7 +50,7 @@
   file:
     owner: "{{ app_pyapps_user }}"
     group: "{{ app_group }}"
-    dest: "{{ base_app_directory}}/{{ role_type }}/{{ virtual_env_dir y}}"
+    dest: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
     state: directory
     recurse: yes
 
