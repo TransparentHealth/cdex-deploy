@@ -6,7 +6,7 @@
 - name: "install aptitude"
   apt:
     name: aptitude
-    upgrade: yes
+    state: latest
 
 - name: "updates packages"
   apt:
