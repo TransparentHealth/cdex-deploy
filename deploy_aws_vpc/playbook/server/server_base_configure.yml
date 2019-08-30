@@ -5,7 +5,7 @@
 #
 # Configure the server with base components
 
-- name: provision base server
+- name: configure server
   hosts: "{{ variable_host| default('tag_function_BaseInstance:tag_workflow_JustCreated') }}"
   remote_user: "{{ remote_user_account }}"
   vars:
