@@ -13,6 +13,8 @@
 # Get vmi/.nginx/{{ role_type }}/nginx.conf out of repo
 # pull to tmp and use as template source to push to /etc/nginx/nginx.conf
 - name: "get  vmi/.nginx/{{ role_type }}/nginx.conf out of repo"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   run_once: true
   fetch:
     src: "{{ base_app_directory }}/{{ role_type }}/.nginx/template/{{ item }}"
