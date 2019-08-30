@@ -8,8 +8,6 @@
     # update_cache: yes
     force_apt_get: yes
 
-#
-
 # Get vmi/.nginx/{{ role_type }}/nginx.conf out of repo
 # pull to tmp and use as template source to push to /etc/nginx/nginx.conf
 - name: "get  vmi/.nginx/{{ role_type }}/nginx.conf out of repo"
@@ -32,6 +30,12 @@
     src: /tmp/nginx.conf
     dest: /etc/nginx/nginx.conf
     mode: 0644
+
+- name: "create group logreader"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  group: logreader
+  state: present
 
 - name: "set permission on nginx log dir"
   become: yes
