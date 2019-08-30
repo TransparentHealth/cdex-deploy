@@ -9,7 +9,7 @@ system_descriptive_name:
 
 deployment_server_name: "abhealth_deploy_server"
 
-base_instance_elastic_ip: ""
+base_instance_elastic_ip: "3.227.187.144"
 
 aws_access_key: "{{ env_aws_access_key }}"
 
