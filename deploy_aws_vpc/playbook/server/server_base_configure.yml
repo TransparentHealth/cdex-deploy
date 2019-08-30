@@ -31,6 +31,8 @@
 
   pre_tasks:
     - name: install python
+      become: yes
+      become_user: "{{ remote_admin_account }}"
       raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python python-pip python3 python3-pip)"
       register: output
       changed_when: output.stdout != ""
