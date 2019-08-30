@@ -4,11 +4,15 @@
 # roles/base_patch/tasks/main.yml
 
 - name: "install aptitude"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   apt:
     name: aptitude
     state: latest
 
 - name: "updates packages"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   apt:
     name: "*"
     state: latest
