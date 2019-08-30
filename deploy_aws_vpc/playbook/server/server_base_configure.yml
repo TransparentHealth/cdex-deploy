@@ -29,6 +29,7 @@
     - "./../../vars/environment/{{ vpc_env }}/env.yml"
 
   roles:
+    - "../../roles/base_patch"
     - "../../roles/app_user"
     - "../../roles/python"
     - "../../roles/app_install"

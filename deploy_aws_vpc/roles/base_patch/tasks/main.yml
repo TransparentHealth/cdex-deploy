@@ -1,0 +1,14 @@
+---
+# 2019-08-29.21:43 - mark
+# cdex-deploy
+# roles/base_patch/tasks/main.yml
+
+- name: "install aptitude"
+  apt:
+    name: aptitude
+    upgrade: yes
+
+- name: "updates packages"
+  apt:
+    name: "*"
+    state: latest
