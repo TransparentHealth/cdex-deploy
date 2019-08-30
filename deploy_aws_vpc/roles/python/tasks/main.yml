@@ -5,10 +5,10 @@
 # download and install python3
 # Check for python version
 
-- name: "Install Python 3.6 and supporting copmponents"
+- name: "Install Python 3.6 and supporting components"
   become_user: "{{ remote_admin_account }}"
   become: yes
   apt:
-    name: ["python3", "python3-dev"]
+    name: ["python3-dev"]
     state: present
 
