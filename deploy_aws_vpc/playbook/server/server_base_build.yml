@@ -116,6 +116,9 @@
         delay: 30
         timeout: 180
 
+    - debug:
+        msg: "New Instance: {{ ec2_base_instance_info }} \n assign elastic_ip"
+
     - name: "Assign elastic_ip to instance"
       ec2_eip:
         allow_reassociation: yes
