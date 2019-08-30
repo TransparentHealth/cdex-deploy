@@ -26,7 +26,8 @@
 - name: "Create Virtualenv"
   become_user: "{{ remote_admin_account }}"
   become: yes
-  shell: "cd {{ base_app_directory }}/{{ role_type }}; {{ python_bin_dir }}/python{{ python_ver }} -m venv {{ virtual_env_dir }}"
+#  shell: "cd {{ base_app_directory }}/{{ role_type }}; {{ python_bin_dir }}/python{{ python_ver }} -m venv {{ virtual_env_dir }}"
+  shell: "cd {{ base_app_directory }}/{{ role_type }}; virtualenv --python=python3.6 {{ virtual_env_dir }}"
 
 - name: Ensure group "www-data" exists
   become_user: "{{ remote_admin_account }}"
