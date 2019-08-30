@@ -122,6 +122,7 @@
     - name: "Assign elastic_ip to instance"
       ec2_eip:
         allow_reassociation: yes
+        region: "{{ aws_region }}"
         public_ip: "{{ base_instance_elastic_ip }}"
         device_id: "{{ ec2_base_instance_info.instances[0]['id'] }}"
 
