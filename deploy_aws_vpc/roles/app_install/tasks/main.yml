@@ -14,7 +14,7 @@
     path: "{{ base_app_directory }}/{{ role_type }}/"
     state: absent
 
-- name: "Get the {{role_Type }} app from github"
+- name: "Get the {{role_type }} app from github"
   become_user: "{{ remote_admin_account }}"
   become: yes
   git:
@@ -26,7 +26,7 @@
 - name: "Create Virtualenv"
   become_user: "{{ remote_admin_account }}"
   become: yes
-  shell: "cd {{ base_app_directory }}/{{ role_type }}; {{ python_bin_dir }}/python{{ python_ver }} -m venv {{ virtual_env_dir }}"
+  shell: "cd {{ base_app_directory }}/{{ role_type }};  sudo apt-get install python3-venv; {{ python_bin_dir }}/python{{ python_ver }} -m venv {{ virtual_env_dir }}"
 
 - name: Ensure group "www-data" exists
   become_user: "{{ remote_admin_account }}"
