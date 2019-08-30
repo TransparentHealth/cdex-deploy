@@ -9,6 +9,8 @@ system_descriptive_name:
 
 deployment_server_name: "abhealth_deploy_server"
 
+base_instance_elastic_ip: ""
+
 aws_access_key: "{{ env_aws_access_key }}"
 
 remote_user_account: "{{ env_remote_user_account }}"
