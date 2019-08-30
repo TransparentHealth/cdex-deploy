@@ -28,6 +28,13 @@
     #    - "./../../vault/environment/{{ vpc_env }}/vault.yml"
     - "./../../vars/environment/{{ vpc_env }}/env.yml"
 
+
+  pre_tasks:
+    - name: install python
+      raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python python-pip python3 python3-pip)"
+      register: output
+      changed_when: output.stdout != ""
+
   roles:
     - "../../roles/base_patch"
     - "../../roles/app_user"
