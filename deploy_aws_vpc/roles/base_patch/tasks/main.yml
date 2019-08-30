@@ -10,7 +10,7 @@
     name: aptitude
     state: latest
 
-- name: "updates packages"
+- name: "update packages"
   become_user: "{{ remote_admin_account }}"
   become: yes
   apt:
