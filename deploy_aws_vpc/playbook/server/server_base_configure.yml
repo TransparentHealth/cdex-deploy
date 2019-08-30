@@ -31,7 +31,7 @@
   roles:
     - "../../roles/base_patch"
     - "../../roles/app_user"
-    - "../../roles/python"
+    # - "../../roles/python"
     - "../../roles/app_install"
     - "../../roles/nginx"
 
