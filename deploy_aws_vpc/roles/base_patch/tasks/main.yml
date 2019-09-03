@@ -16,3 +16,30 @@
   apt:
     name: "*"
     state: latest
+
+- name: "Add packages"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+#    - jpeg-dev
+#    - zlib-dev
+    - libffi-dev
+    - zlib1g-dev
+#    - openssh
+    - gcc
+#    - build-base
+#    - linux-headers
+#    - pcre-dev
+#    - postgresql-dev
+    - musl-dev
+    - libxml2-dev
+    - libxslt-dev
+    - nginx
+    - curl
+    - supervisor
+    - git
+
+

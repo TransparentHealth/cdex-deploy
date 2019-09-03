@@ -29,19 +29,19 @@
     - "./../../vars/environment/{{ vpc_env }}/env.yml"
 
 
-  pre_tasks:
-    - name: install python
-      become: yes
-      become_user: "{{ remote_admin_account }}"
-      raw: bash -c "sudo apt-get -y install python3.7 python3-pip python3.7-dev python3.7-venv python3-apt"
-
-      register: output
-      changed_when: output.stdout != ""
+#  pre_tasks:
+#    - name: install python
+#      become: yes
+#      become_user: "{{ remote_admin_account }}"
+#      raw: bash -c "sudo apt-get -y install python3.7 python3-pip python3.7-dev python3.7-venv python3-apt"
+#
+#      register: output
+#      changed_when: output.stdout != ""
 
   roles:
     - "../../roles/base_patch"
-    - "../../roles/app_user"
     - "../../roles/python"
+    - "../../roles/app_user"
     - "../../roles/app_install"
     - "../../roles/nginx"
 

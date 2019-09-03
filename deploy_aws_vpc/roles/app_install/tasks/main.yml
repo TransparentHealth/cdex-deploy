@@ -28,6 +28,10 @@
   become: yes
 #  shell: "cd {{ base_app_directory }}/{{ role_type }}; {{ python_bin_dir }}/python{{ python_ver }} -m venv {{ virtual_env_dir }}"
   shell: "cd {{ base_app_directory }}/{{ role_type }}; virtualenv --python=python3.6 {{ virtual_env_dir }}"
+  register: venv_setup
+
+  -debug:
+     msg: "{{ venv_setup }}"
 
 - name: Ensure group "www-data" exists
   become_user: "{{ remote_admin_account }}"
@@ -80,6 +84,18 @@
 #    source {{ base_app_directory }}/{{ role_type}}/{{ virtual_env_dir }}/bin/activate && make reqs-install
 #  args:
 #    chdir: "{{ app_pyapp_home }}/{{ common_project_name }}"
+
+- naame: "install additional elements:"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  pip:
+    state: present
+    name: "{{ item }}"
+    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+  with_items:
+    - django-extensions
+    - Werkzeug
+    - pyOpenSSL
 
 - name: "install boto3 for collectstatic"
   become_user: "{{ remote_admin_account }}"
