@@ -38,6 +38,7 @@ pip_extra_args: ""
 
 app_pyapps_user: "{{ env_app_pyapps_user }}"
 app_pyapps_pwd: "{{ env_app_pyapps_pwd }}"
+
 app_owner: "{{ app_pyapps_user }}"
 # application group: nginx
 app_group: "www-data"

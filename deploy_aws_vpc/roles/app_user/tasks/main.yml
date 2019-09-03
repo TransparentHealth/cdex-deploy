@@ -5,3 +5,4 @@
   user:
     name: "{{ app_pyapps_user }}"
     password: "{{ app_pyapps_pwd | password_hash('sha512') }}"
+
