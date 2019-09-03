@@ -30,8 +30,9 @@
   shell: "cd {{ base_app_directory }}/{{ role_type }}; virtualenv --python=python3.6 {{ virtual_env_dir }}"
   register: venv_setup
 
-  -debug:
-     msg: "{{ venv_setup }}"
+- name: "Check virtual env setup"
+  debug:
+    msg: "{{ venv_setup }}"
 
 - name: Ensure group "www-data" exists
   become_user: "{{ remote_admin_account }}"
