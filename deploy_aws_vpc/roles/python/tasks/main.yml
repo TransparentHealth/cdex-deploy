@@ -9,16 +9,17 @@
   become_user: "{{ remote_admin_account }}"
   become: yes
   shell: |
-    cd ~
     wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
-    sudo cd /opt
-    sudo tar -xvf ~/Python-3.6.3.tgz
+    cd /opt
+    tar -xvf ~/Python-3.6.3.tgz
     cd Python-3.6.3/
-    sudo ./configure
-    sudo make
-    sudo make install
-    rm -Rf ~/.cache
-    python 3.6 -V
+    ./configure
+    make
+    make install
+    rm -Rf /home/ubuntu/.cache
+    python3.6 -V
+  args:
+    chdir: /home/ubuntu
   register: result_python_install
 
 - debug:
