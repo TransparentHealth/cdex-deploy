@@ -34,7 +34,7 @@
 #    - linux-headers
 #    - pcre-dev
 #    - postgresql-dev
-    - musl-dev
+#    - musl-dev
     - libxml2-dev
     - libxslt-dev
     - nginx
