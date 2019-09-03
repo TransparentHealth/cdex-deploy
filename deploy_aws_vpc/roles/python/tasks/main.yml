@@ -32,25 +32,27 @@
   shell: "./configure"
   args:
     chdir: "/opt/Python-3.6.3/"
-  register: result_python_install
+  register: result_python_configure
 
 - name: "make python3.6"
   become_user: "{{ remote_admin_account }}"
   become: yes
-  shell: "make"
-  args:
+  make:
     chdir: "/opt/Python-3.6.3/"
+  register: result_python_make
 
 #     "&& make install && rm -Rf /home/ubuntu/.cache && python3.6 -V"
 - name: "make install"
   become_user: "{{ remote_admin_account }}"
   become: yes
-  shell: "make install"
-  args:
+  make:
     chdir: "/opt/Python-3.6.3/"
+    target: install
+  register: result_python_makeinstall
 
 - debug:
-    msg: "Result: \n {{ result_python_install }}"
+    msg: "Result: \n {{ result_python_configure }}\n {{result_python_make }} \n {{ result_python_makeinstall }}"
+
 
 - name: "install virtualenv"
   become_user: "{{ remote_admin_account }}"
