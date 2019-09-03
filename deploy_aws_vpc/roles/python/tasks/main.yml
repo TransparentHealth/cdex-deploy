@@ -65,6 +65,6 @@
   become_user: "{{ remote_admin_account }}"
   become: yes
   apt:
-    name: ["python-virtualenv"]
+    name: ["libpython3.6-stdlib", "python-virtualenv"]
     state: present
 

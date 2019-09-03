@@ -31,9 +31,11 @@
     name: "{{ item }}"
     state: present
   with_items:
+    - build-essential
 #    - jpeg-dev
 #    - zlib-dev
     - libffi-dev
+    - libss-dev
     - zlib1g-dev
 #    - openssh
     - gcc
@@ -48,6 +50,5 @@
     - curl
 #    - supervisor
     - git
-    - build-essential
 
 
