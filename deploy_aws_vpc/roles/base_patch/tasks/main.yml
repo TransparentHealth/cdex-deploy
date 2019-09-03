@@ -39,7 +39,7 @@
     - libxslt-dev
     - nginx
     - curl
-    - supervisor
+#    - supervisor
     - git
 
 
