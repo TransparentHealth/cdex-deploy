@@ -5,21 +5,33 @@
 # download and install python3
 # Check for python version
 
+- name: "Get Python 3.6 "
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  shell: "wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz"
+  args:
+    chdir: /home/ubuntu
+
 - name: "Install Python 3.6 and supporting components"
   become_user: "{{ remote_admin_account }}"
   become: yes
-  shell: |
-    wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
-    cd /opt
-    tar -xvf ~/Python-3.6.3.tgz
-    cd Python-3.6.3/
-    ./configure
-    make
-    make install
-    rm -Rf /home/ubuntu/.cache
-    python3.6 -V
+  shell: "tar -xvf /home/ubuntu/Python-3.6.3.tgz"
   args:
-    chdir: /home/ubuntu
+    chdir: /opt
+
+- name: "Expand Python 3.6"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  shell: "tar -xvf /home/ubuntu/Python-3.6.3.tgz"
+  args:
+    chdir: /opt/Python-3.6.3/
+
+- name: "compile python 3.6"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  shell: "./configure && make && make install && rm -Rf /home/ubuntu/.cache && python3.6 -V"
+  args:
+    chdir: /opt/Python-3.6.3/
   register: result_python_install
 
 - debug:
