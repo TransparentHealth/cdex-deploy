@@ -57,6 +57,14 @@
   with_items:
     - uwsgi
 #
+- name: "create sock path"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  file:
+    path: "/var/pyapps/{{ role_type }}"
+    state: directory
+    mode: "0664"
+
 - name: "create sock file"
   become_user: "{{ remote_admin_account }}"
   become: yes
