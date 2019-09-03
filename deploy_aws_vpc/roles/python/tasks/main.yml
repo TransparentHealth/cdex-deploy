@@ -37,14 +37,16 @@
 - name: "make python3.6"
   become_user: "{{ remote_admin_account }}"
   become: yes
-  command: "make"
+  shell: "make"
+  args:
     chdir: "/opt/Python-3.6.3/"
 
 #     "&& make install && rm -Rf /home/ubuntu/.cache && python3.6 -V"
 - name: "make install"
   become_user: "{{ remote_admin_account }}"
   become: yes
-  command: "make install"
+  shell: "make install"
+  args:
     chdir: "/opt/Python-3.6.3/"
 
 - debug:
