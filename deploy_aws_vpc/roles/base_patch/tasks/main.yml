@@ -35,7 +35,7 @@
 #    - jpeg-dev
 #    - zlib-dev
     - libffi-dev
-    - libss-dev
+    - libssl-dev
     - zlib1g-dev
 #    - openssh
     - gcc
