@@ -1,5 +1,5 @@
 [Unit]
-Description=uWSGI - {{ system_descriptive_name[role_type] }}
+Description=uWSGI - {{ system_descriptive_name.role_type }}
 
 [Service]
 ExecStart=/sbin/uwsgi --emperor /etc/uwsgi/vassals
