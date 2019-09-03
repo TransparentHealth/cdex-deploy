@@ -18,7 +18,7 @@
   apt:
     name: make
     state: present
-  
+
 - name: "Install Python 3.6 and supporting components"
   become_user: "{{ remote_admin_account }}"
   become: yes

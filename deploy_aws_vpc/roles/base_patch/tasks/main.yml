@@ -48,5 +48,6 @@
     - curl
 #    - supervisor
     - git
+    - build-essential
 
 
