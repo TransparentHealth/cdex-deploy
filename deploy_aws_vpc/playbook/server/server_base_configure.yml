@@ -33,7 +33,7 @@
     - name: install python
       become: yes
       become_user: "{{ remote_admin_account }}"
-      raw: bash -c "sudo apt-get -y install python3.7 python3-pip python3.7-dev python3.7-venv"
+      raw: bash -c "sudo apt-get -y install python3.7 python3-pip python3.7-dev python3.7-venv python3-apt"
 
       register: output
       changed_when: output.stdout != ""
