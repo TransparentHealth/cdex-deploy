@@ -86,7 +86,7 @@
 #  args:
 #    chdir: "{{ app_pyapp_home }}/{{ common_project_name }}"
 
-- naame: "install additional elements:"
+- name: "install additional elements:"
   become_user: "{{ remote_admin_account }}"
   become: yes
   pip:
