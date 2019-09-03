@@ -17,6 +17,13 @@
     name: "*"
     state: latest
 
+- name: "APT upgrade/update"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  apt:
+    upgrade: yes
+    update_cache: yes
+
 - name: "Add packages"
   become_user: "{{ remote_admin_account }}"
   become: yes
