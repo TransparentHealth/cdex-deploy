@@ -2,7 +2,7 @@
 # Install docker-ce
 
 - hosts: "{{ variable_host | default('all') }}"
-  remote_user: root
+  remote_user: "{{ remote_user_account }}"
   gather_facts: false
   vars_files:
     - "./../vars/common.yml"
