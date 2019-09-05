@@ -27,7 +27,7 @@
       raw: sudo apt-get -y update
 
     - name: install docker CE
-      raw: sudo apt-get install docker-ce
+      raw: sudo apt-get -y install docker-ce
 
     - name: hello world
       become_user: ubuntu
