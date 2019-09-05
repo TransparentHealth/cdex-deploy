@@ -4,6 +4,11 @@
 - hosts: "{{ variable_host | default('all') }}"
   remote_user: root
   gather_facts: false
+  vars_files:
+    - "./../vars/common.yml"
+    - "./../vault/environment/{{ vpc_env }}/vault.yml"
+    - "./../vars/environment/{{ vpc_env }}/env.yml"
+
   tasks:
 
     - name: apt update
