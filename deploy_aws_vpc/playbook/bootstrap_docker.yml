@@ -38,6 +38,8 @@
         state: present
 
     - name: "add {{ remote_user_account }} user to docker group"
+      become_user: "{{ remote_admin_account}}"
+      become: yes
       user:
         name: "{{ remote_user_account }}"
         groups: docker
