@@ -56,6 +56,11 @@
 
     - name: Make executable
       raw: sudo chmod +x /usr/local/bin/docker-compose
+
+
+    - name: " start docker daemon"
+      raw: "sudo systemctl enable docker"
+
 #      become_user: "{{ remote_admin_account }}"
 #      become: yes
 #      apt:
