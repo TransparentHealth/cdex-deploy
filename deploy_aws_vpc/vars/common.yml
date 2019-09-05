@@ -62,3 +62,5 @@ allowed_ips: "{{ env_allowed_ips }}"
 # confuses scanners looking for known endpoints
 
 django_admin_redirector: "private/"
+
+git_branch: "{{ env_git_branch }}"
