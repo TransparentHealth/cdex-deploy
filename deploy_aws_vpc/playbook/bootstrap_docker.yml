@@ -41,7 +41,7 @@
 
     - name: hello world
       become_user: ubuntu
-      raw: sudo docker run hello-world
+      raw: docker run hello-world
       register: docker_installed_result
 
     - debug:
