@@ -42,14 +42,14 @@
         append: yes
 
     - name: install docker-compose
-      become_user: "{{ remote_admin_account}}"
-      become: yes
-      apt:
-        name: "docker-compose"
-        state: present
+      raw: sudo apt-get -y install docker-compose
+#      become_user: "{{ remote_admin_account }}"
+#      become: yes
+#      apt:
+#        name: "docker-compose"
+#        state: present
 
     - name: hello world
-      become_user: ubuntu
       raw: docker run hello-world
       register: docker_installed_result
 
