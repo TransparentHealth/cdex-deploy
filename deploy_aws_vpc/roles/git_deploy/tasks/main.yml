@@ -10,7 +10,7 @@
 - name: "git clone cdex.{{ vpc_env }}"
   git:
     repo: "https://github.com/transparenthealth/cdex.{{ vpc_env }}.git"
-    dest: "/home/{{ remote_user_account }}/{{cdex.{{ vpc_env }}"
+    dest: "/home/{{ remote_user_account }}/cdex.{{ vpc_env }}"
     clone: yes
     force: yes
     version: "{{ git_branch | default('HEAD') }}"
@@ -18,7 +18,7 @@
 - name: "git clone {{ role_type }} into cdex.{{ vpc_env }}"
   git:
     repo: "https://github.com/transparenthealth/{{ role?-type }}.git"
-    dest: "/home/{{ remote_user_account }}/{{cdex.{{ vpc_env }}/{{ role_type }}"
+    dest: "/home/{{ remote_user_account }}/cdex.{{ vpc_env }}/{{ role_type }}"
     clone: yes
     force: yes
 
