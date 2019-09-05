@@ -7,6 +7,11 @@
 #    
 #    
 
+- name: "remove target directory: /home/{{ remote_user_account }}/cdex.{{ vpc_env }}"
+  file:
+    path: "/home/{{ remote_user_account }}/cdex.{{ vpc_env }}"
+    state: absent
+
 - name: "git clone cdex.{{ vpc_env }}"
   git:
     repo: "https://github.com/transparenthealth/cdex.{{ vpc_env }}.git"
@@ -14,6 +19,11 @@
     clone: yes
     force: yes
     version: "{{ git_branch | default('HEAD') }}"
+
+- name: "remove target directory: /home/{{ remote_user_account }}/cdex.{{ vpc_env }}/{{ role_type }}"
+  file:
+    path: "/home/{{ remote_user_account }}/cdex.{{ vpc_env }}/{{ role_type }}"
+    state: absent
 
 - name: "git clone {{ role_type }} into cdex.{{ vpc_env }}"
   git:
