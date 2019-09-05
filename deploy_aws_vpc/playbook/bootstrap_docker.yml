@@ -40,9 +40,9 @@
         append: yes
 
     - name: install docker-compose
-      - apt:
-          name: "docker-compose"
-          state: present
+      apt:
+        name: "docker-compose"
+        state: present
 
     - name: hello world
       become_user: ubuntu
