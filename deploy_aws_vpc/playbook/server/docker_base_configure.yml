@@ -27,6 +27,6 @@
     - "./../../vars/environment/{{ vpc_env }}/env.yml"
 
   roles:
-    - "../../roles/git_deploy/tasks/main.yml"
+    - "../../roles/git_deploy"
 
 
