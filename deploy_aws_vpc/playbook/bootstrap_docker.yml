@@ -1,0 +1,32 @@
+---
+# Install docker-ce
+
+- hosts: "{{ variable_host | default('all') }}"
+  remote_user: root
+  gather_facts: false
+  tasks:
+
+    - name: apt update
+      raw: sudo apt-get -y update
+
+    - name: install pre-requisites
+      raw: sudo apt-get -y install  apt-transport-https ca-certificates curl software-properties-common
+
+    - name: add docker GPG key
+      raw: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+    - name: setup stable repository
+      raw: sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+    - name: refresh apt for latest updates
+      raw: sudo apt-get -y update
+
+    - name: install docker CE
+      raw: sudo apt-get install docker-ce
+
+    - name: hello world
+      raw: sudo docker run hello-world
+      register: docker_installed_result
+
+    - debug:
+        msg: "{{ docker_installed_result }}"
