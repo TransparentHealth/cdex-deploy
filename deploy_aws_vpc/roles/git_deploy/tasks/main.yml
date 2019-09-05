@@ -5,7 +5,8 @@
 # Purpose:
 # deploy git.{{ role_type }} to target
 #    
-#    
+# NOTE: .gitmodules should use https references to sub modules
+#
 
 - name: "remove target directory: /home/{{ remote_user_account }}/cdex.{{ vpc_env }}"
   file:
@@ -19,17 +20,5 @@
     clone: yes
     force: yes
     version: "{{ git_branch | default('HEAD') }}"
-
-- name: "remove target directory: /home/{{ remote_user_account }}/cdex.{{ vpc_env }}/{{ role_type }}"
-  file:
-    path: "/home/{{ remote_user_account }}/cdex.{{ vpc_env }}/{{ role_type }}"
-    state: absent
-
-- name: "git clone {{ role_type }} into cdex.{{ vpc_env }}"
-  git:
-    repo: "https://github.com/transparenthealth/{{ role?-type }}.git"
-    dest: "/home/{{ remote_user_account }}/cdex.{{ vpc_env }}/{{ role_type }}"
-    clone: yes
-    force: yes
 
 
