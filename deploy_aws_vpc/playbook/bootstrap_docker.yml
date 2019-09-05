@@ -42,6 +42,8 @@
         append: yes
 
     - name: install docker-compose
+      become_user: "{{ remote_admin_account}}"
+      become: yes
       apt:
         name: "docker-compose"
         state: present
