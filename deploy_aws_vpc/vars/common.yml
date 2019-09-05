@@ -9,6 +9,10 @@ system_descriptive_name:
 
 deployment_server_name: "abhealth_deploy_server"
 
+# ubuntu 18.04 with Python3.6
+# base_ami: "ami-07d0cf3af28718ef8"
+# ubuntu 16.04 with Python3.5
+# base_ami: "ami-0cfee17793b08a293"
 base_ami: "{{ env_base_ami }}"
 
 base_instance_elastic_ip: "3.227.187.144"

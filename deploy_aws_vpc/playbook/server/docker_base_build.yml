@@ -1,0 +1,138 @@
+---
+# playbook/server/build_server_base.yml
+
+# Install process:
+# Create a server instance
+# install base software
+# configure
+# Create ami from server
+# terminate server
+
+
+- name: provision base server
+  hosts: localhost
+  connection: local
+  vars:
+    ansible_ssh_pipelining: no
+    env: "{{ vpc_env }}"
+    # Options - lower case: staging | prod
+    azone: "az1"
+    # Options: az1 | az2 | az3
+    sub_zone: "app"
+    role_type: "vmi"
+    # Options: vmi | smh | smhapp
+
+    sg_zone: "{{ vpc_env }}-{{ role_type }}-APP"
+    env_az: "{{ vpc_env }}-{{ azone }}"
+#    env_cf_data_version: "20"
+#    env_cf_app_version: "01"
+    build_subnet_id: null
+  vars_files:
+    - "./../../vars/common.yml"
+    - "./../../vault/environment/{{ vpc_env }}/vault.yml"
+    - "./../../vars/environment/{{ vpc_env }}/env.yml"
+
+
+  pre_tasks:
+    - set_fact:
+        instance_type_choices: "{{ lookup('vars', 'ec2_app_instance_type') }}"
+        instance_vol_size_choices: "{{ lookup('vars', 'ec2_instance_volsize') }}"
+
+#    - name: "Get VPC Facts for vpc where mgmt-controller is located"
+#        ec2_vpc_net_facts:
+#        region: "{{ aws_region }}"
+#        filters:
+#          "tag:Name": "{{deployment_server_name }}"
+#      register: vpc_info
+
+#    - debug:
+#        msg: "vpc_info"
+
+#    - name: "install boto3"
+#      apt:
+#        name: boto3
+#        state: present
+
+
+    - name: "get subnet for {{ deployment_server_name}}"
+      ec2_instance_facts:
+        region: "{{ aws_region }}"
+        filters:
+          "tag:Name": "{{ deployment_server_name }}"
+      register: deployment_server_info
+
+    - debug:
+        msg: "{{ deployment_server_info }}"
+
+    - set_fact:
+        # vpc_env_id: "vpc_info[0].id"
+        vpc_env_id: "{{ deployment_server_info.instances[0].vpc_id }}"
+        vpc_env_subnet_id: "{{ deployment_server_info.instances[0].subnet_id }}"
+
+#    - ec2_vpc_subnet_facts:
+#        region: "{{ aws_region }}"
+#        filters:
+#          "tag:Name": "{{ vpc_env|upper }}-app-a"
+#      register: vpc_subnet_info
+
+#    - debug:
+#        msg: "{{ vpc_subnet_info}}"
+#
+#    - set_fact:
+#        vpc_env_subnet_id: "{{ vpc_subnet_info.subnets.0.subnet_id }}"
+
+    - name: "create ec2 base instance in same vpc as mgmt-controller"
+      ec2:
+        key_name: "{{ private_key_name }}"
+        region: "{{ aws_region }}"
+        # group: "{{ vpc_env }}-{{ role_type }}-APP"
+        instance_type: "{{ instance_type_choices[role_type] }}"
+        image: "{{ base_ami }}"
+        state: "present"
+        instance_initiated_shutdown_behavior: "terminate"
+        wait: yes
+        wait_timeout: 500
+        count: 1
+        instance_tags:
+          role: "{{ role_type }}"
+          env: "{{ vpc_env }}"
+          function: "BaseInstance"
+          Name: "BaseInstance_Docker"
+          workflow: "JustCreated"
+        monitoring: no
+        vpc_subnet_id: "{{ vpc_env_subnet_id }}"
+        # assign public ip to enable software downloads
+        assign_public_ip: yes
+        volumes:
+          - device_name: "/dev/sda1"
+            volume_type: "gp2"
+            volume_size: "{{ instance_vol_size_choices[role_type] }}"
+            encrypted: True
+            delete_on_termination: True
+      register: ec2_base_instance_info
+
+    - name: Wait 180 seconds, but only start checking after 30 seconds
+      wait_for_connection:
+        delay: 30
+        timeout: 180
+
+#    - debug:
+#        msg: "New Instance: {{ ec2_base_instance_info }} \n assign elastic_ip"
+
+    - name: "Assign elastic_ip to instance"
+      ec2_eip:
+        region: "{{ aws_region }}"
+        allow_reassociation: yes
+        public_ip: "{{ base_instance_elastic_ip }}"
+        device_id: "{{ ec2_base_instance_info.instances[0]['id'] }}"
+        state: present
+
+    - debug:
+        msg: "About to connect to {{ ec2_base_instance_info.instances[0]['private_ip'] }}"
+
+    - name: "Wait for SSH to become available"
+      wait_for:
+        port: 22
+        host: "{{ ec2_base_instance_info.instances[0]['private_ip'] }}"
+        delay: 5
+
