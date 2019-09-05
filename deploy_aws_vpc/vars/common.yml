@@ -7,6 +7,11 @@ system_descriptive_name:
   smh: "Share My Health"
   smhapp: "Share My Health Apps"
 
+system_repository_name:
+  vmi: "vmi"
+  smh: "sharemyhealth"
+  smhapp: "smh_app"
+
 deployment_server_name: "abhealth_deploy_server"
 
 # ubuntu 18.04 with Python3.6
