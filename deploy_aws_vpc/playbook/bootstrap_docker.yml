@@ -31,6 +31,8 @@
       raw: sudo apt-get -y update
 
     - name: install docker CE
+      become_user: "{{ remote_admin_account}}"
+      become: yes
       apt:
         name: "docker-ce"
         state: present
