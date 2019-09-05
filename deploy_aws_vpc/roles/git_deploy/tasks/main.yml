@@ -9,6 +9,8 @@
 #
 
 - name: "remove target directory: /home/{{ remote_user_account }}/cdex.{{ vpc_env }}"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   file:
     path: "/home/{{ remote_user_account }}/cdex.{{ vpc_env }}"
     state: absent
