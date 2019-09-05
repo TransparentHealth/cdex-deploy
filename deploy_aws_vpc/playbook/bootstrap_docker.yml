@@ -35,4 +35,4 @@
       register: docker_installed_result
 
     - debug:
-        msg: "{{ docker_installed_result }}"
+        msg: "{{ docker_installed_result.stdout }}"
