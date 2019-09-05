@@ -42,7 +42,11 @@
         append: yes
 
     - name: install docker-compose
-      raw: sudo apt-get -y install docker-compose
+      # raw: sudo apt-get -y install docker-compose
+      raw: sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+    - name: Make executable
+      raw: sudo chmod +x /usr/local/bin/docker-compose
 #      become_user: "{{ remote_admin_account }}"
 #      become: yes
 #      apt:
