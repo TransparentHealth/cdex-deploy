@@ -15,7 +15,9 @@
       raw: sudo apt-get -y update
 
     - name: install pre-requisites
-      raw: sudo apt-get -y install  apt-transport-https ca-certificates curl software-properties-common
+      apt:
+        name: ["apt-transport-https", "ca-certificates", "curl", "software-properties-common"]
+        state: present
 
     - name: add docker GPG key
       raw: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -27,7 +29,9 @@
       raw: sudo apt-get -y update
 
     - name: install docker CE
-      raw: sudo apt-get -y install docker-ce
+      apt:
+        name: "docker-ce"
+        state: present
 
     - name: hello world
       become_user: ubuntu
