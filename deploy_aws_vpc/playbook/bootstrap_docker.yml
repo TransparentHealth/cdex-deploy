@@ -45,6 +45,11 @@
         groups: docker
         append: yes
 
+    - name: "refresh {{ remote_user_account }} group memberships without logout"
+      become_user: "{{ remote_admin_account}}"
+      become: yes
+      raw: "gpasswd -a {{ remote_user_account }} docker"
+
     - name: install docker-compose
       # raw: sudo apt-get -y install docker-compose
       raw: sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
