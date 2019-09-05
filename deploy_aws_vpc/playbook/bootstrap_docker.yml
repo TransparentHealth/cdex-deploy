@@ -30,7 +30,7 @@
       raw: sudo apt-get install docker-ce
 
     - name: hello world
-      raw: sudo docker run hello-world
+      raw: docker run hello-world
       register: docker_installed_result
 
     - debug:
