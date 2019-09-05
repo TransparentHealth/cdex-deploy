@@ -33,6 +33,12 @@
         name: "docker-ce"
         state: present
 
+    - name: "add {{ remote_user_account }} user to docker group"
+      user:
+        name: "{{ remote_user_account }}"
+        groups: docker
+        append: yes
+
     - name: hello world
       become_user: ubuntu
       raw: sudo docker run hello-world
