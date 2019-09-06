@@ -1,5 +1,5 @@
 ---
-# Install docker-ce
+# Install docker-ce and docker-compose
 
 - hosts: "{{ variable_host | default('all') }}"
   remote_user: "{{ remote_user_account }}"
