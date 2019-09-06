@@ -8,6 +8,8 @@
 #    
 
 - name: "Install docker module"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   apt:
     name: "python-pip"
     state: present
