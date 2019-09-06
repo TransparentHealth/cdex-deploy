@@ -8,13 +8,20 @@
 
 - name: "Tear down existing services: {{ role_type }} ( {{ system_repository_name[role_type] }})"
   docker_compose:
-    project_src: "/home/ubuntu/cdex.{{ vpc_env }}"
+    project_src: "/home/{{ remote_user_account }}/cdex.{{ vpc_env }}"
     services: "{{ system_repository_name[role_type] }}"
     state: absent
 
+- name: Download .env file
+  template:
+    src: templates/env_file
+    dest: "/home/{{ remote_user_account }}/cdex.{{ vpc_env }}/.env"
+    owner: "{{ remote_user_account }}"
+    mode: 0664
+
 - name: Create and start services
   docker_compose:
-    project_src: "/home/ubuntu/cdex.{{ vpc_env }}"
+    project_src: "/home/{{ remote_user_account }}/cdex.{{ vpc_env }}"
     services: "{{ system_repository_name[role_type] }}"
   register: output
 
@@ -23,7 +30,7 @@
 
 - name: Run `docker-compose up` again
   docker_compose:
-    project_src: "/home/ubuntu/cdex.{{ vpc_env }}"
+    project_src: "/home/{{ remote_user_account }}/cdex.{{ vpc_env }}"
     services: "{{ system_repository_name[role_type] }}"
     build: no
   register: output
@@ -36,7 +43,7 @@
 
 - name: Stop all services
   docker_compose:
-    project_src: "/home/ubuntu/cdex.{{ vpc_env }}"
+    project_src: "/home/{{ remote_user_account }}/cdex.{{ vpc_env }}"
     services: "{{ system_repository_name[role_type] }}"
     build: no
     stopped: yes
@@ -47,7 +54,7 @@
 
 - name: Restart services
   docker_compose:
-    project_src: "/home/ubuntu/cdex.{{ vpc_env }}"
+    project_src: "/home/{{ remote_user_account }}/cdex.{{ vpc_env }}"
     services: "{{ system_repository_name[role_type] }}"
     build: no
     restarted: yes

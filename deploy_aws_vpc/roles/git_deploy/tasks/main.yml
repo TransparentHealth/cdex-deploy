@@ -4,8 +4,8 @@
 # cdex-deploy : 
 # Purpose:
 # deploy git.{{ role_type }} to target
-#    
-# NOTE: .gitmodules should use https references to sub modules
+
+ NOTE: .gitmodules should use https references to sub modules
 #
 
 - name: "remove target directory: /home/{{ remote_user_account }}/cdex.{{ vpc_env }}"

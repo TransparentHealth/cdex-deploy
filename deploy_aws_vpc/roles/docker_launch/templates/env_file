@@ -1,0 +1,25 @@
+# env template file
+# copied to /home/ubuntu/cdex.staging/.env
+
+DATABASES_CUSTOMM=postgres://postgres:{{ db_master_pw }}:5432/{{ role_type}}
+ALLOWED_HOSTS=*
+OAUTHLIB_INSECURE_TRANSPORT=true
+ROOT_USER=dev
+ROOT_PASSWORD=password
+OIDC_ISSUER=http://localhost:8001
+HOSTNAME_URL=${VMI_HOSTNAME_URL}
+
+# Need to set more variables to address the following warnings
+# WARNING: The VMI_HOSTNAME_URL variable is not set. Defaulting to a blank string.
+# WARNING: The SMH_HOSTNAME_URL variable is not set. Defaulting to a blank string.
+# WARNING: The VMI_KEY variable is not set. Defaulting to a blank string.
+# WARNING: The VMI_SECRET variable is not set. Defaulting to a blank string.
+# WARNING: The HIE_TOKEN_API_URI variable is not set. Defaulting to a blank string.
+# WARNING: The HIE_PATIENT_API_URI variable is not set. Defaulting to a blank string.
+# WARNING: The HIE_WORKBENCH_USERNAME variable is not set. Defaulting to a blank string.
+# WARNING: The HIE_WORKBENCH_PASSWORD variable is not set. Defaulting to a blank string.
+# WARNING: The HIE_BASIC_AUTH_PASSWORD variable is not set. Defaulting to a blank string.
+# WARNING: The APP_VMI_KEY variable is not set. Defaulting to a blank string.
+# WARNING: The APP_VMI_SECRET variable is not set. Defaulting to a blank string.
+# WARNING: The SMH_KEY variable is not set. Defaulting to a blank string.
+# WARNING: The SMH_SECRET variable is not set. Defaulting to a blank string.
