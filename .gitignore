@@ -108,3 +108,6 @@ awscli-bundle/
 .idea/
 abhealth-env-staging.yml
 cdex-deploy.iml
+/deploy_aws_vpc/docker_ubuntu.yml
+/deploy_aws_vpc/inventory/inventory.sample.json
+/env_save/
