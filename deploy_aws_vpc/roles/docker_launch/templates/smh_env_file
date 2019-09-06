@@ -1,0 +1,36 @@
+# env template file
+# copied to /home/ubuntu/cdex.staging/.env
+# smh .env file
+# source: roles/docker_launch/template/smh_env_file
+
+DATABASES_CUSTOMM=postgres://postgres:{{ db_master_pw }}:5432/{{ role_type}}
+ALLOWED_HOSTS=*
+OAUTHLIB_INSECURE_TRANSPORT=true
+ROOT_USER=dev
+ROOT_PASSWORD=password
+OIDC_ISSUER=http://localhost:8001
+HOSTNAME_URL=${VMI_HOSTNAME_URL}
+
+# auth: sharemyhealth to verifymyidentity
+VMI_KEY=WGDa8HoIxV8F3vSMBj9EKS1sDDBYovpStPb7Q67l
+VMI_SECRET=DblGSC8ZuJkxxq34XWBaL98MWoJpIBZvaHAhyk0oiZKTMKgd6PLtkec2vyhC7DnZ26MnRMCy5HYYEw3tEqJTlK2KcctbJFI3TK9DSIXY60Nw6uTlYNmgzJuOiDD7sxSm
+
+# auth: smh_app to sharemyhealth
+SMH_KEY=SIybt6eLIFNtUavqou7Gp6QtUVUwunSe5i1FOvH9
+SMH_SECRET=oZpmksZU4fqznG9OQbThjLe4PSRhN55mmTzfhjuQ09mcm8Qbk7WX1fSG3cyXVCqsdfZFsPu31iZsnO64xvqiFz7N5V0ht34Gw3LysW8KnKvTqs0bL19s2iuqHmxQNs71
+
+# auth: smh_app to verifymyidentity
+APP_VMI_KEY=WGDa8HoIxV8F3vSMBj9EKS1sDDBYovpStPb7Q67l
+APP_VMI_SECRET=DblGSC8ZuJkxxq34XWBaL98MWoJpIBZvaHAhyk0oiZKTMKgd6PLtkec2vyhC7DnZ26MnRMCy5HYYEw3tEqJTlK2KcctbJFI3TK9DSIXY60Nw6uTlYNmgzJuOiDD7sxSm
+
+# HIXNY connection parameters
+HIE_TOKEN_API_URI=https://integration.hixny.com:6443
+HIE_PATIENT_API_URI=https://integration.hixny.com:5443
+HIE_WORKBENCH_USERNAME=theusername
+HIE_WORKBENCH_PASSWORD=thepassword
+
+
+# Need to set more variables to address the following warnings
+# WARNING: The VMI_HOSTNAME_URL variable is not set. Defaulting to a blank string.
+# WARNING: The SMH_HOSTNAME_URL variable is not set. Defaulting to a blank string.
+# WARNING: The HIE_BASIC_AUTH_PASSWORD variable is not set. Defaulting to a blank string.
