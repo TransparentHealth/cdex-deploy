@@ -9,7 +9,7 @@
 
 - name: "Install docker module"
   apt:
-    name: "python3-pip"
+    name: "python-pip"
     state: present
 
 - name: "pip install docker"
