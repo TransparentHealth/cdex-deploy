@@ -69,3 +69,5 @@ allowed_ips: "{{ env_allowed_ips }}"
 django_admin_redirector: "private/"
 
 git_branch: "{{ env_git_branch }}"
+
+rds_endpoint: "{{ env_rds_endpoint }}"

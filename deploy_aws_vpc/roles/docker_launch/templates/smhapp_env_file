@@ -3,7 +3,7 @@
 # smhapp .env file
 # source: roles/docker_launch/template/smhapp_env_file
 
-DATABASES_CUSTOMM=postgres://postgres:{{ db_master_pw }}:5432/{{ role_type}}
+DATABASES_CUSTOM=postgres://postgres:{{ db_master_pw }}@{{ rds_endpoint }}:5432/{{ role_type}}
 ALLOWED_HOSTS=*
 OAUTHLIB_INSECURE_TRANSPORT=true
 ROOT_USER=dev

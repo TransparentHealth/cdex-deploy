@@ -14,7 +14,7 @@
 
 - name: Download .env file
   template:
-    src: templates/env_file
+    src: "templates/{{ role_type }}_env_file"
     dest: "/home/{{ remote_user_account }}/cdex.{{ vpc_env }}/.env"
     owner: "{{ remote_user_account }}"
     mode: 0664
