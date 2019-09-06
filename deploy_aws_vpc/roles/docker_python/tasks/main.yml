@@ -1,0 +1,19 @@
+---
+# roles/docker_python/tasks/main.yml
+# Created: 2019-09-05
+# cdex-deploy
+# Purpose: deploy docker module for python
+#
+#    
+#    
+
+- name: "Install docker module"
+  apt:
+    name: "python3-pip"
+    state: present
+
+- name: "pip install docker"
+  pip:
+    name: docker
+    state: present
+
