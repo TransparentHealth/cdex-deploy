@@ -71,3 +71,5 @@ django_admin_redirector: "private/"
 git_branch: "{{ env_git_branch }}"
 
 rds_endpoint: "{{ env_rds_endpoint }}"
+
+vpc_app_subnet_id: "{{ env_vpc_app_subnet_id }}"
