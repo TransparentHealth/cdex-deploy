@@ -20,7 +20,8 @@ deployment_server_name: "abhealth_deploy_server"
 # base_ami: "ami-0cfee17793b08a293"
 base_ami: "{{ env_base_ami }}"
 
-base_instance_elastic_ip: "3.227.187.144"
+# base_instance_elastic_ip: "3.227.187.144"
+base_instance_elastic_ip: "34.229.8.6"
 
 aws_access_key: "{{ env_aws_access_key }}"
 
