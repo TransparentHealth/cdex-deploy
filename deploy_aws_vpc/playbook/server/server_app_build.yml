@@ -39,6 +39,8 @@
         instance_vol_size_choices: "{{ lookup('vars', 'ec2_instance_volsize') }}"
         app_security_group_choices: "{{ lookup('vars', 'app_security_group_id') }}"
 
+    - debug:
+        msg: "{{ app_security_group_choices }}"
 
     - name: "get subnet for {{ deployment_server_name}}"
       ec2_instance_facts:
