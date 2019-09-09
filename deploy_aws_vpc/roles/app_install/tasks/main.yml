@@ -27,12 +27,19 @@
   become_user: "{{ remote_admin_account }}"
   become: yes
 #  shell: "cd {{ base_app_directory }}/{{ role_type }}; {{ python_bin_dir }}/python{{ python_ver }} -m venv {{ virtual_env_dir }}"
-  shell: "cd {{ base_app_directory }}/{{ role_type }}; virtualenv --python=python3.6 {{ virtual_env_dir }}"
+  shell: "cd {{ base_app_directory }}/{{ role_type }}; virtualenv --python=python3.7 {{ virtual_env_dir }}"
   register: venv_setup
 
 - name: "Check virtual env setup"
   debug:
     msg: "{{ venv_setup }}"
+
+- name: "install gunicorn"
+  pip:
+    chdir: "{{ base_app_directory }}/{{ role_type }}"
+    name: gunicorn
+    state: present
+    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
 
 - name: Ensure group "www-data" exists
   become_user: "{{ remote_admin_account }}"

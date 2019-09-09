@@ -1,0 +1,22 @@
+---
+# roles/postgres_setup/tasks/main.yml
+# Created: 2019-09-09
+# cdex-deploy
+# Purpose: Setup Postgres database
+#
+#    
+#    
+
+- name: "setup .pgpass file"
+  files:
+    name: "/home/{{ remote_user_account }}/.pgpass"
+
+
+- name: "create database in postgres for {{ role_type }}"
+  raw: "psql  -c CREATE DATABASE {{ role_type }}_{{ vpc_env }}; CREATE USER {{ app_pyapps_user }} WITH PASSWORD '{{ app_pyapps_pwd }}';"
+
+- name: "Update postgres settings"
+  raw: "psql -c ALTER ROLE {{ app_pyapps_user }} SET client_encoding TO 'utf8'; ALTER ROLE {{ app_pyapps_user }} SET default_transaction_isolation TO 'read committed';ALTER ROLE {{ app_pyapps_user }} SET timezone TO 'UTC';"
+
+- name: "grant all privileges"
+  raw: "psql -c GRANT ALL PRIVILEGES ON DATABASE {{ role_type }}_{{ vpc_env }} TO {{ app_pyapps_user }};"

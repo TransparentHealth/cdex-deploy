@@ -1,0 +1,20 @@
+---
+# roles/python37/tasks/main.yml
+# Created: 2019-09-09
+# cdex-deploy
+# Purpose:
+# Install python37
+#    
+#    
+
+- name: "install python3.7"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  apt:
+    name: python37
+    state: present
+
+- name: "upgrade pip"
+  raw: "sudo -H pip3 -y install --upgrade pip"
+
+
