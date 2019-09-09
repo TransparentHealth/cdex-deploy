@@ -23,5 +23,8 @@
       raw: "sudo apt -y update && sudo apt install -y python-minimal"
       when: check_python.rc != 0
 
+    - name: "install Python3-venv"
+      raw: sudo apt -y install python3-venv python-pip
+
   roles:
     - "../roles/install_ansible"

@@ -26,3 +26,6 @@
 
 - name: install abhealth deploy repo
   raw: git clone https://github.com/transparenthealth/cdex-deploy.git
+
+- name: create virtual environment
+  raw: cd ~/cdex-deploy && python3 -m venv env
