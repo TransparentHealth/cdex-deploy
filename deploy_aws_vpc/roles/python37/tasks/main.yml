@@ -11,7 +11,7 @@
   become_user: "{{ remote_admin_account }}"
   become: yes
   apt:
-    name: python37
+    name: python3.7
     state: present
 
 - name: "upgrade pip"
