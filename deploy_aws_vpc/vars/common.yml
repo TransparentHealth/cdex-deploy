@@ -12,7 +12,7 @@ system_repository_name:
   smh: "sharemyhealth"
   smhapp: "smh_app"
 
-deployment_server_name: "abhealth_deploy_server"
+deployment_server_name: "abhealth_deploy_server_{{ vpc_env }}"
 
 # ubuntu 18.04 with Python3.6
 # base_ami: "ami-07d0cf3af28718ef8"

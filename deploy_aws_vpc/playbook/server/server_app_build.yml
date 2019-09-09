@@ -22,7 +22,7 @@
     role_type: "vmi"
     # Options: vmi | smh | smhapp
 
-    sg_zone: "{{ vpc_env }}-{{ role_type }}-APP"
+    sg_zone: "{{ vpc_env }}_{{ role_type }}_APP"
     env_az: "{{ vpc_env }}-{{ azone }}"
 #    env_cf_data_version: "20"
 #    env_cf_app_version: "01"
@@ -37,7 +37,6 @@
     - set_fact:
         instance_type_choices: "{{ lookup('vars', 'ec2_app_instance_type') }}"
         instance_vol_size_choices: "{{ lookup('vars', 'ec2_instance_volsize') }}"
-
 
 
     - name: "get subnet for {{ deployment_server_name}}"
@@ -77,7 +76,7 @@
         monitoring: no
         vpc_subnet_id: "{{ vpc_app_subnet_id }}"
         # assign public ip to enable software downloads
-        assign_public_ip: yes
+        assign_public_ip: no
         volumes:
           - device_name: "/dev/sda1"
             volume_type: "gp2"

@@ -1,18 +1,27 @@
 ---
 # Install python for Ansible
-
-- hosts: all
-  remote_user: root
+- name: Bootstrap ubuntu with Ansible
+  hosts: "{{ variable_host| default('all') }}"
+  remote_user: "ubuntu"
   gather_facts: false
-  tasks:
-
-    - name: Check for Python
+  vars:
+    ansible_ssh_private_key_file: "~/.ec2/abhealth/mgmt-controller.pem"
+    host_key_checking: false
+    # Valid options include: "package" or "pip"
+    ansible_install_method: package
+    remote_admin_account: "root"
+    # Used only if ansible_install_method is "pip". If empty, defaults to latest.
+    ansible_install_version_pip: ""
+  pre_tasks:
+    - name: "Check for Python"
       raw: test -e /usr/bin/python
       changed_when: false
       failed_when: false
       register: check_python
 
-    - name: Install Python
-      raw: apt -y update && apt install -y python-minimal
+    - name: "Install Python"
+      raw: "sudo apt -y update && sudo apt install -y python-minimal"
       when: check_python.rc != 0
 
+  roles:
+    - "../roles/install_ansible"

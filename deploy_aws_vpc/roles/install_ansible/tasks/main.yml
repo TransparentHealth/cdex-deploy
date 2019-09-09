@@ -1,0 +1,28 @@
+---
+# roles/install_ansible/tasks/main.yml
+# Created: 2019-09-09
+# cdex-deploy
+# Purpose:
+# Install Ansible to ?Mgmt-controller in a zone
+#    
+#    
+
+- name: Add ansible repository.
+  become_user: root
+  become: yes
+  apt_repository: repo='ppa:ansible/ansible'
+
+- name: Update apt cache.
+  become_user: "root"
+  become: yes
+  apt: update_cache=true cache_valid_time=86400
+
+- name: Install Ansible.
+  become_user: root
+  become: yes
+  apt:
+    name: ansible
+    state: present
+
+- name: install abhealth deploy repo
+  raw: git clone https://github.com/transparenthealth/cdex-deploy.git
