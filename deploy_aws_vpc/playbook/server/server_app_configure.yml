@@ -33,6 +33,7 @@
     - "../../roles/python37"
     - "../../roles/app_user"
     - "../../roles/app_install"
+    - "../../roles/postgres_setup"
     - "../../roles/nginx"
 
 
