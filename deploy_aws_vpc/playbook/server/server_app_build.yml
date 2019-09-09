@@ -37,7 +37,7 @@
     - set_fact:
         instance_type_choices: "{{ lookup('vars', 'ec2_app_instance_type') }}"
         instance_vol_size_choices: "{{ lookup('vars', 'ec2_instance_volsize') }}"
-        app_security_group_choices: "{{ lookup('vars', 'app_security_group_id'}}"
+        app_security_group_choices: "{{ lookup('vars', 'app_security_group_id') }}"
 
 
     - name: "get subnet for {{ deployment_server_name}}"
