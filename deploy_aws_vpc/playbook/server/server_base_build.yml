@@ -102,7 +102,7 @@
         monitoring: no
         vpc_subnet_id: "{{ vpc_env_subnet_id }}"
         # assign public ip to enable software downloads
-        assign_public_ip: yes
+        assign_public_ip: no
         volumes:
           - device_name: "/dev/sda1"
             volume_type: "gp2"

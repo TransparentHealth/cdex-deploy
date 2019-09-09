@@ -29,3 +29,7 @@
 
 - name: create virtual environment
   raw: cd ~/cdex-deploy && python3 -m venv env
+
+- name: install boto / boto3
+  raw: pip install boto boto3
+
