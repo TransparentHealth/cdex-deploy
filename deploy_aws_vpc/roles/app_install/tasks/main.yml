@@ -24,7 +24,7 @@
     clone: yes
 
 - name: "install virtualenv"
-  shell: "pip3 install virtualenv"
+  shell: "sudo pip3 install virtualenv"
 
 - name: "Create Virtualenv"
   become_user: "{{ remote_admin_account }}"
