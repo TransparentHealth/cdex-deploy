@@ -27,7 +27,7 @@
   become_user: "{{ remote_admin_account }}"
   become: yes
 #  shell: "cd {{ base_app_directory }}/{{ role_type }}; {{ python_bin_dir }}/python{{ python_ver }} -m venv {{ virtual_env_dir }}"
-  shell: "cd {{ base_app_directory }}/{{ role_type }}; virtualenv --python=python3.7 {{ virtual_env_dir }}"
+  shell: "cd {{ base_app_directory }}/{{ role_type }}; python3.7 -m venv {{ virtual_env_dir }} "
   register: venv_setup
 
 - name: "Check virtual env setup"
