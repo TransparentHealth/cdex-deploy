@@ -59,7 +59,7 @@
       ec2:
         key_name: "{{ private_key_name }}"
         region: "{{ aws_region }}"
-        group: "{{ vpc_env }}_{{ role_type }}_APP"
+        # group: "{{ vpc_env }}_{{ role_type }}_APP"
         group_id: "{{ app_security_group_id[role_type] }}"
         instance_type: "{{ instance_type_choices[role_type] }}"
         image: "{{ base_ami }}"
