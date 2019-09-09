@@ -21,6 +21,13 @@
     name: python3-pip
     state: present
 
+- name: "install python3 venv"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  apt:
+    name: python3-venv
+    state: present
+
 - name: "upgrade pip"
   raw: "sudo -H pip3 install --upgrade pip"
 
