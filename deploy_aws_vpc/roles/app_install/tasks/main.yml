@@ -6,8 +6,8 @@
   file:
     path: "{{ base_app_directory }}"
     state: directory
-    user: "{{ remote_user_account }}"
-    group: "{{ remote_user_account }}"
+#    user: "{{ remote_user_account }}"
+#    group: "{{ remote_user_account }}"
     mode: "0644"
 
 - name: "remove directory"
