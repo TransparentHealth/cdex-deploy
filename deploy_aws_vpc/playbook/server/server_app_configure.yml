@@ -30,7 +30,7 @@
 
   roles:
     - "../../roles/base_app"
-    - "../../roles/python37"
+    # - "../../roles/python3.7"
     - "../../roles/app_user"
     - "../../roles/app_install"
     - "../../roles/postgres_setup"
