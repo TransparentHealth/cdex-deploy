@@ -34,7 +34,7 @@
 #        -
     - name: "Check out parameter store"
       debug:
-        msg: "{{ lookup('aws_ssm', '/'+ vpc_env + '/' + role_type, aws_region, bypath=true, recursive=true ) }}"
+        msg: "{{ lookup('aws_ssm', '/dev, aws_region, bypath=true, recursive=true ) }}"
 
     - name: "Create S3 bucket for {{ vpc_env }}-{{ system_full_name[role_type] }}"
       s3_bucket:
