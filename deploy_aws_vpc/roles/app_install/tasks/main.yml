@@ -23,14 +23,14 @@
     force: yes
     clone: yes
 
-- name: "install virtualenv"
+- name: "install virtualenv for Python version {{ python_version }}"
   shell: "sudo pip3 install virtualenv"
 
 - name: "Create Virtualenv"
   become_user: "{{ remote_admin_account }}"
   become: yes
 #  shell: "cd {{ base_app_directory }}/{{ role_type }}; {{ python_bin_dir }}/python{{ python_ver }} -m venv {{ virtual_env_dir }}"
-  shell: "cd {{ base_app_directory }}/{{ role_type }}; virtualenv -p /usr/bin/python3.7 {{ virtual_env_dir }} "
+  shell: "cd {{ base_app_directory }}/{{ role_type }}; virtualenv -p /usr/bin/python{{ python_version }} {{ virtual_env_dir }} "
   register: venv_setup
 
 - name: "Check virtual env setup"
