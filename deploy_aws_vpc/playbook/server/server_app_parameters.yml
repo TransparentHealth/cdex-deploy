@@ -32,11 +32,15 @@
 #    - name: prepare string got lookup
 #      set_fact:
 #        -
-    - name: "Check out parameter store"
-      debug: msg="{{ lookup('aws_ssm', bypath=true, recursive=true ) }}"
-      vars:
-        env_area: "/{{ vpc_env }}/{{ role_type}}"
-        region_info: "region='{{ aws_region }}'"
+    - name: "Check out parameter store - dev/vmi"
+      debug: msg="{{ lookup('aws_ssm', '/dev/vmi' ,bypath=true, recursive=true ) }}"
+
+    - name: "Check out parameter store - staging/vmi"
+      debug: msg="{{ lookup('aws_ssm', '/staging/vmi' ,bypath=true, recursive=true ) }}"
+
+    - name: "Check out parameter store - prod/vmi"
+      debug: msg="{{ lookup('aws_ssm', '/prod/vmi' ,bypath=true, recursive=true ) }}"
+
 
     - name: "Create S3 bucket for {{ vpc_env }}-{{ system_full_name[role_type] }}"
       s3_bucket:
