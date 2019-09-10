@@ -20,8 +20,9 @@
 - name:  "install python3.7 from source - step 2 - pre-requisites"
   become_user: "{{ remote_admin_account }}"
   become: yes
-  apt: ["build-essential", "zlib1g-dev", "libncurses5-dev", "libgdbm-dev", "libnss3-dev", "libssl-dev", "libreadline-dev", "libffi-dev", "wget"]
-  state: present
+  apt:
+    name: ["build-essential", "zlib1g-dev", "libncurses5-dev", "libgdbm-dev", "libnss3-dev", "libssl-dev", "libreadline-dev", "libffi-dev", "wget"]
+    state: present
 
 - name:  "install python3.7 from source - step 3 - wget Python-3.7.4"
   shell: "wget https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tar.xz"
