@@ -9,7 +9,7 @@
 
 - name: "setup .pgpass file"
   template:
-    src: template/pgpass
+    src: "templates/pgpass"
     dest: "/home/{{ remote_user_account }}/.pgpass"
     mode: "0400"
 
