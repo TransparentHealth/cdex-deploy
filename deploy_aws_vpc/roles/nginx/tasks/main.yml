@@ -10,26 +10,7 @@
 
 # Get vmi/.nginx/{{ role_type }}/nginx.conf out of repo
 # pull to tmp and use as template source to push to /etc/nginx/nginx.conf
-- name: "get  vmi/.nginx/{{ role_type }}/nginx.conf out of repo"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  run_once: true
-  fetch:
-    src: "{{ base_app_directory }}/{{ role_type }}/.nginx/template/{{ item }}"
-    dest: "/tmp/{{ item }}"
-    flat: yes
-    fail_on_missing: yes
-  with_items:
-    - nginx.conf
-    - uwsgi.ini
 
-- name: "copy nginx.conf from vmi/.nginx to the target"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  template:
-    src: /tmp/nginx.conf
-    dest: /etc/nginx/nginx.conf
-    mode: 0644
 
 - name: "remove default config files"
   become_user: "{{ remote_admin_account }}"
@@ -63,7 +44,33 @@
     state: present
   with_items:
     - uwsgi
-#
+
+- name: "copy nginx.conf to the target"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  template:
+    src:  templates/nginx.conf
+    dest: /etc/nginx/nginx.conf
+    mode: 0644
+
+- name: "Copy Gunicorn to virtualenv bin"
+  template:
+    src: templates/gunicorn_start
+    dest: "{{ base_app_directory }}/{{ role_type }}/env/bin/gunicorn_start"
+    mode: 0644
+    owner: "{{ remote_user_account }}"
+    group: "{{ remote_user_account }}"
+
+- name: "Copy default vhost file in to /etc/nginx/site-available"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  template:
+    src: templates/nginx_default
+    dest: "/etc/nginx/sites-enabled/default"
+    owner: "{{ remote_admin_account }}"
+    group: "www-data"
+    mode: "0644"
+
 - name: "create sock path"
   become_user: "{{ remote_admin_account }}"
   become: yes
@@ -80,30 +87,7 @@
     state: touch
     mode: "0664"
 
-- name: "create vassals dir"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  file:
-    path: /etc/uwsgi/vassals
-    state: directory
-    mode: "0664"
 
-- name: "install uwsgi ini file from copied template file"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  template:
-    src: /tmp/uwsgi.ini
-    dest: /etc/uwsgi/vassals/uwsgi.ini
-    mode: "0644"
-
-- name: "add uwsgi to system startup"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  template:
-    src: files/uwsgi.service
-    dest: /etc/systemd/system/uwsgi.service
-    mode: "0644"
-#
 - name: "enable nginx"
   become_user: "{{ remote_admin_account }}"
   become: yes
@@ -125,4 +109,22 @@
     name: supervisor
     state: present
 
+- name: configure gunicorn as service
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  template:
+    src: templates/gunicorn_service
+    dest: "/etc/systemd/system/gunicorn.service"
+    mode: "0644"
+    owner: "{{ remote_admin_account }}"
+    group: "{{ remote_admin_account }}"
 
+- name: "configure supervisord/conf.d/ {{ system_repository_name[role_type] }}.conf"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  template:
+    src: templates/supervisor_conf
+    dest: "/etc/supervisord/conf.d/{{ system_repository_name[role_type] }}.conf"
+    mode: "0644"
+    owner: "{{ remote_admin_account }}"
+    group: "{{ remote_admin_account }}"

@@ -1,0 +1,52 @@
+#!/bin/bash
+
+
+NAME="{{ role_type }}"                                  # Name of the application
+DJANGODIR={{ base_app_directory }}/{{ role_type }}      # Django project directory
+SOCKFILE={{ base_app_directory }}/{{ role_type }}/run/gunicorn.sock  # we will communictae using this unix socket
+USER={{ remote_user_account }}                                       # the user to run as
+GROUP= {{ remote_user_account }}                                     # the group to run as
+NUM_WORKERS=6                                     # how many worker processes should Gunicorn spawn
+NUM_TIMEOUT=1200
+DJANGO_SETTINGS_MODULE={{ system_repository_name[role_type] }}.settings             # which settings file should Django use
+DJANGO_WSGI_MODULE={{ system_repository_name[role_type] }}.wsgi                     # WSGI module name
+
+
+echo "Starting $NAME as `whoami`"
+
+# Activate the virtual environment
+cd $DJANGODIR
+# virtual env is stored in env directory in cloned repository
+source {{ base_app_directory }}/{{ role_type }}/env/bin/activate
+#workon djsampleenv
+export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+export PYTHONPATH=$DJANGODIR:$PYTHONPATH
+export DATABASES_CUSTOM=postgres://{{ rds_username }}:{{ db_master_pw }}@{{ rds_endpoint }}:{{ env_rds_port }}/{{ role_type }}_{{ vpc_env }}
+export AWS_STORAGE_BUCKET_NAME={{ vpc_env }}-media-storage-{{ system_full_name[role_type] }}
+export AWS_DEFAULT_REGION={{ aws_region }}
+export DEFAULT_FILE_STORAGE=storages.backends.s3boto3.S3Boto3Storage
+export HOSTNAME_URL={{ http_mode }}://{{ dns_app_name[role_type] }}
+export ROOT_USER={{ app_pyapps_user }}
+export ROOT_PASSWORD={{ app_pyapps_pwd }}
+export ALLOWED_HOSTS=[{{ dns_app_name[role_type] }}, localhost]
+export OIDC_ISSUER={{ http_mode }}://{{ dns_app_name['vmi'] }}
+echo "PythonPATH = $PYTHONPATH"
+echo "app + env = {{ role_type }} + {{ vpc_env }}"
+echo "HostName = $HOSTNAME_URL"
+echo "Allowed Hosts = $ALLOWED_HOSTS"
+
+
+# Create the run directory if it doesn't exist
+RUNDIR=$(dirname $SOCKFILE)
+test -d $RUNDIR || mkdir -p $RUNDIR
+
+# Start your Django Unicorn
+# Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
+
+exec env/{{ role_type }}/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
+  --name $NAME \
+  --worker-class eventlet \
+  --workers $NUM_WORKERS \
+  --user=$USER --group=$GROUP \
+  --bind=127.0.0.1:8000 \
+  --timeout $NUM_TIMEOUT
