@@ -33,7 +33,7 @@
 #      set_fact:
 #        -
     - name: "Check out parameter store"
-      debug: msg="{{ lookup('aws_ssm', lookup('vars', 'env_area'), lookup('vars', 'region_info') , bypath=true, recursive=true ) }}"
+      debug: msg="{{ lookup('aws_ssm', bypath=true, recursive=true ) }}"
       vars:
         env_area: "/{{ vpc_env }}/{{ role_type}}"
         region_info: "region='{{ aws_region }}'"
