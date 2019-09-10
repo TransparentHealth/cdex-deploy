@@ -85,13 +85,14 @@
 #    group: "{{ app_group }}"
 #    mode: 0755
 
-- name: "install requirements"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  pip:
-    chdir: "{{ base_app_directory }}/{{ role_type}}"
-    requirements: "requirements.txt"
-    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+- name: "install requirements via shell in virtualenv {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+  # become_user: "{{ remote_admin_account }}"
+  # become: yes
+  shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ virtual_env_dir }}/bin/activate ## pip install -r requirements.txt"
+#  pip:
+#    chdir: "{{ base_app_directory }}/{{ role_type}}"
+#    requirements: "requirements.txt"
+#    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
 
 #  shell: |
 #    source {{ base_app_directory }}/{{ role_type}}/{{ virtual_env_dir }}/bin/activate && make reqs-install
