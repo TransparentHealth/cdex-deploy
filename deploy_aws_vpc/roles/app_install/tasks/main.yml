@@ -6,9 +6,9 @@
   file:
     path: "{{ base_app_directory }}"
     state: directory
-#    user: "{{ remote_user_account }}"
+    user: "{{ remote_user_account }}"
 #    group: "{{ remote_user_account }}"
-    mode: "0644"
+    mode: "0664"
 
 - name: "remove directory"
   become_user: "{{ remote_admin_account }}"
@@ -21,7 +21,7 @@
 #  become_user: "{{ remote_admin_account }}"
 #  become: yes
   git:
-    repo: "https://github.com/TransparentHealth/{{ role_type }}.git"
+    repo: "https://github.com/TransparentHealth/{{ system_repository_name[role_type] }}.git"
     dest: "{{ base_app_directory }}/{{ role_type }}"
     force: yes
     clone: yes
