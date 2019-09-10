@@ -13,9 +13,8 @@
     dest: "/home/{{ remote_user_account }}/.pgpass"
     mode: "0400"
 
-
-- name: "create database in postgres for {{ role_type }}"
-  raw: "psql  -c CREATE DATABASE {{ role_type }}_{{ vpc_env }}; CREATE USER {{ rds_username }} WITH PASSWORD '{{ db_master_pw }}';"
+- name: "create database in postgres for {{ role_type }}_{{ vpc_env }}"
+  raw: "createdb -h {{ rds_endpoint }} -p {{ env_rds_port }} -U {{ rds_username }} {{ role_type }}_{{ vpc_env }}"
 
 - name: "Update postgres settings"
   raw: "psql -c ALTER ROLE {{ rds_username }} SET client_encoding TO 'utf8'; ALTER ROLE {{rds_username }} SET default_transaction_isolation TO 'read committed';ALTER ROLE {{ rds_username }} SET timezone TO 'UTC';"

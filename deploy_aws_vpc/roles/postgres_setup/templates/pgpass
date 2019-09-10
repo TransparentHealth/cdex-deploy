@@ -1,1 +1,1 @@
-{{ rds_endpoint }}:{{ env_rds_port }}:{{ role_type }}:{{ rds_username }}:{{ db_master_pw }}
+{{ rds_endpoint }}:{{ env_rds_port }}:*:{{ rds_username }}:{{ db_master_pw }}
