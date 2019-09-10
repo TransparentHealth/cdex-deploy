@@ -15,10 +15,10 @@
 
 
 - name: "create database in postgres for {{ role_type }}"
-  raw: "psql  -c CREATE DATABASE {{ role_type }}_{{ vpc_env }}; CREATE USER {{ app_pyapps_user }} WITH PASSWORD '{{ app_pyapps_pwd }}';"
+  raw: "psql  -c CREATE DATABASE {{ role_type }}_{{ vpc_env }}; CREATE USER {{ rds_username }} WITH PASSWORD '{{ db_master_pw }}';"
 
 - name: "Update postgres settings"
-  raw: "psql -c ALTER ROLE {{ app_pyapps_user }} SET client_encoding TO 'utf8'; ALTER ROLE {{ app_pyapps_user }} SET default_transaction_isolation TO 'read committed';ALTER ROLE {{ app_pyapps_user }} SET timezone TO 'UTC';"
+  raw: "psql -c ALTER ROLE {{ rds_username }} SET client_encoding TO 'utf8'; ALTER ROLE {{rds_username }} SET default_transaction_isolation TO 'read committed';ALTER ROLE {{ rds_username }} SET timezone TO 'UTC';"
 
 - name: "grant all privileges"
-  raw: "psql -c GRANT ALL PRIVILEGES ON DATABASE {{ role_type }}_{{ vpc_env }} TO {{ app_pyapps_user }};"
+  raw: "psql -c GRANT ALL PRIVILEGES ON DATABASE {{ role_type }}_{{ vpc_env }} TO {{ rds_username }};"
