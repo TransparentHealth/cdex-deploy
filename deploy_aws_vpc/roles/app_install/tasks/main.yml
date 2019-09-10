@@ -6,9 +6,10 @@
   file:
     path: "{{ base_app_directory }}"
     state: directory
-    user: "{{ remote_user_account }}"
-#    group: "{{ remote_user_account }}"
     mode: "0664"
+
+- name: "Change ownership on {{ base_app_directory }}"
+  shell: "sudo chown {{ remote_user_account }}:{{ remote_user_account }} {{ base_app_directory }} "
 
 - name: "remove directory"
   become_user: "{{ remote_admin_account }}"
