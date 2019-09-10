@@ -21,10 +21,10 @@
     login_password: "{{ db_master_pw }}"
     port: "{{ env_rds_port }} "
     name: "{{ role_type }}_{{ vpc_env }}"
-    state: present
 
+    state: present
 - name: "Update postgres settings"
-  raw: "psql -c ALTER ROLE {{ rds_username }} SET client_encoding TO 'utf8'; ALTER ROLE {{rds_username }} SET default_transaction_isolation TO 'read committed';ALTER ROLE {{ rds_username }} SET timezone TO 'UTC';"
+  raw: "psql -h {{ rds_endpoint }} -p {{ env_rds_port }} -U {{ rds_username }} -c ALTER ROLE {{ rds_username }} SET client_encoding TO 'utf8'; ALTER ROLE {{rds_username }} SET default_transaction_isolation TO 'read committed';ALTER ROLE {{ rds_username }} SET timezone TO 'UTC';"
 
 - name: "grant all privileges"
-  raw: "psql -c GRANT ALL PRIVILEGES ON DATABASE {{ role_type }}_{{ vpc_env }} TO {{ rds_username }};"
+  raw: "psql -h {{ rds_endpoint }} -p {{ env_rds_port }} -U {{ rds_username }} -c GRANT ALL PRIVILEGES ON DATABASE {{ role_type }}_{{ vpc_env }} TO {{ rds_username }};"
