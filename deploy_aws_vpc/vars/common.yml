@@ -12,6 +12,10 @@ system_repository_name:
   smh: "sharemyhealth"
   smhapp: "smh_app"
 
+system_full_name: {"vmi": "verifymyidentity", "smh": "sharemyhealth", "smhappp": "sharemyhealthapp"}
+
+dns_app_name: "{{ env_dns_app_name }}"
+
 deployment_server_name: "abhealth_deploy_server_{{ vpc_env }}"
 
 # ubuntu 18.04 with Python3.6
@@ -21,6 +25,8 @@ deployment_server_name: "abhealth_deploy_server_{{ vpc_env }}"
 base_ami: "{{ env_base_ami }}"
 
 python_version: "{{ env_python_version }}"
+# http or https
+http_mode: "{{ env_http_mode }}"
 
 # base_instance_elastic_ip: "3.227.187.144"
 base_instance_elastic_ip: "34.229.8.6"
