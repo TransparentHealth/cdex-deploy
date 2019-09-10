@@ -58,6 +58,8 @@
       aws_ssm_parameter_store:
         name: "{{ item.name }}"
         region: "{{ aws_region }}"
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
         state: present
         string_type: "{{ item.type }}"
         value: "{{ item.value }}"
