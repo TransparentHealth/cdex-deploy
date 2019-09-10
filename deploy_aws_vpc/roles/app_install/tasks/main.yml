@@ -6,6 +6,9 @@
   file:
     path: "{{ base_app_directory }}"
     state: directory
+    user: "{{ remote_user_account }}"
+    group: "{{ remote_user_account }}"
+    mode: "0644"
 
 - name: "remove directory"
   become_user: "{{ remote_admin_account }}"
@@ -15,8 +18,8 @@
     state: absent
 
 - name: "Get the {{role_type }} app from github"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
   git:
     repo: "https://github.com/TransparentHealth/{{ role_type }}.git"
     dest: "{{ base_app_directory }}/{{ role_type }}"
@@ -27,8 +30,8 @@
   shell: "sudo pip3 install virtualenv"
 
 - name: "Create Virtualenv"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
 #  shell: "cd {{ base_app_directory }}/{{ role_type }}; {{ python_bin_dir }}/python{{ python_ver }} -m venv {{ virtual_env_dir }}"
   shell: "cd {{ base_app_directory }}/{{ role_type }}; virtualenv -p /usr/bin/python{{ python_version }} {{ virtual_env_dir }} "
   register: venv_setup
