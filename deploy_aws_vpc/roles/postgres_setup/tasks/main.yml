@@ -8,8 +8,10 @@
 #    
 
 - name: "setup .pgpass file"
-  files:
-    name: "/home/{{ remote_user_account }}/.pgpass"
+  template:
+    src: template/pgpass
+    dest: "/home/{{ remote_user_account }}/.pgpass
+    mode: "0400"
 
 
 - name: "create database in postgres for {{ role_type }}"

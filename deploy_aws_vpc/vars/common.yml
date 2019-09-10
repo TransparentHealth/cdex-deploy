@@ -58,6 +58,12 @@ app_group: "www-data"
 python_ver: "3.6"
 python_bin_dir: "/usr/bin"
 
+#RDS DB_NAME
+rds_db_name: "{{ env_rds_db_name }}"
+
+# RDS Username
+rds_username: "{{ env_rds_username }}"
+
 db_master_pw: "{{ env_db_master_pw }}"
 
 # nginx settings
@@ -72,6 +78,7 @@ django_admin_redirector: "private/"
 git_branch: "{{ env_git_branch }}"
 
 rds_endpoint: "{{ env_rds_endpoint }}"
+rds_port: "{{ env_rds_port }}"
 
 vpc_app_subnet_id: "{{ env_vpc_app_subnet_id }}"
 
