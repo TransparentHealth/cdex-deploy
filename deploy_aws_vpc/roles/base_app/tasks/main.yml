@@ -15,7 +15,7 @@
   become: yes
   apt:
     name: ["python3-dev", "libpq-dev", "postgresql", "postgresql-contrib", "postgresql-client-common", "nginx", "curl"]
-    statE: present
+    state: present
 
 - name: "update packages"
   raw: "sudo apt-get -y update"
