@@ -24,7 +24,7 @@
       when: check_python.rc != 0
 
     - name: "install Python3-venv"
-      raw: sudo apt -y install python3-venv python-pip
+      raw: sudo apt -y install python3-venv python-pip psycopg2-binary
 
   roles:
     - "../roles/install_ansible"

@@ -53,37 +53,37 @@
     name: "{{ app_group }}"
     state: present
 
-- name: "Set permissions to application code"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  file:
-    dest: "{{ base_app_directory }}/{{ role_type }}"
-    state: directory
-    recurse: yes
-    owner: "{{ app_pyapps_user }}"
-    group: "{{ app_group }}"
-    mode: 0755
+#- name: "Set permissions to application code"
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  file:
+#    dest: "{{ base_app_directory }}/{{ role_type }}"
+#    state: directory
+#    recurse: yes
+#    owner: "{{ app_pyapps_user }}"
+#    group: "{{ app_group }}"
+#    mode: 0755
 
-- name: "set ownership to pyapps:www-data ({{ app_pyapps_user }}:{{ app_group }})"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  file:
-    owner: "{{ app_pyapps_user }}"
-    group: "{{ app_group }}"
-    dest: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
-    state: directory
-    recurse: yes
+#- name: "set ownership to pyapps:www-data ({{ app_pyapps_user }}:{{ app_group }})"
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  file:
+#    owner: "{{ app_pyapps_user }}"
+#    group: "{{ app_group }}"
+#    dest: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+#    state: directory
+#    recurse: yes
 
-- name: "set permissions to application code ( {{ app_pyapps_user }}:{{ app_group }} )"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  file:
-    dest: "{{ base_app_directory}}/{{ role_type }}"
-    state: directory
-    recurse: yes
-    owner: "{{ app_pyapps_user }}"
-    group: "{{ app_group }}"
-    mode: 0755
+#- name: "set permissions to application code ( {{ app_pyapps_user }}:{{ app_group }} )"
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  file:
+#    dest: "{{ base_app_directory}}/{{ role_type }}"
+#    state: directory
+#    recurse: yes
+#    owner: "{{ app_pyapps_user }}"
+#    group: "{{ app_group }}"
+#    mode: 0755
 
 - name: "install requirements"
   become_user: "{{ remote_admin_account }}"
@@ -122,27 +122,27 @@
 
 - # import_tasks: ./../appherd/roles/create_certstore/tasks/main.yml
 
-# change ownership of files
-- name: "Update file ownership"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  file:
-    path: "{{ base_app_directory }}/{{ role_type }}/"
-    recurse: yes
-    owner: "{{ app_owner }}"
-    group: "{{ app_group }}"
-    mode:  "u+rw,g+rw,o-rwx"
+## change ownership of files
+#- name: "Update file ownership"
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  file:
+#    path: "{{ base_app_directory }}/{{ role_type }}/"
+#    recurse: yes
+#    owner: "{{ app_owner }}"
+#    group: "{{ app_group }}"
+#    mode:  "u+rw,g+rw,o-rwx"
 
-# Change ownership for libraries
-- name: "Change ownership for libraries"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  file:
-    path: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
-    recurse: yes
-    owner: "{{ app_owner }}"
-    group: "{{ app_group }}"
-    mode:  "u+rw,g+rw,o-rwx"
+## Change ownership for libraries
+#- name: "Change ownership for libraries"
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  file:
+#    path: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+#    recurse: yes
+#    owner: "{{ app_owner }}"
+#    group: "{{ app_group }}"
+#    mode:  "u+rw,g+rw,o-rwx"
 
 - name: make manage.py executable
   become_user: "{{ remote_admin_account }}"
