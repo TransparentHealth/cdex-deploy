@@ -64,13 +64,13 @@
         string_type: "{{ item.type }}"
         value: "{{ item.value }}"
       with_items:
-        - { name: "/{{ env }}/{{ role_type }}/AWS_STORAGE_BUCKET_NAME", value: "{{ vpc_env }}-media-storage-{{ system_full_name[role_type] }}" , type: "String" }
-        - { name: "/{{ env }}/{{ role_type }}/AWS_DEFAULT_REGION", value: "{{ aws_region }}", type: "String" }
-        - { name: "/{{ env }}/{{ role_type }}/DEFAULT_FILE_STORAGE", value: "storages.backends.s3boto3.S3Boto3Storage", type: "String" }
-        - { name: "/{{ env }}/{{ role_type }}/HOSTNAME_URL", value: "{{ http_mode }}://{{ dns_app_name[role_type] }}", type: "String" }
-        - { name: "/{{ env }}/{{ role_type }}/ROOT_PASSWORD", value: "{{ app_pyapps_pwd }}", type: "SecureString" }
-        - { name: "/{{ env }}/{{ role_type }}/ROOT_USER", value: "{{ app_pyapps_user }}", type: "SecureString" }
-        - { name: "/{{ env }}/{{ role_type }}/database/DATABASES_CUSTOM", value: "postgres://{{ rds_username }}:{{ db_master_pw }}@{{ rds_endpoint }}:{{ env_rds_port }}/{{ role_type }}_{{ vpc_env }}", type: "SecureString" }
-        - { name: "/{{ env }}/{{ role_type }}/eb/ALLOWED_HOSTS", value: "{{ dns_app_name[role_type] }}", type: "String" }
-        - { name: "/{{ env }}/{{ role_type }}/eb/OIDC_ISSUER", value: "{{ http_mode }}://{{ dns_app_name['vmi'] }}", type: "String" }
+        - { name: "/{{ vpc_env }}/{{ role_type }}/AWS_STORAGE_BUCKET_NAME", value: "{{ vpc_env }}-media-storage-{{ system_full_name[role_type] }}" , type: "String" }
+        - { name: "/{{ vpc_env }}/{{ role_type }}/AWS_DEFAULT_REGION", value: "{{ aws_region }}", type: "String" }
+        - { name: "/{{ vpc_env }}/{{ role_type }}/DEFAULT_FILE_STORAGE", value: "storages.backends.s3boto3.S3Boto3Storage", type: "String" }
+        - { name: "/{{ vpc_env }}/{{ role_type }}/HOSTNAME_URL", value: "{{ http_mode }}://{{ dns_app_name[role_type] }}", type: "String" }
+        - { name: "/{{ vpc_env }}/{{ role_type }}/ROOT_PASSWORD", value: "{{ app_pyapps_pwd }}", type: "SecureString" }
+        - { name: "/{{ vpc_env }}/{{ role_type }}/ROOT_USER", value: "{{ app_pyapps_user }}", type: "SecureString" }
+        - { name: "/{{ vpc_env }}/{{ role_type }}/database/DATABASES_CUSTOM", value: "postgres://{{ rds_username }}:{{ db_master_pw }}@{{ rds_endpoint }}:{{ env_rds_port }}/{{ role_type }}_{{ vpc_env }}", type: "SecureString" }
+        - { name: "/{{ vpc_env }}/{{ role_type }}/eb/ALLOWED_HOSTS", value: "{{ dns_app_name[role_type] }}", type: "String" }
+        - { name: "/{{ vpc_env }}/{{ role_type }}/eb/OIDC_ISSUER", value: "{{ http_mode }}://{{ dns_app_name['vmi'] }}", type: "String" }
 
