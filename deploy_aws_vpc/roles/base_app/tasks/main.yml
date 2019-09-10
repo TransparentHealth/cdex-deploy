@@ -11,7 +11,11 @@
   raw: "sudo apt-get -y update"
 
 - name: "add packages for python3"
-  raw: " sudo apt-get -y install python3-dev libpq-dev postgresql postgresql-contrib postgresql-client-common nginx curl"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  apt:
+    name: ["python3-dev", "libpq-dev", "postgresql", "postgresql-contrib", "postgresql-client-common", "nginx", "curl"]
+    statE: present
 
 - name: "update packages"
   raw: "sudo apt-get -y update"
