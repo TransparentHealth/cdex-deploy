@@ -39,7 +39,7 @@ remote_admin_account: "{{ env_remote_admin_account }}"
 
 # This is the directory that the apps are cloned into
 # each app will be in a different sub0directory under this base directory
-base_app_directory: "/home/ubuntu"
+base_app_directory: "{{ env_base_app_directory }}"
 
 # create a virtual environment directory in the env directory of the app.
 # eg. if vmi is installed to /pyapps/vmi the env dir for the virtual env is in /pyapps/vmi/env
