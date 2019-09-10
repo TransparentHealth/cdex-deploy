@@ -11,7 +11,7 @@
   raw: "sudo apt-get -y update"
 
 - name: "add packages for python3"
-  raw: " sudo apt-get -y install python3-pip python3-dev libpq-dev postgresql postgresql-contrib postgresql-client-common nginx curl"
+  raw: " sudo apt-get -y install python3-dev libpq-dev postgresql postgresql-contrib postgresql-client-common nginx curl"
 
 - name: "update packages"
   raw: "sudo apt-get -y update"
