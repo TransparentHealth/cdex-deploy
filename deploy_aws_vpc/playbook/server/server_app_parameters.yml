@@ -29,9 +29,12 @@
     - "./../../vars/environment/{{ vpc_env }}/env.yml"
 
   tasks:
+#    - name: prepare string got lookup
+#      set_fact:
+#        -
     - name: "Check out parameter store"
       debug:
-        msg: "{{ lookup('aws_ssm', '/dev/vmi', region='{{ aws_region }}', bypath=true, recursive=true ) }}"
+        msg: "{{ lookup('aws_ssm', '/dev/vmi', region=\'{{ aws_region }}\', bypath=true, recursive=true ) }}"
 
     - name: "Create S3 bucket for {{ vpc_env }}-{{ system_full_name[role_type] }}"
       s3_bucket:
