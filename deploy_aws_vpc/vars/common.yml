@@ -32,6 +32,7 @@ http_mode: "{{ env_http_mode }}"
 base_instance_elastic_ip: "34.229.8.6"
 
 aws_access_key: "{{ env_aws_access_key }}"
+aws_secret_key: "{{ env_aws_secret_key }}"
 
 remote_user_account: "{{ env_remote_user_account }}"
 remote_admin_account: "{{ env_remote_admin_account }}"
