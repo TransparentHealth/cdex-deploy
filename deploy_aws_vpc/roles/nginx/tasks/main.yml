@@ -157,7 +157,7 @@
     owner: "{{ remote_admin_account }}"
     group: "{{ remote_admin_account }}"
 
-- name: "enable gunicorn.ocket"
+- name: "enable gunicorn.socket"
   become_user: "{{ remote_admin_account }}"
   become: yes
   service:
