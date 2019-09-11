@@ -33,9 +33,7 @@
   file:
     path: /var/log/nginx
     state: directory
-    mode: "0755"
-    user: "www-data"
-    group: "logreader"
+    group: "syslog"
 
 - name: "touch log files"
   become: yes
