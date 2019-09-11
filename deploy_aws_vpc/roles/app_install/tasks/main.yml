@@ -124,6 +124,7 @@
     - django-extensions
     - Werkzeug
     - pyOpenSSL
+    - gevent
 
 - name: "install boto3 for collectstatic"
   become_user: "{{ remote_admin_account }}"
