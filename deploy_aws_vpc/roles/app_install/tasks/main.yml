@@ -141,7 +141,7 @@
   shell: "mkdir -p {{ base_app_directory }}/{{ role_type }}/collectedstatic"
 
 - name: "copy static files to collectedstatic"
-  shell: "cp -r {{ base_App-directory }}/{{ role_type }}/sitestatic/* {{ base_app_directory}}/{{ role_type }}/collectedstatic"
+  shell: "cp -r {{ base_app_directory }}/{{ role_type }}/sitestatic/* {{ base_app_directory}}/{{ role_type }}/collectedstatic"
 
 ## change ownership of files
 #- name: "Update file ownership"
