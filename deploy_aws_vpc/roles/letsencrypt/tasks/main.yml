@@ -59,6 +59,7 @@
   shell: "mkdir -p /home/ubuntu/letsencrypt && mkdir -p /home/ubuntu/letsencrypt/log && mkdir -p /home/ubuntu/letsencrypt/config && mkdir -p /home/ubuntu/letsencrypt/work "
 
 - name: create initial cert
+  # change the -d entries to match the external addresses used in nginx
   shell: |
     certbot certonly -d id.stage.sharemy.health \
       -d stage.sharemy.health -d vmi.stage.sharemy.health \

@@ -20,13 +20,17 @@
 #
 server {
        listen         80 default_server;
-       server_name    {{ dns_app_name[role_type] }};
+       # change this to match
+       server_name    id.stage.sharemy.health vmi.stage.sharemy.health stage.sharemy.health ;
+       # change above line
        rewrite ^/(.*) {{ http_mode }}://{{ dns_app_name[role_type] }}/$1 permanent;
 }
 
 
 server {
-        server_name {{ dns_app_name[role_type] }};
+        # change the next line
+        server_name id.stage.sharemy.health vmi.stage.sharemy.health stage.sharemy.health;
+        # change the line above.
 	# SSL configuration
 	#
 	listen 443 ssl default_server;
