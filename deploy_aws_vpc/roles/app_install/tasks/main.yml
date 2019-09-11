@@ -125,6 +125,7 @@
     - Werkzeug
     - pyOpenSSL
     - gevent
+    - eventlet
 
 - name: "install boto3 for collectstatic"
   become_user: "{{ remote_admin_account }}"
