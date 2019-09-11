@@ -61,8 +61,9 @@
 - name: create initial cert
   # change the -d entries to match the external addresses used in nginx
   shell: |
-    certbot certonly -d id.stage.sharemy.health \
-      -d stage.sharemy.health -d vmi.stage.sharemy.health \
+    certbot certonly -d stage.sharemy.health \
+      -d id.stage.sharemy.health \
+      -d vmi.stage.sharemy.health \
       --dns-route53 \
       --logs-dir /home/{{ remote_user_account }}/letsencrypt/log/ \
       --config-dir /home/{{ remote_user_account }}/letsencrypt/config/ \
@@ -70,5 +71,5 @@
       -m mscrimshire+afbh@gmail.com \
       --agree-tos \
       --non-interactive \
-      --server https://acme-v02.api.letsencrypt.org/directory
+      --force-renewal
 

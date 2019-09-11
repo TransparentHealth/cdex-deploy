@@ -92,3 +92,5 @@ rds_port: "{{ env_rds_port }}"
 vpc_app_subnet_id: "{{ env_vpc_app_subnet_id }}"
 
 app_security_group_id: "{{ env_app_security_group_id }}"
+
+ext_nginx_server_names: "{{ env_ext_nginx_server_names }}"

@@ -20,21 +20,8 @@
 #
 server {
        listen         80 default_server;
-       # change this to match
-       server_name    id.stage.sharemy.health vmi.stage.sharemy.health stage.sharemy.health ;
-       # change above line
-       rewrite ^/(.*) {{ http_mode }}://{{ dns_app_name[role_type] }}/$1 permanent;
-}
-
-
-server {
-        # change the next line
-        server_name id.stage.sharemy.health vmi.stage.sharemy.health stage.sharemy.health;
-        # change the line above.
-	# SSL configuration
-	#
-	listen 443 ssl default_server;
-	listen [::]:443 ssl default_server;
+       server_name    {{ ext_nginx_server_names[role_type] }}
+    #   rewrite ^/(.*) {{ http_mode }}://{{ dns_app_name[role_type] }}/$1 permanent;
 	#
 	# Note: You should disable gzip for SSL traffic.
 	# See: https://bugs.debian.org/773332
@@ -46,11 +33,10 @@ server {
 	# Don't use them in a production server!
 	#
 	# include snippets/snakeoil.conf;
-        ssl on;
+    #    ssl on;
 
-        ## TODO install lets encrypt certs
-        ssl_certificate /etc/letsencrypt/live/{{ dns_app_name[role_type] }}/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/{{ dns_app_name[role_type] }}/privkey.pem;
+    #    ssl_certificate /etc/letsencrypt/live/{{ dns_app_name[role_type] }}/fullchain.pem;
+    #    ssl_certificate_key /etc/letsencrypt/live/{{ dns_app_name[role_type] }}/privkey.pem;
 
         access_log /var/log/nginx/nginx.vhost.access.log;
         error_log /var/log/nginx/nginx.vhost.error.log;
@@ -68,7 +54,6 @@ server {
                         proxy_set_header Host $http_host;
                    }
 
-
         location /static/ {
                 alias   {{ base_app_directory }}/{{ role_type }}/collectedstatic/;
         }
@@ -77,10 +62,7 @@ server {
                 alias   {{ base_app_directory }}/{{ role_type }}/uploads/;
         }
 
-
         #root /var/www/html;
-
-
 
 }
 
