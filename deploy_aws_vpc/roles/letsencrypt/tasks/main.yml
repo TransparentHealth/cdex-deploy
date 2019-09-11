@@ -60,20 +60,13 @@
 
 - name: create initial cert
   shell: |
-    certbot certonly -d sharemy.health -d stage.sharemy.health -d *.sharemy.health \
+    certbot certonly -d sharemy.health -d *.sharemy.health \
       --dns-route53 \
       --logs-dir /home/{{ remote_user_account }}/letsencrypt/log/ \
       --config-dir /home/{{ remote_user_account }}/letsencrypt/config/ \
-      --work-dir /home/{{ remote_user_account }}/letsencrypt/work/
+      --work-dir /home/{{ remote_user_account }}/letsencrypt/work/ \
       -m mscrimshire+afbh@gmail.com \
       --agree-tos \
-      --non-interactive
+      --non-interactive \
       --server https://acme-v02.api.letsencrypt.org/directory
-
-- name: "configure certbot for nginx"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  shell: "sudo certbot --nginx"
-  # or
-  # shell: "sudo certbot certonly --nginx"
 

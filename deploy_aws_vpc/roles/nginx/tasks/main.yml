@@ -160,12 +160,13 @@
     name: supervisor
     state: present
 
-- name: "create /etc/supervisord/conf.d"
+- name: "create /etc/supervisor/conf.d/{{ role_type}}.conf"
   become_user: "{{ remote_admin_account }}"
   become: yes
-  file:
-    name: "/etc/supervisord/conf.d"
-    state: directory
+  template:
+    src: templates/supervisor_conf
+    dest: "/etc/supervisor/conf.d/{{ role_type }}.conf"
+    state: present
 
 - name: configure gunicorn socket
   become_user: "{{ remote_admin_account }}"
