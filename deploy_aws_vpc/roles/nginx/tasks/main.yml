@@ -42,11 +42,22 @@
     path: "{{ item }}"
     state: touch
     mode: "0644"
-    owner: "{{ remote_admin_account }}"
-    group: "{{ remote_admin_account }}"
+    owner: "www-data"
+    group: "adm"
   with_items:
     - /var/log/nginx/access.log
     - /var/log/nginx/error.log
+
+- name: "touch vhost log files"
+  become: yes
+  become_user: "{{ remote_admin_account }}"
+  file:
+    path: "{{ item }}"
+    state: touch
+    mode: "0644"
+    owner: "{{ remote_admin_account }}"
+    group: "{{ remote_admin_account }}"
+  with_items:
     - /var/log/nginx/nginx.vhost.access.log
     - /var/log/nginx/nginx.vhost.error.log
 
