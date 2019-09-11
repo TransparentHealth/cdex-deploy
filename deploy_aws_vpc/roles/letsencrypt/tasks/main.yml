@@ -52,6 +52,9 @@
    state: present
    virtualenv: "{{ base_app_directory }}/{{ virtual_env_dir }}"
 
+# source for route53 letsencrypt config
+# https://medium.com/prog-code/lets-encrypt-wildcard-certificate-configuration-with-aws-route-53-9c15adb936a7
+
 - name: "create letsencrypt folders in home directory"
   shell: "mkdir /home/ubuntu/letsencrypt && mkdir /home/ubuntu/letsencrypt/log && mkdir /home/ubuntu/letsencrypt/config && mkdir /home/ubuntu/letsencrypt/work "
 
