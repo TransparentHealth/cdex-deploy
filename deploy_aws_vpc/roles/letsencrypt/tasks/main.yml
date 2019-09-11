@@ -39,6 +39,34 @@
     - certbot
     - python-certbot-nginx
 
+- name: "make ubutnu virtualenv owner"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  shell: "sudo chown -Rf {{ remote_user_account }}:{{ remote_user_account }} {{ base_app_directory }}/{{ virtual_env_dir }} "
+
+- name: "pip install for route53"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  pip:
+   name: "certbot_dns_route53"
+   state: present
+   virtualenv: "{{ base_app_directory }}/{{ virtual_env_dir }}"
+
+- name: "create letsencrypt folders in home directory"
+  shell: "mkdir /home/ubuntu/letsencrypt && mkdir /home/ubuntu/letsencrypt/log && mkdir /home/ubuntu/letsencrypt/config && mkdir /home/ubuntu/letsencrypt/work "
+
+- name: create initial cert
+  shell: |
+    certbot certonly -d sharemy.health -d stage.sharemy.health -d *.sharemy.health \
+      --dns-route53 \
+      --logs-dir /home/{{ remote_user_account }}/letsencrypt/log/ \
+      --config-dir /home/{{ remote_user_account }}/letsencrypt/config/ \
+      --work-dir /home/{{ remote_user_account }}/letsencrypt/work/
+      -m mscrimshire+afbh@gmail.com \
+      --agree-tos \
+      --non-interactive
+      --server https://acme-v02.api.letsencrypt.org/directory
+
 - name: "configure certbot for nginx"
   become_user: "{{ remote_admin_account }}"
   become: yes
