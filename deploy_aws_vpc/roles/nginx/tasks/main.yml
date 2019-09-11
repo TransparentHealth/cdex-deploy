@@ -33,8 +33,24 @@
   file:
     path: /var/log/nginx
     state: directory
-    mode: 0755
+    mode: "0755"
+    user: "www-data"
     group: "logreader"
+
+- name: "touch log files"
+  become: yes
+  become_user: "{{ remote_admin_account }}"
+  file:
+    path: "{{ item }}"
+    state: touch
+    mode: "0644"
+    owner: "{{ remote_admin_account }}"
+    group: "{{ remote_admin_account }}"
+  with_items:
+    - /var/log/nginx/access.log
+    - /var/log/nginx/error.log
+    - /var/log/nginx/nginx.vhost.access.log
+    - /var/log/nginx/nginx.vhost.error.log
 
 - name: "install uwsgi"
   become: yes
@@ -51,7 +67,8 @@
   template:
     src:  templates/nginx.conf
     dest: /etc/nginx/nginx.conf
-    mode: 0644
+    mode: "0644"
+
 
 - name: "Copy Gunicorn to virtualenv bin"
   template:
