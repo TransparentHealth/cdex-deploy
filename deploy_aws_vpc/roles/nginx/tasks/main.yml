@@ -57,7 +57,7 @@
   template:
     src: templates/gunicorn_start
     dest: "{{ base_app_directory }}/{{ role_type }}/env/bin/gunicorn_start"
-    mode: 0644
+    mode: "0755"
     owner: "{{ remote_user_account }}"
     group: "{{ remote_user_account }}"
 
