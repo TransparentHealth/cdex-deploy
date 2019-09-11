@@ -109,6 +109,13 @@
     name: supervisor
     state: present
 
+- name: "create /etc/supervisord/conf.d"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  file:
+    name: "/etc/supervisord/conf.d"
+    state: directory
+
 - name: configure gunicorn as service
   become_user: "{{ remote_admin_account }}"
   become: yes
