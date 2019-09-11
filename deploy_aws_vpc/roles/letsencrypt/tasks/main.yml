@@ -60,7 +60,8 @@
 
 - name: create initial cert
   shell: |
-    certbot certonly -d sharemy.health -d *.sharemy.health \
+    certbot certonly -d id.stage.sharemy.health \
+      -d stage.sharemy.health -d vmi.stage.sharemy.health \
       --dns-route53 \
       --logs-dir /home/{{ remote_user_account }}/letsencrypt/log/ \
       --config-dir /home/{{ remote_user_account }}/letsencrypt/config/ \

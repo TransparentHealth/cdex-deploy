@@ -6,7 +6,7 @@ After=network.target
 [Service]
 User=ubuntu
 Group=ubuntu
-WorkingDirectory={{ base_app_directory }}/{{ role_type }}/{{ system_repository_name[role_type] }}
+WorkingDirectory={{ base_app_directory }}/{{ role_type }}
 ExecStart={{ base_app_directory }}/{{ role_type }}/env/bin/gunicorn \
           --access-logfile - \
           --workers 3 \
