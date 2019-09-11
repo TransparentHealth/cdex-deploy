@@ -106,7 +106,7 @@
   become_user: "{{ remote_admin_account }}"
   become: yes
   template:
-    src: template/uwsgi_service
+    src: templates/uwsgi_service
     dest:  /etc/systemd/system/uwsgi.service
     mode: "0644"
     owner: "{{ remote_user_account }}"
