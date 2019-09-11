@@ -28,7 +28,7 @@ export DEFAULT_FILE_STORAGE=storages.backends.s3boto3.S3Boto3Storage
 export HOSTNAME_URL={{ http_mode }}://{{ dns_app_name[role_type] }}
 export ROOT_USER={{ app_pyapps_user }}
 export ROOT_PASSWORD={{ app_pyapps_pwd }}
-export ALLOWED_HOSTS=[{{ dns_app_name[role_type] }}, localhost]
+export ALLOWED_HOSTS=["{{ dns_app_name[role_type] }}", "localhost"]
 export OIDC_ISSUER={{ http_mode }}://{{ dns_app_name['vmi'] }}
 echo "PythonPATH = $PYTHONPATH"
 echo "app + env = {{ role_type }} + {{ vpc_env }}"
@@ -43,7 +43,7 @@ test -d $RUNDIR || mkdir -p $RUNDIR
 # Start your Django Unicorn
 # Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
 
-exec env/{{ role_type }}/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
+exec env/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
   --name $NAME \
   --worker-class eventlet \
   --workers $NUM_WORKERS \
