@@ -105,7 +105,7 @@
 - name: "copy uwsgi.service into place"
   become_user: "{{ remote_admin_account }}"
   become: yes
-  templace:
+  template:
     src: template/uwsgi_service
     dest:  /etc/systemd/system/uwsgi.service
     mode: "0644"
