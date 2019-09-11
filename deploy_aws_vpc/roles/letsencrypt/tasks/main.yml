@@ -1,0 +1,42 @@
+---
+# roles/letsencrypt/tasks/main.yml
+# Created: 2019-09-11
+# cdex-deploy
+# Purpose:
+# Install Let's Encrypt with certbot
+#    
+#    
+
+- name: "update before letsencrypt install"
+  become_user: "{{ remote_admin_user }}"
+  become: yes
+  shell: "sudo apt-get -y update"
+
+- name: "prepare for let's encrypt"
+  apt:
+    name: "software-properties-common"
+    state: present
+
+- name: "repository update"
+  shell: "sudo add-apt-repository universe && sudo add-apt-repository ppa:certbot/certbot"
+
+- name: "re-update for letsencrypt install"
+  become_user: "{{ remote_admin_user }}"
+  become: yes
+  shell: "sudo apt-get -y update"
+
+- name: "Certbot install"
+  become_user: "{{ remote_admin_user }}"
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state:  present
+  with_items:
+    - certbot
+    - python-certbot-nginx
+
+- name: "configure certbot for nginx"
+  shell: "sudo certbot --nginx"
+  # or
+  # shell: "sudo certbot certonly --nginx"
+
