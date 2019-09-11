@@ -8,25 +8,29 @@
 #    
 
 - name: "update before letsencrypt install"
-  become_user: "{{ remote_admin_user }}"
+  become_user: "{{ remote_admin_account }}"
   become: yes
   shell: "sudo apt-get -y update"
 
 - name: "prepare for let's encrypt"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   apt:
     name: "software-properties-common"
     state: present
 
 - name: "repository update"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   shell: "sudo add-apt-repository universe && sudo add-apt-repository ppa:certbot/certbot"
 
 - name: "re-update for letsencrypt install"
-  become_user: "{{ remote_admin_user }}"
+  become_user: "{{ remote_admin_account }}"
   become: yes
   shell: "sudo apt-get -y update"
 
 - name: "Certbot install"
-  become_user: "{{ remote_admin_user }}"
+  become_user: "{{ remote_admin_account }}"
   become: yes
   apt:
     name: "{{ item }}"
@@ -36,6 +40,8 @@
     - python-certbot-nginx
 
 - name: "configure certbot for nginx"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   shell: "sudo certbot --nginx"
   # or
   # shell: "sudo certbot certonly --nginx"
