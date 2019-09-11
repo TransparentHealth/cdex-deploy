@@ -1,5 +1,5 @@
 [program:{{ system_repository_name[role_type] }}]
-command = {{ base_app_directory }}/{{ role_type }}/env/bin/gunicorn_start
+command = {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/gunicorn_start
 user = ubuntu                                      ; User to run as
 stdout_logfile = {{ base_app_directory }}/{{ role_type }}/gunicorn_supervisor.log   ; Where$
 redirect_stderr = true                                                       ; Save stde$

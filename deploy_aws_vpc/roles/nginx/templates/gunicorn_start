@@ -3,7 +3,7 @@
 
 NAME="{{ role_type }}"                                  # Name of the application
 DJANGODIR={{ base_app_directory }}/{{ role_type }}      # Django project directory
-SOCKFILE={{ base_app_directory }}/{{ role_type }}/run/gunicorn.sock  # we will communictae using this unix socket
+SOCKFILE={{ base_app_directory }}/{{ role_type }}/run/gunicorn.sock  # we will communicate using this unix socket
 USER={{ remote_user_account }}                                       # the user to run as
 GROUP={{ remote_user_account }}                                      # the group to run as
 NUM_WORKERS=6                                     # how many worker processes should Gunicorn spawn
@@ -17,7 +17,7 @@ echo "Starting $NAME as `whoami`"
 # Activate the virtual environment
 cd $DJANGODIR
 # virtual env is stored in env directory in cloned repository
-source {{ base_app_directory }}/{{ role_type }}/env/bin/activate
+source {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/activate
 #workon djsampleenv
 export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
@@ -29,8 +29,8 @@ export HOSTNAME_URL={{ http_mode }}://{{ dns_app_name[role_type] }}
 export ROOT_USER={{ app_pyapps_user }}
 export ROOT_PASSWORD={{ app_pyapps_pwd }}
 # export ALLOWED_HOSTS={{ dns_app_name[role_type] }}
-# export ALLOWED_HOSTS="['{{ dns_app_name[role_type] }}', 'localhost']"
-export ALLOWED_HOSTS=*
+export ALLOWED_HOSTS={{ dns_app_name[role_type] }},localhost
+# export ALLOWED_HOSTS=*
 export OIDC_ISSUER={{ http_mode }}://{{ dns_app_name['vmi'] }}
 echo "PythonPATH = $PYTHONPATH"
 echo "app + env = {{ role_type }} + {{ vpc_env }}"
@@ -45,7 +45,7 @@ test -d $RUNDIR || mkdir -p $RUNDIR
 # Start your Django Unicorn
 # Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
 
-exec env/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
+exec {{ virtual_env_dir }}/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
   --name $NAME \
   --worker-class eventlet \
   --workers $NUM_WORKERS \

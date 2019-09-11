@@ -126,6 +126,17 @@
     name: "/etc/supervisord/conf.d"
     state: directory
 
+- name: configure gunicorn socket
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  template:
+    src: templates/gunicorn_socket
+    dest: "/etc/systemd/system/gunicorn.socket"
+    mode: "0644"
+    owner: "{{ remote_admin_account }}"
+    group: "{{ remote_admin_account }}"
+
+
 - name: configure gunicorn as service
   become_user: "{{ remote_admin_account }}"
   become: yes
@@ -145,3 +156,10 @@
     mode: "0644"
     owner: "{{ remote_admin_account }}"
     group: "{{ remote_admin_account }}"
+
+- name: "enable gunicorn.ocket"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  service:
+    name: gunicorn.socket
+    enabled: yes
