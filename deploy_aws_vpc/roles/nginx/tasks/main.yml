@@ -166,7 +166,9 @@
   template:
     src: templates/supervisor_conf
     dest: "/etc/supervisor/conf.d/{{ role_type }}.conf"
-    state: present
+    owner: "{{ remote_admin_account }}"
+    group: "{{ remote_admin_account }}"
+    mode: "0644"
 
 - name: configure gunicorn socket
   become_user: "{{ remote_admin_account }}"
