@@ -29,10 +29,11 @@
   become_user: "{{ remote_admin_account }}"
   become: yes
   git:
-    repo: "https://github.com/TransparentHealth/{{ system_repository_name[role_type] }}.git"
+    repo: "https://github.com/TransparentHealth/{{ system_repository_name[role_type] }}.git BRANCH:{{ git_branch[role_type] }}"
     dest: "{{ base_app_directory }}/{{ role_type }}"
     force: yes
     clone: yes
+    version: "{{ git_branch[role_type] }}"
 
 - name: "Change ownership on {{ base_app_directory }}"
   shell: "sudo chown -Rf {{ remote_user_account }}:{{ remote_user_account }} {{ base_app_directory }} "
