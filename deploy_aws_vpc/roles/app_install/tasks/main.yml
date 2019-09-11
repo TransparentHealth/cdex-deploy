@@ -1,5 +1,15 @@
 ---
 
+- name: "make /opt"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  file:
+    path: "/opt"
+    state: directory
+
+- name: "change ownership to {{ remote_user_account }}"
+  shell: "sudo chown {{ remote_user_account }}:{{ remote_user_account }} /opt"
+
 - name: "create base app directory: {{ base_app_directory }}"
   become_user: "{{ remote_admin_account }}"
   become: yes
