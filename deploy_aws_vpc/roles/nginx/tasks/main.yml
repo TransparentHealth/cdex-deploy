@@ -102,6 +102,16 @@
     name: uwsgi
     enabled: yes
 
+- name: "copy uwsgi.service into place"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  templace:
+    src: template/uwsgi_service
+    dest:  /etc/systemd/system/uwsgi.service
+    mode: "0644"
+    owner: "{{ remote_user_account }}"
+    group: "{{ remote_user_account }}"
+
 - name: "install supervisor"
   become_user: "{{ remote_admin_account }}"
   become: yes
