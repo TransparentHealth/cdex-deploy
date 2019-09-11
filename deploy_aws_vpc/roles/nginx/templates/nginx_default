@@ -19,7 +19,7 @@
 # Default server configuration
 #
 server {
-       listen         80;
+       listen         80 default_server;
        server_name    {{ dns_app_name[role_type] }};
        rewrite ^/(.*) {{ http_mode }}://{{ dns_app_name[role_type] }}/$1 permanent;
 }
@@ -45,8 +45,8 @@ server {
         ssl on;
 
         ## TODO install lets encrypt certs
-        ssl_certificate /etc/letsencrypt/live/healthapi.oauth2.io/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/healthapi.oauth2.io/privkey.pem;
+        ssl_certificate /etc/letsencrypt/live/{{ dns_app_name[role_type] }}/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/{{ dns_app_name[role_type] }}/privkey.pem;
 
         access_log /var/log/nginx/nginx.vhost.access.log;
         error_log /var/log/nginx/nginx.vhost.error.log;
