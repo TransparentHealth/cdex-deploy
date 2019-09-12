@@ -10,6 +10,7 @@
   ec2_ami:
     instance_id: "{{ ec2_facts_info_id.instances.0.instance_id }}"
     wait: yes
+    name:  "{{ role_type }}_{{ ansible_date_time.iso8601_basic_short }}"
     tags:
       Name: "{{ role_type }}_{{ ansible_date_time.iso8601_basic_short }}"
       env: "{{ vpc_env }}"
