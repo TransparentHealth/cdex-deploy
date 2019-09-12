@@ -215,5 +215,6 @@
     name: nginx
     state: reloaded
     enabled: yes
+  ignore_errors: true
 
 
