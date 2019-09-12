@@ -25,6 +25,7 @@
     #    env_cf_data_version: "20"
     #    env_cf_app_version: "01"
     build_subnet_id: null
+    replacement_time: "{{ ansible_date_time.iso8601_basic_short }}"
   vars_files:
     - "./../../vars/common.yml"
     - "./../../vault/environment/{{ vpc_env }}/vault.yml"
@@ -32,3 +33,4 @@
 
   roles:
     - "../../roles/deploy_ready"
+    - "../../roles/deploy_make"
