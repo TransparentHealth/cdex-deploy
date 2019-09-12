@@ -111,6 +111,6 @@
         host: "{{ ec2_base_instance_info.instances[0]['private_ip'] }}"
         delay: 5
 
-  roles:
-    - "../../roles/app_install"
-    - "../../roles/
+#  roles:
+#    - "../../roles/app_install"
+
