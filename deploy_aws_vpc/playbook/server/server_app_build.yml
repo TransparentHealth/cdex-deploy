@@ -103,7 +103,9 @@
         state: present
 
     - debug:
-        msg: "About to connect to {{ ec2_base_instance_info.instances[0]['private_ip'] }}"
+        msg:
+          - "About to connect to {{ ec2_base_instance_info.instances[0]['private_ip'] }}"
+          - "export VARIABLE_HOST={{ ec2_base_instance_info.instances[0]['private_dns_name'] }}
 
     - name: "Wait for SSH to become available"
       wait_for:
