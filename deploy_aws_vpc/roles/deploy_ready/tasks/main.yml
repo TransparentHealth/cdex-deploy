@@ -24,7 +24,7 @@
   debug:
     msg: "{{ ec2_facts_info }}"
 
-- name: "get ec2 facts for BaseInstsnce_{{ role_type }} & JustCreated"
+- name: "get ec2 facts for BaseInstance_{{ role_type }} - JustCreated"
   ec2_instance_facts:
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
@@ -36,7 +36,7 @@
 
 - name: "Get resource_id of ec2_instance"
   debug:
-    msg: "{{ ec2_facts_info_id }}"
+    msg: "{{ ec2_facts_info_id.instances.0.instance_id }}"
 
 
 # disable section until operational
