@@ -36,7 +36,7 @@
 
 - name: "Get resource_id of ec2_instance"
   debug:
-    msg: "{{ ec2_facts_info_id.instances.0.instance_id }}"
+    msg: "{{ ec2_facts_info_id.instances }}"
 
 
 # disable section until operational
