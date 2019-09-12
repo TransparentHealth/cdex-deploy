@@ -196,7 +196,7 @@
   become: yes
   template:
     src: templates/supervisor_conf
-    dest: "/etc/supervisord/conf.d/{{ system_repository_name[role_type] }}.conf"
+    dest: "/etc/supervisor/conf.d/{{ system_repository_name[role_type] }}.conf"
     mode: "0644"
     owner: "{{ remote_admin_account }}"
     group: "{{ remote_admin_account }}"
