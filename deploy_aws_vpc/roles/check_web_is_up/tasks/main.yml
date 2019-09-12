@@ -6,8 +6,10 @@
 #
 
 - name: "check {{ role_type }} is up"
-  url: "http://{{ variable_host }}"
+  url:
+    url: "http://{{ variable_host }}"
     status_code: 200
+    return_content: yes
   register: web_check
 
 - debug:
@@ -15,4 +17,4 @@
       - "RETURNED: {{ web_check.status}}"
       - "REDIRECTED: {{ web_check.redirected }}"
       - "BODY:"
-      - "{{ web_check.body }}"
+      - "{{ web_check.content }}"
