@@ -33,4 +33,4 @@
 
   roles:
     - "../../roles/deploy_ready"
-    - "../../roles/deploy_make"
+    - "../../roles/deploy_make_ami"
