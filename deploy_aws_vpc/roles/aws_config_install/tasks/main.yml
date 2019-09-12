@@ -9,7 +9,7 @@
   file:
     path: "/home/{{ remote_user_account }}/.aws"
     state: directory
-    mode: "0600"
+    mode: "0760"
 
 - name: "install ~/.aws/config"
   template:
