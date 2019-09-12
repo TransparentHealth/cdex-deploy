@@ -7,6 +7,11 @@
 #    
 #    
 
+- name: pip install psycopg2
+  pip:
+    name: psycopg2
+    state: present
+
 - name: "setup .pgpass file"
   template:
     src: "templates/pgpass"
