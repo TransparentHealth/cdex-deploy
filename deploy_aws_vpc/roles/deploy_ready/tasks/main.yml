@@ -19,6 +19,7 @@
   ec2_instance_facts:
     filters:
       "tag:workflow": "JustCreated"
+      "tag:Name: "BaseInstance_{{ role_type }}"
   register: ec2_facts_info_id
 
 - name: "Get resource_id of ec2_instance"
