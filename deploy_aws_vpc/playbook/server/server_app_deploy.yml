@@ -1,11 +1,13 @@
 ---
-# 2019-08-27.17:41 - mark
+# playbook/server/server_app_deploy.yml
+# Created: 2019-09-11
 # cdex-deploy
-# playbook/server/server_base_configure.yml
+# Purpose: deploy server to ALB
 #
-# Configure the server with base components
+#    
+#    
 
-- name: configure server
+- name: deploy server
   hosts: "{{ variable_host| default('tag_function_BaseInstance:tag_workflow_JustCreated') }}"
   remote_user: "{{ remote_user_account }}"
   vars:
@@ -29,15 +31,4 @@
     - "./../../vars/environment/{{ vpc_env }}/env.yml"
 
   roles:
-    - "../../roles/base_app"
-    # - "../../roles/python3.7"
-    - "../../roles/app_user"
-    - "../../roles/app_install"
-    - "../../roles/postgres_setup"
-    - "../../roles/nginx"
-    # not required. ALB handles certificates
-    # - "../../roles/letsencrypt"
-    - "../../roles/deploy_ready"
-    -
-
-
+    - "./../../deploy_ready"

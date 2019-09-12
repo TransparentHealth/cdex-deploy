@@ -9,7 +9,7 @@
 # terminate server
 
 
-- name: provision base server
+- name: build server instance
   hosts: localhost
   connection: local
   vars:
