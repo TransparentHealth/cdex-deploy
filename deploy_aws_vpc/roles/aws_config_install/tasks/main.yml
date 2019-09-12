@@ -1,0 +1,26 @@
+---
+# roles/aws_config?-install/main.yml
+# Created: 2019-09-12
+# cdex-deploy
+# Purpose: install aws config
+#
+
+- name: "create /home/{{ remote_user_account }}/.aws"
+  file:
+    path: "/home/{{ remote_user_account }}/.aws"
+    state: directory
+    mode: "0600"
+
+- name: "install ~/.aws/config"
+  template:
+    src: template/aws_config
+    dest: "/home/{{ remote_user_account }}/.aws/config"
+    mode: "0400"
+
+- name: "install ~/.aws/credentials"
+  template:
+    src: template/aws_credentials
+    dest: "/home/{{ remote_user_account }}/.aws/credentials"
+    mode: "0400"
+
+

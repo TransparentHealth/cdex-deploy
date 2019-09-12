@@ -30,6 +30,7 @@
 
   roles:
     - "../../roles/base_app"
+    - "../../roles/aws_config_install"
     # - "../../roles/python3.7"
     - "../../roles/app_user"
     - "../../roles/app_install"
