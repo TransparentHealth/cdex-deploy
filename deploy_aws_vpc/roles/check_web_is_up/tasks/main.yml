@@ -5,7 +5,7 @@
 # Purpose: check a website is up
 #
 
-- name: "check {{ role_type }} is up"
+- name: "check {{ role_type }} is up and operating correctly"
   url:
     url: "http://{{ variable_host }}"
     status_code: 200
@@ -14,7 +14,8 @@
 
 - debug:
     msg:
-      - "RETURNED: {{ web_check.status}}"
+      - "RETURNED: {{ web_check.status }}"
       - "REDIRECTED: {{ web_check.redirected }}"
       - "BODY:"
       - "{{ web_check.content }}"
+
