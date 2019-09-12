@@ -7,6 +7,11 @@
 #    
 #
 
+- name: check for boto3
+  pip:
+    name: boto3
+    state: present
+
 - name: get ec2 facts
   ec2_instance_facts:
   register: ec2_facts_info
