@@ -38,6 +38,7 @@
     - "../../roles/nginx"
     # not required. ALB handles certificates
     # - "../../roles/letsencrypt"
+    - "../../roles/check_web_is_up"
     - "../../roles/deploy_ready"
 
 

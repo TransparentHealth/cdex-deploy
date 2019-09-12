@@ -1,0 +1,18 @@
+---
+# roles/check_web_is_up/main.yml
+# Created: 2019-09-12
+# cdex-deploy
+# Purpose: check a website is up
+#
+
+- name: "check {{ role_type }} is up"
+  url: "http://{{ variable_host }}"
+    status_code: 200
+  register: web_check
+
+- debug:
+    msg:
+      - "RETURNED: {{ web_check.status}}"
+      - "REDIRECTED: {{ web_check.redirected }}"
+      - "BODY:"
+      - "{{ web_check.body }}"
