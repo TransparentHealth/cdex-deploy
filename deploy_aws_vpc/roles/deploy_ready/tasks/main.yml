@@ -9,7 +9,7 @@
 
 - name: check for boto3
   pip:
-    name: {{ item }}
+    name: "{{ item }}"
     state: present
   with_items:
     - boto3
