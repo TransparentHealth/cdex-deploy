@@ -6,7 +6,7 @@
 #
 #    
 
-- name: "create ami from server"
+- name: "create ami from server {{ variable_host }}"
   ec2_ami:
     instance_id: "{{ ec2_facts_info_id.instances.0.instance_id }}"
     wait: yes
@@ -16,6 +16,10 @@
       env: "{{ vpc_env }}"
       function: "{{ role_type }}"
       role:  "{{ role_type }}"
+      birth: "{{ ansible_date_time.iso8601_basic_short }}"
+      mode: "readytoattach"
+
+
 
 
 
