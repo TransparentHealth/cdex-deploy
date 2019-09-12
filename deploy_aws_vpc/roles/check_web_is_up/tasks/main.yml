@@ -1,14 +1,15 @@
 ---
-# roles/check_web_is_up/main.yml
+# roles/check_web_is_up/tasks/main.yml
 # Created: 2019-09-12
 # cdex-deploy
 # Purpose: check a website is up
 #
 
-- name: "check {{ role_type }} is up and operating correctly"
+
+- name: "check {{ role_type }} is up and operating correctly "
   url:
     url: "http://{{ variable_host }}"
-    status_code: 200
+    status_code: "200"
     return_content: yes
   register: web_check
 
