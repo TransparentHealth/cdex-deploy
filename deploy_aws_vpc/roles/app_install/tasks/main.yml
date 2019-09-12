@@ -25,11 +25,12 @@
     path: "{{ base_app_directory }}/{{ role_type }}/"
     state: absent
 
-- name: "Get the {{role_type }} app from github"
+# https://github.com/TransparentHealth/sharemyhealth.git
+- name: "Get the {{ system_repository_name[role_type] }} app from github  BRANCH:{{ git_branch[role_type] }}"
   become_user: "{{ remote_admin_account }}"
   become: yes
   git:
-    repo: "https://github.com/TransparentHealth/{{ system_repository_name[role_type] }}.git BRANCH:{{ git_branch[role_type] }}"
+    repo: "https://github.com/TransparentHealth/{{ system_repository_name[role_type] }}.git"
     dest: "{{ base_app_directory }}/{{ role_type }}"
     force: yes
     clone: yes
