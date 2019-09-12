@@ -39,6 +39,11 @@
 - name: "Change ownership on {{ base_app_directory }}"
   shell: "sudo chown -Rf {{ remote_user_account }}:{{ remote_user_account }} {{ base_app_directory }} "
 
+- name: "install python3-pip"
+  apt:
+    name: python3-pip
+    state: present
+
 - name: "install virtualenv for Python version {{ python_version }}"
   shell: "sudo pip3 install virtualenv"
 
