@@ -6,8 +6,7 @@
 #
 
 
-- name: "check {{ role_type }} is up and operating correctly "
-  url:
+- url:
     url: "http://{{ variable_host }}"
     status_code: ["200", "301"]
     return_content: yes
