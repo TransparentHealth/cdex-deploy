@@ -31,4 +31,4 @@
     - "./../../vars/environment/{{ vpc_env }}/env.yml"
 
   roles:
-    - "../../deploy_ready"
+    - "../../roles/deploy_ready"
