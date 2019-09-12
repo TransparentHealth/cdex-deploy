@@ -201,12 +201,19 @@
     owner: "{{ remote_admin_account }}"
     group: "{{ remote_admin_account }}"
 
-- name: "enable gunicorn.socket"
+- name: "enable supervisor"
   become_user: "{{ remote_admin_account }}"
   become: yes
   service:
-    name: gunicorn.socket
+    name: supervisor
     enabled: yes
+
+- name: "reload supervisor"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  service:
+    name: supervisor
+    state: reloaded
 
 - name: "reload and restart nginx"
   service:
