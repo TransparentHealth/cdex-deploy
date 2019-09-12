@@ -207,3 +207,8 @@
   service:
     name: gunicorn.socket
     enabled: yes
+
+- name: "reload and restart nginx"
+  service:
+    name: nginx
+    state: reloaded
