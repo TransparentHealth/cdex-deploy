@@ -18,7 +18,7 @@
 - name: get ec2 facts
   ec2_instance_facts:
     filters:
-      private_dns_address: "{{ variable_host }}"
+      "tag:workflow": "JustCreated"
   register: ec2_facts_info_id
 
 - name: "Get resource_id of ec2_instance"
