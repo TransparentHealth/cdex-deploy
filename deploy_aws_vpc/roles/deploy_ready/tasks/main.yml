@@ -17,6 +17,7 @@
 
 - name: get ec2 facts
   ec2_instance_facts:
+    region: "{{ aws_region }}"
   register: ec2_facts_info
 
 - name: "Get resource_id of ec2_instance"
@@ -25,6 +26,7 @@
 
 - name: get ec2 facts
   ec2_instance_facts:
+    region: "{{ aws_region }}"
     filters:
       "tag:workflow": "JustCreated"
       "tag:Name": "BaseInstance_{{ role_type }}"
