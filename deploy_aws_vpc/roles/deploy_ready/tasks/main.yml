@@ -26,21 +26,23 @@
   debug:
     msg: "{{ ec2_facts_info_id.instances.0.instance_id }}"
 
-- name: "update ec2 tags on built ec2 instance"
-  ec2_tag:
-    region: "{{ aws_region }}"
-    resource: "{{ ec2_facts_info_id.instances.0.instance_id }}"
-    state: absent
-    tags:
-      workflow: "JustCreated"
 
-- name: "replace ec2_tag"
-  ec2_tag:
-    region: "{{ aws_region }}"
-    resource: "{{ ec2_facts_info_id.instances.0.instance_id }}"
-    state: present
-    tags:
-      workflow: "Deploy"
+# disable section until operational
+#- name: "update ec2 tags on built ec2 instance"
+#  ec2_tag:
+#    region: "{{ aws_region }}"
+#    resource: "{{ ec2_facts_info_id.instances.0.instance_id }}"
+#    state: absent
+#    tags:
+#      workflow: "JustCreated"
+#
+#- name: "replace ec2_tag"
+#  ec2_tag:
+#    region: "{{ aws_region }}"
+#    resource: "{{ ec2_facts_info_id.instances.0.instance_id }}"
+#    state: present
+#    tags:
+#      workflow: "Deploy"
 
 
 
