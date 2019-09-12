@@ -15,6 +15,16 @@
   debug:
     msg: "{{ ec2_facts_info }}"
 
+- name: get ec2 facts
+  ec2_instance_facts:
+    filters:
+      private_dns_address: "{{ variable_host }}"
+  register: ec2_facts_info_id
+
+- name: "Get resource_id of ec2_instance"
+  debug:
+    msg: "{{ ec2_facts_info_id }}"
+
 - name: "update ec2 tags on built ec2 instance"
   ec2_tag:
     region: "{{ aws_region }}"
