@@ -191,7 +191,7 @@
     owner: "{{ remote_admin_account }}"
     group: "{{ remote_admin_account }}"
 
-- name: "configure supervisord/conf.d/ {{ system_repository_name[role_type] }}.conf"
+- name: "configure supervisor/conf.d/ {{ system_repository_name[role_type] }}.conf"
   become_user: "{{ remote_admin_account }}"
   become: yes
   template:
@@ -201,12 +201,6 @@
     owner: "{{ remote_admin_account }}"
     group: "{{ remote_admin_account }}"
 
-- name: "enable supervisor"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  service:
-    name: supervisor
-    enabled: yes
 
 - name: "reload supervisor"
   become_user: "{{ remote_admin_account }}"
@@ -214,10 +208,12 @@
   service:
     name: supervisor
     state: reloaded
+    enabled: yes
 
 - name: "reload and restart nginx"
   service:
     name: nginx
     state: reloaded
+    enabled: yes
 
 
