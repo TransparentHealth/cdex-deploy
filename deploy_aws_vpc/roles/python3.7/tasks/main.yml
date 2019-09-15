@@ -17,18 +17,25 @@
 - name: "install python3.7 from source - step 1"
   shell: "sudo apt -y update"
 
-- name:  "install python3.7 from source - step 2 - pre-requisites"
+- name:  "install python3.7 - step 2 - pre-requisites"
   become_user: "{{ remote_admin_account }}"
   become: yes
   apt:
     name: ["build-essential", "zlib1g-dev", "libncurses5-dev", "libgdbm-dev", "libnss3-dev", "libssl-dev", "libreadline-dev", "libffi-dev", "wget"]
     state: present
 
-- name:  "install python3.7 from source - step 3 - wget Python-3.7.4"
-  shell: "wget https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tar.xz"
+#- name:  "install python3.7 from source - step 3 - wget Python-3.7.4"
+#  shell: "wget https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tar.xz"
 
-- name:  "install python3.7.4 from source - step 4 untar/configure/make altinstall"
-  shell: "tar -xf Python-3.7.4.tar.xz; cd Python-3.7.4; ./configure --enable-optimizations; make -j 8; sudo make altinstall"
+#- name:  "install python3.7.4 from source - step 4 untar/configure/make altinstall"
+#  shell: "tar -xf Python-3.7.4.tar.xz; cd Python-3.7.4; ./configure --enable-optimizations; make -j 8; sudo make altinstall"
+
+- name: install python 3.7
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  apt:
+    name: python3.7
+    state: present
 
 - name: "install python3 pip"
   become_user: "{{ remote_admin_account }}"
