@@ -7,6 +7,13 @@
 #    
 #
 
+- name: install pip3
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  apt:
+    name: python3-pip
+    state: present
+
 #- name: check for boto/boto3 in virtualenv
 #  pip:
 #    name: ["boto", "boto3"]
@@ -25,6 +32,8 @@
   become_user: "{{ remote_admin_account }}"
   become: yes
   ec2_instance_facts:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
     region: "{{ aws_region }}"
   register: ec2_facts_info
 
