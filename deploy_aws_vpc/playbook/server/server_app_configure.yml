@@ -39,6 +39,7 @@
     - role: "../../roles/app_user"
     - role: "../../roles/app_install"
     - role: "../../roles/postgres_setup"
+    - role: "../../roles/configure_app"
     - role: "../../roles/nginx"
     - role: "../../roles/check_web_is_up"
 
@@ -48,6 +49,7 @@
 #    - "../../roles/app_user"
 #    - "../../roles/app_install"
 #    - "../../roles/postgres_setup"
+#    - "../../roles/configure_app"
 #    - "../../roles/nginx"
 #    - "../../roles/check_web_is_up"
 #    - "../../roles/deploy_ready"

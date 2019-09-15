@@ -187,5 +187,3 @@
     src: "templates/{{ role_type }}.env"
     dest: "{{ base_app_directory}}/{{ role_type }}/.env"
     mode: "0640"
-
-
