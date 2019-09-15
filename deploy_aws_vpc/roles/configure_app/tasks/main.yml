@@ -14,23 +14,9 @@
     app_path: "{{ base_app_directory }}/{{ role_type }}"
     virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
 
-- name: "Check if django superuser exists - {{ app_pyapps_user }}"
-  django_manage:
-    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
-    app_path: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
-    command: shell -c 'import sys; from django.contrib.auth.models import User; sys.exit(0 if User.objects.filter(username="{{ app_pyapps_user }}").count() > 0 else 1)'
-  register: checksuperuser
-  check_mode: True
-  ignore_errors: True
-  changed_when: False
-
-- debug:
-    msg: "results:\n {{ checksuperuser }}"
-
 - name: "django create superuser - {{ app_pyapps_user }}"
   django_manage:
     virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
     app_path: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
     command: "create_super_user_from_envars"
-  when: checksuperuser.rc != 0
 
