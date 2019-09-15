@@ -32,16 +32,16 @@
     - "./../../vars/common.yml"
 
   roles:
-    - role: base_app
-    - role: aws_config_install
-    - role: python3.7
+    - role: "../../roles/base_app"
+    - role: "../../roles/aws_config_install"
+    - role: "../../roles/python3.7"
       when: "role_type == 'smh_app' "
-    - role: app_user
-    - role: app_install
-    - role: postgres_setup
-    - role: nginx
-    - role: check_web_is_up
-    - role: deploy_ready
+    - role: "../../roles/app_user"
+    - role: "../../roles/app_install"
+    - role: "../../roles/postgres_setup"
+    - role: "../../roles/nginx"
+    - role: "../../roles/check_web_is_up"
+    - role: "../../roles/deploy_ready"
 
 #    - "../../roles/base_app"
 #    - "../../roles/aws_config_install"
