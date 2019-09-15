@@ -12,6 +12,8 @@ system_repository_name:
   smh: "sharemyhealth"
   smh_app: "smh_app"
 
+ansible_ssh_private_key_file: "{{ env_ansible_ssh_private_key_file }}"
+
 system_full_name: {"vmi": "verifymyidentity", "smh": "sharemyhealth", "smh_app": "sharemyhealthapp"}
 
 dns_app_name: "{{ env_dns_app_name }}"
