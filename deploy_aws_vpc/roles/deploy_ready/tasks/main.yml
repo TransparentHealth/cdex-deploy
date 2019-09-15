@@ -27,6 +27,7 @@
   become: yes
   ec2_instance_facts:
     region: "{{ aws_region }}"
+  delegate_to: "{{ variable_host }}"
   register: ec2_facts_info
 
 - name: "Get resource_id of ec2_instance"
