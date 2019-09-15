@@ -29,6 +29,7 @@
 # create launch configuration
 - name: "build ec2 instance {{ ami_info.tags.Name }}"
   ec2:
+    region: "{{ aws_region}}"
     image: "{{ ami_info.image_id }}"
     count: 1
 
