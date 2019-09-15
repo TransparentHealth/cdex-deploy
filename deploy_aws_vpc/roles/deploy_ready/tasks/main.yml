@@ -7,11 +7,11 @@
 #    
 #
 
-- name: check for boto/boto3 in virtualenv
-  pip:
-    name: ["boto", "boto3"]
-    state: present
-    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+#- name: check for boto/boto3 in virtualenv
+#  pip:
+#    name: ["boto", "boto3"]
+#    state: present
+#    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
 
 - name: check for boto/boto3 in baseenv
   become_user: "{{ remote_admin_account }}"
