@@ -24,6 +24,9 @@
   ignore_errors: True
   changed_when: False
 
+- debug:
+    msg: "results:\n {{ checksuperuser }}"
+
 - name: "django create superuser - {{ app_pyapps_user }}"
   django_manage:
     virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
