@@ -23,6 +23,8 @@
 
 
 - name: get ec2 facts
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   ec2_instance_facts:
     region: "{{ aws_region }}"
   register: ec2_facts_info
@@ -32,6 +34,8 @@
     msg: "{{ ec2_facts_info }}"
 
 - name: "get ec2 facts for BaseInstance_{{ role_type }} - JustCreated"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   ec2_instance_facts:
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
@@ -62,6 +66,4 @@
 #    state: present
 #    tags:
 #      workflow: "Deploy"
-
-
 
