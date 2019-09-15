@@ -19,7 +19,6 @@
   pip:
     name: ["boto", "boto3"]
     state: present
-    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
 
 
 - name: get ec2 facts
