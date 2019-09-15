@@ -35,7 +35,7 @@
     wait: yes
     vpc_subnet_id: "{{ vpc_app_subnet_id }}"
     count: 1
-    key_name: "{{  }}"
+    key_name: "{{ ansible_ssh_private_key_file }}"
     assign_public_ip: no
     state: present
 
