@@ -185,7 +185,7 @@
   # referenced in gunicorn_start and manage.py
   template:
     src: "templates/{{ role_type }}.env"
-    dest: "{{ base?_app_directory}}/{{ role_type }}/.env"
+    dest: "{{ base_app_directory}}/{{ role_type }}/.env"
     mode: "0640"
 
 
