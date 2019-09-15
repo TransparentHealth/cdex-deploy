@@ -44,6 +44,13 @@
     name: python3-pip
     state: present
 
+- name: install python3.7-dev
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  apt:
+    name: python3.7-dev
+    state: present
+
 - name: "install python3 venv"
   become_user: "{{ remote_admin_account }}"
   become: yes
