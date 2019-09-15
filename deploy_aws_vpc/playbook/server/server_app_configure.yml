@@ -41,7 +41,6 @@
     - role: "../../roles/postgres_setup"
     - role: "../../roles/nginx"
     - role: "../../roles/check_web_is_up"
-    - role: "../../roles/deploy_ready"
 
 #    - "../../roles/base_app"
 #    - "../../roles/aws_config_install"

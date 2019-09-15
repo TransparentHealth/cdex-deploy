@@ -34,5 +34,5 @@
     - "./../../vars/common.yml"
 
   roles:
-    - "../../roles/deploy_ready"
-    - "../../roles/deploy_make_ami"
+    - role: "../../roles/deploy_ready"
+    - role: "../../roles/deploy_make_ami"
