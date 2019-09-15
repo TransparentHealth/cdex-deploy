@@ -7,13 +7,20 @@
 #    
 #
 
-- name: check for boto3
+- name: check for boto/boto3 in virtualenv
   pip:
-    name: "{{ item }}"
+    name: ["boto", "boto3"]
     state: present
-  with_items:
-    - boto3
-    - boto
+    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+
+- name: check for boto/boto3 in baseenv
+  become_user: "{{ remote_admin_user }}"
+  become: yes
+  pip:
+    name: ["boto", "boto3"]
+    state: present
+    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+
 
 - name: get ec2 facts
   ec2_instance_facts:
