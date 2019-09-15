@@ -6,7 +6,7 @@ Repeat process for each app server flavor:
 
 1. Create an EC2 instance
 2. Deploy base toolset (Docker, Git etc.)
-3. Clone code for app server (vmi, smh, smhapp)
+3. Clone code for app server (vmi, smh, smh_app)
 4. Set environment variables for app/environment
 5. Create AMI from Instance
 6. Build Auto Scaling Group using AMI

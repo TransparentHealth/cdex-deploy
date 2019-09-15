@@ -179,3 +179,13 @@
     path: "{{ base_app_directory }}/{{ role_type }}/manage.py"
     state: touch
     mode: "u+rwx,g+rwx,o-rwx"
+
+- name: setup .env file in base of repo
+  # .env file loads environment variables.
+  # referenced in gunicorn_start and manage.py
+  template:
+    src: "templates/{{ role_type }}.env"
+    dest: "{{ base?_app_directory}}/{{ role_type }}/.env"
+    mode: "0640"
+
+

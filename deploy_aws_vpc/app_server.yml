@@ -10,16 +10,16 @@
     platform_app:
       - "vmi"
       - "smh"
-      - "smhapp"
+      - "smh_app"
     base_ami: "ami-07d0cf3af28718ef8"
     ec2_app_instance_type:
       vmi: "t2.micro"
       smh: "t2.medium"
-      smhapp: "t2.large"
+      smh_app: "t2.large"
     ec2_instance_volsize:
       vmi: 20
       smh: 21
-      smhapp: 22
+      smh_app: 22
 
     role_type: "vmi"
     # ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-20190722.1 (ami-07d0cf3af28718ef8)

@@ -18,7 +18,27 @@
       role:  "{{ role_type }}"
       birth: "{{ ansible_date_time.iso8601_basic_short }}"
       mode: "readytoattach"
+  register: ami_info
+  ignore_errors: true
 
+# find ami
+- name: find ami
+  debug:
+    msg: "Created AMI: {{ ami_info.image_id }}"
+
+# create launch configuration
+- name: "build ec2 instance {{ ami_info.tags.Name }}"
+  ec2:
+    image: "{{ ami_info.image_id }}"
+    count: 1
+
+# get instance id
+
+# add instance to scalable group
+
+# add group to target group
+
+# add target group to ALB
 
 
 

@@ -20,7 +20,7 @@
     # Options: az1 | az2 | az3
     sub_zone: "app"
     role_type: "vmi"
-    # Options: vmi | smh | smhapp
+    # Options: vmi | smh | smh_app
 
     sg_zone: "{{ vpc_env }}-{{ role_type }}-APP"
     env_az: "{{ vpc_env }}-{{ azone }}"
