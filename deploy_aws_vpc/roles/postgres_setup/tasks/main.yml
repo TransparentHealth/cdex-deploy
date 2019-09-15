@@ -11,6 +11,8 @@
   pip:
     name: psycopg2
     state: present
+    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+
 
 - name: "setup .pgpass file"
   template:
