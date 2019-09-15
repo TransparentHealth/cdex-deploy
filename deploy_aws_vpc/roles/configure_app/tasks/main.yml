@@ -24,7 +24,7 @@
   ignore_errors: True
   changed_when: False
 
-- name: "django create superuser - {{ app_pyapps_user }}
+- name: "django create superuser - {{ app_pyapps_user }}"
   django_manage:
     virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
     app_path: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
