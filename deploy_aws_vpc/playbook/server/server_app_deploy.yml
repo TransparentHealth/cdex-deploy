@@ -60,7 +60,7 @@
           DefaultActions:
             - Type: forward
               # we may need to change this in the future
-              TargetGroupName: '{{ blue_target_group[role_type] }}'
+              TargetGroupName: '{{ blue_target_group_name[role_type] }}'
           Rules:
             - Conditions:
                 - Field: host-header
