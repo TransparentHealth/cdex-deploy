@@ -211,6 +211,8 @@
     enabled: yes
 
 - name: "reload and restart nginx"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   service:
     name: nginx
     state: reloaded
