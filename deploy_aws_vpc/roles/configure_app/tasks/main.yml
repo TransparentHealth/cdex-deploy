@@ -28,6 +28,14 @@
     app_path: "{{ base_app_directory }}/{{ role_type }}"
     virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
 
+- name: collectstatic
+  django_manage:
+    command: collectstatic
+    app_path: "{{ base_app_directory }}/{{ role_type }}"
+    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+  register: static_result
+  changed_when: '"0 static files" not in static_result.out'
+
 - name: "django create superuser - {{ app_pyapps_user }}"
   django_manage:
     virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
