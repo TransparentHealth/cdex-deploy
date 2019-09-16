@@ -12,7 +12,7 @@
     name: '{{ alb_name }}'
     state: present
     region: '{{ aws_region }}'
-    security_groups: '{{ alb_security_groups }}'
+    security_groups: '{{ app_security_group_id[role_type] }}'
     subnets: '{{ alb_subnets }}'
     purge_listeners: '{{ should_purge_listeners }}'
     deletion_protection: yes
