@@ -18,7 +18,7 @@
 - name: build assets
   make:
     chdir: "{{ base_app_directory }}/{{ role_type }}/assets"
-    target: all
+    target: build
     file: "{{ base_app_directory }}/{{ role_type }}/assets/Makefile"
   when: role_type == "smh_app"
 
