@@ -59,7 +59,8 @@
           SslPolicy: '{{ alb_ssl_policy_name }}'
           DefaultActions:
             - Type: forward
-              TargetGroupName: '{{ blue_target_group.target_group_name }}'
+              # we may need to change this in the future
+              TargetGroupName: '{{ blue_target_group[role_type] }}'
           Rules:
             - Conditions:
                 - Field: host-header
