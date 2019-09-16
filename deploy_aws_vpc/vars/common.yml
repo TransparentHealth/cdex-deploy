@@ -100,6 +100,7 @@ ext_nginx_server_names: "{{ env_ext_nginx_server_names }}"
 target_group_name: "{{ env_target_group_name }}"
 vpc_id: "{{ env_vpc_id }}"
 
+alb_name: "{{ env_alb_name }}"
 alb_subnets: "{{ env_alb_subnets }}"
 
 ssl_cert_arn: "{{ env_ssl_cert_arn }}"
