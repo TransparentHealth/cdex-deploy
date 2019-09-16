@@ -8,6 +8,20 @@
 #    
 #    
 
+- name: install npm for SASS/CSS Build
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  apt:
+    name: npm
+    state: present
+
+- name: build assets
+  make:
+    chdir: "{{ base_app_directory }}/{{ role_type }}/assets"
+    target: all
+    file: "{{ base_app_directory }}/{{ role_type }}/assets/Makefile"
+  when: role_type == "smh_app"
+
 - name: run migrate
   django_manage:
     command: migrate
