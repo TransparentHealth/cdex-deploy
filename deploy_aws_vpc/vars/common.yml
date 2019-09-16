@@ -94,3 +94,25 @@ vpc_app_subnet_id: "{{ env_vpc_app_subnet_id }}"
 app_security_group_id: "{{ env_app_security_group_id }}"
 
 ext_nginx_server_names: "{{ env_ext_nginx_server_names }}"
+
+### Deployment
+
+target_group_name: "{{ env_target_group_name }}"
+vpc_id: "{{ env_vpc_id }}"
+
+alb_subnets: "{{ env_alb_subnets }}"
+
+ssl_cert_arn: "{{ env_ssl_cert_arn }}"
+
+lc_name: "{{ env_lc_name }}"
+
+asg_name: "{{ env_asg_name }}"
+
+asg_min_size: "{{ env_asg_min_size }}"
+asg_max_size: "{{ env_asg_max_size }}"
+asg_wait_timeout: "300"
+asg_health_check_period: "300"
+
+
+availability_zones: "{{ env_availability_zones }}"
+alb_ssl_policy_name: "ELBSecurityPolicy-2016-08"

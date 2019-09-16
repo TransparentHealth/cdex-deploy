@@ -1,0 +1,47 @@
+---
+# deploy_create_asg/tasks/main.yml
+# Created: 2019-09-16
+# cdex-deploy
+# Purpose: create an Auto Scaling Group
+#
+#
+
+- name: Launch a new Launch Config as a blueprint from the created AMI
+  ec2_lc:
+    name: '{{ lc_name }}'
+    region: '{{ aws_region }}'
+    image_id: '{{ ami_info.image_id }}'
+    instance_type: '{{ ec2_app_instance_type[role_type] }}'
+    security_groups: '{{ app_security_group_id[role_type] }}'
+    ebs_optimized: yes
+    instance_monitoring: yes
+  register: ec2_lc_result
+  until: ec2_lc_result is defined
+  retries: 5
+  delay: 5
+
+- name: Launch a new AutoScaling Group behind an ALB with the above Launch Config
+  ec2_asg:
+    name: '{{ asg_name }}'
+    region: '{{ aws_region }}'
+    launch_config_name: '{{ lc_name }}'
+    min_size: '{{ asg_min_size }}'
+    max_size: '{{ asg_max_size }}'
+    desired_capacity: '{{ asg_min_size }}'
+    availability_zones: '{{ availability_zones }}'
+    target_group_arns: '{{ green_target_group.target_group_arn }}'
+    health_check_period: '{{ asg_health_check_period }}'
+    health_check_type: ELB
+#    notification_topic: '{{ notification_topic }}'
+#    notification_types: '{{ notification_types }}'
+    metrics_collection: yes
+    replace_all_instances: yes
+    termination_policies: ['NewestInstance', 'Default']
+    wait_for_instances: yes
+    wait_timeout: '{{ asg_wait_timeout }}'
+    tags: '{{ ec2_asg_tags }}'
+  register: ec2_asg_result
+  until: (ec2_asg_result is defined) and (ec2_asg_result.viable_instances is defined) and (ec2_asg_result.viable_instances|int >= desired_instance_size|int)
+  retries: 5
+  delay: 30
+

@@ -1,0 +1,28 @@
+---
+# roles/deploy_create_target_group/tasks/main.yml
+# Created: 2019-09-15
+# cdex-deploy
+# Purpose: create a target group
+#
+# https://gist.github.com/kqdtran/ad22a25df36ba90cad75cde3017715bd#file-create_target_group-yml
+
+# Retry up to 5 times, with a 5s delay between retries
+- name: Create a new target group
+  elb_target_group:
+    name: '{{ target_group_name }}'
+    state: present
+    region: '{{ aws_region }}'
+    vpc_id: '{{ vpc_id }}'
+    protocol: 'http'
+    port: '80'
+    health_check_interval: '30'
+    health_check_path: '/'
+    health_check_port: 'traffic-port'
+    health_check_protocol: 'http'
+    health_check_timeout: '5'
+    healthy_threshold_count: '5'
+    unhealthy_threshold_count: '2'
+  register: green_target_group
+  until: green_target_group is defined
+  retries: 5
+  delay: 5

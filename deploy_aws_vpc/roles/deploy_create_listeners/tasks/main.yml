@@ -1,0 +1,20 @@
+---
+# deploy_create_listeners/tasks/main.yml
+# Created: 2019-09-15
+# cdex-deploy
+# Purpose: create a new listener group
+#
+#    
+#    
+
+- name: Creates a new set of listeners rules for the ALB
+  elb_application_lb:
+    name: '{{ alb_name }}'
+    state: present
+    region: '{{ aws_region }}'
+    security_groups: '{{ alb_security_groups }}'
+    subnets: '{{ alb_subnets }}'
+    purge_listeners: '{{ should_purge_listeners }}'
+    deletion_protection: yes
+    listeners: '{{ listeners }}'
+  register: alb_with_new_listeners

@@ -4,6 +4,7 @@
 # cdex-deploy
 # Purpose: deploy server to ALB
 #
+# https://medium.com/qbits/immutable-deployment-using-aws-application-load-balancing-ade3e70b00e8
 
 - name: deploy server
   hosts: localhost
@@ -36,3 +37,59 @@
   roles:
     - role: "../../roles/deploy_ready"
     - role: "../../roles/deploy_make_ami"
+    - role: "../../roles/deploy_create_target_group"
+    - role: "../../roles/deploy_create_listeners"
+      should_purge_listeners: no
+      listeners:
+        - protocol: HTTP
+          Port: 80
+          DefaultActions:
+            - Type: redirect
+              RedirectConfig:
+                Protocol: HTTPS
+                Host: "#{host}"
+                Query: "#{query}"
+                Path: "/#{path}"
+                Port: "443"
+                StatusCode: HTTP_301
+        - Protocol: HTTPS
+          Port: 443
+          Certificates:
+            - CertificateArn: '{{ ssl_cert_arn }}'
+          SslPolicy: '{{ ssl_policy_name }}'
+          DefaultActions:
+            - Type: forward
+              TargetGroupName: '{{ blue_target_group.target_group_name }}'
+          Rules:
+            - Conditions:
+                - Field: host-header
+                  Values:
+                    - "new.{{ dns_app_name[role_type] }}"
+              Priority: 1
+              Actions:
+                - Type: forward
+                  TargetGroupName: '{{ green_target_group.target_group_name }}'
+
+    - role: "../../roles/deploy_create_listeners"
+      should_purge_listeners: yes
+      listeners:
+        - protocol: HTTP
+            Port: 80
+            DefaultActions:
+              - Type: redirect
+                RedirectConfig:
+                  Protocol: HTTPS
+                  Host: "#{host}"
+                  Query: "#{query}"
+                  Path: "/#{path}"
+                  Port: "443"
+                  StatusCode: HTTP_301
+        - Protocol: HTTPS
+          Port: 443
+          Certificates:
+            - CertificateArn: '{{ ssl_cert_arn }}'
+          SslPolicy: '{{ alb_ssl_policy_name }}'
+          DefaultActions:
+            - Type: forward
+              TargetGroupName: '{{ green_target_group.target_group_name }}'
+

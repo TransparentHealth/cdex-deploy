@@ -32,6 +32,12 @@
     region: "{{ aws_region}}"
     image: "{{ ami_info.image_id }}"
     instance_type: "{{ec2_app_instance_type[role_type] }}"
+    instance_tags:
+      role: "{{ role_type }}"
+      env: "{{ vpc_env }}"
+      function: "DeployInstance"
+      Name: "{{ vpc_env}}_{{ role_type }}"
+      workflow: "Deploy"
     wait: yes
     vpc_subnet_id: "{{ vpc_app_subnet_id }}"
     count: 1
