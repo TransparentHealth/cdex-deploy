@@ -15,11 +15,8 @@
     name: npm
     state: present
 
-- name: make node
-  shell: "cd {{ base_app_directory }}/{{ role_type }}/assets && make"
-
 - name: build assets
-  shell: "cd {{ base_app_directory }}/{{ role_type }}/assets && make build"
+  shell: "cd {{ base_app_directory }}/{{ role_type }}/assets && make -i -k build"
   when: role_type == "smh_app"
 
 - name: run migrate
