@@ -56,7 +56,7 @@
           Port: 443
           Certificates:
             - CertificateArn: '{{ ssl_cert_arn }}'
-          SslPolicy: '{{ ssl_policy_name }}'
+          SslPolicy: '{{ alb_ssl_policy_name }}'
           DefaultActions:
             - Type: forward
               TargetGroupName: '{{ blue_target_group.target_group_name }}'
