@@ -95,13 +95,13 @@
         delay: 30
         timeout: 180
 
-    - name: "Assign elastic_ip to instance"
-      ec2_eip:
-        region: "{{ aws_region }}"
-        allow_reassociation: yes
-        public_ip: "{{ base_instance_elastic_ip }}"
-        device_id: "{{ ec2_base_instance_info.instances[0]['id'] }}"
-        state: present
+#    - name: "Assign elastic_ip to instance"
+#      ec2_eip:
+#        region: "{{ aws_region }}"
+#        allow_reassociation: yes
+#        public_ip: "{{ base_instance_elastic_ip }}"
+#        device_id: "{{ ec2_base_instance_info.instances[0]['id'] }}"
+#        state: present
 
     - debug:
         msg:
