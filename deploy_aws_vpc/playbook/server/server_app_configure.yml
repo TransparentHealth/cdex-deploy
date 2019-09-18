@@ -33,6 +33,7 @@
 
   roles:
     - role: "../../roles/base_app"
+    # install aws config
     - role: "../../roles/aws_config_install"
     - role: "../../roles/python3.7"
       when: "role_type == 'smh_app' "
@@ -44,6 +45,7 @@
     - role: "../../roles/check_web_is_up"
 
 #    - "../../roles/base_app"
+
 #    - "../../roles/aws_config_install"
 #    - "../../roles/python3.7"
 #    - "../../roles/app_user"

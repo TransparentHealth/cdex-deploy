@@ -2,6 +2,9 @@
 # var/common.yml
 # Store variables that are common across all environments
 
+cloud_provider: "aws"
+# Options: aws | azure
+
 system_descriptive_name:
   vmi: "Verify My Identity"
   smh: "Share My Health"
@@ -11,6 +14,7 @@ system_repository_name:
   vmi: "vmi"
   smh: "sharemyhealth"
   smh_app: "smh_app"
+
 
 ansible_ssh_private_key_file: "{{ env_ansible_ssh_private_key_file }}"
 ansible_ssh_private_key_name: "{{ env_ansible_ssh_private_key_name }}"
