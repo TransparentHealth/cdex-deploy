@@ -7,7 +7,7 @@
 
 - name: notify slack
   slack:
-    token: https://hooks.slack.com/services/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
+    token: "{{ slack_token_update_channel }}"
     msg: "{{ role_type }} updated in {{ vpc_env }} at {{ configure_time }} from https://github.com/TransparentHealth/{{ system_repository_name[role_type] }} Branch: {{ git_branch[role_type] }}"
     username: "afbh-mgmt-controller"
     channel: "#afbh-updates"
