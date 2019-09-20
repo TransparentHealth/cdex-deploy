@@ -23,6 +23,7 @@
     #    env_cf_data_version: "20"
     #    env_cf_app_version: "01"
     build_subnet_id: null
+    configure_time: "{{ ansible_date_time.iso8601_basic_short }}"
 
   vars_files:
     - "./../../vault/environment/{{ vpc_env }}/{{ role_type }}/vault.yml"
@@ -43,6 +44,7 @@
     - role: "../../roles/configure_app"
     - role: "../../roles/nginx"
     - role: "../../roles/check_web_is_up"
+    - role: "../../roles/notify_slack"
 
 #    - "../../roles/base_app"
 
