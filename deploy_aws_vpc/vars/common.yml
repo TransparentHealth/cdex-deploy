@@ -121,3 +121,6 @@ asg_health_check_period: "300"
 
 availability_zones: "{{ env_availability_zones }}"
 alb_ssl_policy_name: "ELBSecurityPolicy-2016-08"
+
+# Notifications
+slack_token_update_channel: "{{ env_slack_token_update_channel }}"
