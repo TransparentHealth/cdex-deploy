@@ -45,18 +45,5 @@
     - role: "../../roles/nginx"
     - role: "../../roles/check_web_is_up"
     - role: "../../roles/notify_slack"
-
-#    - "../../roles/base_app"
-
-#    - "../../roles/aws_config_install"
-#    - "../../roles/python3.7"
-#    - "../../roles/app_user"
-#    - "../../roles/app_install"
-#    - "../../roles/postgres_setup"
-#    - "../../roles/configure_app"
-#    - "../../roles/nginx"
-#    - "../../roles/check_web_is_up"
-#    - "../../roles/deploy_ready"
-
-
+    - role: "../../roles/notify_team"
 

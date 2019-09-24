@@ -41,3 +41,10 @@
     app_path: "{{ base_app_directory }}/{{ role_type }}"
     command: "create_super_user_from_envars"
   when: role_type != "smh"
+
+- name: "install group settings"
+  django_manage:
+    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+    app_path: "{{ base_app_directory }}/{{ role_type }}"
+    command: "create_default_groups"
+  when: role_type == "vmi"
