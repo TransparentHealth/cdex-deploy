@@ -1,0 +1,1543 @@
+{
+  "changed": false,
+  "failed": false,
+  "instances": [
+    {
+      "ami_launch_index": 0,
+      "architecture": "x86_64",
+      "block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "ebs": {
+            "attach_time": "2019-09-09T12:08:20+00:00",
+            "delete_on_termination": true,
+            "status": "attached",
+            "volume_id": "vol-058ef9a468fb66f0c"
+          }
+        }
+      ],
+      "capacity_reservation_specification": {
+        "capacity_reservation_preference": "open"
+      },
+      "client_token": "",
+      "cpu_options": {
+        "core_count": 1,
+        "threads_per_core": 1
+      },
+      "ebs_optimized": false,
+      "ena_support": true,
+      "hibernation_options": {
+        "configured": false
+      },
+      "hypervisor": "xen",
+      "image_id": "ami-07d0cf3af28718ef8",
+      "instance_id": "i-0b6b6d4b2a36527b2",
+      "instance_type": "t2.micro",
+      "key_name": "mgmt-controller",
+      "launch_time": "2019-09-09T12:08:19+00:00",
+      "monitoring": {
+        "state": "disabled"
+      },
+      "network_interfaces": [
+        {
+          "association": {
+            "ip_owner_id": "amazon",
+            "public_dns_name": "ec2-3-219-29-74.compute-1.amazonaws.com",
+            "public_ip": "3.219.29.74"
+          },
+          "attachment": {
+            "attach_time": "2019-09-09T12:08:19+00:00",
+            "attachment_id": "eni-attach-0b8be1df22f49771f",
+            "delete_on_termination": true,
+            "device_index": 0,
+            "status": "attached"
+          },
+          "description": "Primary network interface",
+          "groups": [
+            {
+              "group_id": "sg-06d87c8690366dc4c",
+              "group_name": "staging-DMZ"
+            }
+          ],
+          "interface_type": "interface",
+          "ipv6_addresses": [],
+          "mac_address": "02:e4:7b:50:23:06",
+          "network_interface_id": "eni-0258c0d65a399e74e",
+          "owner_id": "567024208163",
+          "private_dns_name": "ip-10-13-1-15.ec2.internal",
+          "private_ip_address": "10.13.1.15",
+          "private_ip_addresses": [
+            {
+              "association": {
+                "ip_owner_id": "amazon",
+                "public_dns_name": "ec2-3-219-29-74.compute-1.amazonaws.com",
+                "public_ip": "3.219.29.74"
+              },
+              "primary": true,
+              "private_dns_name": "ip-10-13-1-15.ec2.internal",
+              "private_ip_address": "10.13.1.15"
+            }
+          ],
+          "source_dest_check": true,
+          "status": "in-use",
+          "subnet_id": "subnet-0ef1b2cf03df24e8d",
+          "vpc_id": "vpc-05253e87f7c98a659"
+        }
+      ],
+      "placement": {
+        "availability_zone": "us-east-1a",
+        "group_name": "",
+        "tenancy": "default"
+      },
+      "private_dns_name": "ip-10-13-1-15.ec2.internal",
+      "private_ip_address": "10.13.1.15",
+      "product_codes": [],
+      "public_dns_name": "ec2-3-219-29-74.compute-1.amazonaws.com",
+      "public_ip_address": "3.219.29.74",
+      "root_device_name": "/dev/sda1",
+      "root_device_type": "ebs",
+      "security_groups": [
+        {
+          "group_id": "sg-06d87c8690366dc4c",
+          "group_name": "staging-DMZ"
+        }
+      ],
+      "source_dest_check": true,
+      "state": {
+        "code": 16,
+        "name": "running"
+      },
+      "state_transition_reason": "",
+      "subnet_id": "subnet-0ef1b2cf03df24e8d",
+      "tags": {
+        "Name": "abhealth_deploy_server-staging",
+        "env": "staging",
+        "function": "mgmt-controller"
+      },
+      "virtualization_type": "hvm",
+      "vpc_id": "vpc-05253e87f7c98a659"
+    },
+    {
+      "ami_launch_index": 0,
+      "architecture": "x86_64",
+      "block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "ebs": {
+            "attach_time": "2019-09-09T12:18:41+00:00",
+            "delete_on_termination": true,
+            "status": "attached",
+            "volume_id": "vol-047c5a2ea4de3ccf3"
+          }
+        }
+      ],
+      "capacity_reservation_specification": {
+        "capacity_reservation_preference": "open"
+      },
+      "client_token": "",
+      "cpu_options": {
+        "core_count": 1,
+        "threads_per_core": 1
+      },
+      "ebs_optimized": false,
+      "ena_support": true,
+      "hibernation_options": {
+        "configured": false
+      },
+      "hypervisor": "xen",
+      "image_id": "ami-07d0cf3af28718ef8",
+      "instance_id": "i-0f571ece925672b95",
+      "instance_type": "t2.micro",
+      "key_name": "mgmt-controller",
+      "launch_time": "2019-09-09T12:18:40+00:00",
+      "monitoring": {
+        "state": "disabled"
+      },
+      "network_interfaces": [
+        {
+          "association": {
+            "ip_owner_id": "amazon",
+            "public_dns_name": "ec2-3-219-170-31.compute-1.amazonaws.com",
+            "public_ip": "3.219.170.31"
+          },
+          "attachment": {
+            "attach_time": "2019-09-09T12:18:40+00:00",
+            "attachment_id": "eni-attach-0ff81351424c4240b",
+            "delete_on_termination": true,
+            "device_index": 0,
+            "status": "attached"
+          },
+          "description": "Primary network interface",
+          "groups": [
+            {
+              "group_id": "sg-0eaffc1560f20cd4b",
+              "group_name": "prod-DMZ"
+            }
+          ],
+          "interface_type": "interface",
+          "ipv6_addresses": [],
+          "mac_address": "02:07:5b:0e:41:7c",
+          "network_interface_id": "eni-05fe50e77e6b7b01b",
+          "owner_id": "567024208163",
+          "private_dns_name": "ip-10-14-1-63.ec2.internal",
+          "private_ip_address": "10.14.1.63",
+          "private_ip_addresses": [
+            {
+              "association": {
+                "ip_owner_id": "amazon",
+                "public_dns_name": "ec2-3-219-170-31.compute-1.amazonaws.com",
+                "public_ip": "3.219.170.31"
+              },
+              "primary": true,
+              "private_dns_name": "ip-10-14-1-63.ec2.internal",
+              "private_ip_address": "10.14.1.63"
+            }
+          ],
+          "source_dest_check": true,
+          "status": "in-use",
+          "subnet_id": "subnet-0b6ac858e4707aac0",
+          "vpc_id": "vpc-04034ff7143fb9d51"
+        }
+      ],
+      "placement": {
+        "availability_zone": "us-east-1a",
+        "group_name": "",
+        "tenancy": "default"
+      },
+      "private_dns_name": "ip-10-14-1-63.ec2.internal",
+      "private_ip_address": "10.14.1.63",
+      "product_codes": [],
+      "public_dns_name": "ec2-3-219-170-31.compute-1.amazonaws.com",
+      "public_ip_address": "3.219.170.31",
+      "root_device_name": "/dev/sda1",
+      "root_device_type": "ebs",
+      "security_groups": [
+        {
+          "group_id": "sg-0eaffc1560f20cd4b",
+          "group_name": "prod-DMZ"
+        }
+      ],
+      "source_dest_check": true,
+      "state": {
+        "code": 16,
+        "name": "running"
+      },
+      "state_transition_reason": "",
+      "subnet_id": "subnet-0b6ac858e4707aac0",
+      "tags": {
+        "Name": "abhealth_deploy_server-prod"
+      },
+      "virtualization_type": "hvm",
+      "vpc_id": "vpc-04034ff7143fb9d51"
+    },
+    {
+      "ami_launch_index": 0,
+      "architecture": "x86_64",
+      "block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "ebs": {
+            "attach_time": "2019-09-09T15:53:14+00:00",
+            "delete_on_termination": true,
+            "status": "attached",
+            "volume_id": "vol-0f95260b125d9b571"
+          }
+        }
+      ],
+      "capacity_reservation_specification": {
+        "capacity_reservation_preference": "open"
+      },
+      "client_token": "",
+      "cpu_options": {
+        "core_count": 1,
+        "threads_per_core": 1
+      },
+      "ebs_optimized": false,
+      "ena_support": true,
+      "hibernation_options": {
+        "configured": false
+      },
+      "hypervisor": "xen",
+      "image_id": "ami-07d0cf3af28718ef8",
+      "instance_id": "i-0c68193f53475d60a",
+      "instance_type": "t2.micro",
+      "key_name": "abhealth-staging-servers",
+      "launch_time": "2019-09-09T15:53:14+00:00",
+      "monitoring": {
+        "state": "disabled"
+      },
+      "network_interfaces": [
+        {
+          "attachment": {
+            "attach_time": "2019-09-09T15:53:14+00:00",
+            "attachment_id": "eni-attach-077daf381a5e42c15",
+            "delete_on_termination": true,
+            "device_index": 0,
+            "status": "attached"
+          },
+          "description": "",
+          "groups": [
+            {
+              "group_id": "sg-07e837a18a5455edc",
+              "group_name": "staging-vmi-APP"
+            }
+          ],
+          "interface_type": "interface",
+          "ipv6_addresses": [],
+          "mac_address": "02:75:34:42:e9:84",
+          "network_interface_id": "eni-03750e515b05fea36",
+          "owner_id": "567024208163",
+          "private_dns_name": "ip-10-13-4-126.ec2.internal",
+          "private_ip_address": "10.13.4.126",
+          "private_ip_addresses": [
+            {
+              "primary": true,
+              "private_dns_name": "ip-10-13-4-126.ec2.internal",
+              "private_ip_address": "10.13.4.126"
+            }
+          ],
+          "source_dest_check": true,
+          "status": "in-use",
+          "subnet_id": "subnet-0f3e62ed785a43596",
+          "vpc_id": "vpc-05253e87f7c98a659"
+        }
+      ],
+      "placement": {
+        "availability_zone": "us-east-1a",
+        "group_name": "",
+        "tenancy": "default"
+      },
+      "private_dns_name": "ip-10-13-4-126.ec2.internal",
+      "private_ip_address": "10.13.4.126",
+      "product_codes": [],
+      "public_dns_name": "",
+      "root_device_name": "/dev/sda1",
+      "root_device_type": "ebs",
+      "security_groups": [
+        {
+          "group_id": "sg-07e837a18a5455edc",
+          "group_name": "staging-vmi-APP"
+        }
+      ],
+      "source_dest_check": true,
+      "state": {
+        "code": 16,
+        "name": "running"
+      },
+      "state_transition_reason": "",
+      "subnet_id": "subnet-0f3e62ed785a43596",
+      "tags": {
+        "Name": "BaseInstance_vmi",
+        "env": "staging",
+        "function": "BaseInstance",
+        "role": "vmi",
+        "workflow": "copied"
+      },
+      "virtualization_type": "hvm",
+      "vpc_id": "vpc-05253e87f7c98a659"
+    },
+    {
+      "ami_launch_index": 0,
+      "architecture": "x86_64",
+      "block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "ebs": {
+            "attach_time": "2019-09-12T12:49:32+00:00",
+            "delete_on_termination": true,
+            "status": "attached",
+            "volume_id": "vol-0975b1c51b80ceade"
+          }
+        }
+      ],
+      "capacity_reservation_specification": {
+        "capacity_reservation_preference": "open"
+      },
+      "client_token": "",
+      "cpu_options": {
+        "core_count": 2,
+        "threads_per_core": 1
+      },
+      "ebs_optimized": false,
+      "ena_support": true,
+      "hibernation_options": {
+        "configured": false
+      },
+      "hypervisor": "xen",
+      "image_id": "ami-07d0cf3af28718ef8",
+      "instance_id": "i-06712a0eb708cb426",
+      "instance_type": "t2.medium",
+      "key_name": "abhealth-staging-servers",
+      "launch_time": "2019-09-12T12:49:31+00:00",
+      "monitoring": {
+        "state": "disabled"
+      },
+      "network_interfaces": [
+        {
+          "attachment": {
+            "attach_time": "2019-09-12T12:49:31+00:00",
+            "attachment_id": "eni-attach-02f1522c4a2a87dc2",
+            "delete_on_termination": true,
+            "device_index": 0,
+            "status": "attached"
+          },
+          "description": "",
+          "groups": [
+            {
+              "group_id": "sg-091fdd0a61462e424",
+              "group_name": "staging-smh-APP"
+            }
+          ],
+          "interface_type": "interface",
+          "ipv6_addresses": [],
+          "mac_address": "02:a9:17:ff:7e:60",
+          "network_interface_id": "eni-08622a863b2c9e4a1",
+          "owner_id": "567024208163",
+          "private_dns_name": "ip-10-13-4-216.ec2.internal",
+          "private_ip_address": "10.13.4.216",
+          "private_ip_addresses": [
+            {
+              "primary": true,
+              "private_dns_name": "ip-10-13-4-216.ec2.internal",
+              "private_ip_address": "10.13.4.216"
+            }
+          ],
+          "source_dest_check": true,
+          "status": "in-use",
+          "subnet_id": "subnet-0f3e62ed785a43596",
+          "vpc_id": "vpc-05253e87f7c98a659"
+        }
+      ],
+      "placement": {
+        "availability_zone": "us-east-1a",
+        "group_name": "",
+        "tenancy": "default"
+      },
+      "private_dns_name": "ip-10-13-4-216.ec2.internal",
+      "private_ip_address": "10.13.4.216",
+      "product_codes": [],
+      "public_dns_name": "",
+      "root_device_name": "/dev/sda1",
+      "root_device_type": "ebs",
+      "security_groups": [
+        {
+          "group_id": "sg-091fdd0a61462e424",
+          "group_name": "staging-smh-APP"
+        }
+      ],
+      "source_dest_check": true,
+      "state": {
+        "code": 16,
+        "name": "running"
+      },
+      "state_transition_reason": "",
+      "subnet_id": "subnet-0f3e62ed785a43596",
+      "tags": {
+        "Name": "BaseInstance_smh",
+        "env": "staging",
+        "function": "BaseInstance",
+        "role": "smh",
+        "workflow": "JustCreated"
+      },
+      "virtualization_type": "hvm",
+      "vpc_id": "vpc-05253e87f7c98a659"
+    },
+    {
+      "ami_launch_index": 0,
+      "architecture": "x86_64",
+      "block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "ebs": {
+            "attach_time": "2018-10-08T19:53:19+00:00",
+            "delete_on_termination": true,
+            "status": "attached",
+            "volume_id": "vol-06d56857a9a62e11f"
+          }
+        }
+      ],
+      "capacity_reservation_specification": {
+        "capacity_reservation_preference": "open"
+      },
+      "client_token": "runInstances-1539028396995",
+      "cpu_options": {
+        "core_count": 1,
+        "threads_per_core": 1
+      },
+      "ebs_optimized": false,
+      "ena_support": false,
+      "hibernation_options": {
+        "configured": false
+      },
+      "hypervisor": "xen",
+      "image_id": "ami-030add67c93791800",
+      "instance_id": "i-0e70b0fdda0cd0804",
+      "instance_type": "t2.small",
+      "key_name": "dgage-vpn",
+      "launch_time": "2019-05-17T21:39:40+00:00",
+      "monitoring": {
+        "state": "disabled"
+      },
+      "network_interfaces": [
+        {
+          "attachment": {
+            "attach_time": "2018-10-08T19:53:18+00:00",
+            "attachment_id": "eni-attach-0c344c53a924db7f7",
+            "delete_on_termination": true,
+            "device_index": 0,
+            "status": "attached"
+          },
+          "description": "",
+          "groups": [
+            {
+              "group_id": "sg-0604c6dad97c387a5",
+              "group_name": "vmi-dev"
+            },
+            {
+              "group_id": "sg-00e2dd7215a17b95e",
+              "group_name": "default-vpn"
+            }
+          ],
+          "interface_type": "interface",
+          "ipv6_addresses": [],
+          "mac_address": "12:11:5e:be:1f:52",
+          "network_interface_id": "eni-01fe06eea591a6db8",
+          "owner_id": "567024208163",
+          "private_dns_name": "ip-172-31-92-38.ec2.internal",
+          "private_ip_address": "172.31.92.38",
+          "private_ip_addresses": [
+            {
+              "primary": true,
+              "private_dns_name": "ip-172-31-92-38.ec2.internal",
+              "private_ip_address": "172.31.92.38"
+            }
+          ],
+          "source_dest_check": true,
+          "status": "in-use",
+          "subnet_id": "subnet-1464e93a",
+          "vpc_id": "vpc-86e735fc"
+        }
+      ],
+      "placement": {
+        "availability_zone": "us-east-1b",
+        "group_name": "",
+        "tenancy": "default"
+      },
+      "private_dns_name": "ip-172-31-92-38.ec2.internal",
+      "private_ip_address": "172.31.92.38",
+      "product_codes": [
+        {
+          "product_code_id": "f2ew2wrz425a1jagnifd02u5t",
+          "product_code_type": "marketplace"
+        }
+      ],
+      "public_dns_name": "",
+      "root_device_name": "/dev/sda1",
+      "root_device_type": "ebs",
+      "security_groups": [
+        {
+          "group_id": "sg-0604c6dad97c387a5",
+          "group_name": "vmi-dev"
+        },
+        {
+          "group_id": "sg-00e2dd7215a17b95e",
+          "group_name": "default-vpn"
+        }
+      ],
+      "source_dest_check": true,
+      "state": {
+        "code": 80,
+        "name": "stopped"
+      },
+      "state_reason": {
+        "code": "Client.UserInitiatedShutdown",
+        "message": "Client.UserInitiatedShutdown: User initiated shutdown"
+      },
+      "state_transition_reason": "User initiated (2019-05-17 22:39:01 GMT)",
+      "subnet_id": "subnet-1464e93a",
+      "tags": {
+        "Name": "vmi-dev-vpn"
+      },
+      "virtualization_type": "hvm",
+      "vpc_id": "vpc-86e735fc"
+    },
+    {
+      "ami_launch_index": 0,
+      "architecture": "x86_64",
+      "block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "ebs": {
+            "attach_time": "2019-08-12T17:17:35+00:00",
+            "delete_on_termination": false,
+            "status": "attached",
+            "volume_id": "vol-0b7957b6b2e64aa7f"
+          }
+        }
+      ],
+      "capacity_reservation_specification": {
+        "capacity_reservation_preference": "open"
+      },
+      "client_token": "",
+      "cpu_options": {
+        "core_count": 1,
+        "threads_per_core": 1
+      },
+      "ebs_optimized": false,
+      "ena_support": true,
+      "hibernation_options": {
+        "configured": false
+      },
+      "hypervisor": "xen",
+      "image_id": "ami-07d0cf3af28718ef8",
+      "instance_id": "i-045f8523ac0584f51",
+      "instance_type": "t2.micro",
+      "key_name": "mgmt-controller",
+      "launch_time": "2019-08-12T17:17:34+00:00",
+      "monitoring": {
+        "state": "disabled"
+      },
+      "network_interfaces": [
+        {
+          "association": {
+            "ip_owner_id": "amazon",
+            "public_dns_name": "ec2-100-24-20-110.compute-1.amazonaws.com",
+            "public_ip": "100.24.20.110"
+          },
+          "attachment": {
+            "attach_time": "2019-08-12T17:17:34+00:00",
+            "attachment_id": "eni-attach-0edc7b0d4538ccf32",
+            "delete_on_termination": true,
+            "device_index": 0,
+            "status": "attached"
+          },
+          "description": "",
+          "groups": [
+            {
+              "group_id": "sg-04f62b78004992d2d",
+              "group_name": "MGMT-CONTROL"
+            }
+          ],
+          "interface_type": "interface",
+          "ipv6_addresses": [],
+          "mac_address": "12:40:b1:bc:7a:5e",
+          "network_interface_id": "eni-0b0dd7855e2f62f73",
+          "owner_id": "567024208163",
+          "private_dns_name": "ip-172-31-86-230.ec2.internal",
+          "private_ip_address": "172.31.86.230",
+          "private_ip_addresses": [
+            {
+              "association": {
+                "ip_owner_id": "amazon",
+                "public_dns_name": "ec2-100-24-20-110.compute-1.amazonaws.com",
+                "public_ip": "100.24.20.110"
+              },
+              "primary": true,
+              "private_dns_name": "ip-172-31-86-230.ec2.internal",
+              "private_ip_address": "172.31.86.230"
+            }
+          ],
+          "source_dest_check": true,
+          "status": "in-use",
+          "subnet_id": "subnet-1464e93a",
+          "vpc_id": "vpc-86e735fc"
+        }
+      ],
+      "placement": {
+        "availability_zone": "us-east-1b",
+        "group_name": "",
+        "tenancy": "default"
+      },
+      "private_dns_name": "ip-172-31-86-230.ec2.internal",
+      "private_ip_address": "172.31.86.230",
+      "product_codes": [],
+      "public_dns_name": "ec2-100-24-20-110.compute-1.amazonaws.com",
+      "public_ip_address": "100.24.20.110",
+      "root_device_name": "/dev/sda1",
+      "root_device_type": "ebs",
+      "security_groups": [
+        {
+          "group_id": "sg-04f62b78004992d2d",
+          "group_name": "MGMT-CONTROL"
+        }
+      ],
+      "source_dest_check": true,
+      "state": {
+        "code": 16,
+        "name": "running"
+      },
+      "state_transition_reason": "",
+      "subnet_id": "subnet-1464e93a",
+      "tags": {
+        "Name": "abhealth_deploy_server",
+        "purpose": "deployment",
+        "role": "mgmt-controller",
+        "vendor": "NewWave"
+      },
+      "virtualization_type": "hvm",
+      "vpc_id": "vpc-86e735fc"
+    },
+    {
+      "ami_launch_index": 0,
+      "architecture": "x86_64",
+      "block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "ebs": {
+            "attach_time": "2019-08-17T04:29:54+00:00",
+            "delete_on_termination": true,
+            "status": "attached",
+            "volume_id": "vol-0099fbfdf12faa39a"
+          }
+        }
+      ],
+      "capacity_reservation_specification": {
+        "capacity_reservation_preference": "open"
+      },
+      "client_token": "",
+      "cpu_options": {
+        "core_count": 1,
+        "threads_per_core": 1
+      },
+      "ebs_optimized": false,
+      "ena_support": true,
+      "hibernation_options": {
+        "configured": false
+      },
+      "hypervisor": "xen",
+      "image_id": "ami-07d0cf3af28718ef8",
+      "instance_id": "i-089b85acd8496891b",
+      "instance_type": "t2.micro",
+      "key_name": "mgmt-controller",
+      "launch_time": "2019-08-17T04:29:53+00:00",
+      "monitoring": {
+        "state": "disabled"
+      },
+      "network_interfaces": [
+        {
+          "attachment": {
+            "attach_time": "2019-08-17T04:29:53+00:00",
+            "attachment_id": "eni-attach-0fde9e751d36bbcf2",
+            "delete_on_termination": true,
+            "device_index": 0,
+            "status": "attached"
+          },
+          "description": "",
+          "groups": [
+            {
+              "group_id": "sg-04f62b78004992d2d",
+              "group_name": "MGMT-CONTROL"
+            }
+          ],
+          "interface_type": "interface",
+          "ipv6_addresses": [],
+          "mac_address": "12:35:14:f4:0d:02",
+          "network_interface_id": "eni-0d883ca0be9b1184f",
+          "owner_id": "567024208163",
+          "private_dns_name": "ip-172-31-88-111.ec2.internal",
+          "private_ip_address": "172.31.88.111",
+          "private_ip_addresses": [
+            {
+              "primary": true,
+              "private_dns_name": "ip-172-31-88-111.ec2.internal",
+              "private_ip_address": "172.31.88.111"
+            }
+          ],
+          "source_dest_check": true,
+          "status": "in-use",
+          "subnet_id": "subnet-1464e93a",
+          "vpc_id": "vpc-86e735fc"
+        }
+      ],
+      "placement": {
+        "availability_zone": "us-east-1b",
+        "group_name": "",
+        "tenancy": "default"
+      },
+      "private_dns_name": "ip-172-31-88-111.ec2.internal",
+      "private_ip_address": "172.31.88.111",
+      "product_codes": [],
+      "public_dns_name": "",
+      "root_device_name": "/dev/sda1",
+      "root_device_type": "ebs",
+      "security_groups": [
+        {
+          "group_id": "sg-04f62b78004992d2d",
+          "group_name": "MGMT-CONTROL"
+        }
+      ],
+      "source_dest_check": true,
+      "state": {
+        "code": 16,
+        "name": "running"
+      },
+      "state_transition_reason": "",
+      "subnet_id": "subnet-1464e93a",
+      "tags": {
+        "Name": "vmi-base",
+        "env": "build",
+        "function": "vmi",
+        "role": "app"
+      },
+      "virtualization_type": "hvm",
+      "vpc_id": "vpc-86e735fc"
+    },
+    {
+      "ami_launch_index": 0,
+      "architecture": "x86_64",
+      "block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "ebs": {
+            "attach_time": "2019-09-03T19:04:22+00:00",
+            "delete_on_termination": true,
+            "status": "attached",
+            "volume_id": "vol-04c405fecf1178df5"
+          }
+        }
+      ],
+      "capacity_reservation_specification": {
+        "capacity_reservation_preference": "open"
+      },
+      "client_token": "",
+      "cpu_options": {
+        "core_count": 1,
+        "threads_per_core": 1
+      },
+      "ebs_optimized": false,
+      "ena_support": true,
+      "hibernation_options": {
+        "configured": false
+      },
+      "hypervisor": "xen",
+      "image_id": "ami-0cfee17793b08a293",
+      "instance_id": "i-0b97548a857951275",
+      "instance_type": "t2.micro",
+      "key_name": "abhealth-staging-servers",
+      "launch_time": "2019-09-03T19:04:21+00:00",
+      "monitoring": {
+        "state": "disabled"
+      },
+      "network_interfaces": [
+        {
+          "association": {
+            "ip_owner_id": "amazon",
+            "public_dns_name": "ec2-3-82-246-155.compute-1.amazonaws.com",
+            "public_ip": "3.82.246.155"
+          },
+          "attachment": {
+            "attach_time": "2019-09-03T19:04:21+00:00",
+            "attachment_id": "eni-attach-0a60b0d8fa3526788",
+            "delete_on_termination": true,
+            "device_index": 0,
+            "status": "attached"
+          },
+          "description": "",
+          "groups": [
+            {
+              "group_id": "sg-667c752a",
+              "group_name": "default"
+            }
+          ],
+          "interface_type": "interface",
+          "ipv6_addresses": [],
+          "mac_address": "12:ef:1e:02:78:bc",
+          "network_interface_id": "eni-0b07035ae5998637d",
+          "owner_id": "567024208163",
+          "private_dns_name": "ip-172-31-94-3.ec2.internal",
+          "private_ip_address": "172.31.94.3",
+          "private_ip_addresses": [
+            {
+              "association": {
+                "ip_owner_id": "amazon",
+                "public_dns_name": "ec2-3-82-246-155.compute-1.amazonaws.com",
+                "public_ip": "3.82.246.155"
+              },
+              "primary": true,
+              "private_dns_name": "ip-172-31-94-3.ec2.internal",
+              "private_ip_address": "172.31.94.3"
+            }
+          ],
+          "source_dest_check": true,
+          "status": "in-use",
+          "subnet_id": "subnet-1464e93a",
+          "vpc_id": "vpc-86e735fc"
+        }
+      ],
+      "placement": {
+        "availability_zone": "us-east-1b",
+        "group_name": "",
+        "tenancy": "default"
+      },
+      "private_dns_name": "ip-172-31-94-3.ec2.internal",
+      "private_ip_address": "172.31.94.3",
+      "product_codes": [],
+      "public_dns_name": "ec2-3-82-246-155.compute-1.amazonaws.com",
+      "public_ip_address": "3.82.246.155",
+      "root_device_name": "/dev/sda1",
+      "root_device_type": "ebs",
+      "security_groups": [
+        {
+          "group_id": "sg-667c752a",
+          "group_name": "default"
+        }
+      ],
+      "source_dest_check": true,
+      "state": {
+        "code": 16,
+        "name": "running"
+      },
+      "state_transition_reason": "",
+      "subnet_id": "subnet-1464e93a",
+      "tags": {
+        "Name": "BaseInstance_vmi",
+        "env": "staging",
+        "function": "BaseInstance",
+        "role": "vmi",
+        "workflow": ""
+      },
+      "virtualization_type": "hvm",
+      "vpc_id": "vpc-86e735fc"
+    },
+    {
+      "ami_launch_index": 0,
+      "architecture": "x86_64",
+      "block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "ebs": {
+            "attach_time": "2019-09-05T22:05:13+00:00",
+            "delete_on_termination": true,
+            "status": "attached",
+            "volume_id": "vol-058a2dc68b58de09d"
+          }
+        }
+      ],
+      "capacity_reservation_specification": {
+        "capacity_reservation_preference": "open"
+      },
+      "client_token": "",
+      "cpu_options": {
+        "core_count": 1,
+        "threads_per_core": 1
+      },
+      "ebs_optimized": false,
+      "ena_support": true,
+      "hibernation_options": {
+        "configured": false
+      },
+      "hypervisor": "xen",
+      "image_id": "ami-07d0cf3af28718ef8",
+      "instance_id": "i-06d31f7bdd740c09b",
+      "instance_type": "t2.micro",
+      "key_name": "abhealth-staging-servers",
+      "launch_time": "2019-09-05T22:05:13+00:00",
+      "monitoring": {
+        "state": "disabled"
+      },
+      "network_interfaces": [
+        {
+          "association": {
+            "ip_owner_id": "567024208163",
+            "public_dns_name": "ec2-3-227-187-144.compute-1.amazonaws.com",
+            "public_ip": "3.227.187.144"
+          },
+          "attachment": {
+            "attach_time": "2019-09-05T22:05:13+00:00",
+            "attachment_id": "eni-attach-0a7e245dd5244bc4a",
+            "delete_on_termination": true,
+            "device_index": 0,
+            "status": "attached"
+          },
+          "description": "",
+          "groups": [
+            {
+              "group_id": "sg-667c752a",
+              "group_name": "default"
+            }
+          ],
+          "interface_type": "interface",
+          "ipv6_addresses": [],
+          "mac_address": "12:a9:c6:af:27:f0",
+          "network_interface_id": "eni-00314b0e27315f794",
+          "owner_id": "567024208163",
+          "private_dns_name": "ip-172-31-87-138.ec2.internal",
+          "private_ip_address": "172.31.87.138",
+          "private_ip_addresses": [
+            {
+              "association": {
+                "ip_owner_id": "567024208163",
+                "public_dns_name": "ec2-3-227-187-144.compute-1.amazonaws.com",
+                "public_ip": "3.227.187.144"
+              },
+              "primary": true,
+              "private_dns_name": "ip-172-31-87-138.ec2.internal",
+              "private_ip_address": "172.31.87.138"
+            }
+          ],
+          "source_dest_check": true,
+          "status": "in-use",
+          "subnet_id": "subnet-1464e93a",
+          "vpc_id": "vpc-86e735fc"
+        }
+      ],
+      "placement": {
+        "availability_zone": "us-east-1b",
+        "group_name": "",
+        "tenancy": "default"
+      },
+      "private_dns_name": "ip-172-31-87-138.ec2.internal",
+      "private_ip_address": "172.31.87.138",
+      "product_codes": [],
+      "public_dns_name": "ec2-3-227-187-144.compute-1.amazonaws.com",
+      "public_ip_address": "3.227.187.144",
+      "root_device_name": "/dev/sda1",
+      "root_device_type": "ebs",
+      "security_groups": [
+        {
+          "group_id": "sg-667c752a",
+          "group_name": "default"
+        }
+      ],
+      "source_dest_check": true,
+      "state": {
+        "code": 16,
+        "name": "running"
+      },
+      "state_transition_reason": "",
+      "subnet_id": "subnet-1464e93a",
+      "tags": {
+        "Name": "BaseInstance_Docker",
+        "env": "staging",
+        "function": "BaseInstance",
+        "role": "vmi",
+        "workflow": "JustCreated"
+      },
+      "virtualization_type": "hvm",
+      "vpc_id": "vpc-86e735fc"
+    },
+    {
+      "ami_launch_index": 0,
+      "architecture": "x86_64",
+      "block_device_mappings": [
+        {
+          "device_name": "/dev/xvda",
+          "ebs": {
+            "attach_time": "2019-09-03T23:50:03+00:00",
+            "delete_on_termination": true,
+            "status": "attached",
+            "volume_id": "vol-0c989a100dd0ae10a"
+          }
+        },
+        {
+          "device_name": "/dev/xvdcz",
+          "ebs": {
+            "attach_time": "2019-09-03T23:50:03+00:00",
+            "delete_on_termination": true,
+            "status": "attached",
+            "volume_id": "vol-03973733774eb08b2"
+          }
+        }
+      ],
+      "capacity_reservation_specification": {
+        "capacity_reservation_preference": "open"
+      },
+      "client_token": "6765b3e6-23ff-6d08-d395-1d0d525a4e58_subnet-6bd08621_1",
+      "cpu_options": {
+        "core_count": 1,
+        "threads_per_core": 1
+      },
+      "ebs_optimized": false,
+      "ena_support": true,
+      "hibernation_options": {
+        "configured": false
+      },
+      "hypervisor": "xen",
+      "iam_instance_profile": {
+        "arn": "arn:aws:iam::567024208163:instance-profile/sharemyhealth-eb-ec2",
+        "id": "AIPAJWFYWQJU63OX6AWCW"
+      },
+      "image_id": "ami-0ee60e67918b963a0",
+      "instance_id": "i-0580d8ce67abbe529",
+      "instance_type": "t1.micro",
+      "launch_time": "2019-09-03T23:50:02+00:00",
+      "monitoring": {
+        "state": "disabled"
+      },
+      "network_interfaces": [
+        {
+          "association": {
+            "ip_owner_id": "amazon",
+            "public_dns_name": "ec2-54-226-241-108.compute-1.amazonaws.com",
+            "public_ip": "54.226.241.108"
+          },
+          "attachment": {
+            "attach_time": "2019-09-03T23:50:02+00:00",
+            "attachment_id": "eni-attach-0f612d833ddc1c3ea",
+            "delete_on_termination": true,
+            "device_index": 0,
+            "status": "attached"
+          },
+          "description": "",
+          "groups": [
+            {
+              "group_id": "sg-05e5c67c010950110",
+              "group_name": "sharemyhealth-dev"
+            },
+            {
+              "group_id": "sg-007e61f71c4d6f4c4",
+              "group_name": "awseb-e-efuxjhj3q4-stack-AWSEBSecurityGroup-11VC6MR3GO02T"
+            }
+          ],
+          "interface_type": "interface",
+          "ipv6_addresses": [],
+          "mac_address": "0a:3d:38:b5:dd:4a",
+          "network_interface_id": "eni-04b075d280979517c",
+          "owner_id": "567024208163",
+          "private_dns_name": "ip-172-31-18-211.ec2.internal",
+          "private_ip_address": "172.31.18.211",
+          "private_ip_addresses": [
+            {
+              "association": {
+                "ip_owner_id": "amazon",
+                "public_dns_name": "ec2-54-226-241-108.compute-1.amazonaws.com",
+                "public_ip": "54.226.241.108"
+              },
+              "primary": true,
+              "private_dns_name": "ip-172-31-18-211.ec2.internal",
+              "private_ip_address": "172.31.18.211"
+            }
+          ],
+          "source_dest_check": true,
+          "status": "in-use",
+          "subnet_id": "subnet-6bd08621",
+          "vpc_id": "vpc-86e735fc"
+        }
+      ],
+      "placement": {
+        "availability_zone": "us-east-1c",
+        "group_name": "",
+        "tenancy": "default"
+      },
+      "private_dns_name": "ip-172-31-18-211.ec2.internal",
+      "private_ip_address": "172.31.18.211",
+      "product_codes": [],
+      "public_dns_name": "ec2-54-226-241-108.compute-1.amazonaws.com",
+      "public_ip_address": "54.226.241.108",
+      "root_device_name": "/dev/xvda",
+      "root_device_type": "ebs",
+      "security_groups": [
+        {
+          "group_id": "sg-05e5c67c010950110",
+          "group_name": "sharemyhealth-dev"
+        },
+        {
+          "group_id": "sg-007e61f71c4d6f4c4",
+          "group_name": "awseb-e-efuxjhj3q4-stack-AWSEBSecurityGroup-11VC6MR3GO02T"
+        }
+      ],
+      "source_dest_check": true,
+      "state": {
+        "code": 16,
+        "name": "running"
+      },
+      "state_transition_reason": "",
+      "subnet_id": "subnet-6bd08621",
+      "tags": {
+        "Name": "sharemyhealth-dev-env",
+        "aws:autoscaling:groupName": "awseb-e-efuxjhj3q4-stack-AWSEBAutoScalingGroup-SZQZL222UNZ",
+        "aws:cloudformation:logical-id": "AWSEBAutoScalingGroup",
+        "aws:cloudformation:stack-id": "arn:aws:cloudformation:us-east-1:567024208163:stack/awseb-e-efuxjhj3q4-stack/5a0e9210-c9c7-11e9-ae23-0e348661d726",
+        "aws:cloudformation:stack-name": "awseb-e-efuxjhj3q4-stack",
+        "elasticbeanstalk:environment-id": "e-efuxjhj3q4",
+        "elasticbeanstalk:environment-name": "sharemyhealth-dev-env"
+      },
+      "virtualization_type": "hvm",
+      "vpc_id": "vpc-86e735fc"
+    },
+    {
+      "ami_launch_index": 0,
+      "architecture": "x86_64",
+      "block_device_mappings": [
+        {
+          "device_name": "/dev/xvda",
+          "ebs": {
+            "attach_time": "2019-09-06T03:14:33+00:00",
+            "delete_on_termination": true,
+            "status": "attached",
+            "volume_id": "vol-056946b263f822ef9"
+          }
+        },
+        {
+          "device_name": "/dev/xvdcz",
+          "ebs": {
+            "attach_time": "2019-09-06T03:14:33+00:00",
+            "delete_on_termination": true,
+            "status": "attached",
+            "volume_id": "vol-0a33dfe0f1f9a85ba"
+          }
+        }
+      ],
+      "capacity_reservation_specification": {
+        "capacity_reservation_preference": "open"
+      },
+      "client_token": "0485b412-43c8-4171-b64c-ffad50bdf9aa_subnet-6bd08621_1",
+      "cpu_options": {
+        "core_count": 1,
+        "threads_per_core": 1
+      },
+      "ebs_optimized": false,
+      "ena_support": true,
+      "hibernation_options": {
+        "configured": false
+      },
+      "hypervisor": "xen",
+      "iam_instance_profile": {
+        "arn": "arn:aws:iam::567024208163:instance-profile/vmi-eb-ec2",
+        "id": "AIPAIZSJVCORFJGG3SVRY"
+      },
+      "image_id": "ami-0ee60e67918b963a0",
+      "instance_id": "i-0c398f319a193bc99",
+      "instance_type": "t1.micro",
+      "launch_time": "2019-09-06T03:14:32+00:00",
+      "monitoring": {
+        "state": "disabled"
+      },
+      "network_interfaces": [
+        {
+          "association": {
+            "ip_owner_id": "amazon",
+            "public_dns_name": "ec2-3-85-206-14.compute-1.amazonaws.com",
+            "public_ip": "3.85.206.14"
+          },
+          "attachment": {
+            "attach_time": "2019-09-06T03:14:32+00:00",
+            "attachment_id": "eni-attach-0b99e8ca6d82c76c9",
+            "delete_on_termination": true,
+            "device_index": 0,
+            "status": "attached"
+          },
+          "description": "",
+          "groups": [
+            {
+              "group_id": "sg-0604c6dad97c387a5",
+              "group_name": "vmi-dev"
+            },
+            {
+              "group_id": "sg-040d77d502156f6fd",
+              "group_name": "awseb-e-8yfqkvdtwb-stack-AWSEBSecurityGroup-1PPWFGTDCHVVW"
+            }
+          ],
+          "interface_type": "interface",
+          "ipv6_addresses": [],
+          "mac_address": "0a:f9:57:44:a9:f4",
+          "network_interface_id": "eni-04df9292398a49698",
+          "owner_id": "567024208163",
+          "private_dns_name": "ip-172-31-19-195.ec2.internal",
+          "private_ip_address": "172.31.19.195",
+          "private_ip_addresses": [
+            {
+              "association": {
+                "ip_owner_id": "amazon",
+                "public_dns_name": "ec2-3-85-206-14.compute-1.amazonaws.com",
+                "public_ip": "3.85.206.14"
+              },
+              "primary": true,
+              "private_dns_name": "ip-172-31-19-195.ec2.internal",
+              "private_ip_address": "172.31.19.195"
+            }
+          ],
+          "source_dest_check": true,
+          "status": "in-use",
+          "subnet_id": "subnet-6bd08621",
+          "vpc_id": "vpc-86e735fc"
+        }
+      ],
+      "placement": {
+        "availability_zone": "us-east-1c",
+        "group_name": "",
+        "tenancy": "default"
+      },
+      "private_dns_name": "ip-172-31-19-195.ec2.internal",
+      "private_ip_address": "172.31.19.195",
+      "product_codes": [],
+      "public_dns_name": "ec2-3-85-206-14.compute-1.amazonaws.com",
+      "public_ip_address": "3.85.206.14",
+      "root_device_name": "/dev/xvda",
+      "root_device_type": "ebs",
+      "security_groups": [
+        {
+          "group_id": "sg-0604c6dad97c387a5",
+          "group_name": "vmi-dev"
+        },
+        {
+          "group_id": "sg-040d77d502156f6fd",
+          "group_name": "awseb-e-8yfqkvdtwb-stack-AWSEBSecurityGroup-1PPWFGTDCHVVW"
+        }
+      ],
+      "source_dest_check": true,
+      "state": {
+        "code": 16,
+        "name": "running"
+      },
+      "state_transition_reason": "",
+      "subnet_id": "subnet-6bd08621",
+      "tags": {
+        "Name": "vmi-dev-env",
+        "aws:autoscaling:groupName": "awseb-e-8yfqkvdtwb-stack-AWSEBAutoScalingGroup-1TXQ7Y8RS3V3M",
+        "aws:cloudformation:logical-id": "AWSEBAutoScalingGroup",
+        "aws:cloudformation:stack-id": "arn:aws:cloudformation:us-east-1:567024208163:stack/awseb-e-8yfqkvdtwb-stack/5c2e01a0-d054-11e9-8277-0a437bda7b86",
+        "aws:cloudformation:stack-name": "awseb-e-8yfqkvdtwb-stack",
+        "elasticbeanstalk:environment-id": "e-8yfqkvdtwb",
+        "elasticbeanstalk:environment-name": "vmi-dev-env"
+      },
+      "virtualization_type": "hvm",
+      "vpc_id": "vpc-86e735fc"
+    },
+    {
+      "ami_launch_index": 0,
+      "architecture": "x86_64",
+      "block_device_mappings": [
+        {
+          "device_name": "/dev/xvda",
+          "ebs": {
+            "attach_time": "2019-09-06T04:19:36+00:00",
+            "delete_on_termination": true,
+            "status": "attached",
+            "volume_id": "vol-0094d9363c119c12e"
+          }
+        },
+        {
+          "device_name": "/dev/xvdcz",
+          "ebs": {
+            "attach_time": "2019-09-06T04:19:36+00:00",
+            "delete_on_termination": true,
+            "status": "attached",
+            "volume_id": "vol-0fab8959acb5ff89c"
+          }
+        }
+      ],
+      "capacity_reservation_specification": {
+        "capacity_reservation_preference": "open"
+      },
+      "client_token": "d4f5b413-3200-3a3e-4150-e4e97f1ad206_subnet-6bd08621_1",
+      "cpu_options": {
+        "core_count": 1,
+        "threads_per_core": 1
+      },
+      "ebs_optimized": false,
+      "ena_support": true,
+      "hibernation_options": {
+        "configured": false
+      },
+      "hypervisor": "xen",
+      "iam_instance_profile": {
+        "arn": "arn:aws:iam::567024208163:instance-profile/smhapp-eb-ec2",
+        "id": "AIPAYIBKGZERYVIGSAS7L"
+      },
+      "image_id": "ami-0ee60e67918b963a0",
+      "instance_id": "i-0c4d6d34a58864dd9",
+      "instance_type": "t2.micro",
+      "launch_time": "2019-09-06T04:19:35+00:00",
+      "monitoring": {
+        "state": "disabled"
+      },
+      "network_interfaces": [
+        {
+          "association": {
+            "ip_owner_id": "amazon",
+            "public_dns_name": "ec2-3-94-127-33.compute-1.amazonaws.com",
+            "public_ip": "3.94.127.33"
+          },
+          "attachment": {
+            "attach_time": "2019-09-06T04:19:35+00:00",
+            "attachment_id": "eni-attach-06213531a22b1285f",
+            "delete_on_termination": true,
+            "device_index": 0,
+            "status": "attached"
+          },
+          "description": "",
+          "groups": [
+            {
+              "group_id": "sg-06af0c99f154c7837",
+              "group_name": "smhapp-dev"
+            },
+            {
+              "group_id": "sg-0f2c6601164bc2f15",
+              "group_name": "awseb-e-27eeuvc5rh-stack-AWSEBSecurityGroup-1KM88Y1B8JZ50"
+            }
+          ],
+          "interface_type": "interface",
+          "ipv6_addresses": [],
+          "mac_address": "0a:eb:ed:39:b4:ba",
+          "network_interface_id": "eni-0b85cc98dda1c1a52",
+          "owner_id": "567024208163",
+          "private_dns_name": "ip-172-31-21-224.ec2.internal",
+          "private_ip_address": "172.31.21.224",
+          "private_ip_addresses": [
+            {
+              "association": {
+                "ip_owner_id": "amazon",
+                "public_dns_name": "ec2-3-94-127-33.compute-1.amazonaws.com",
+                "public_ip": "3.94.127.33"
+              },
+              "primary": true,
+              "private_dns_name": "ip-172-31-21-224.ec2.internal",
+              "private_ip_address": "172.31.21.224"
+            }
+          ],
+          "source_dest_check": true,
+          "status": "in-use",
+          "subnet_id": "subnet-6bd08621",
+          "vpc_id": "vpc-86e735fc"
+        }
+      ],
+      "placement": {
+        "availability_zone": "us-east-1c",
+        "group_name": "",
+        "tenancy": "default"
+      },
+      "private_dns_name": "ip-172-31-21-224.ec2.internal",
+      "private_ip_address": "172.31.21.224",
+      "product_codes": [],
+      "public_dns_name": "ec2-3-94-127-33.compute-1.amazonaws.com",
+      "public_ip_address": "3.94.127.33",
+      "root_device_name": "/dev/xvda",
+      "root_device_type": "ebs",
+      "security_groups": [
+        {
+          "group_id": "sg-06af0c99f154c7837",
+          "group_name": "smhapp-dev"
+        },
+        {
+          "group_id": "sg-0f2c6601164bc2f15",
+          "group_name": "awseb-e-27eeuvc5rh-stack-AWSEBSecurityGroup-1KM88Y1B8JZ50"
+        }
+      ],
+      "source_dest_check": true,
+      "state": {
+        "code": 16,
+        "name": "running"
+      },
+      "state_transition_reason": "",
+      "subnet_id": "subnet-6bd08621",
+      "tags": {
+        "Name": "smhapp-dev-env",
+        "aws:autoscaling:groupName": "awseb-e-27eeuvc5rh-stack-AWSEBAutoScalingGroup-55NY8YO86DQO",
+        "aws:cloudformation:logical-id": "AWSEBAutoScalingGroup",
+        "aws:cloudformation:stack-id": "arn:aws:cloudformation:us-east-1:567024208163:stack/awseb-e-27eeuvc5rh-stack/a9764cd0-a442-11e9-bd63-0ee5479654d4",
+        "aws:cloudformation:stack-name": "awseb-e-27eeuvc5rh-stack",
+        "elasticbeanstalk:environment-id": "e-27eeuvc5rh",
+        "elasticbeanstalk:environment-name": "smhapp-dev-env"
+      },
+      "virtualization_type": "hvm",
+      "vpc_id": "vpc-86e735fc"
+    },
+    {
+      "ami_launch_index": 0,
+      "architecture": "x86_64",
+      "block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "ebs": {
+            "attach_time": "2019-09-12T03:33:44+00:00",
+            "delete_on_termination": true,
+            "status": "attached",
+            "volume_id": "vol-0dc60afbbdafd0803"
+          }
+        }
+      ],
+      "capacity_reservation_specification": {
+        "capacity_reservation_preference": "open"
+      },
+      "client_token": "e545b48e-229b-40b9-7f04-0b3264691036_subnet-016d7e6c98f8eb48e_1",
+      "cpu_options": {
+        "core_count": 1,
+        "threads_per_core": 1
+      },
+      "ebs_optimized": false,
+      "ena_support": true,
+      "hibernation_options": {
+        "configured": false
+      },
+      "hypervisor": "xen",
+      "image_id": "ami-083f24e6d53f772e7",
+      "instance_id": "i-09764e4a350d4df95",
+      "instance_type": "t2.micro",
+      "key_name": "abhealth-staging-servers",
+      "launch_time": "2019-09-12T03:33:43+00:00",
+      "monitoring": {
+        "state": "disabled"
+      },
+      "network_interfaces": [
+        {
+          "attachment": {
+            "attach_time": "2019-09-12T03:33:43+00:00",
+            "attachment_id": "eni-attach-0d837ecc6508074d8",
+            "delete_on_termination": true,
+            "device_index": 0,
+            "status": "attached"
+          },
+          "description": "",
+          "groups": [
+            {
+              "group_id": "sg-07e837a18a5455edc",
+              "group_name": "staging-vmi-APP"
+            }
+          ],
+          "interface_type": "interface",
+          "ipv6_addresses": [],
+          "mac_address": "0a:20:4a:d0:0f:60",
+          "network_interface_id": "eni-016c8159414c319a7",
+          "owner_id": "567024208163",
+          "private_dns_name": "ip-10-13-6-236.ec2.internal",
+          "private_ip_address": "10.13.6.236",
+          "private_ip_addresses": [
+            {
+              "primary": true,
+              "private_dns_name": "ip-10-13-6-236.ec2.internal",
+              "private_ip_address": "10.13.6.236"
+            }
+          ],
+          "source_dest_check": true,
+          "status": "in-use",
+          "subnet_id": "subnet-016d7e6c98f8eb48e",
+          "vpc_id": "vpc-05253e87f7c98a659"
+        }
+      ],
+      "placement": {
+        "availability_zone": "us-east-1c",
+        "group_name": "",
+        "tenancy": "default"
+      },
+      "private_dns_name": "ip-10-13-6-236.ec2.internal",
+      "private_ip_address": "10.13.6.236",
+      "product_codes": [],
+      "public_dns_name": "",
+      "root_device_name": "/dev/sda1",
+      "root_device_type": "ebs",
+      "security_groups": [
+        {
+          "group_id": "sg-07e837a18a5455edc",
+          "group_name": "staging-vmi-APP"
+        }
+      ],
+      "source_dest_check": true,
+      "state": {
+        "code": 16,
+        "name": "running"
+      },
+      "state_transition_reason": "",
+      "subnet_id": "subnet-016d7e6c98f8eb48e",
+      "tags": {
+        "Name": "vmi_staging",
+        "aws:autoscaling:groupName": "GROUP_vmi__20190912T031905",
+        "env": "staging",
+        "role": "vmi"
+      },
+      "virtualization_type": "hvm",
+      "vpc_id": "vpc-05253e87f7c98a659"
+    }
+  ]
+}
+}

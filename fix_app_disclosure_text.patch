@@ -1,0 +1,43 @@
+Index: deploy_aws_vpc/roles/app_install/templates/smh.env
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- deploy_aws_vpc/roles/app_install/templates/smh.env	(revision b559f455233e1c757e1fa4ccfe1638a20c4fa60c)
++++ deploy_aws_vpc/roles/app_install/templates/smh.env	(date 1568617565643)
+@@ -53,7 +53,7 @@
+ export SOCIAL_AUTH_VERIFYMYIDENTITY_OPENIDCONNECT_SECRET={{ app_social_auth_verifymyidentity_openidconnect_secret }}
+ 
+ 
+-export DISCLOSURE_TEXT={{ app_disclosure_text }}
++export DISCLOSURE_TEXT='{{ app_disclosure_text }}'
+ 
+ 
+ export BACKEND_FHIR_CLIENT_ID={{ app_backend_fhir_client_id }}
+@@ -71,8 +71,8 @@
+ export HIE_WORKBENCH_PASSWORD={{ app_hie_workbench_password }}
+ export HIE_BASIC_AUTH_PASSWORD={{ app_hie_basic_auth_password }}
+ 
+-export HIE_CLIENT_CERT={{ app_hie_client_cert }}
++export HIE_CLIENT_CERT='{{ app_hie_client_cert }}'
+ 
+ 
+-export HIE_CLIENT_PRIVATE_KEY={{ app_hie_client_private_key }}
++export HIE_CLIENT_PRIVATE_KEY='{{ app_hie_client_private_key }}'
+ echo "{{ role_type }} 35 env variables were set"
+Index: deploy_aws_vpc/roles/app_install/templates/smh_app.env
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- deploy_aws_vpc/roles/app_install/templates/smh_app.env	(revision b559f455233e1c757e1fa4ccfe1638a20c4fa60c)
++++ deploy_aws_vpc/roles/app_install/templates/smh_app.env	(date 1568617565649)
+@@ -41,7 +41,7 @@
+ 
+ export DEFAULT_FILE_STORAGE=storages.backends.s3boto3.S3Boto3Storage
+ 
+-# TODO Add OIDC PUB AND PRIVATE KEYS
++# When adding OIDC PUB AND PRIVATE KEYS wrap ansible variable with single quotes
+ 
+ ##########################################
+ # Connection to Verify My Identity (VMI) #

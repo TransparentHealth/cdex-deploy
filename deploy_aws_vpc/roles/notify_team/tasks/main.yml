@@ -1,0 +1,15 @@
+---
+# notify_teams/tasks/main.yml
+# Created: 2019-09-21
+# cdex-deploy
+# Purpose: Send notifcation to Teams BB2,0/alliance channel
+#
+#    
+
+- debug:
+    msg: "testing teams notification"
+
+- name: Send Teams notification
+  office_365_connector_card:
+    webhook: https://outlook.office.com/webhook/b0c913bf-8240-46b5-9822-83c20a763d0f@e23fb87b-9a87-474d-9d81-91d0af53601d/IncomingWebhook/a4a7269dd30d4ebba3b92ddcdd0b8906/22050450-095f-4178-a187-2550bb609cb2
+    text: "{{ role_type }} updated in {{ vpc_env }} at {{ configure_time }} from https://github.com/TransparentHealth/{{ system_repository_name[role_type] }} Branch: {{ git_branch[role_type] }}"
