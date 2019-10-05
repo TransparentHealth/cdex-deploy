@@ -9,6 +9,7 @@ django_secret_key: "{{ env_django_secret_key }}"
 use_parameter_store: "{{ env_use_parameter_store }}"
 environment_variable_strategy: "{{ env_environment_variable_strategy }}"
 # ".env" | "EC2_PARAMSTORE"
+ec2paramstore_4_env_vars: "{{ env_ec2paramstore_4_env_vars }}"
 
 cloud_provider: "aws"
 # Options: aws | azure
