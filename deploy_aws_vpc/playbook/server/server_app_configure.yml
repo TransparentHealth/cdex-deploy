@@ -35,7 +35,9 @@
   roles:
     - role: "../../roles/base_app"
     # install aws config
-    - role: "../../roles/aws_config_install"
+    - role: "../../roles/aws/config_install"
+    # install cloudwatch agent
+    - role: "../../roles/aws/cloudwatch_install"
     - role: "../../roles/python3.7"
       when: "role_type == 'smh_app' "
     - role: "../../roles/app_user"
