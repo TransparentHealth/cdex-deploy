@@ -13,7 +13,10 @@
 - name: Get cloudwatch agent package
   become_user: "{{ remote_admin_account }}"
   become: yes
-  shell: "curl -o /home/{{ remote_admin_account }}/amazon-cloudwatch-agent.deb https://s3.amazonaws.com/amazoncloudwatch-agent/debian/amd64/latest/amazon-cloudwatch-agent.deb"
+  get_url:
+    url: "https://s3.amazonaws.com/amazoncloudwatch-agent/debian/amd64/latest/amazon-cloudwatch-agent.deb"
+    dest: "/home/{{ remote_admin_account }}/amazon-cloudwatch-agent.deb"
+    mode: "0644"
 
 - name: Install cloudwatch agent
   become_user: "{{ remote_admin_account }}"
