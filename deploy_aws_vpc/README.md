@@ -103,7 +103,7 @@ Run the playbook:
 ### VPC Configuration
 
 - The VPC is configured in AWS US-East-1.
-- The VPC has a 10.0.0.0/16 address space.
+- The VPC has a 10.X.0.0/16 address space.
 - The VPC has subnets across three availability zones (a, b & c).
 - The VPC has four areas: dmz, app, dbs and ctl
 

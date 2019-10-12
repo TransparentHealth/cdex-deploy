@@ -4,6 +4,7 @@
 
 - hosts: localhost
   connection: local
+  gather_facts: no
   vars_files:
     - "group_vars/abhealth-env-{{ vpc_env|lower }}.yml"
   vars:
