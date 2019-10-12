@@ -10,7 +10,7 @@
     platform_app:
       - "vmi"
       - "smh"
-      - "smhapp"
+      - "smh_app"
 
 
   environment:
