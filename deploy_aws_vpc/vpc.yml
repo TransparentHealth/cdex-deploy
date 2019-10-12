@@ -18,7 +18,7 @@
     platform_app:
       - "vmi"
       - "smh"
-      - "smh_app"
+      - "smhapp"
 
   environment:
     AWS_ACCESS_KEY_ID: "{{ aws_access_key }}"
