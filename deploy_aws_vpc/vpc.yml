@@ -20,6 +20,11 @@
       - "smh"
       - "smhapp"
 
+    no_underbar_platform_app:
+      - "vmi"
+      - "smh"
+      - "smhapp"
+
   environment:
     AWS_ACCESS_KEY_ID: "{{ aws_access_key }}"
     AWS_SECRET_ACCESS_KEY: "{{ aws_secret_key }}"
@@ -29,7 +34,7 @@
     - include_tasks: tasks/vpc/setup.vpc.yml
     - include_tasks: tasks/vpc/setup.gateways.yml
     - include_tasks: tasks/vpc/setup.targetgroup.yml
-      with_items: "{{ platform_app }}"
+      with_items: "{{ no_underbar_platform_app }}"
 
     - include_tasks: tasks/vpc/get.alb.yml
       with_items:
