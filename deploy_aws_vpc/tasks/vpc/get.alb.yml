@@ -2,6 +2,9 @@
 ---
 # get information about application load balancers.
 
+- debug:
+    msg: "checking for ALB: {{ item }}"
+
 - elb_application_lb_facts:
     names:
       - "{{ item }}"
