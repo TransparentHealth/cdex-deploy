@@ -70,6 +70,8 @@
     owner: cwagent
 
 - name: enable cloudwatch
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   systemd:
     name: amazon-cloudwatch-agent.service
     state: started
