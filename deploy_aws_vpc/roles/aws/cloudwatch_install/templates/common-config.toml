@@ -1,0 +1,8 @@
+# This common-config is used to configure items used for both ssm and cloudwatch access
+
+## Configuration for shared credential.
+## Default credential strategy will be used if it is absent here:
+## 	Instance role is used for EC2 case by default.
+[credentials]
+     shared_credential_file = "/home/{{ remote_user_account }}/.aws/credentials"
+

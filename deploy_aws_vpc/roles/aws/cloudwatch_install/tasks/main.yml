@@ -26,3 +26,30 @@
   become: yes
   shell: "sudo usermod -aG adm cwagent "
 
+- name: "create /home/cwagent/.aws"
+  file:
+    path: "/home/cwagent/.aws"
+    state: directory
+    mode: "0760"
+
+- name: "install /home/cwagent/.aws/config"
+  template:
+    src: templates/aws_config
+    dest: "/home/cwagent/.aws/config"
+    mode: "0400"
+
+- name: "install /home/cwagent/.aws/credentials"
+  template:
+    src: templates/aws_credentials
+    dest: "/home/cwagent/.aws/credentials"
+    mode: "0400"
+    owner: cwagent
+
+
+- name: Setup cwagent config file
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  template:
+    src: templates/common-config.toml
+    dest: "/opt/aws/amazon-cloudwatch-agent/etc/common-config.toml"
+    owner: cwagent

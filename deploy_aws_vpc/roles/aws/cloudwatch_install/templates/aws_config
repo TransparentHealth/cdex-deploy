@@ -1,0 +1,3 @@
+[default]
+output = text
+region = {{ aws_region }}
