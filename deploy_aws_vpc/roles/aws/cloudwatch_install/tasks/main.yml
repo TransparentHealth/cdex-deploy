@@ -26,6 +26,13 @@
   become: yes
   shell: "sudo usermod -aG adm cwagent "
 
+- name: Create cwagent home directory
+  file:
+    path: "/home/cwagent"
+    state: directory
+    owner: cwagent
+    mode: "0760"
+
 - name: "create /home/cwagent/.aws"
   file:
     path: "/home/cwagent/.aws"
