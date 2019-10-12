@@ -2,7 +2,7 @@
 # create VPC target Groups.
 
 - debug:
-    msg: "setting up trarget group {{  vpc_env}}-{{ item }}-APP"
+    msg: "setting up target group {{  vpc_env}}-{{ item }}-APP"
 # Create a target group with a default health check
 - elb_target_group:
     name: "{{  vpc_env}}-{{ item }}-APP"
