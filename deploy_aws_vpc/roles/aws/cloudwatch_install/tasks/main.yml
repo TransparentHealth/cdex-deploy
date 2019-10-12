@@ -68,3 +68,10 @@
     src: templates/common-config.toml
     dest: "/opt/aws/amazon-cloudwatch-agent/etc/common-config.toml"
     owner: cwagent
+
+- name: enable cloudwatch
+  systemd:
+    name: amazon-cloudwatch-agent.service
+    state: started
+    enabled: yes
+
