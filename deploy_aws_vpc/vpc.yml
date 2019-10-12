@@ -2,7 +2,8 @@
 ---
 # playbook that runs our VPC tasks for any hosts in the `vpc` group, providing AWS credentials in the environment
 
-- hosts: vpc
+- hosts: localhost
+  connection: local
   vars_files:
     - "group_vars/abhealth-env-{{ vpc_env|lower }}.yml"
   vars:

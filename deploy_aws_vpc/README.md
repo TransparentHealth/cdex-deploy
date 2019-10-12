@@ -91,10 +91,13 @@ Edit group_vars/all.yml
 Change the above line to match the location of the virtualenv 
 python version.
 
+The following example is for the dev environment in us-=east-1 region:
 Run the playbook:
 
     cd ./deploy_aws_vpc
-    ansible-playbook -i ./etc/ansible/hosts vpc.yml --vault-id ~/env/ansibled.vault 
+    ansible-playbook -i ./etc/ansible/hosts vpc.yml \
+       --extra-vars "vpc_env=dev vpc_base_region=us-east \
+                     vpc_number=1 aws_region=us-east-1"
 
 
 ### VPC Configuration
