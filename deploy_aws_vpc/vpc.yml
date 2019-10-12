@@ -6,14 +6,19 @@
   connection: local
   gather_facts: no
   vars_files:
+    - "vault/environment/{{ vpc_env }}/{{ role_type }}/vault.yml"
+    - "vars/environment/{{ vpc_env }}/{{ role_type }}/env.yml"
+    - "vault/environment/{{ vpc_env }}/vault.yml"
+    - "vars/environment/{{ vpc_env }}/env.yml"
+    - "vars/common.yml"
     - "group_vars/abhealth-env-{{ vpc_env|lower }}.yml"
+
   vars:
     role_state: present
     platform_app:
       - "vmi"
       - "smh"
       - "smh_app"
-
 
   environment:
     AWS_ACCESS_KEY_ID: "{{ aws_access_key }}"

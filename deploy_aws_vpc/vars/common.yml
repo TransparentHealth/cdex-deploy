@@ -133,3 +133,240 @@ alb_ssl_policy_name: "ELBSecurityPolicy-2016-08"
 
 # Notifications
 slack_token_update_channel: "{{ env_slack_token_update_channel }}"
+
+# Imported from vpc_ansibled.yml
+
+# IP CIDR BLOCK Mapping
+# vpc_base_region: us-east
+# vpc_number: 1 | 2
+# env: scratch | dev | stage | prod
+# NOTE: Last period is required in string. Used to connect into Valid subnet string
+vpc_env_block:
+  us-east-1-scratch: "10.11."
+  us-east-1-dev: "10.12."
+  us-east-1-staging: "10.13."
+  us-east-1-prod: "10.14."
+  us-east-2-scratch: "10.1."
+  us-east-2-dev: "10.2."
+  us-east-2-staging: "10.0."
+  us-east-2-prod: "10.3."
+
+# IP CIDR block for the VPC
+vpc_cidr_block: "{{ vpc_env_block[vpc_env_block_prefix] }}0.0/16"
+
+# a map defining the subnets we will build in the VPC
+vpc_subnets:
+  dmz-a:
+    cidr: "{{ vpc_env_block[vpc_env_block_prefix] }}1.0/24"
+    az: "{{ aws_region }}a"
+  dmz-b:
+    cidr: "{{ vpc_env_block[vpc_env_block_prefix] }}2.0/24"
+    az: "{{ aws_region }}b"
+  dmz-c:
+    cidr: "{{ vpc_env_block[vpc_env_block_prefix] }}3.0/24"
+    az: "{{ aws_region }}c"
+  app-a:
+    cidr: "{{ vpc_env_block[vpc_env_block_prefix] }}4.0/24"
+    az: "{{ aws_region }}a"
+  app-b:
+    cidr: "{{ vpc_env_block[vpc_env_block_prefix] }}5.0/24"
+    az: "{{ aws_region }}b"
+  app-c:
+    cidr: "{{ vpc_env_block[vpc_env_block_prefix] }}6.0/24"
+    az: "{{ aws_region }}c"
+  dbs-a:
+    cidr: "{{ vpc_env_block[vpc_env_block_prefix] }}7.0/24"
+    az: "{{ aws_region }}a"
+  dbs-b:
+    cidr: "{{ vpc_env_block[vpc_env_block_prefix] }}8.0/24"
+    az: "{{ aws_region }}b"
+  dbs-c:
+    cidr: "{{ vpc_env_block[vpc_env_block_prefix] }}9.0/24"
+    az: "{{ aws_region }}c"
+  ctl-a:
+    cidr: "{{ vpc_env_block[vpc_env_block_prefix] }}10.0/24"
+    az: "{{ aws_region }}a"
+  ctl-b:
+    cidr: "{{ vpc_env_block[vpc_env_block_prefix] }}11.0/24"
+    az: "{{ aws_region }}b"
+  ctl-c:
+    cidr: "{{ vpc_env_block[vpc_env_block_prefix] }}12.0/24"
+    az: "{{ aws_region }}c"
+
+
+
+# a list defining the security groups for our VPC
+#
+# vpc_env: prod | staging
+#
+#
+#
+vpc_security_groups:
+  - name: "{{ vpc_env }}-DMZ"
+    description: "Public Access to DMZ"
+    rules:
+      - proto: tcp
+        cidr_ip: 0.0.0.0/0
+        ports:
+          - 80
+        rule_desc: "allow web traffic"
+      - proto: tcp
+        cidr_ip: 0.0.0.0/0
+        ports:
+          - 443
+        rule_desc: "allow secure web traffic"
+      - proto: tcp
+        cidr_ip: 0.0.0.0/0
+        ports:
+          - 22
+        rule_desc: "allow SSH Access"
+    rules_egress:
+      - proto: all
+        cidr_ip: 0.0.0.0/0
+        rule_desc: "allow all outbound traffic"
+  - name: "{{ vpc_env }}-vmi-APP"
+    description: "Access to APP for vmi zone"
+    rules:
+      - proto: tcp
+        ports:
+          - 80
+          - 443
+        cidr_ip: "{{ vpc_subnets['dmz-a']['cidr'] }}"
+        rule_desc: "Web Traffic for vmi from dmz-a"
+      - proto: tcp
+        ports:
+          - 80
+          - 443
+        cidr_ip: "{{ vpc_subnets['dmz-b']['cidr'] }}"
+        rule_desc: "Web Traffic for vmi from dmz-b"
+      - proto: tcp
+        ports:
+          - 80
+          - 443
+        cidr_ip: "{{ vpc_subnets['dmz-c']['cidr'] }}"
+        rule_desc: "Web Traffic for vmi from dmz-c"
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: "{{ vpc_subnets['dmz-a']['cidr'] }}"
+        rule_desc: "ssh Traffic for vmi from dmz-a"
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: "{{ vpc_subnets['dmz-b']['cidr'] }}"
+        rule_desc: "ssh Traffic for vmi from dmz-b"
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: "{{ vpc_subnets['dmz-c']['cidr'] }}"
+        rule_desc: "ssh Traffic for vmi from dmz-c"
+
+  - name: "{{ vpc_env }}-smh-APP"
+    description: "Access to APP for smh zone"
+    rules:
+      - proto: tcp
+        ports:
+          - 80
+          - 443
+        cidr_ip: "{{ vpc_subnets['dmz-a']['cidr'] }}"
+        rule_desc: "Web Traffic for smh from dmz-a"
+      - proto: tcp
+        ports:
+          - 80
+          - 443
+        cidr_ip: "{{ vpc_subnets['dmz-b']['cidr'] }}"
+        rule_desc: "Web Traffic for smh from dmz-b"
+      - proto: tcp
+        ports:
+          - 80
+          - 443
+        cidr_ip: "{{ vpc_subnets['dmz-c']['cidr'] }}"
+        rule_desc: "Web Traffic for smh from dmz-c"
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: "{{ vpc_subnets['dmz-a']['cidr'] }}"
+        rule_desc: "ssh Traffic for smh from dmz-a"
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: "{{ vpc_subnets['dmz-b']['cidr'] }}"
+        rule_desc: "ssh Traffic for smh from dmz-b"
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: "{{ vpc_subnets['dmz-c']['cidr'] }}"
+        rule_desc: "ssh Traffic for smh from dmz-c"
+
+  - name: "{{ vpc_env }}-smhapp-APP"
+    description: "Access to APP for smhapp zone"
+    rules:
+      - proto: tcp
+        ports:
+          - 80
+          - 443
+        cidr_ip: "{{ vpc_subnets['dmz-a']['cidr'] }}"
+        rule_desc: "Web Traffic for smhapp from dmz-a"
+      - proto: tcp
+        ports:
+          - 80
+          - 443
+        cidr_ip: "{{ vpc_subnets['dmz-b']['cidr'] }}"
+        rule_desc: "Web Traffic for smhapp from dmz-b"
+      - proto: tcp
+        ports:
+          - 80
+          - 443
+        cidr_ip: "{{ vpc_subnets['dmz-c']['cidr'] }}"
+        rule_desc: "Web Traffic for smhapp from dmz-c"
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: "{{ vpc_subnets['dmz-a']['cidr'] }}"
+        rule_desc: "ssh Traffic for smhapp from dmz-a"
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: "{{ vpc_subnets['dmz-b']['cidr'] }}"
+        rule_desc: "ssh Traffic for smh from dmz-b"
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: "{{ vpc_subnets['dmz-c']['cidr'] }}"
+        rule_desc: "ssh Traffic for smhapp from dmz-c"
+
+
+  - name: "{{ vpc_env }}-DBS"
+    description: "Access to DBS zone"
+    rules:
+      - proto: tcp
+        ports:
+          - 5432
+        cidr_ip: "{{ vpc_subnets['app-a']['cidr'] }}"
+        rule_desc: "Postgres Traffic from app-a"
+      - proto: tcp
+        ports:
+          - 5432
+        cidr_ip: "{{ vpc_subnets['app-b']['cidr'] }}"
+        rule_desc: "Postgres Traffic from app-b"
+      - proto: tcp
+        ports:
+          - 5432
+        cidr_ip: "{{ vpc_subnets['app-c']['cidr'] }}"
+        rule_desc: "Web Traffic from app-c"
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: "{{ vpc_subnets['dmz-a']['cidr'] }}"
+        rule_desc: "ssh Traffic from dmz-a"
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: "{{ vpc_subnets['dmz-b']['cidr'] }}"
+        rule_desc: "ssh Traffic from dmz-b"
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: "{{ vpc_subnets['dmz-c']['cidr'] }}"
+        rule_desc: "ssh Traffic from dmz-c"
+

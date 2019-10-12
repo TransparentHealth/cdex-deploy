@@ -96,6 +96,7 @@ Run the playbook:
 
     cd ./deploy_aws_vpc
     ansible-playbook -i ./etc/ansible/hosts vpc.yml \
+       --vault-password-file ../env/ansibled-dev.vault \
        --extra-vars "vpc_env=dev vpc_base_region=us-east \
                      vpc_number=1 aws_region=us-east-1"
 
