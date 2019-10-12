@@ -27,6 +27,8 @@
   shell: "sudo usermod -aG adm cwagent "
 
 - name: Create cwagent home directory
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   file:
     path: "/home/cwagent"
     state: directory
@@ -34,18 +36,24 @@
     mode: "0760"
 
 - name: "create /home/cwagent/.aws"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   file:
     path: "/home/cwagent/.aws"
     state: directory
     mode: "0760"
 
 - name: "install /home/cwagent/.aws/config"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   template:
     src: templates/aws_config
     dest: "/home/cwagent/.aws/config"
     mode: "0400"
 
 - name: "install /home/cwagent/.aws/credentials"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   template:
     src: templates/aws_credentials
     dest: "/home/cwagent/.aws/credentials"
