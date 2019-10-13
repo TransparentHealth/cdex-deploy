@@ -38,10 +38,10 @@
     - set_fact:
         instance_type_choices: "{{ lookup('vars', 'ec2_app_instance_type') }}"
         instance_vol_size_choices: "{{ lookup('vars', 'ec2_instance_volsize') }}"
-        app_security_group_choices: "{{ lookup('vars', 'app_security_group_id') }}"
+#        app_security_group_choices: "{{ lookup('vars', 'app_security_group_id') }}"
 
-    - debug:
-        msg: "{{ app_security_group_choices }}"
+#    - debug:
+#        msg: "{{ app_security_group_choices }}"
 
     - name: "get subnet for {{ deployment_server_name}}"
       ec2_instance_facts:
@@ -64,7 +64,7 @@
         key_name: "{{ private_key_name }}"
         region: "{{ aws_region }}"
         # group: "{{ vpc_env }}_{{ role_type }}_APP"
-        group_id: "{{ app_security_group_choices[role_type] }}"
+        group_id: "{{ app_security_group_id[vpc_env][role_type] }}"
         instance_type: "{{ instance_type_choices[role_type] }}"
         image: "{{ base_ami }}"
         state: "present"
