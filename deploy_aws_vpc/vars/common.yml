@@ -104,9 +104,9 @@ rds_port: "{{ env_rds_port }}"
 
 vpc_app_subnet_id: "{{ env_vpc_app_subnet_id }}"
 
-app_security_group_id: "{{ env_app_security_group_id }}"
+# app_security_group_id: "{{ env_app_security_group_id }}"
 
-ext_nginx_server_names: "{{ env_ext_nginx_server_names }}"
+# ext_nginx_server_names: "{{ env_ext_nginx_server_names }}"
 
 ### Deployment
 
@@ -370,3 +370,74 @@ vpc_security_groups:
         cidr_ip: "{{ vpc_subnets['dmz-c']['cidr'] }}"
         rule_desc: "ssh Traffic from dmz-c"
 
+
+app_primary_zone:
+  vmi: "a"
+  smh: "b"
+  smh_app: "c"
+
+# vpc ids:
+# ABH-prod-A: vpc-04034ff7143fb9d51
+# ABH-staging-A: vpc-05253e87f7c98a659
+# ABH-dev-A: vpc-0da9583f8b8df681e
+
+vpc_id_name:
+  dev: "ABH-dev-A"
+  staging: "ABH-staging-A"
+  prod: "ABH-prod-A"
+
+vpc_id_ref:
+  dev: "vpc-0da9583f8b8df681e"
+  staging: "vpc-05253e87f7c98a659"
+  prod: "vpc-04034ff7143fb9d51"
+
+
+# DEV-app-a: subnet-068a792b48a3a04ae
+# DEV-app-b: subnet-0a3676ccba353ebd1
+# DEV-app-c: subnet-090899c2cc10ae855
+# STAGING-app-a: subnet-0f3e62ed785a43596
+# STAGING-app-b: subnet-01115adb629045855
+# STAGING-app-c: subnet-016d7e6c98f8eb48e
+# PROD-app-a: subnet-0b4476f5dcbe627b8
+# PROD-app-b: subnet-037bcc0e86562e2cd
+# PROD-app-c: subnet-0448512ba47acf397
+app_subnet_id:
+  dev:
+    a: "subnet-068a792b48a3a04ae"
+    b: "subnet-0a3676ccba353ebd1"
+    c: "subnet-090899c2cc10ae855"
+  staging:
+    a: "subnet-0f3e62ed785a43596"
+    b: "subnet-01115adb629045855"
+    c: "subnet-016d7e6c98f8eb48e"
+  prod:
+    a: "subnet-0b4476f5dcbe627b8"
+    b: "subnet-037bcc0e86562e2cd"
+    c: "subnet-0448512ba47acf397"
+
+# Security Groups:
+# dev_vmi_APP: sg-021a6be0790fe616c
+# dev_vmi_smh_APP: sg-051a766b5e26e88a4
+# dev_smhapp_APP: sg-0b7f7277479d1aa80
+# staging_vmi_APP: sg-07e837a18a5455edc
+# staging_smh_APP: sg-091fdd0a61462e424
+# staging_smhapp_APP": sg-0067056400347db8e
+# prod_vmi_APP: sg-06e76cadf810014c6
+# prod_smh_APP: sg-05c463ee4001bba68
+# prod_smhapp_APP: sg-0ea107f6d95844cb5
+app_security_group_id:
+  dev: {"vmi": "sg-021a6be0790fe616c", "smh": "sg-051a766b5e26e88a4", "smh_app": "sg-0b7f7277479d1aa80"}
+  staging: {"vmi": "sg-07e837a18a5455edc", "smh": "sg-091fdd0a61462e424", "smh_app": "sg-0067056400347db8e"}
+  prod: {"vmi": "sg-06e76cadf810014c6", "smh": "sg-05c463ee4001bba68", "smh_app": "sg-0ea107f6d95844cb5"}
+
+app_security_group_name:
+  dev: {"vmi": "dev_vmi_APP", "smh": "dev_smh_APP", "smh_app": "dev_smhapp_APP"}
+  staging: {"vmi": "staging_vmi_APP", "smh": "staging_smh_APP", "smh_app": "staging_smhapp_APP"}
+  prod: {"vmi": "prod_vmi_APP", "smh": "prod_smh_APP", "smh_app": "prod_smhapp_APP"}
+
+# NGINX Names
+ext_nginx_server_
+ext_nginx_server_names:
+  dev: {"vmi": "id.{{ vpc_env }}.sharemy.health vmi.{{ vpc_env }}.sharemy.health {{ vpc_env }}.sharemy.health", "smh": "smh.{{ vpc_env }}.sharemy.health sharemyhealth.{{ vpc_env }}.sharemy.health {{ vpc_env }}.sharemy.health", "smh_app": "smh_app.{{ vpc_env }}.sharemy.health app.{{ vpc_env }}.sharemy.health {{ vpc_env }}.sharemy.health" }
+  staging: {"vmi": "id.{{ vpc_env }}.sharemy.health vmi.{{ vpc_env }}.sharemy.health {{ vpc_env }}.sharemy.health", "smh": "smh.{{ vpc_env }}.sharemy.health sharemyhealth.{{ vpc_env }}.sharemy.health {{ vpc_env }}.sharemy.health", "smh_app": "smh_app.{{ vpc_env }}.sharemy.health app.{{ vpc_env }}.sharemy.health {{ vpc_env }}.sharemy.health" }
+  prod: {"vmi": "id.sharemy.health vmi.sharemy.health sharemy.health", "smh": "smh.sharemy.health sharemyhealth.sharemy.health sharemy.health", "smh_app": "smh_app.sharemy.health app.sharemy.health sharemy.health" }
