@@ -106,7 +106,7 @@ vpc_app_subnet_id: "{{ env_vpc_app_subnet_id }}"
 
 # app_security_group_id: "{{ env_app_security_group_id }}"
 
-# ext_nginx_server_names: "{{ env_ext_nginx_server_names }}"
+ext_nginx_server_names: "{{ common_ext_nginx_server_names[vpc_env] }}"
 
 ### Deployment
 
@@ -436,8 +436,8 @@ app_security_group_name:
   prod: {"vmi": "prod_vmi_APP", "smh": "prod_smh_APP", "smh_app": "prod_smhapp_APP"}
 
 # NGINX Names
-ext_nginx_server_
-ext_nginx_server_names:
+
+common_ext_nginx_server_names:
   dev: {"vmi": "id.{{ vpc_env }}.sharemy.health vmi.{{ vpc_env }}.sharemy.health {{ vpc_env }}.sharemy.health", "smh": "smh.{{ vpc_env }}.sharemy.health sharemyhealth.{{ vpc_env }}.sharemy.health {{ vpc_env }}.sharemy.health", "smh_app": "smh_app.{{ vpc_env }}.sharemy.health app.{{ vpc_env }}.sharemy.health {{ vpc_env }}.sharemy.health" }
   staging: {"vmi": "id.{{ vpc_env }}.sharemy.health vmi.{{ vpc_env }}.sharemy.health {{ vpc_env }}.sharemy.health", "smh": "smh.{{ vpc_env }}.sharemy.health sharemyhealth.{{ vpc_env }}.sharemy.health {{ vpc_env }}.sharemy.health", "smh_app": "smh_app.{{ vpc_env }}.sharemy.health app.{{ vpc_env }}.sharemy.health {{ vpc_env }}.sharemy.health" }
   prod: {"vmi": "id.sharemy.health vmi.sharemy.health sharemy.health", "smh": "smh.sharemy.health sharemyhealth.sharemy.health sharemy.health", "smh_app": "smh_app.sharemy.health app.sharemy.health sharemy.health" }
