@@ -20,11 +20,11 @@
   when: role_type == "smh_app"
 
 - name: run migrate
-  django_manage:
-    command: migrate
-    app_path: "{{ base_app_directory }}/{{ role_type }}"
-    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
-#   shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/activate &&  source {{ base_app_directory }}/{{ role_type }}/.env && python manage.py migrate "
+#  django_manage:
+#    command: migrate
+#    app_path: "{{ base_app_directory }}/{{ role_type }}"
+#    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+   shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/activate &&  source {{ base_app_directory }}/{{ role_type }}/.env && python manage.py migrate "
 
 
 - name: collectstatic
