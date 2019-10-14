@@ -36,24 +36,28 @@
   changed_when: '"0 static files" not in static_result.out'
 
 - name: "django create superuser - {{ app_pyapps_user }}"
-  django_manage:
-    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
-    app_path: "{{ base_app_directory }}/{{ role_type }}"
-    command: "create_super_user_from_envars"
+#  django_manage:
+#    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+#    app_path: "{{ base_app_directory }}/{{ role_type }}"
+#    command: "create_super_user_from_envars"
 #  when: role_type != "smh"
+  shell: "cd {{ base_app_directory }}/{{ role_type }} && . {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/activate &&  . {{ base_app_directory }}/{{ role_type }}/.env && python manage.py collectstatic "
+
 
 - name: "install group settings"
-  django_manage:
-    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
-    app_path: "{{ base_app_directory }}/{{ role_type }}"
-    command: "create_default_groups"
+#  django_manage:
+#    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+#    app_path: "{{ base_app_directory }}/{{ role_type }}"
+#    command: "create_default_groups"
+  shell: "cd {{ base_app_directory }}/{{ role_type }} && . {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/activate &&  . {{ base_app_directory }}/{{ role_type }}/.env && python manage.py create_default_groups "
   when: role_type == "vmi"
 
 - name: "install sample organizations to vmi only"
-  django_manage:
-    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
-    app_path: "{{ base_app_directory }}/{{ role_type }}"
-    command: "create_sample_organizations"
+#  django_manage:
+#    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+#    app_path: "{{ base_app_directory }}/{{ role_type }}"
+#    command: "create_sample_organizations"
+  shell: "cd {{ base_app_directory }}/{{ role_type }} && . {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/activate &&  . {{ base_app_directory }}/{{ role_type }}/.env && python manage.py create_sample_organizations "
   when: role_type == "vmi"
 
 
