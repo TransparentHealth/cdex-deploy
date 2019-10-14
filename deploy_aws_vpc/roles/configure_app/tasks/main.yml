@@ -19,12 +19,12 @@
   shell: "cd {{ base_app_directory }}/{{ role_type }}/assets && make -i -k build"
   when: role_type == "smh_app"
 
-- name: run migrate
+- name: run migrate using shell
 #  django_manage:
 #    command: migrate
 #    app_path: "{{ base_app_directory }}/{{ role_type }}"
 #    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
-   shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/activate &&  source {{ base_app_directory }}/{{ role_type }}/.env && python manage.py migrate "
+  shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/activate &&  source {{ base_app_directory }}/{{ role_type }}/.env && python manage.py migrate "
 
 
 - name: collectstatic
