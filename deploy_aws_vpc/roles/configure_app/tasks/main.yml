@@ -41,7 +41,7 @@
 #    app_path: "{{ base_app_directory }}/{{ role_type }}"
 #    command: "create_super_user_from_envars"
 #  when: role_type != "smh"
-  shell: "cd {{ base_app_directory }}/{{ role_type }} && . {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/activate &&  . {{ base_app_directory }}/{{ role_type }}/.env && python manage.py collectstatic "
+  shell: "cd {{ base_app_directory }}/{{ role_type }} && . {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/activate &&  . {{ base_app_directory }}/{{ role_type }}/.env && python manage.py create_super_user_from_envars "
 
 
 - name: "install group settings"
