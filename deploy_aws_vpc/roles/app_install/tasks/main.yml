@@ -187,3 +187,10 @@
     src: "templates/{{ role_type }}.env"
     dest: "{{ base_app_directory}}/{{ role_type }}/.env"
     mode: "0640"
+
+# testing fix to set .env variables when virtualenv is called by ansible django_manage
+- name: "Append .env to virtualenv activate script"
+  shell: "cat .env >> env/bin/activate"
+    args:
+      chdir: "{{ base_app_directory}}/{{ role_type }}"
+
