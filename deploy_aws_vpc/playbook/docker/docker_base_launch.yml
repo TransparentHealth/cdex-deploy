@@ -27,7 +27,7 @@
     - "./../../vars/environment/{{ vpc_env }}/env.yml"
 
   roles:
-    - "../../roles/docker_python"
-    - "../../roles/docker_launch"
+    - "../../roles/docker/python"
+    - "../../roles/docker/launch"
 
 

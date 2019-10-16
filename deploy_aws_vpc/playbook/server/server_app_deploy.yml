@@ -35,10 +35,10 @@
     - "./../../vars/common.yml"
 
   roles:
-    - role: "../../roles/deploy_ready"
-    - role: "../../roles/deploy_make_ami"
-    - role: "../../roles/deploy_create_target_group"
-    - role: "../../roles/deploy_create_listeners"
+    - role: "../../roles/deploy/ready"
+    - role: "../../roles/deploy/make_ami"
+    - role: "../../roles/deploy/create_target_group"
+    - role: "../../roles/deploy/create_listeners"
       should_purge_listeners: no
       listeners:
         - Protocol: HTTP
