@@ -1,31 +1,11 @@
 ---
-# roles/deploy_ready/tasks/main.yml
+# roles/deploy/ready/tasks/main.yml
 # Created: 2019-09-11
 # cdex-deploy
 # Purpose: update tags on server to identify deployment readiness
 #
 #    
 #
-
-- name: install pip3
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  apt:
-    name: python3-pip
-    state: present
-
-#- name: check for boto/boto3 in virtualenv
-#  pip:
-#    name: ["boto", "boto3"]
-#    state: present
-#    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
-
-- name: check for boto/boto3 in baseenv
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  pip:
-    name: ["boto", "boto3"]
-    state: present
 
 
 - name: get ec2 facts
@@ -41,7 +21,7 @@
   debug:
     msg: "{{ ec2_facts_info }}"
 
-- name: "get ec2 facts for BaseInstance_{{ role_type }} - JustCreated"
+- name: "get ec2 facts for {{ vpc_env }}_{{ role_type }}_server - source"
   become_user: "{{ remote_admin_account }}"
   become: yes
   ec2_instance_facts:
@@ -49,8 +29,8 @@
     aws_secret_key: "{{ aws_secret_key }}"
     region: "{{ aws_region }}"
     filters:
-      "tag:workflow": "JustCreated"
-      "tag:Name": "BaseInstance_{{ role_type }}"
+      "tag:workflow": "source"
+      "tag:Name": "{{ vpc_env }}_{{ role_type }}_server"
   register: ec2_facts_info_id
 
 - name: "Get resource_id of ec2_instance"
@@ -58,20 +38,22 @@
     msg: "{{ ec2_facts_info_id.instances.0.instance_id }}"
 
 
-# disable section until operational
-#- name: "update ec2 tags on built ec2 instance"
-#  ec2_tag:
-#    region: "{{ aws_region }}"
-#    resource: "{{ ec2_facts_info_id.instances.0.instance_id }}"
-#    state: absent
-#    tags:
-#      workflow: "JustCreated"
-#
-#- name: "replace ec2_tag"
-#  ec2_tag:
-#    region: "{{ aws_region }}"
-#    resource: "{{ ec2_facts_info_id.instances.0.instance_id }}"
-#    state: present
-#    tags:
-#      workflow: "Deploy"
+ disable section until operational
+- name: "update ec2 tags on built ec2 instance"
+  ec2_tag:
+    region: "{{ aws_region }}"
+    resource: "{{ ec2_facts_info_id.instances.0.instance_id }}"
+    state: absent
+    tags:
+      workflow: "source"
+
+- name: "replace ec2_tag"
+  ec2_tag:
+    region: "{{ aws_region }}"
+    resource: "{{ ec2_facts_info_id.instances.0.instance_id }}"
+    state: present
+    tags:
+      workflow: "release"
+      release: "{{ replacement_time }}"
+
 

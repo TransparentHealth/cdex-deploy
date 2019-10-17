@@ -1,5 +1,5 @@
 ---
-# roles/base_app/tasks/main.yml
+# roles/app/base/tasks/main.yml
 # Created: 2019-09-09
 # cdex-deploy
 # Purpose: Install components for Postgres, Nginx and Gunicorn on Ubuntu 18.04

@@ -35,6 +35,7 @@
     - "./../../vars/common.yml"
 
   roles:
+    - role: "../../roles/mgmt-controller/install_tools"
     - role: "../../roles/deploy/ready"
     - role: "../../roles/deploy/make_ami"
     - role: "../../roles/deploy/create_target_group"

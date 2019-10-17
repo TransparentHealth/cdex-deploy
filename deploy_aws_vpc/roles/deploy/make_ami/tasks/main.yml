@@ -12,11 +12,12 @@
     wait: yes
     name:  "{{ role_type }}_{{ ansible_date_time.iso8601_basic_short }}"
     tags:
-      Name: "{{ role_type }}_{{ ansible_date_time.iso8601_basic_short }}"
+      Name: "{{ vpc_env }}_{{ role_type }}_{{ ansible_date_time.iso8601_basic_short }}"
       env: "{{ vpc_env }}"
       function: "{{ role_type }}"
       role:  "{{ role_type }}"
       birth: "{{ ansible_date_time.iso8601_basic_short }}"
+      release: "{{ replacement_time }}"
       mode: "readytoattach"
   register: ami_info
   ignore_errors: true
@@ -27,7 +28,7 @@
     msg: "Created AMI: {{ ami_info.image_id }}"
 
 # create launch configuration
-- name: "build ec2 instance {{ ami_info.tags.Name }}"
+- name: "Create Launch Config Instance: {{ ami_info.tags.Name }}"
   ec2:
     region: "{{ aws_region}}"
     image: "{{ ami_info.image_id }}"
@@ -35,9 +36,10 @@
     instance_tags:
       role: "{{ role_type }}"
       env: "{{ vpc_env }}"
-      function: "DeployInstance"
+      function: "ScalingInstance"
       Name: "{{ vpc_env}}_{{ role_type }}"
-      workflow: "Deploy"
+      workflow: "release"
+      release: "{{ replacement_time }}"
     wait: yes
     vpc_subnet_id: "{{ vpc_app_subnet_id }}"
     count: 1
@@ -53,6 +55,16 @@
 
 # add instance to scalable group
 
+- name: Create Launch Configuration
+  ec2_lc:
+    region: "{{ aws_region }}"
+    name: "{{ vpc_env}}_{{ role_type }}_LC_{{ replacement_time }}"
+    image_id: "{{ ami.image_id }}"
+    key_name: "{{ keypair }}"
+    instance_type: "{{ instance_type }}"
+    security_groups: "{{ security_groups }}"
+    volumes: "{{ volumes }}"
+    instance_monitoring: yes
 # add group to target group
 
 # add target group to ALB
