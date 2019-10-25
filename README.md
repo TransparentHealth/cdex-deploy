@@ -9,10 +9,10 @@ that they choose to trust.
 The CDEx platform consists of multiple loosely coupled components:
 
 1. Verify My Identity (VMI) `vmi`: An OpenID Connect Identity provider to provider single signon.
-2. Share My Health (SMH) OAuth2 Provider / FHIR Server / FHIR Proxy `sharemyhealth`. 
-If configured to do so, `sharemyhealth` communicates with a health information exchange (without native FHIR capabilities) 
-and converts CDA content into FHIR content.  This function relies on #4.
-3. Share My Health App - An organization agent and member facing application for sharing health information `smh_app`
+2. Share My Health (SMH) `sharemyhealth` : OAuth2 Provider / FHIR Server / FHIR Proxy `sharemyhealth`. 
+If configured to do so, it communicates with a health information exchange to receive CDA content then
+converts the CDA content into FHIR content, and make it avaaible as a FHIR API. This function relies on #4.
+3. Share My Health App (SMH_APP) `smh_app` - An organization agent and member facing application for sharing health information `smh_app`
 4. CDA2FHIR Webservice - A tool for converting CDA to FHIR v3. We use it to convert a CCDA to a Patient Bundle within #2.
 5. 3rd Party FHIR services including your own. Examples include HAPI FHIR and Microsoft Azure FHIR. 
 These services could connect at either #2 or #3. If customizing these tools for your own purposes, you might consider 
