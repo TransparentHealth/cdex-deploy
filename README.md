@@ -20,12 +20,14 @@ adding a custom app to #2, Share My Health (SMH) OAuth2 Provider.
 
 
 The CDEx platform is a suite of open source software. 
-The projects are managed @ Transparent Health. https://github.com/TransparentHealth
+Projects are managed @ Transparent Health.
+
+https://github.com/TransparentHealth
 
 
 # Deploying CDEx
 
-The CDEx platform was designed for deployment via Ansible. 
+The possiblitiesCDEx platform was designed for deployment via Ansible. 
 
 The components involved include:
 
@@ -38,12 +40,12 @@ The components involved include:
 Containerized services should be configured to avoid 
 conflicts if running on the same server.
 
-PostgreSQL is configured to run on port 5432
-HAPI FHIR is configured to run on port 8080
-VMI is configured to run on port 8000
-SMH is configured to run on port 8001
-SMH_APPis configured to run on port 8002
-CDA2FHIR is configured to run on port 8081 (internal)
+* PostgreSQL is configured to run on port 5432
+* HAPI FHIR is configured to run on port 8080
+* VMI is configured to run on port 8000
+* SMH is configured to run on port 8001
+* SMH_APPis configured to run on port 8002
+* CDA2FHIR is configured to run on port 8081 (internal)
 
 
 SMY, VMI and FHIR all use PostgreSQL as a database service via
