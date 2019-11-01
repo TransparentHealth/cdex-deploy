@@ -213,6 +213,16 @@
     enabled: yes
     sleep: 10
 
+- name: "reload GUnicorn"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  service:
+    name: gunicorn
+    state: reloaded
+    enabled: yes
+    sleep: 10
+  ignore_errors: true
+
 - name: "reload and restart nginx"
   become_user: "{{ remote_admin_account }}"
   become: yes
