@@ -9,6 +9,8 @@ django_secret_key: "{{ env_django_secret_key }}"
 django_organization_title: "{{ env_django_organization_title }}"
 django_organization_uri: "{{ env_django_organization_uri }}"
 
+django_org_signup_contact: "https://abhealth.us/contact-us/"
+
 use_parameter_store: "{{ env_use_parameter_store }}"
 environment_variable_strategy: "{{ env_environment_variable_strategy }}"
 # ".env" | "EC2_PARAMSTORE"
