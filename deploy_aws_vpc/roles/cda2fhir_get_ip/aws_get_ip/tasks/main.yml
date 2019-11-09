@@ -11,7 +11,7 @@
     filters:
       "tag:env": "{{ vpc_env }}"
       "tag:function": "cda2fhir"
-      "tag:role": "{{ role_type }}"
+      "tag:role": "cda"
       "tag:workflow": "service"
   register: cda2fhir_info
 
