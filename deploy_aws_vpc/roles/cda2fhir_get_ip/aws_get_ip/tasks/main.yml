@@ -6,6 +6,8 @@
 
 - name: "get cda2fhir private ip in {{ vpc_env }}"
   ec2_instance_facts:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws-secret_key }}"
     filters:
       "tag:env": "{{ vpc_env }}"
       "tag:function": "cda2fhir"

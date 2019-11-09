@@ -52,6 +52,10 @@ http_mode: "{{ env_http_mode }}"
 # base_instance_elastic_ip: "3.227.187.144"
 base_instance_elastic_ip: "34.229.8.6"
 
+##################################
+# AWS
+##################################
+
 aws_access_key: "{{ env_aws_access_key }}"
 aws_secret_key: "{{ env_aws_secret_key }}"
 
