@@ -1,0 +1,22 @@
+---
+# roles/cda2fhir_get_ip/aws/tasks/main.yml
+# Created: 2019-11-08
+# cdex-deploy
+# Purpose:  Get private Ip via AWS Tags
+
+- name: "get cda2fhir private ip in {{ vpc_env }}"
+  ec2_instance_facts:
+    filters:
+      "tag:env": "{{ vpc_env }}"
+      "tag:function": "cda2fhir"
+      "tag:role": "{{ role_type }}"
+      "tag:workflow": "service"
+  register: cda2fhir_info
+
+    - debug:
+        msg:  "EC2 Instance:\n{{ ec2_base | to_nice_yaml }}"
+        # msg:  "EC2 Instance:\n{{ ec2_base | to_nice_json }}"
+
+
+
+

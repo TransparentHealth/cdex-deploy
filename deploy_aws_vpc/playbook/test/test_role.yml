@@ -36,4 +36,4 @@
 #    - role: "../../roles/notify_slack"
 #    - role: "../../roles/notify_team"
 
-    - role: ""
+    - role: "../../roles/cda2fhir_get_ip/aws_get_ip"

@@ -139,6 +139,16 @@ alb_ssl_policy_name: "ELBSecurityPolicy-2016-08"
 # Notifications
 slack_token_update_channel: "{{ env_slack_token_update_channel }}"
 
+#################################
+# CDA2FHIR SERVICE
+#################################
+# Get Private IP Address for CDA2FHiR Service in Elastic Beanstalk from Environment
+
+cda2fhir_service_port: "8080"
+
+
+
+
 # Imported from vpc_ansibled.yml
 
 # IP CIDR BLOCK Mapping
