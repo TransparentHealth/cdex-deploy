@@ -14,8 +14,8 @@
   register: cda2fhir_info
 
 - debug:
-    msg:  "EC2 Instance:\n{{ ec2_base | to_nice_yaml }}"
-    # msg:  "EC2 Instance:\n{{ ec2_base | to_nice_json }}"
+    msg:  "EC2 Instance:\n{{ cda2fhir_info | to_nice_yaml }}"
+    # msg:  "EC2 Instance:\n{{ cda2fhir_info | to_nice_json }}"
 
 
 
