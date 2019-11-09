@@ -1,5 +1,5 @@
 ---
-# roles/cda2fhir_get_ip/aws/tasks/main.yml
+# roles/cda2fhir_get_ip/aws_get_ip/tasks/main.yml
 # Created: 2019-11-08
 # cdex-deploy
 # Purpose:  Get private Ip via AWS Tags
@@ -7,7 +7,7 @@
 - name: "get cda2fhir private ip in {{ vpc_env }}"
   ec2_instance_facts:
     aws_access_key: "{{ aws_access_key }}"
-    aws_secret_key: "{{ aws-secret_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
     filters:
       "tag:env": "{{ vpc_env }}"
       "tag:function": "cda2fhir"
