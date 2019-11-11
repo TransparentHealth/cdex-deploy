@@ -147,7 +147,7 @@ slack_token_update_channel: "{{ env_slack_token_update_channel }}"
 # CDA2FHIR SERVICE
 #################################
 # Get Private IP Address for CDA2FHiR Service in Elastic Beanstalk from Environment
-
+# cda2fhir_private_ip is set in roles/cda2hir_get_ip/aws_get_ip/tasks/main.yml
 cda2fhir_service_port: "8080"
 
 
@@ -216,7 +216,7 @@ vpc_subnets:
 
 # a list defining the security groups for our VPC
 #
-# vpc_env: prod | staging
+# vpc_env: prod | staging | dev
 #
 #
 #
@@ -243,6 +243,7 @@ vpc_security_groups:
       - proto: all
         cidr_ip: 0.0.0.0/0
         rule_desc: "allow all outbound traffic"
+
   - name: "{{ vpc_env }}-vmi-APP"
     description: "Access to APP for vmi zone"
     rules:
@@ -354,6 +355,39 @@ vpc_security_groups:
         cidr_ip: "{{ vpc_subnets['dmz-c']['cidr'] }}"
         rule_desc: "ssh Traffic for smhapp from dmz-c"
 
+  - name: "{{ vpc_env }}-cda-APP"
+    description: "Access to DBS zone"
+    rules:
+      - proto: tcp
+        ports:
+          - 8080
+        cidr_ip: "{{ vpc_subnets['app-a']['cidr'] }}"
+        rule_desc: "Postgres Traffic from app-a"
+      - proto: tcp
+        ports:
+          - 8080
+        cidr_ip: "{{ vpc_subnets['app-b']['cidr'] }}"
+        rule_desc: "Postgres Traffic from app-b"
+      - proto: tcp
+        ports:
+          - 8080
+        cidr_ip: "{{ vpc_subnets['app-c']['cidr'] }}"
+        rule_desc: "Web Traffic from app-c"
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: "{{ vpc_subnets['dmz-a']['cidr'] }}"
+        rule_desc: "ssh Traffic from dmz-a"
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: "{{ vpc_subnets['dmz-b']['cidr'] }}"
+        rule_desc: "ssh Traffic from dmz-b"
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: "{{ vpc_subnets['dmz-c']['cidr'] }}"
+        rule_desc: "ssh Traffic from dmz-c"
 
   - name: "{{ vpc_env }}-DBS"
     description: "Access to DBS zone"

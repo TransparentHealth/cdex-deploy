@@ -34,6 +34,8 @@
     - "./../../vars/common.yml"
 
   roles:
+    # Get the CDA2FHIR service
+    - role: "../../roles/cda2fhir_get_ip/aws_get-ip"
     - role: "../../roles/app/base"
     # install aws config
     - role: "../../roles/aws/config_install"
