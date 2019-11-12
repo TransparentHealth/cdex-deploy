@@ -107,8 +107,8 @@
 #    mode: 0755
 
 - name: "install requirements via shell in virtualenv {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
-  # become_user: "{{ remote_admin_account }}"
-  # become: yes
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   # shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ virtual_env_dir }}/bin/activate && pip install -r requirements.txt"
   pip:
     chdir: "{{ base_app_directory }}/{{ role_type}}"
@@ -143,6 +143,11 @@
     state: present
     extra_args: " --upgrade {{ pip_extra_args }} "
     virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+
+- name: "set ownership of virtualenv to {{ remote_user_account }}:{{ remote_user_account }}"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  shell: "chmod -Rf {{ remote_user_account }}:{{ remote_user_account }} {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
 
 - name: "Create  collectedstatic"
   shell: "mkdir -p {{ base_app_directory }}/{{ role_type }}/collectedstatic"
