@@ -13,7 +13,7 @@ django_secret_key: "{{ env_django_secret_key }}"
 django_organization_title: "{{ env_django_organization_title }}"
 django_organization_uri: "{{ env_django_organization_uri }}"
 killer_app_title: "Share My Health"
-killer_app_uri: {{ env_killer_app_uri }}"
+killer_app_uri: "{{ env_killer_app_uri }}"
 top_left_title: "Verify My Identity"
 
 django_org_signup_contact: "https://abhealth.us/contact-us/"
