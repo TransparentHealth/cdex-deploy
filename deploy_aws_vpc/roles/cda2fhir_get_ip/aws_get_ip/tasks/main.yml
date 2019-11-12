@@ -5,17 +5,16 @@
 # Purpose:  Get private Ip via AWS Tags
 
 - name: "get cda2fhir private ip in {{ vpc_env }}"
-  local_action:
-    ec2_instance_facts:
-      aws_access_key: "{{ aws_access_key }}"
-      aws_secret_key: "{{ aws_secret_key }}"
-      filters:
-        "tag:env": "{{ vpc_env }}"
-        "tag:function": "cda2fhir"
-        "tag:role": "cda"
-        "tag:workflow": "service"
+  ec2_instance_facts:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    filters:
+      "tag:env": "{{ vpc_env }}"
+      "tag:function": "cda2fhir"
+      "tag:role": "cda"
+      "tag:workflow": "service"
   register: cda2fhir_info
-
+  delegate_to: localhost
 #- debug:
 #    msg: "{{ cda2fhir_info.instances.0.private_ip_address }}"
 #    # msg:  "EC2 Instance:\n{{ cda2fhir_info | to_nice_yaml }}"
