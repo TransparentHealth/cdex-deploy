@@ -21,8 +21,6 @@
 #    # msg:  "EC2 Instance:\n{{ cda2fhir_info | to_nice_json }}"
 
 - name: "Save cda2fhir private Ip Address:{{ cda2fhir_info.instances.0.private_ip_address }}"
-  - set_fact:
-      cda2fhir_private_ip: "{{ cda2fhir_info.instances.0.private_ip_address }}"
-
-
+  set_fact:
+    cda2fhir_private_ip: "{{ cda2fhir_info.instances.0.private_ip_address }}"
 
