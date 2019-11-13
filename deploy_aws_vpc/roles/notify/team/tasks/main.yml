@@ -9,7 +9,7 @@
 - name: Send CDA2FHIR Update for SMH Service
   office_365_connector_card:
     webhook: "{{ teams_webhook }}"
-    text: "{{ vpc_env|upper }}: {{ configure_time }} - CDA2FHIR Service ({{ cda2fhir_private_ip }}:{{ cda2fhir_service_port }}) reported: {{ web_check.content }}"
+    text: "{{ vpc_env|upper }}: {{ configure_time }} - CDA2FHIR Service ({{ cda2fhir_private_ip }}:{{ cda2fhir_service_port }}) reported: {{ cda2fhir_check.content }}"
   delegate_to: localhost
   when: role_type == "smh"
 

@@ -30,7 +30,7 @@
     url: "http://{{ cda2fhir_private_ip }}:{{ cda2fhir_service_port }}/api/convert"
     status_code: ["200", "301"]
     return_content: yes
-  register: web_check
+  register: cda2fhir_check
 
 - name: "result of http://{{ cda2fhir_private_ip }}:{{ cda2fhir_service_port }}/api/convert call"
   debug:
@@ -38,5 +38,5 @@
       - "RETURNED: {{ web_check.status }}"
       - "REDIRECTED: {{ web_check.redirected }}"
       - "BODY:"
-      - "{{ web_check.content }}"
+      - "{{ cda2fhir_check.content }}"
 
