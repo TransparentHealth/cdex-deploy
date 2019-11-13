@@ -15,7 +15,7 @@
     name:
       - nodejs
       - npm
-    cache_updated: true
+    update_cache: yes
     state: present
 
 - name: install and configure npm
