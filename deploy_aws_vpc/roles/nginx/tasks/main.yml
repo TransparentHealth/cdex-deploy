@@ -11,7 +11,6 @@
 # Get vmi/.nginx/{{ role_type }}/nginx.conf out of repo
 # pull to tmp and use as template source to push to /etc/nginx/nginx.conf
 
-
 - name: "remove default config files"
   become_user: "{{ remote_admin_account }}"
   become:
@@ -77,7 +76,6 @@
     dest: /etc/nginx/nginx.conf
     mode: "0644"
 
-
 - name: "Copy Gunicorn to virtualenv bin"
   template:
     src: templates/gunicorn_start
@@ -127,14 +125,13 @@
     state: touch
     mode: "0664"
 
-
 - name: "enable nginx"
   become_user: "{{ remote_admin_account }}"
   become: yes
   service:
     name: nginx
     enabled: yes
-    sleep: 10
+#    sleep: 10
 
 - name: "enable uwsgi"
   become_user: "{{ remote_admin_account }}"
@@ -142,7 +139,7 @@
   service:
     name: uwsgi
     enabled: yes
-    sleep: 10
+#    sleep: 10
 
 - name: "copy uwsgi.service into place"
   become_user: "{{ remote_admin_account }}"
@@ -181,7 +178,6 @@
     owner: "{{ remote_admin_account }}"
     group: "{{ remote_admin_account }}"
 
-
 - name: configure gunicorn as service
   become_user: "{{ remote_admin_account }}"
   become: yes
@@ -202,7 +198,6 @@
     owner: "{{ remote_admin_account }}"
     group: "{{ remote_admin_account }}"
 
-
 - name: "reload supervisor"
   become_user: "{{ remote_admin_account }}"
   become: yes
@@ -210,7 +205,7 @@
     name: supervisor
     state: reloaded
     enabled: yes
-    sleep: 10
+#    sleep: 10
 
 - name: "reload GUnicorn"
   become_user: "{{ remote_admin_account }}"
@@ -219,7 +214,7 @@
     name: gunicorn
     state: reloaded
     enabled: yes
-    sleep: 10
+#    sleep: 10
   ignore_errors: true
 
 - name: "reload and restart nginx"
@@ -229,7 +224,7 @@
     name: nginx
     state: reloaded
     enabled: yes
-    sleep: 10
+#    sleep: 10
   ignore_errors: true
 
 - name: wait for 10 seconds to let nginx reload
