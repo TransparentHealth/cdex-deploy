@@ -16,11 +16,11 @@
       - nodejs
     state: present
 
-- name:
+- name: install and configure npm
   become_user: "{{ remote_admin_account }}"
   become: yes
   shell: "cd {{ base_app_directory }}/{{ role_type }}/assets && npm install"
-    
+
 - name: build assets
   shell: "cd {{ base_app_directory }}/{{ role_type }}/assets && make -i -k build"
   when: role_type == "smh_app"
