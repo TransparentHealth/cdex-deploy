@@ -17,14 +17,10 @@
     update_cache: yes
     state: present
 
-- name: install npm for SASS/CSS Build
+- name: install npm for SASS/CSS Build via aptitude
   become_user: "{{ remote_admin_account }}"
   become: yes
-  apt:
-    name:
-      - npm
-    update_cache: yes
-    state: present
+  shell: "aptitude install -y npm"
 
 - name: install and configure npm
   become_user: "{{ remote_admin_account }}"
