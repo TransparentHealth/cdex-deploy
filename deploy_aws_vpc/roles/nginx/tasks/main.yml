@@ -65,10 +65,9 @@
   become: yes
   become_user: "{{ remote_admin_account }}"
   apt:
-    name: "{{ item }}"
+    pkg:
+      - uwsgi
     state: present
-  with_items:
-    - uwsgi
 
 - name: "copy nginx.conf to the target"
   become_user: "{{ remote_admin_account }}"

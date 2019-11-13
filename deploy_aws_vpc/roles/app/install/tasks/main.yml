@@ -106,7 +106,7 @@
 #    group: "{{ app_group }}"
 #    mode: 0755
 
-- name: "install requirements via shell in virtualenv {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+- name: "install requirements via pip in virtualenv {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
   become_user: "{{ remote_admin_account }}"
   become: yes
   # shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ virtual_env_dir }}/bin/activate && pip install -r requirements.txt"
@@ -125,14 +125,14 @@
   become: yes
   pip:
     state: present
-    name: "{{ item }}"
+    name:
+      - django-extensions
+      - Werkzeug
+      - pyOpenSSL
+      - gevent
+      - eventlet
+
     virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
-  with_items:
-    - django-extensions
-    - Werkzeug
-    - pyOpenSSL
-    - gevent
-    - eventlet
 
 - name: "install boto3 for collectstatic"
   become_user: "{{ remote_admin_account }}"
