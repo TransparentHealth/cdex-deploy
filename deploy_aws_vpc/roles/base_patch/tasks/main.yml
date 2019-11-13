@@ -37,13 +37,16 @@
     - libffi-dev
     - libssl-dev
     - zlib1g-dev
+    - libsasl2-dev
 #    - openssh
     - gcc
 #    - build-base
 #    - linux-headers
+    - python-dev
 #    - pcre-dev
 #    - postgresql-dev
 #    - musl-dev
+    - libldap2-dev
     - libxml2-dev
     - libxslt-dev
     - nginx
