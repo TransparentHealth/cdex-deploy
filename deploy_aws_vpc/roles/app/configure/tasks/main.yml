@@ -8,19 +8,25 @@
 #    
 #    
 
-- name: install npm for SASS/CSS Build
+- name: install nodejs and npm for SASS/CSS Build
   become_user: "{{ remote_admin_account }}"
   become: yes
   apt:
-    name: npm
+    name:
+      - nodejs
     state: present
 
+- name:
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  shell: "cd {{ base_app_directory }}/{{ role_type }}/assets && npm install"
+    
 - name: build assets
   shell: "cd {{ base_app_directory }}/{{ role_type }}/assets && make -i -k build"
   when: role_type == "smh_app"
 
-# switching to django?_manage after appending .env to activate script
-- name: run migrate using shell
+# switching to django_manage after appending .env to activate script
+- name: run django migrate
   django_manage:
     command: migrate
     app_path: "{{ base_app_directory }}/{{ role_type }}"
