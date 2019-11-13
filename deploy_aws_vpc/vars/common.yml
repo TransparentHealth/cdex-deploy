@@ -184,6 +184,9 @@ common_ext_nginx_server_names:
 # Notifications - Slack
 slack_token_update_channel: "{{ env_slack_token_update_channel }}"
 # Notifications - Teams
+# Teams / office_365_connector_card webhook:
+teams_webhook: "{{ env_teams_webhook }}"
+
 
 #################################
 # CDA2FHIR SERVICE
