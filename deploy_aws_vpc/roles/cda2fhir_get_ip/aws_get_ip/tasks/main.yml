@@ -35,8 +35,8 @@
 - name: "result of http://{{ cda2fhir_private_ip }}:{{ cda2fhir_service_port }}/api/convert call"
   debug:
     msg:
-      - "RETURNED: {{ web_check.status }}"
-      - "REDIRECTED: {{ web_check.redirected }}"
+      - "RETURNED: {{ cda2fhir_check.status }}"
+      - "REDIRECTED: {{ cda2fhir_check.redirected }}"
       - "BODY:"
       - "{{ cda2fhir_check.content }}"
 
