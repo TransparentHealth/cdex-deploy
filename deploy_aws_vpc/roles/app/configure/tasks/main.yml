@@ -8,12 +8,20 @@
 #    
 #    
 
-- name: install nodejs and npm for SASS/CSS Build
+- name: install nodejs for SASS/CSS Build
   become_user: "{{ remote_admin_account }}"
   become: yes
   apt:
     name:
       - nodejs
+    update_cache: yes
+    state: present
+
+- name: install npm for SASS/CSS Build
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  apt:
+    name:
       - npm
     update_cache: yes
     state: present
