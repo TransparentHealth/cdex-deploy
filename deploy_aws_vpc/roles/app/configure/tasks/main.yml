@@ -19,7 +19,7 @@
 - name: install and configure npm
   become_user: "{{ remote_admin_account }}"
   become: yes
-  shell: "cd {{ base_app_directory }}/{{ role_type }}/assets && npm install"
+  shell: "cd {{ base_app_directory }}/{{ role_type }} && npm install"
 
 - name: build assets
   shell: "cd {{ base_app_directory }}/{{ role_type }}/assets && make -i -k build"
