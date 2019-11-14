@@ -20,7 +20,7 @@
 - name: install npm for SASS/CSS Build via aptitude
   become_user: "{{ remote_admin_account }}"
   become: yes
-  shell: "aptitude install -y npm"
+  shell: "sudo apt-get install -y npm"
 
 - name: install and configure npm
   become_user: "{{ remote_admin_account }}"
