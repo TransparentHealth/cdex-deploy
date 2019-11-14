@@ -94,6 +94,7 @@ Name: {env}_cda_APP
 # IMPORTANT:
 
 Tag the Elastic Beanstalk VM Instance with the following tags:
+      
       function: "cda2fhir"
       role: "cda"
       workflow: "service"
