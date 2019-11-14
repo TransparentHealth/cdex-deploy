@@ -8,13 +8,13 @@
 #    
 
 # fix npm install issues
-- name: "install aptitude"
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  apt:
-    name:
-      - aptitude
-    state: present
+#- name: "install aptitude"
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  apt:
+#    name:
+#      - aptitude
+#    state: present
 
 - name: "upgrade and update packages"
   become_user: "{{ remote_admin_account }}"
