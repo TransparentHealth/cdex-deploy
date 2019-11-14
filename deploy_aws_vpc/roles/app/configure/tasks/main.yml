@@ -28,6 +28,8 @@
   shell: "cd {{ base_app_directory }}/{{ role_type }} && npm install"
 
 - name: build assets
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   shell: "cd {{ base_app_directory }}/{{ role_type }}/assets && make -i -k build"
   when: role_type == "smh_app"
 
