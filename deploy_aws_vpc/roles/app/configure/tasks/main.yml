@@ -17,15 +17,15 @@
     update_cache: yes
     state: present
 
-- name: install npm for SASS/CSS Build via aptitude
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  shell: "sudo apt-get install -y npm"
+#- name: install npm for SASS/CSS Build via aptitude
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  shell: "sudo apt-get install -y npm"
 
-- name: install and configure npm
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  shell: "cd {{ base_app_directory }}/{{ role_type }} && npm install"
+#- name: install and configure npm
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  shell: "cd {{ base_app_directory }}/{{ role_type }} && npm install"
 
 - name: build assets
   become_user: "{{ remote_admin_account }}"
