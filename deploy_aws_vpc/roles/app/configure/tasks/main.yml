@@ -8,14 +8,14 @@
 #    
 #    
 
-- name: install nodejs for SASS/CSS Build
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  apt:
-    name:
-      - nodejs
-    update_cache: yes
-    state: present
+#- name: install nodejs for SASS/CSS Build
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  apt:
+#    name:
+#      - nodejs
+#    update_cache: yes
+#    state: present
 
 #- name: install npm for SASS/CSS Build via aptitude
 #  become_user: "{{ remote_admin_account }}"
@@ -27,11 +27,11 @@
 #  become: yes
 #  shell: "cd {{ base_app_directory }}/{{ role_type }} && npm install"
 
-- name: build assets
-  become_user: "{{ remote_admin_account }}"
-  become: yes
-  shell: "cd {{ base_app_directory }}/{{ role_type }}/assets && make -i -k build"
-  when: role_type == "smh_app"
+#- name: build assets
+#  become_user: "{{ remote_admin_account }}"
+#  become: yes
+#  shell: "cd {{ base_app_directory }}/{{ role_type }}/assets && make -i -k build"
+#  when: role_type == "smh_app"
 
 # switching to django_manage after appending .env to activate script
 - name: run django migrate
