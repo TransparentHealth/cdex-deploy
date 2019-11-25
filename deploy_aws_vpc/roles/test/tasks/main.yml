@@ -7,8 +7,9 @@
 
 - debug:
     msg:
+      - " what user from common.yml/app_owner/app_pyapps_user : {{ app_owner }}"
       - "what environment: {{ vpc_env }}"
-      - " what pyapps user: {{ vault_app_superuser_username }}"
+      # - " what pyapps user: {{ vault_app_superuser_username }}"
 
 
 
