@@ -32,7 +32,7 @@
     - "./../../vars/environment/{{ vpc_env }}/env.yml"
     - "./../../vars/common.yml"
 
-roles:
+  roles:
 #    - role: "../../roles/notify_slack"
 #    - role: "../../roles/notify_team"
     - role: "../../roles/test"
