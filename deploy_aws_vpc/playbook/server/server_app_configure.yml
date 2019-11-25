@@ -43,7 +43,7 @@
     - role: "../../roles/aws/cloudwatch_install"
 
     - role: "../../roles/python/python3.7"
-      when: "role_type == 'smh_app' "
+      when: role_type == 'smh_app'
 
     - role: "../../roles/app/user"
     - role: "../../roles/app/install"
