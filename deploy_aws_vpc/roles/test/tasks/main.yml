@@ -1,0 +1,14 @@
+---
+# main.yml
+# Created: 2019-11-25
+# cdex-deploy
+# Purpose: Test variables in vault
+#
+
+- debug:
+    msg:
+      - "what environment: {{ vpc_env }}"
+      - " what pyapps user: {{ vault_app_superuser_username }}"
+
+
+
