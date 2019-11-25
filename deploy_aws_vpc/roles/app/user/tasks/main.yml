@@ -2,7 +2,7 @@
 - debug:
     msg: "What is the {{ vpc_env }} pyapps user: {{ vault_app_superuser_username }}"
 
-- name: "Creating Appserver User {{ app_pyapps_user }} - {{ app_superuser_username }}"
+- name: "Creating Appserver User {{ app_pyapps_user }} - {{ vault_app_superuser_username }}"
   become_user: "{{ remote_admin_account }}"
   become: yes
   user:
