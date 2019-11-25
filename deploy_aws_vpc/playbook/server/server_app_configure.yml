@@ -42,10 +42,11 @@
     # install cloudwatch agent
     - role: "../../roles/aws/cloudwatch_install"
 
+    - role: "../../roles/app/user"
+
     - role: "../../roles/python/python3.7"
       when: role_type == 'smh_app'
 
-    - role: "../../roles/app/user"
     - role: "../../roles/app/install"
     - role: "../../roles/postgres_setup"
     - role: "../../roles/app/configure"
