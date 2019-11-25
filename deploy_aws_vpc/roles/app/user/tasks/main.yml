@@ -1,6 +1,7 @@
 ---
 - debug:
-    msg: "What is the {{ vpc_env }} pyapps user: {{ vault_app_pyapps_user }}"
+    msg: "What is the {{ vpc_env }}"
+    # pyapps user: {{ vault_app_pyapps_user }}"
 
 - name: "Creating Appserver User {{ app_pyapps_user }} - {{ app_superuser_username }}"
   become_user: "{{ remote_admin_account }}"
