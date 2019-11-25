@@ -32,9 +32,15 @@
     - "./../../vars/environment/{{ vpc_env }}/env.yml"
     - "./../../vars/common.yml"
 
+  tasks:
+    - debug:
+        msg:
+          - "what environment: {{ vpc_env }}"
+          - " what pyapps user: {{ vault_app_superuser_username }}"
+        
   roles:
 #    - role: "../../roles/notify_slack"
 #    - role: "../../roles/notify_team"
 
     - role: "../../roles/cda2fhir_get_ip/aws_get_ip"
-    - role: "../../roles/notify/team"
+#    - role: "../../roles/notify/team"
