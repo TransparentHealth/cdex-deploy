@@ -11,7 +11,7 @@
 - name: get ec2 facts
   become_user: "{{ remote_admin_account }}"
   become: yes
-  ec2_instance_facts:
+  ec2_instance_info:
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
     region: "{{ aws_region }}"
@@ -24,7 +24,7 @@
 - name: "get ec2 facts for {{ vpc_env }}_{{ role_type }}_server - source"
   become_user: "{{ remote_admin_account }}"
   become: yes
-  ec2_instance_facts:
+  ec2_instance_info:
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
     region: "{{ aws_region }}"

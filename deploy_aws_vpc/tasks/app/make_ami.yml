@@ -31,7 +31,7 @@
 
 # Get volume id
 - name: Get source instance
-  ec2_instance_facts:
+  ec2_instance_info:
     filters:
       "tag:Name": "MY-prod-web-AMI-SOURCE"
   register: source_instance

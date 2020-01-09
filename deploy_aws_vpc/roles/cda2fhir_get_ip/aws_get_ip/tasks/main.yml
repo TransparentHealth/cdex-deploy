@@ -5,7 +5,7 @@
 # Purpose:  Get private Ip via AWS Tags
 
 - name: "get cda2fhir private ip in {{ vpc_env }}"
-  ec2_instance_facts:
+  ec2_instance_info:
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
     filters:

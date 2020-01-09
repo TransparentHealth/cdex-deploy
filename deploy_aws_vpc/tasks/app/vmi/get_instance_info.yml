@@ -4,7 +4,7 @@
 # instance information
 
 - name: "get ec2 info"
-  ec2_instance_facts:
+  ec2_instance_info:
     instance_ids:
       - "i-089b85acd8496891b"
   register: ec2_base

@@ -55,7 +55,7 @@
 
 
     - name: "get subnet for {{ deployment_server_name}}"
-      ec2_instance_facts:
+      ec2_instance_info:
         region: "{{ aws_region }}"
         filters:
           "tag:Name": "{{ deployment_server_name }}"

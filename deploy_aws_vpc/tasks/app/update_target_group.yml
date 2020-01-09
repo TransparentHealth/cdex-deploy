@@ -10,7 +10,7 @@
 # get list of prod instances
 # Check for PROD EC2 Instances
 - name: get OLD Instances
-  ec2_instance_facts:
+  ec2_instance_info:
     filters:
       "tag:ENV": "{{ vpc_env }}"
       "tag:ROLE": "web-farm"
