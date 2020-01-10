@@ -8,8 +8,9 @@
   become_user: "{{ remote_admin_account }}"
   become: yes
   pip:
-    - boto3
-    - botocore
+    name:
+      - boto3
+      - botocore
 
 - name: "get cda2fhir private ip in {{ vpc_env }}"
   become_user: "{{ remote_admin_account }}"
