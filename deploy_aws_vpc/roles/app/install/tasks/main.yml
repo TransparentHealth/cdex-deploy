@@ -39,6 +39,14 @@
 - name: "Change ownership on {{ base_app_directory }}"
   shell: "sudo chown -Rf {{ remote_user_account }}:{{ remote_user_account }} {{ base_app_directory }} "
 
+- name: "install python-dev libraries"
+  apt:
+    name:
+      - python-dev
+      - libldap2-dev
+      - libsasl2-dev
+      - libssl-dev
+
 - name: "install python3-pip"
   apt:
     name: python3-pip
@@ -131,7 +139,6 @@
       - pyOpenSSL
       - gevent
       - eventlet
-
     virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
 
 - name: "install boto3 for collectstatic"
