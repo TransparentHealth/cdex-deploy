@@ -49,6 +49,7 @@
       - libsasl2-dev
       - libssl-dev
       - python3-setuptools
+      - python2-setuptools
 
 - name: "install python3-pip"
   become_user: "{{ remote_admin_account }}"
