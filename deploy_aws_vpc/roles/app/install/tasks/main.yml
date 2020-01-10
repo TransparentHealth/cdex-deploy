@@ -49,7 +49,6 @@
       - libsasl2-dev
       - libssl-dev
       - python3-setuptools
-      - python2-setuptools
 
 - name: "install python3-pip"
   become_user: "{{ remote_admin_account }}"
@@ -79,6 +78,7 @@
     chdir: "{{ base_app_directory }}/{{ role_type }}"
     name:
       - setuptools
+      - boto3
     state: present
     virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
 
