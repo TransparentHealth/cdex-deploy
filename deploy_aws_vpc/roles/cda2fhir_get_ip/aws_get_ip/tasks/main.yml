@@ -5,11 +5,11 @@
 # Purpose:  Get private Ip via AWS Tags
 
 - name: "install boto3 for ec2_instance_info"
-    become_user: "{{ remote_admin_account }}"
-    become: yes
-    pip:
-      - boto3
-      - botocore
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  pip:
+    - boto3
+    - botocore
 
 - name: "get cda2fhir private ip in {{ vpc_env }}"
   become_user: "{{ remote_admin_account }}"
