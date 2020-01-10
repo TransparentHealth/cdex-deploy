@@ -4,7 +4,16 @@
 # cdex-deploy
 # Purpose:  Get private Ip via AWS Tags
 
+- name: "install boto3 for ec2_instance_info"
+    become_user: "{{ remote_admin_account }}"
+    become: yes
+    pip:
+      - boto3
+      - botocore
+
 - name: "get cda2fhir private ip in {{ vpc_env }}"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
   ec2_instance_info:
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
