@@ -73,7 +73,9 @@
   become: yes
   pip:
     chdir: "{{ base_app_directory }}/{{ role_type }}"
-    name: gunicorn
+    name:
+      - setuptools
+      - gunicorn
     state: present
     virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
 
