@@ -71,6 +71,16 @@
   debug:
     msg: "{{ venv_setup }}"
 
+- name: "install setuptools"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  pip:
+    chdir: "{{ base_app_directory }}/{{ role_type }}"
+    name:
+      - setuptools
+    state: present
+    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+
 - name: "install gunicorn"
   become_user: "{{ remote_admin_account }}"
   become: yes
