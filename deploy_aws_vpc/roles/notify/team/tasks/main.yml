@@ -2,9 +2,15 @@
 # notify_teams/tasks/main.yml
 # Created: 2019-09-21
 # cdex-deploy
-# Purpose: Send notification to Teams BB2,0/alliance channel
+# Purpose: Send notification to Teams BB2.0/alliance channel
 #
-#    
+# To setup a webhook go to Teams.
+# Choose your team and Channel.
+# Select ... against channel in sidebar
+# Select "Connectors"
+# Choose "Incoming Webhook"
+# Configure.
+# Copy Full URL after creating connector. Paste full url into vault/environment/{{ vpc_env }}/vault.yml into env_teams_webhook variable.
 
 - name: Send CDA2FHIR Update for SMH Service
   office_365_connector_card:
