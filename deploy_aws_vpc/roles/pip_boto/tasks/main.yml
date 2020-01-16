@@ -1,0 +1,31 @@
+---
+# pip_boto/tasks/main.yml
+# Created: 2020-01-16
+# cdex-deploy
+# Purpose: Install pip and boto3 to servers for CDA2FHIR Service check
+#
+
+- name: "install pip3"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  shell: "apt-get -y install python3-pip"
+
+- name: "install pip"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  shell: "apt-get -y install python-pip"
+
+
+- name: "install boto3 for python3"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  shell: "pip3 install boto3"
+
+- name: "install boto3 for python2"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  shell: "pip install boto3"
+
+
+
+

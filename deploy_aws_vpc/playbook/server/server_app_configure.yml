@@ -34,6 +34,8 @@
     - "./../../vars/common.yml"
 
   roles:
+    # install boto3 to support CDA2FHIR Service query
+    - role: "../../roles/pip_boto"
     # Get the CDA2FHIR service
     - role: "../../roles/cda2fhir_get_ip/aws_get_ip"
     - role: "../../roles/app/base"
