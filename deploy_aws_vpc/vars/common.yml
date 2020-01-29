@@ -27,6 +27,9 @@ ec2paramstore_4_env_vars: "{{ env_ec2paramstore_4_env_vars }}"
 # confuses scanners looking for known endpoints
 django_admin_redirector: "private/"
 
+# ALLOW_MULTIPLE_USERS_PER_EMAIL
+allow_multiple_users_per_email: "{{ env_allow_multiple_users_per_email }}"
+
 #############################################
 # CLOUD Environment
 #############################################
