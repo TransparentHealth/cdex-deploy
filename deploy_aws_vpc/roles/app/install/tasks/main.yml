@@ -140,8 +140,12 @@
 - name: "install requirements via pip in virtualenv {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
   become_user: "{{ remote_admin_account }}"
   become: yes
+  sudo: yes
+
   # shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ virtual_env_dir }}/bin/activate && pip install -r requirements.txt"
   shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ virtual_env_dir }}/bin/activate && chown -Rf {{ remote_user_account }}:{{ remote_user_account }} {{ virtual_env_dir }} && sudo pip install -r requirements.txt"
+  args:
+     executable: /bn/bash
 #  pip:
 #    chdir: "{{ base_app_directory }}/{{ role_type}}"
 #    requirements: "requirements.txt"
