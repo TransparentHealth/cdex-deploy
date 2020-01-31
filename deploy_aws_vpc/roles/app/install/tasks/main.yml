@@ -141,14 +141,14 @@
   become_user: "{{ remote_admin_account }}"
   become: yes
   # shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ virtual_env_dir }}/bin/activate && pip install -r requirements.txt"
-  shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ virtual_env_dir }}/bin/activate && chown -Rf {{ remote_user_account }}:{{ remote_user_account }} {{ virtual_env_dir }} && sudo pip install -r requirements.txt"
-  args:
-    executable: /bin/bash
-#  pip:
-#    chdir: "{{ base_app_directory }}/{{ role_type}}"
-#    requirements: "requirements.txt"
-#    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
-
+#  shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ virtual_env_dir }}/bin/activate && chown -Rf {{ remote_user_account }}:{{ remote_user_account }} {{ virtual_env_dir }} && sudo pip install -r requirements.txt"
+#  args:
+#    executable: /bin/bash
+  pip:
+    chdir: "{{ base_app_directory }}/{{ role_type}}"
+    requirements: "requirements.txt"
+    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+    extra_args: --ignore-installed
 #  shell: |
 #    source {{ base_app_directory }}/{{ role_type}}/{{ virtual_env_dir }}/bin/activate && make reqs-install
 #  args:
