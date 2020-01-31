@@ -35,12 +35,14 @@
 
 # switching to django_manage after appending .env to activate script
 - name: run django migrate
-  django_manage:
-    command: migrate
-    app_path: "{{ base_app_directory }}/{{ role_type }}"
-    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
-#  shell: "cd {{ base_app_directory }}/{{ role_type }} && . {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/activate &&  . {{ base_app_directory }}/{{ role_type }}/.env && python manage.py migrate "
-
+#  django_manage:
+#    command: migrate
+#    app_path: "{{ base_app_directory }}/{{ role_type }}"
+#    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+  shell: ". {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/activate &&  . {{ base_app_directory }}/{{ role_type }}/.env && python manage.py migrate "
+  args:
+    chdir: "{{ base_app_directory }}/{{ role_type }}"
+    executable: /bin/bash
 
 - name: collectstatic
   django_manage:
