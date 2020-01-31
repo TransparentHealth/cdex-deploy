@@ -157,7 +157,7 @@
     chdir: "{{ base_app_directory }}/{{ role_type}}"
     requirements: "requirements.txt"
     virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
-    extra_args: --ignore-installed
+    # extra_args: --ignore-installed
 #  shell: |
 #    source {{ base_app_directory }}/{{ role_type}}/{{ virtual_env_dir }}/bin/activate && make reqs-install
 #  args:
