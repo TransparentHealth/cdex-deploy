@@ -141,7 +141,7 @@
   replace:
     path: "{{ base_app_directory }}/{{ role_type }}/requirements.txt"
     regexp: '^pyYAML==(.x)'
-    line: '#\1'
+    replace: '#\1'
     owner: "{{ remote_user_account }}"
     group: "{{ remote_user_account }}"
     mode: "0644"
