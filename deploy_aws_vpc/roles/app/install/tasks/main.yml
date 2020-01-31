@@ -137,6 +137,15 @@
 #    group: "{{ app_group }}"
 #    mode: 0755
 
+- name: "comment out pyYAML from requirements.txt"
+  replace:
+    path: "{{ base_app_directory }}/{{ role_type }}/requirements.txt"
+    regexp: '^pyYAML==(.x)'
+    line: '#\1'
+    owner: "{{ remote_user_account }}"
+    group: "{{ remote_user_account }}"
+    mode: "0644"
+
 - name: "install requirements via pip in virtualenv {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
   become_user: "{{ remote_admin_account }}"
   become: yes
