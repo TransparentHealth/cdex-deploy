@@ -84,7 +84,7 @@
     name:
       - setuptools
       - boto3
-      - pyYAML==4.2b1
+      - PyYAML==4.2b1
     state: present
     virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
 
