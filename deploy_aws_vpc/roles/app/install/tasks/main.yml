@@ -76,7 +76,7 @@
   debug:
     msg: "{{ venv_setup }}"
 
-- name: "install setuptools, boto3 and pyYAML"
+- name: "install setuptools, boto3 and PyYAML"
   become_user: "{{ remote_admin_account }}"
   become: yes
   pip:
@@ -137,7 +137,7 @@
 #    group: "{{ app_group }}"
 #    mode: 0755
 
-- name: "comment out pyYAML from requirements.txt"
+- name: "comment out PyYAML from requirements.txt"
   replace:
     path: "{{ base_app_directory }}/{{ role_type }}/requirements.txt"
     regexp: '^(.*PyYAML==.*)'
@@ -150,13 +150,13 @@
   become_user: "{{ remote_admin_account }}"
   become: yes
   # shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ virtual_env_dir }}/bin/activate && pip install -r requirements.txt"
-#  shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ virtual_env_dir }}/bin/activate && chown -Rf {{ remote_user_account }}:{{ remote_user_account }} {{ virtual_env_dir }} && sudo pip install -r requirements.txt"
-#  args:
-#    executable: /bin/bash
-  pip:
-    chdir: "{{ base_app_directory }}/{{ role_type}}"
-    requirements: "requirements.txt"
-    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+  shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ virtual_env_dir }}/bin/activate && sudo chown -Rf {{ remote_user_account }}:{{ remote_user_account }} {{ virtual_env_dir }} && sudo pip install -r requirements.txt"
+  args:
+    executable: /bin/bash
+#  pip:
+#    chdir: "{{ base_app_directory }}/{{ role_type}}"
+#    requirements: "requirements.txt"
+#    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
     # extra_args: --ignore-installed
 #  shell: |
 #    source {{ base_app_directory }}/{{ role_type}}/{{ virtual_env_dir }}/bin/activate && make reqs-install
