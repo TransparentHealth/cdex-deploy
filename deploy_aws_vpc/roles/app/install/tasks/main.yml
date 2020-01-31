@@ -140,8 +140,8 @@
 - name: "comment out pyYAML from requirements.txt"
   replace:
     path: "{{ base_app_directory }}/{{ role_type }}/requirements.txt"
-    regexp: '^pyYAML==(.x)'
-    replace: '#\1'
+    regexp: '^(.*pyYAML==.*)'
+    replace: '# \1'
     owner: "{{ remote_user_account }}"
     group: "{{ remote_user_account }}"
     mode: "0644"
