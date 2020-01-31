@@ -76,7 +76,7 @@
   debug:
     msg: "{{ venv_setup }}"
 
-- name: "install setuptools"
+- name: "install setuptools, boto3 and pyYAML"
   become_user: "{{ remote_admin_account }}"
   become: yes
   pip:
@@ -84,6 +84,7 @@
     name:
       - setuptools
       - boto3
+      - pyYAML==4.2b1
     state: present
     virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
 
