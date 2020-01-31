@@ -43,6 +43,7 @@
   args:
     chdir: "{{ base_app_directory }}/{{ role_type }}"
     executable: /bin/bash
+  ignore_errors: yes
 
 - name: collectstatic
   django_manage:
