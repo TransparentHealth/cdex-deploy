@@ -53,14 +53,18 @@
   register: static_result
   changed_when: '"0 static files" not in static_result.out'
 
-- name: "django create superuser - {{ app_pyapps_user }}"
-  django_manage:
-    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
-    app_path: "{{ base_app_directory }}/{{ role_type }}"
-    command: "create_super_user_from_envars"
-  when: role_type != "smh"
-#  shell: "cd {{ base_app_directory }}/{{ role_type }} && . {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/activate &&  . {{ base_app_directory }}/{{ role_type }}/.env && python manage.py create_super_user_from_envars "
+#- name: "django create superuser - {{ app_pyapps_user }}"
+#  django_manage:
+#    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+#    app_path: "{{ base_app_directory }}/{{ role_type }}"
+#    command: "create_super_user_from_envars"
+#  when: role_type != "smh"
 
+- name: "django create superuser - {{ app_pyapps_user }} in virtual env with source"
+  sudo: no
+  shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/activate &&  source {{ base_app_directory }}/{{ role_type }}/.env && echo $DJANGO_SUPERUSER_USERNAME && python3 manage.py create_super_user_from_envars "
+  args:
+    executable: /bin/bash
 
 - name: "install group settings"
   django_manage:
