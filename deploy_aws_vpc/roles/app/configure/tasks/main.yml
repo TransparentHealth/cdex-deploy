@@ -61,7 +61,6 @@
 #  when: role_type != "smh"
 
 - name: "django create superuser - {{ app_pyapps_user }} in virtual env with source"
-  sudo: no
   shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/activate &&  source {{ base_app_directory }}/{{ role_type }}/.env && echo $DJANGO_SUPERUSER_USERNAME && python3 manage.py create_super_user_from_envars "
   args:
     executable: /bin/bash
