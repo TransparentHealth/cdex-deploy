@@ -150,7 +150,7 @@
   become_user: "{{ remote_admin_account }}"
   become: yes
   # shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ virtual_env_dir }}/bin/activate && pip install -r requirements.txt"
-  shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ virtual_env_dir }}/bin/activate && sudo chown -Rf {{ remote_user_account }}:{{ remote_user_account }} {{ virtual_env_dir }} && pip install -r requirements.txt"
+  shell: "cd {{ base_app_directory }}/{{ role_type }} && source {{ virtual_env_dir }}/bin/activate && sudo chown -Rf {{ remote_user_account }}:{{ remote_user_account }} {{ virtual_env_dir }} && sudo pip3 install -r requirements.txt"
   args:
     executable: /bin/bash
 #  pip:
