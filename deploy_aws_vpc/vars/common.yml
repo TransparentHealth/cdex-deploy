@@ -30,6 +30,12 @@ django_admin_redirector: "private/"
 # ALLOW_MULTIPLE_USERS_PER_EMAIL
 allow_multiple_users_per_email: "{{ env_allow_multiple_users_per_email }}"
 
+django_policy_uri: "http://sharemy.health/Alliance-Share-My-Health-Member_-Privacy-Policy_02.2020.html"
+django_policy_title: "Privacy Policy"
+django_tos_uri: "http://sharemy.health/Alliance-Share-My-Health-Member_Terms_of_Service_02.2020.html"
+django_agent_tos_uri: "http://sharemy.health/Alliance-Share-My-Health-Agent_Terms_of_Use_3.2020.html"
+django_tos_title: "Terms of Service"
+
 #############################################
 # CLOUD Environment
 #############################################
