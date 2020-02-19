@@ -21,7 +21,7 @@
   become: yes
   service:
     name: rsyslog
-    state: reloaded
+    state: restarted
     enabled: yes
 
 - name: "setup logrotate"
