@@ -52,6 +52,7 @@
     - role: "../../roles/app/install"
     - role: "../../roles/postgres_setup"
     - role: "../../roles/app/configure"
+    - role: "../../roles/logrotate"
     - role: "../../roles/nginx"
     - role: "../../roles/check_web_is_up"
 

@@ -1,0 +1,10 @@
+/var/log/sharemyhealth.log {
+  copytruncate
+  daily
+  rotate 5
+  compress
+  delaycompress
+  missingok
+  notifempty
+  create 0640 syslog adm
+}

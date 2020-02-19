@@ -1,0 +1,37 @@
+---
+# roles/logrotate/tasks/main.yml
+# Created: 2020-02-18
+# cdex-deploy
+# Purpose:
+#  setup log file for sharemyhealth.conf
+#  in /etc/rsyslog.d/30-sharemyhealth.conf
+
+- name: "create the rsyslog configuration file"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  template:
+    src: templates/30-sharemyhealth.conf
+    dest: "/etc/rsyslog.d/30-sharemyhealth.conf"
+    mode: "0755"
+    owner: "{{ remote_admin_account }}"
+    group: "{{ remote_admin_account }}"
+
+- name: "restart rsyslog"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  service:
+    name: rsyslog
+    state: reloaded
+    enabled: yes
+
+- name: "setup logrotate"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  template:
+    src: templates/sharemyhealth
+    dest: "/etc/logrotate.d/sharemyhealth"
+    mode: "0755"
+    owner: "{{ remote_admin_account }}"
+    group: "{{ remote_admin_account }}"
+
+
