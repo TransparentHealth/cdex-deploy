@@ -18,6 +18,8 @@
     sub_zone: "app"
     role_type: "{{ role_type| default('vmi') }}"
     # Options: vmi | smh | smh_app
+    make_migration: "no"
+    #options: no | yes
 
     sg_zone: "{{ vpc_env }}-{{ role_type }}-APP"
     env_az: "{{ vpc_env }}-{{ azone }}"

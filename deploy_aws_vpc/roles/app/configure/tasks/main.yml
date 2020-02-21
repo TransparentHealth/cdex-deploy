@@ -34,6 +34,19 @@
 #  when: role_type == "smh_app"
 
 # switching to django_manage after appending .env to activate script
+- name: run django makemigrations
+  #  django_manage:
+  #    command: migrate
+  #    app_path: "{{ base_app_directory }}/{{ role_type }}"
+  #    virtualenv: "{{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}"
+  shell: ". {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/activate &&  . {{ base_app_directory }}/{{ role_type }}/.env && python manage.py makemigrations "
+  args:
+    chdir: "{{ base_app_directory }}/{{ role_type }}"
+    executable: /bin/bash
+  when: make_migration == "Yes"
+  ignore_errors: yes
+
+# switching to django_manage after appending .env to activate script
 - name: run django migrate
 #  django_manage:
 #    command: migrate
