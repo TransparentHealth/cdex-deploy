@@ -29,7 +29,7 @@
     aws_secret_key: "{{ aws_secret_key }}"
     region: "{{ aws_region }}"
     filters:
-      "private_dns_name": "{{ variable_host }}"
+      "private-dns-name": "{{ variable_host }}"
 #      "tag:source": "true"
 #      "tag:Name": "{{ vpc_env }}_{{ role_type }}_server"
   register: ec2_facts_info_id
