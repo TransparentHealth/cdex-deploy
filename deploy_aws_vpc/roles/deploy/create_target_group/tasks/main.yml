@@ -12,7 +12,7 @@
     name: "{{ vpc_env}}-{{ role_type }}-{{ target_group_name | default('green') }}"
     state: present
     region: '{{ aws_region }}'
-    vpc_id: "{{ env_vpc_id }}"
+    vpc_id: "{{ vpc_id_ref[role_type] }}"
     protocol: 'http'
     port: '80'
     health_check_interval: '30'
