@@ -1,0 +1,97 @@
+---
+# playbook/server/server_app_scale.yml
+# Created: 2020-02-23
+# cdex-deploy
+# Purpose: Create Auto Scaling Group
+#
+# https://medium.com/qbits/immutable-deployment-using-aws-application-load-balancing-ade3e70b00e8
+
+- name: scale server
+  hosts: localhost
+  connection: local
+  # hosts: "{{ variable_host| default('tag_function_BaseInstance:tag_workflow_JustCreated') }}"
+  remote_user: "{{ remote_user_account }}"
+  vars:
+    ansible_ssh_pipelining: no
+    env: "{{ vpc_env }}"
+    # Options - lower case: staging | prod
+    azone: "az1"
+    # Options: az1 | az2 | az3
+    sub_zone: "app"
+    role_type: "{{ role_type| default('vmi') }}"
+    # Options: vmi | smh | smh_app
+
+    sg_zone: "{{ vpc_env }}-{{ role_type }}-APP"
+    env_az: "{{ vpc_env }}-{{ azone }}"
+    #    env_cf_data_version: "20"
+    #    env_cf_app_version: "01"
+    build_subnet_id: null
+    replacement_time: "{{ ansible_date_time.iso8601_basic_short }}"
+  vars_files:
+    - "./../../vault/environment/{{ vpc_env }}/{{ role_type }}/vault.yml"
+    - "./../../vars/environment/{{ vpc_env }}/{{ role_type }}/env.yml"
+    - "./../../vault/environment/{{ vpc_env }}/vault.yml"
+    - "./../../vars/environment/{{ vpc_env }}/env.yml"
+    - "./../../vars/common.yml"
+
+  roles:
+    # - role: "../../roles/mgmt-controller/install_tools"
+    - role: "../../roles/deploy/ready"
+    - role: "../../roles/deploy/make_ami"
+    - role: "../../roles/deploy/create_target_group"
+    - role: "../../roles/deploy/create_listeners"
+      should_purge_listeners: no
+      listeners:
+        - Protocol: HTTP
+          Port: 80
+          DefaultActions:
+            - Type: redirect
+              RedirectConfig:
+                Protocol: HTTPS
+                Host: "#{host}"
+                Query: "#{query}"
+                Path: "/#{path}"
+                Port: "443"
+                StatusCode: HTTP_301
+        - Protocol: HTTPS
+          Port: 443
+          Certificates:
+            - CertificateArn: '{{ ssl_cert_arn }}'
+          SslPolicy: '{{ alb_ssl_policy_name }}'
+          DefaultActions:
+            - Type: forward
+              # we may need to change this in the future
+              TargetGroupName: '{{ blue_target_group_name[role_type] }}'
+          Rules:
+            - Conditions:
+                - Field: host-header
+                  Values:
+                    - "new.{{ dns_app_name[role_type] }}"
+              Priority: 1
+              Actions:
+                - Type: forward
+                  TargetGroupName: '{{ green_target_group.target_group_name }}'
+
+    - role: "../../roles/deploy_create_listeners"
+      should_purge_listeners: yes
+      listeners:
+        - Protocol: HTTP
+          Port: 80
+          DefaultActions:
+            - Type: redirect
+              RedirectConfig:
+                Protocol: HTTPS
+                Host: "#{host}"
+                Query: "#{query}"
+                Path: "/#{path}"
+                Port: "443"
+                StatusCode: HTTP_301
+        - Protocol: HTTPS
+          Port: 443
+          Certificates:
+            - CertificateArn: '{{ ssl_cert_arn }}'
+          SslPolicy: '{{ alb_ssl_policy_name }}'
+          DefaultActions:
+            - Type: forward
+              TargetGroupName: '{{ green_target_group.target_group_name }}'
+
