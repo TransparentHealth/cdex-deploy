@@ -12,9 +12,13 @@
     name: '{{ alb_name }}'
     state: present
     region: '{{ aws_region }}'
-    security_groups: '{{ app_security_group_id[role_type] }}'
+    security_groups: '{{ app_security_group_id[vpc_env][role_type] }}'
     subnets: '{{ alb_subnets }}'
     purge_listeners: '{{ should_purge_listeners }}'
     deletion_protection: yes
     listeners: '{{ listeners }}'
   register: alb_with_new_listeners
+
+- name: "Here is the listener"
+  debug:
+    msg: "{{ alb_with_new_listeners }}"
