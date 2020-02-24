@@ -9,7 +9,7 @@
 # Retry up to 5 times, with a 5s delay between retries
 - name: Create a new target group
   elb_target_group:
-    name: "{{ vpc_env}}_{{ role_type }}_{{ target_group_name | default('green') }}"
+    name: "{{ vpc_env}}-{{ role_type }}-{{ target_group_name | default('green') }}"
     state: present
     region: '{{ aws_region }}'
     vpc_id: "{{ vpc_id }}"
