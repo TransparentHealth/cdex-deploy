@@ -61,10 +61,15 @@
     region: "{{ aws_region }}"
     name: "{{ vpc_env}}_{{ role_type }}_LC_{{ replacement_time }}"
     image_id: "{{ ami_info.image_id }}"
-    key_name: "{{ keypair }}"
+    key_name: "{{ private_key_name }}"
     instance_type: "{{ instance_type }}"
     security_groups: "{{ security_groups }}"
-    volumes: "{{ volumes }}"
+    volumes:
+      - device_name: "/dev/sda1"
+        volume_type: "gp2"
+        volume_size: "{{ instance_vol_size_choices[role_type] }}"
+        encrypted: True
+        delete_on_termination: True
     instance_monitoring: yes
 # add group to target group
 
