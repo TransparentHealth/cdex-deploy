@@ -72,7 +72,7 @@
                 - Type: forward
                   TargetGroupName: '{{ green_target_group.target_group_name }}'
 
-    - role: "../../roles/deploy_create_listeners"
+    - role: "../../roles/deploy/create_listeners"
       should_purge_listeners: yes
       listeners:
         - Protocol: HTTP
