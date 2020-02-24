@@ -55,6 +55,8 @@
 #    msg: "EC2 Instance: {{ created_instance.tags.Name }}[{{ created_instance.id }}]  "
 
 # add instance to scalable group
+# ec2_app_instance_type: {"vmi": "t2.micro", "smh": "t2.micro", "smh_app": "t2.micro"}
+#  ec2_instance_volsize: {"vmi": 20, "smh": 21, "smh_app": 22 }
 
 - name: Create Launch Configuration
   ec2_lc:
@@ -62,7 +64,7 @@
     name: "{{ vpc_env}}_{{ role_type }}_LC_{{ replacement_time }}"
     image_id: "{{ ami_info.image_id }}"
     key_name: "{{ private_key_name }}"
-    instance_type: "{{ instance_type_choices[role_type] }}"
+    instance_type: "{{ ec2_app_instance_type[role_type] }}"
     security_groups: "{{ app_security_group_id[vpc_env][role_type] }}"
     volumes:
       - device_name: "/dev/sda1"
