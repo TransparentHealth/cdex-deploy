@@ -9,10 +9,9 @@
 # Retry up to 5 times, with a 5s delay between retries
 - name: Create a new target group
   elb_target_group:
-    name: '{{ target_group_name }}'
+    name: "{{ vpc_env}}_{{ role_type }}_{{ target_group_name | default('green') }}"
     state: present
     region: '{{ aws_region }}'
-    vpc_id: '{{ vpc_id }}'
     protocol: 'http'
     port: '80'
     health_check_interval: '30'
@@ -22,7 +21,12 @@
     health_check_timeout: '5'
     healthy_threshold_count: '5'
     unhealthy_threshold_count: '2'
-  register: green_target_group
-  until: green_target_group is defined
+  register: new_target_group
+  until: new_target_group is defined
   retries: 5
   delay: 5
+
+
+- name: "Target Group Info: {{ new_target_group }} "
+  debug:
+    msg: "Target Group:\n{{ new_target_group }}"
