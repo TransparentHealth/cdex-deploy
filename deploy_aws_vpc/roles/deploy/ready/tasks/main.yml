@@ -29,8 +29,9 @@
     aws_secret_key: "{{ aws_secret_key }}"
     region: "{{ aws_region }}"
     filters:
-      "tag:source": "true"
-      "tag:Name": "{{ vpc_env }}_{{ role_type }}_server"
+      "private_dns_name": "{{ variable_host }}"
+#      "tag:source": "true"
+#      "tag:Name": "{{ vpc_env }}_{{ role_type }}_server"
   register: ec2_facts_info_id
 
 - name: "Get resource_id of ec2_instance"

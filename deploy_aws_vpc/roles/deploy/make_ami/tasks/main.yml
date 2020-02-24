@@ -51,7 +51,8 @@
 # get instance id
 - name: "get instance id: {{ created_instance.id }}"
   debug:
-    msg: "EC2 Instance: {{ created_instance.name }}[{{ created_instance.id }}]  "
+    msg: "Created Instance:\n{{ created_instance }}"
+#    msg: "EC2 Instance: {{ created_instance.tags.Name }}[{{ created_instance.id }}]  "
 
 # add instance to scalable group
 
