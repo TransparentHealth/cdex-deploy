@@ -62,8 +62,8 @@
     name: "{{ vpc_env}}_{{ role_type }}_LC_{{ replacement_time }}"
     image_id: "{{ ami_info.image_id }}"
     key_name: "{{ private_key_name }}"
-    instance_type: "{{ instance_type }}"
-    security_groups: "{{ security_groups }}"
+    instance_type: "{{ instance_type_choices[role_type] }}"
+    security_groups: "{{ app_security_group_id[vpc_env][role_type] }}"
     volumes:
       - device_name: "/dev/sda1"
         volume_type: "gp2"
