@@ -70,7 +70,7 @@
               Priority: 1
               Actions:
                 - Type: forward
-                  TargetGroupName: '{{ green_target_group.target_group_name }}'
+                  TargetGroupName: '{{ new_target_group.target_group_name }}'
 
     - role: "../../roles/deploy/create_listeners"
       should_purge_listeners: yes
@@ -93,5 +93,5 @@
           SslPolicy: '{{ alb_ssl_policy_name }}'
           DefaultActions:
             - Type: forward
-              TargetGroupName: '{{ green_target_group.target_group_name }}'
+              TargetGroupName: '{{ new_target_group.target_group_name }}'
 
