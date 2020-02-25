@@ -40,7 +40,7 @@
       env: "{{ vpc_env }}"
       role: "{{ role_type }}"
       function: "LaunchTemplate"
-    security_groups: "{{ app_security_group_id[vpc_env][role_type] }}"
+    security_group_ids: "{{ app_security_group_id[vpc_env][role_type] }}"
   register: launch_template_info
 
 - name: "what did we get?"
