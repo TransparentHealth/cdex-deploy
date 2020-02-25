@@ -27,7 +27,7 @@
   debug:
     msg: "Created AMI: {{ ami_info.image_id }}"
 
-- name: "Create Launch Template for {{ vpc_env }}-{{ role_type }} using {{ variable_host }} AMI: {{ ami_info.image_id }}"
+- name: "Update Launch Template for {{ vpc_env }}-{{ role_type }} using {{ variable_host }} AMI: {{ ami_info.image_id }}"
   ec2_launch_template:
     name: "{{ vpc_env }}-{{ role_type }}-LT"
     image_id: "{{ ami_info.image_id }}"
@@ -47,55 +47,7 @@
   debug:
     msg: "{{ launch_template_info }}"
 
-## create launch configuration
-#- name: "Create Launch Config Instance: {{ ami_info.tags.Name }}"
-#  ec2:
-#    region: "{{ aws_region}}"
-#    image: "{{ ami_info.image_id }}"
-#    instance_type: "{{ec2_app_instance_type[role_type] }}"
-#    instance_tags:
-#      role: "{{ role_type }}"
-#      env: "{{ vpc_env }}"
-#      function: "ScalingInstance"
-#      Name: "{{ vpc_env}}_{{ role_type }}"
-#      workflow: "release"
-#      release: "{{ replacement_time }}"
-#    wait: yes
-#    vpc_subnet_id: "{{ vpc_app_subnet_id }}"
-#    count: 1
-#    key_name: "{{ ansible_ssh_private_key_name }}"
-#    assign_public_ip: no
-#    state: present
-#  register: created_instance
-#
-## get instance id
-#- name: "get instance id: {{ created_instance.id }}"
-#  debug:
-#    msg: "Created Instance:\n{{ created_instance }}"
-##    msg: "EC2 Instance: {{ created_instance.tags.Name }}[{{ created_instance.id }}]  "
-#
-## add instance to scalable group
-## ec2_app_instance_type: {"vmi": "t2.micro", "smh": "t2.micro", "smh_app": "t2.micro"}
-##  ec2_instance_volsize: {"vmi": 20, "smh": 21, "smh_app": 22 }
-#
-#- name: Create Launch Configuration
-#  ec2_lc:
-#    region: "{{ aws_region }}"
-#    name: "{{ vpc_env}}_{{ role_type }}_LC_{{ replacement_time }}"
-#    image_id: "{{ ami_info.image_id }}"
-#    key_name: "{{ private_key_name }}"
-#    instance_type: "{{ ec2_app_instance_type[role_type] }}"
-#    security_groups: "{{ app_security_group_id[vpc_env][role_type] }}"
-#    volumes:
-#      - device_name: "/dev/sda1"
-#        volume_type: "gp2"
-#        volume_size: "{{ ec2_instance_volsize[role_type] }}"
-#        encrypted: True
-#        delete_on_termination: True
-#    instance_monitoring: yes
-## add group to target group
-#
-## add target group to ALB
+
 
 
 
