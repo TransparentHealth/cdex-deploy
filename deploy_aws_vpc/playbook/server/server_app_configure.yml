@@ -58,6 +58,23 @@
     - role: "../../roles/nginx"
     - role: "../../roles/check_web_is_up"
 
-    - role: "../../roles/notify/slack"
-    - role: "../../roles/notify/team"
+    - role: "../../roles/notify/slack/tasks/generic.yml"
+      notify_msg: "{{ vpc_env|upper }}: {{ configure_time }} - CDA2FHIR Service ({{ cda2fhir_private_ip }}:{{ cda2fhir_service_port }}) reported: {{ cda2fhir_check.content }}"
+      notify_slack_channel: "#afbh-updates"
+      notify_slack_user: "afbh-mgmt-controller"
+      when: role_type == "smh"
+
+    - role: "../../roles/notify/slack/tasks/generic.yml"
+      notify_msg: "{{ role_type }} updated in {{ vpc_env }} at {{ configure_time }} from https://github.com/TransparentHealth/{{ system_repository_name[role_type] }} Branch: {{ git_branch[role_type] }}"
+      notify_slack_channel: "#afbh-updates"
+      notify_slack_user: "afbh-mgmt-controller"
+
+    - role: "../../roles/notify/team/tasks/generic.yml"
+      notify_msg: "{{ vpc_env|upper }}: {{ configure_time }} - CDA2FHIR Service ({{ cda2fhir_private_ip }}:{{ cda2fhir_service_port }}) reported: {{ cda2fhir_check.content }}"
+      notify_teams_webhook: "{{ teams_webhook }}"
+      when: role_type == "smh"
+
+    - role: "../../roles/notify/team/tasks/generic.yml"
+      notify_msg: "{{ role_type }} updated in {{ vpc_env }} at {{ configure_time }} from https://github.com/TransparentHealth/{{ system_repository_name[role_type] }} Branch: {{ git_branch[role_type] }}"
+      notify_team_hook:  "{{ teams_webhook }}"
 

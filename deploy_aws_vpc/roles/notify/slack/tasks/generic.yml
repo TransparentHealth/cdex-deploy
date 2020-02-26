@@ -1,0 +1,16 @@
+---
+# roles/notify/slack/tasks/generic.yml
+# Created: 2020-02-25
+# cdex-deploy
+# Purpose:
+#  send generic message received as parameter to Slack
+#    
+#    
+
+- name: "notify slack with {{ notify_msg }}"
+  slack:
+    token: "{{ slack_token_update_channel }}"
+    msg: "{{ notify_msg }}"
+    username: "{{ notify_slack_user }}"
+    channel: "{{ notify_slack_channel }}"
+  delegate_to: localhost

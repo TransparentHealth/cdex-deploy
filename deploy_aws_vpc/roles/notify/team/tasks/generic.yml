@@ -1,0 +1,23 @@
+---
+# roles/notify/team/tasks/generic.yml
+# Created: 2020-02-25
+# cdex-deploy
+# Purpose:
+#  send generic teams message
+#    
+#    
+# To setup a webhook go to Teams.
+# Choose your team and Channel.
+# Select ... against channel in sidebar
+# Select "Connectors"
+# Choose "Incoming Webhook"
+# Configure.
+# Copy Full URL after creating connector. Paste full url into vault/environment/{{ vpc_env }}/vault.yml into env_teams_webhook variable.
+
+- name: "notify teams with {{ notify_msg }}"
+  office_365_connector_card:
+    webhook: "{{ notify_teams_webhook }}"
+    text: "{{ notify_msg }}"
+  delegate_to: localhost
+  when: role_type == "smh"
+
