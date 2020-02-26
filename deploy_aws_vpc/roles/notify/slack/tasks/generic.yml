@@ -14,3 +14,6 @@
     username: "{{ notify_slack_user }}"
     channel: "{{ notify_slack_channel }}"
   delegate_to: localhost
+
+- debug:
+    msg: "slack got called with {{ notify_msg }}"
