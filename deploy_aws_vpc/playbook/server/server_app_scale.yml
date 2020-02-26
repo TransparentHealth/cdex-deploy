@@ -38,12 +38,13 @@
     # - role: "../../roles/mgmt-controller/install_tools"
     - role: "../../roles/deploy/ready"
     - role: "../../roles/deploy/make_ami"
-    - role: "../../roles/notify/slack/tasks/generic"
+
+    - role: "../../roles/notify/slack/tasks/generic.yml"
       notify_msg: "AMI Created for {{ vpc_env }}-{{ role_type }}: {{ ami_info.image_id }} for Launch Config:{{ vpc_env }}-{{ role_type }}-LT\n{{ launch_template_info }}"
       notify_slack_channel: "#afbh-updates"
       notify_slack_user: "afbh-mgmt-controller"
 
-    - role: "../../roles/notify/team/tasks/generic"
+    - role: "../../roles/notify/team/tasks/generic.yml"
       notify_msg: "AMI Created for {{ vpc_env }}-{{ role_type }}: {{ ami_info.image_id }} for Launch Config:{{ vpc_env }}-{{ role_type }}-LT\n{{ launch_template_info }}"
       notify_teams_webhook: "{{ teams_webhook }}"
 
