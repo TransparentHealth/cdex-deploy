@@ -40,11 +40,11 @@
     - role: "../../roles/deploy/make_ami"
 
     - role: "../../roles/notify/slack_generic"
-      notify_msg: "AMI Created for {{ vpc_env }}-{{ role_type }}: {{ ami_info.image_id }} for Launch Config:{{ vpc_env }}-{{ role_type }}-LT\n{{ launch_template_info }}"
+      notify_msg: "AMI Created for {{ vpc_env }}-{{ role_type }}: {{ ami_info.image_id }} for Launch Config:{{ vpc_env }}-{{ role_type }}-LT"
       notify_slack_channel: "#afbh-updates"
       notify_slack_user: "afbh-mgmt-controller"
 
     - role: "../../roles/notify/team_generic"
-      notify_msg: "AMI Created for {{ vpc_env }}-{{ role_type }}: {{ ami_info.image_id }} for Launch Config:{{ vpc_env }}-{{ role_type }}-LT\n{{ launch_template_info }}"
+      notify_msg: "AMI Created for {{ vpc_env }}-{{ role_type }}: {{ ami_info.image_id }} for Launch Config:{{ vpc_env }}-{{ role_type }}-LT"
       notify_teams_webhook: "{{ teams_webhook }}"
 
