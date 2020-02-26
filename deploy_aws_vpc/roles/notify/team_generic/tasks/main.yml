@@ -19,5 +19,4 @@
     webhook: "{{ notify_teams_webhook }}"
     text: "{{ notify_msg }}"
   delegate_to: localhost
-  when: role_type == "smh"
 

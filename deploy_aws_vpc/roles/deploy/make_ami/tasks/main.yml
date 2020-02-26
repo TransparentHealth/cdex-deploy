@@ -43,13 +43,7 @@
     security_group_ids: "{{ app_security_group_id[vpc_env][role_type] }}"
   register: launch_template_info
 
-- name: "what did we get?"
-  debug:
-    msg: "{{ launch_template_info }}"
-
-
-
-
-
-
+#- name: "what did we get?"
+#  debug:
+#    msg: "{{ launch_template_info }}"
 
