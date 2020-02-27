@@ -76,5 +76,5 @@
 
     - role: "../../roles/notify/team_generic"
       notify_msg: "{{ role_type }} updated in {{ vpc_env }} at {{ configure_time }} from https://github.com/TransparentHealth/{{ system_repository_name[role_type] }} Branch: {{ git_branch[role_type] }}"
-      notify_team_hook:  "{{ teams_webhook }}"
+      notify_teams_hook:  "{{ teams_webhook }}"
 
