@@ -7,7 +7,7 @@ SOCKFILE={{ base_app_directory }}/{{ role_type }}/run/gunicorn.sock  # we will c
 USER={{ remote_user_account }}                                       # the user to run as
 GROUP={{ remote_user_account }}                                      # the group to run as
 NUM_WORKERS=6                                     # how many worker processes should Gunicorn spawn
-NUM_TIMEOUT=1200
+NUM_TIMEOUT=3600
 DJANGO_SETTINGS_MODULE={{ system_repository_name[role_type] }}.settings             # which settings file should Django use
 DJANGO_WSGI_MODULE={{ system_repository_name[role_type] }}.wsgi                     # WSGI module name
 
