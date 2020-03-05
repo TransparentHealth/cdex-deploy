@@ -4,8 +4,8 @@ Requires=gunicorn.socket
 After=network.target
 
 [Service]
-User=ubuntu
-Group=ubuntu
+User={{ remote_user_account }}
+Group={{ remote_user_account }}
 WorkingDirectory={{ base_app_directory }}/{{ role_type }}
 ExecStart={{ base_app_directory }}/{{ role_type }}/env/bin/gunicorn \
           --access-logfile - \

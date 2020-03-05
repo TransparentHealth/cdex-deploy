@@ -6,7 +6,7 @@
 #  setup log file for sharemyhealth.conf
 #  in /etc/rsyslog.d/30-sharemyhealth.conf
 
-- name: "create the rsyslog configuration file"
+- name: "create the rsyslog configuration file for django"
   become_user: "{{ remote_admin_account }}"
   become: yes
   template:
@@ -24,7 +24,7 @@
     state: restarted
     enabled: yes
 
-- name: "setup logrotate"
+- name: "setup logrotate for django sharemyhealth.log"
   become_user: "{{ remote_admin_account }}"
   become: yes
   template:
@@ -34,4 +34,14 @@
     owner: "{{ remote_admin_account }}"
     group: "{{ remote_admin_account }}"
 
+
+- name: "setup logrotate for gunicorn_supervisor.log"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  template:
+    src: templates/gunicorn_supervisor
+    dest: "/etc/logrotate.d/gunicorn_supervisor"
+    mode: "0755"
+    owner: "{{ remote_admin_account }}"
+    group: "{{ remote_admin_account }}"
 
