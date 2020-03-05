@@ -538,3 +538,15 @@ app_security_group_name:
   staging: {"vmi": "staging_vmi_APP", "smh": "staging_smh_APP", "smh_app": "staging_smhapp_APP"}
   prod: {"vmi": "prod_vmi_APP", "smh": "prod_smh_APP", "smh_app": "prod_smhapp_APP"}
 
+ec2_type:
+  t2.nano: {"cpu": 1, "ram": 0.5}
+  t2.micro: {"cpu": 1, "ram": 1}
+  t2.small: {"cpu": 1, "ram": 2}
+  t2.medium: {"cpu": 2, "ram": 4}
+  t2.large: {"cpu": 2, "ram": 8}
+  t2.xlarge: {"cpu": 4, "ram": 16}
+  t2.2xlarge: {"cpu": 8, "ram": 32}
+
+
+
+
