@@ -1,6 +1,6 @@
 [program:{{ system_repository_name[role_type] }}]
 command = {{ base_app_directory }}/{{ role_type }}/{{ virtual_env_dir }}/bin/gunicorn_start
-user = ubuntu                                      ; User to run as
-stdout_logfile = {{ base_app_directory }}/{{ role_type }}/gunicorn_supervisor.log   ; Where$
+user = {{ remote_user_account }}                                      ; User to run as
+stdout_logfile = /var/log/gunicorn_supervisor_{{ role_type }}.log     ; Where$
 redirect_stderr = true                                                       ; Save stde$
 environment=LANG=en_US.UTF-8,LC_ALL=en_US.UTF-8

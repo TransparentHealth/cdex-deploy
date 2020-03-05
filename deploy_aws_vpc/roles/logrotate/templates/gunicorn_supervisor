@@ -1,0 +1,10 @@
+/var/log/gunicorn_supervisor_{{ role_type }}.log {
+  copytruncate
+  daily
+  rotate 5
+  compress
+  delaycompress
+  missingok
+  notifempty
+  create 0640 syslog adm
+}
