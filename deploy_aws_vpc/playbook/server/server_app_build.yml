@@ -79,12 +79,12 @@
         # assign public ip to enable software downloads
 
         assign_public_ip: no
-       volumes:
-        - device_name: "/dev/sda1"
-          volume_type: "gp2"
-          volume_size: "{{ instance_vol_size_choices[role_type] }}"
-          encrypted: True
-          delete_on_termination: True
+        volumes:
+          - device_name: "/dev/sda1"
+            volume_type: "gp2"
+            volume_size: "{{ instance_vol_size_choices[role_type] }}"
+            encrypted: True
+            delete_on_termination: True
       register: ec2_base_instance_info
 
     - name: Wait 180 seconds, but only start checking after 30 seconds
