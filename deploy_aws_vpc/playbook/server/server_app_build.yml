@@ -81,10 +81,11 @@
           Name: "{{ vpc_env}}_BaseInstance_{{ role_type }}"
           workflow: "JustCreated"
         monitoring: no
-        vpc_subnet_id: "{{ vpc_app_subnet_id }}"
+        vpc_subnet_id: "{{ env_vpc_app_subnet_id }}"
         # assign public ip to enable software downloads
+
         assign_public_ip: no
-        volumes:
+       volumes:
           - device_name: "/dev/sda1"
             volume_type: "gp2"
             volume_size: "{{ instance_vol_size_choices[role_type] }}"
