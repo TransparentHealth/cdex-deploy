@@ -12,9 +12,12 @@
   vars:
     ansible_ssh_pipelining: no
     env: "{{ vpc_env }}"
-    # Options - lower case: staging | prod
+    # Options - lower case: dev | staging | prod
     azone: "az1"
     # Options: az1 | az2 | az3
+    vpc_number: 1
+    vpc_base_region: "use-east"
+    aws_region: "us-east-1"
     sub_zone: "app"
     role_type: "{{ role_type| default('vmi') }}"
     # Options: vmi | smh | smh_app
