@@ -5,10 +5,20 @@
 # Purpose: Install pip and boto3 to servers for CDA2FHIR Service check
 #
 
+- name: "upgrade and update packages"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  apt:
+    upgrade: True
+    update_cache: True
+    cache_valid_time: 86400  # One Day
+    state: present
+  # raw: "sudo apt-get -y upgrade"
+
 - name: "install pip3"
   become_user: "{{ remote_admin_account }}"
   become: yes
-  shell: "sudo apt-get -y update | sudo apt-get -y install python3-pip"
+  shell: "sudo apt-get -y install python3-pip"
 
 - name: "install pip"
   become_user: "{{ remote_admin_account }}"
