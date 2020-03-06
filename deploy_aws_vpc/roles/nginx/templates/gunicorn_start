@@ -34,7 +34,7 @@ test -d $RUNDIR || mkdir -p $RUNDIR
 
 exec {{ virtual_env_dir }}/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
   --name $NAME \
-  --worker-class eventlet \
+  --worker-class {{ gunicorn_worker_class[vpc_env][role_type] }} \
   --workers $NUM_WORKERS \
   --user=$USER --group=$GROUP \
   --bind=127.0.0.1:8000 \

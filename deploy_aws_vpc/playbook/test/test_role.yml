@@ -35,9 +35,14 @@
 
     ec2_app_instance_type: {"vmi": "t2.2xlarge", "smh": "t2.small", "smh_app": "t2.micro"}
 
+    gunicorn_worker_class:
+      dev: {"vmi": "sync", "smh": "eventlet", "smh_app": "sync"}
+      staging: {"vmi": "sync", "smh": "sync", "smh_app": "sync"}
+      prod: {"vmi": "sync", "smh": "eventlet", "smh_app": "sync"}
 
 
-#  vars_files:
+
+  #  vars_files:
 #    - "./../../vault/environment/{{ vpc_env }}/{{ role_type }}/vault.yml"
 #    - "./../../vars/environment/{{ vpc_env }}/{{ role_type }}/env.yml"
 #    - "./../../vault/environment/{{ vpc_env }}/vault.yml"
@@ -48,8 +53,12 @@
     - debug:
         msg:
           - "ROLE_TYPE:{{ role_type }}"
-          - "EC2 {{ role_type }} Instance: {{ ec2_app_instance_type[role_type] }}"
+          - "EC2 {{ role_type }} "
+          - "Instance: {{ ec2_app_instance_type[role_type] }}"
           - "CPU count: {{ ((ec2_type[ec2_app_instance_type[role_type]].cpu)*2)+1 }}"
+    - debug:
+        msg:
+          - "GUnicorn Worker Class: {{ gunicorn_worker_class[vpc_env][role_type] }}"
 
 
 #  roles:

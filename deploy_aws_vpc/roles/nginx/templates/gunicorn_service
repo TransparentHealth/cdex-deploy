@@ -9,7 +9,7 @@ Group={{ remote_user_account }}
 WorkingDirectory={{ base_app_directory }}/{{ role_type }}
 ExecStart={{ base_app_directory }}/{{ role_type }}/env/bin/gunicorn \
           --access-logfile - \
-          --workers 3 \
+          --workers {{ ((ec2_type[ec2_app_instance_type[role_type]].cpu)*2)+1 }}  \
           --bind unix:/run/gunicorn.sock \
           {{ system_repository_name[role_type] }}.wsgi:application
 

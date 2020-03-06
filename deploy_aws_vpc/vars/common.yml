@@ -547,6 +547,10 @@ ec2_type:
   t2.xlarge: {"cpu": 4, "ram": 16}
   t2.2xlarge: {"cpu": 8, "ram": 32}
 
-
+# Worker Class options: sync | eventlet
+gunicorn_worker_class:
+  dev: {"vmi": "sync", "smh": "sync", "smh_app": "sync"}
+  staging: {"vmi": "sync", "smh": "sync", "smh_app": "sync"}
+  prod: {"vmi": "sync", "smh": "sync", "smh_app": "sync"}
 
 
