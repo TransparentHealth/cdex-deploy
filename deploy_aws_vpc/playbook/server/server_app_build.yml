@@ -21,6 +21,8 @@
     sub_zone: "app"
     role_type: "vmi"
     # Options: vmi | smh | smh_app
+    vpc_number: 1
+    aws_region: "us-east-1"
 
     sg_zone: "{{ vpc_env }}_{{ role_type }}_APP"
     env_az: "{{ vpc_env }}-{{ azone }}"
@@ -76,7 +78,7 @@
           role: "{{ role_type }}"
           env: "{{ vpc_env }}"
           function: "BaseInstance"
-          Name: "BaseInstance_{{ role_type }}"
+          Name: "{{ vpc_env}}_BaseInstance_{{ role_type }}"
           workflow: "JustCreated"
         monitoring: no
         vpc_subnet_id: "{{ vpc_app_subnet_id }}"
