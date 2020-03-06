@@ -141,7 +141,7 @@ ansible_ssh_private_key_name: "{{ env_ansible_ssh_private_key_name }}"
 
 dns_app_name: "{{ env_dns_app_name }}"
 
-deployment_server_name: "abhealth_deploy_server_{{ vpc_env }}"
+deployment_server_name: "abhealth_deploy_server-{{ vpc_env }}"
 
 python_version: "{{ env_python_version }}"
 # http or https
