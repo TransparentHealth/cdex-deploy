@@ -20,8 +20,8 @@
   become_user: "{{ remote_admin_account }}"
   become: yes
   apt:
-    upgrade: "true"
-    update_cache: "true"
+    upgrade: yes
+    update_cache: yes
     cache_valid_time: 86400  # One Day
     state: present
   # raw: "sudo apt-get -y upgrade"
