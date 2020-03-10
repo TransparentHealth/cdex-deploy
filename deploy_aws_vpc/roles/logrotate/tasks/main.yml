@@ -16,6 +16,38 @@
     owner: "{{ remote_admin_account }}"
     group: "{{ remote_admin_account }}"
 
+- name: "touch sharemyhealth log file"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  file:
+    path: /var/log/sharemyhealth.log
+    state: touch
+    mode: u=rw,g=r
+    owner: syslog
+    group: adm
+
+- name: "touch /var/log/gunicorn_supervisor_{{ role_type }}.log log file"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  file:
+    path: /var/log/gunicorn_supervisor_{{ role_type }}.log
+    state: touch
+    mode: u=rw,g=r
+    owner: syslog
+    group: adm
+
+
+- name: "touch log file"
+  become_user: "{{ remote_admin_account }}"
+  become: yes
+  file:
+    path: /var/log/sharemyhealth.log
+    state: touch
+    mode: u=rw,g=r
+    owner: syslog
+    group: adm
+
+
 - name: "restart rsyslog"
   become_user: "{{ remote_admin_account }}"
   become: yes
