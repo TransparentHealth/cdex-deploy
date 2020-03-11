@@ -80,6 +80,9 @@ asg_max_size: "{{ env_asg_max_size }}"
 asg_wait_timeout: "300"
 asg_health_check_period: "300"
 
+# AWS SES Email accounts
+cloud_from_email: "{{ env_cloud_from_email }}"
+cloud_admin_email: "{{ env_cloud_admin_email }}"
 
 availability_zones: "{{ env_availability_zones }}"
 alb_ssl_policy_name: "ELBSecurityPolicy-2016-08"
