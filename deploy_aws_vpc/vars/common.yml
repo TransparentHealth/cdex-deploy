@@ -16,6 +16,9 @@ killer_app_title: "Share My Health"
 killer_app_uri: "{{ env_killer_app_uri }}"
 top_left_title: "Verify My Identity"
 
+vmi_public_home_template: "smh_app_index.html"
+vmi_partner_ref: "smh_app"
+
 django_org_signup_contact: "https://abhealth.us/contact-us/"
 
 use_parameter_store: "{{ env_use_parameter_store }}"
@@ -35,6 +38,8 @@ django_policy_title: "Privacy Policy"
 django_tos_uri: "http://sharemy.health/Alliance-Share-My-Health-Member_Terms_of_Service_02.2020.html"
 django_agent_tos_uri: "http://sharemy.health/Alliance-Share-My-Health-Agent_Terms_of_Use_3.2020.html"
 django_tos_title: "Terms of Service"
+
+
 
 #############################################
 # CLOUD Environment
