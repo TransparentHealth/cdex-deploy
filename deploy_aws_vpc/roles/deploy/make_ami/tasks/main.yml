@@ -35,7 +35,9 @@
     instance_type: "{{ec2_app_instance_type[role_type] }}"
     state: present
     region: "{{ aws_region }}"
+    default_version: "latest"
     tags:
+      Name: "{{ vpc_env }}-{{ role_type }}-clone"
       name: "{{ vpc_env }}-{{ role_type }}-LT"
       env: "{{ vpc_env }}"
       role: "{{ role_type }}"
